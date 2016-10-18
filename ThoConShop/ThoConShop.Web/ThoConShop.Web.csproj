@@ -222,19 +222,66 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\AppCss\bootstrap.css" />
+    <Content Include="Content\AppCss\etalage.css" />
+    <Content Include="Content\AppCss\style.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\arrows.png" />
+    <Content Include="Images\back-ground-lol.jpg" />
+    <Content Include="Images\bag.png" />
+    <Content Include="Images\banner.png" />
+    <Content Include="Images\banner1.jpg" />
+    <Content Include="Images\banner1.png" />
+    <Content Include="Images\banner2.jpg" />
+    <Content Include="Images\banner3.jpg" />
+    <Content Include="Images\bg.jpg" />
+    <Content Include="Images\compare.png" />
+    <Content Include="Images\delivery.jpg" />
+    <Content Include="Images\footer.png" />
+    <Content Include="Images\footer_bg.jpg" />
+    <Content Include="Images\f_menu.png" />
+    <Content Include="Images\img-sprite.png" />
+    <Content Include="Images\logo.png" />
+    <Content Include="Images\p1.jpg" />
+    <Content Include="Images\p10.jpg" />
+    <Content Include="Images\p11.jpg" />
+    <Content Include="Images\p12.jpg" />
+    <Content Include="Images\p13.jpg" />
+    <Content Include="Images\p14.jpg" />
+    <Content Include="Images\p2.jpg" />
+    <Content Include="Images\p3.jpg" />
+    <Content Include="Images\p4.jpg" />
+    <Content Include="Images\p5.jpg" />
+    <Content Include="Images\p6.jpg" />
+    <Content Include="Images\p7.jpg" />
+    <Content Include="Images\p8.jpg" />
+    <Content Include="Images\p9.jpg" />
+    <Content Include="Images\s1.jpg" />
+    <Content Include="Images\s2.jpg" />
+    <Content Include="Images\s3.jpg" />
+    <Content Include="Images\s4.jpg" />
+    <Content Include="Images\search.png" />
+    <Content Include="Images\tick1.png" />
+    <Content Include="Images\wishlist.png" />
     <Content Include="Scripts\ai.0.22.19-build00125.js" />
     <Content Include="Scripts\ai.0.22.19-build00125.min.js" />
+    <Content Include="Scripts\AppScripts\easyResponsiveTabs.js" />
+    <Content Include="Scripts\AppScripts\hover_pack.js" />
+    <Content Include="Scripts\AppScripts\jquery-1.11.1.min.js" />
+    <Content Include="Scripts\AppScripts\jquery.etalage.min.js" />
+    <Content Include="Scripts\AppScripts\nav.js" />
+    <Content Include="Scripts\AppScripts\responsiveslides.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\img-sprite.psd" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -260,10 +307,10 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
