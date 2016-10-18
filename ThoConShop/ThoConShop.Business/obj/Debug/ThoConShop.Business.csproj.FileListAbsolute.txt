@@ -1,0 +1,11 @@
+D:\Projects\LOL\ThoConShop.Web\ThoConShop.Business\bin\Debug\ThoConShop.Business.dll
+D:\Projects\LOL\ThoConShop.Web\ThoConShop.Business\bin\Debug\ThoConShop.Business.pdb
+D:\Projects\LOL\ThoConShop.Web\ThoConShop.Business\obj\Debug\ThoConShop.Business.csprojResolveAssemblyReference.cache
+D:\Projects\LOL\ThoConShop.Web\ThoConShop.Business\obj\Debug\ThoConShop.Business.dll
+D:\Projects\LOL\ThoConShop.Web\ThoConShop.Business\obj\Debug\ThoConShop.Business.pdb
+D:\Projects\LOL\ThoConShop.Web\ThoConShop.Business\bin\Debug\Autofac.dll
+D:\Projects\LOL\ThoConShop.Web\ThoConShop.Business\bin\Debug\AutoMapper.dll
+D:\Projects\LOL\ThoConShop.Web\ThoConShop.Business\bin\Debug\ThoConShop.DAL.dll
+D:\Projects\LOL\ThoConShop.Web\ThoConShop.Business\bin\Debug\ThoConShop.DAL.pdb
+D:\Projects\LOL\ThoConShop.Web\ThoConShop.Business\bin\Debug\Autofac.xml
+D:\Projects\LOL\ThoConShop.Web\ThoConShop.Business\bin\Debug\AutoMapper.xml

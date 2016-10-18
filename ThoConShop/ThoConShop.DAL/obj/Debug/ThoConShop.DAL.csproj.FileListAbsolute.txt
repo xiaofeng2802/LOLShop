@@ -1,0 +1,7 @@
+D:\Projects\LOL\ThoConShop.Web\ThoConShop.DAL\bin\Debug\ThoConShop.DAL.dll
+D:\Projects\LOL\ThoConShop.Web\ThoConShop.DAL\bin\Debug\ThoConShop.DAL.pdb
+D:\Projects\LOL\ThoConShop.Web\ThoConShop.DAL\obj\Debug\ThoConShop.DAL.csprojResolveAssemblyReference.cache
+D:\Projects\LOL\ThoConShop.Web\ThoConShop.DAL\obj\Debug\ThoConShop.DAL.dll
+D:\Projects\LOL\ThoConShop.Web\ThoConShop.DAL\obj\Debug\ThoConShop.DAL.pdb
+D:\Projects\LOL\ThoConShop.Web\ThoConShop.DAL\bin\Debug\Autofac.dll
+D:\Projects\LOL\ThoConShop.Web\ThoConShop.DAL\bin\Debug\Autofac.xml
