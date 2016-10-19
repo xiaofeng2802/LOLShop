@@ -16,11 +16,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link href="~/Content/AppCss/bootstrap.css" rel='stylesheet' type='text/css' />
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <!-- Custom Theme files -->
+    <link href="~/Content/AppCss/reset.css" rel="stylesheet" />
     <link href="~/Content/AppCss/style.css" rel='stylesheet' type='text/css' />
     <!-- Custom Theme files -->
+    <link href="~/Content/AppCss/custom.css" rel="stylesheet"/>
+
+    @*hover-effect*@
+    @*<link href="~/Content/effect-hover-item/effects.css" rel="stylesheet" />
+    <link href="~/Content/effect-hover-item/font-awesome.min.css" rel="stylesheet" />*@
     <!--webfont-->
-    <link href='http://fonts.googleapis.com/css?family=Lato:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'>
-    <script type="text/javascript" src="~/Scripts/AppScripts/jquery-1.11.1.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700&amp;subset=latin,vietnamese" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <script src="~/Scripts/AppScripts/responsiveslides.min.js"></script>
     @*<script>
     $(function () {
@@ -37,38 +45,48 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </head>
 <body>
 <div class="header">
-    <div class="header_top">
-        <div class="container">
-            <div class="logo">
-                <a href="index.html"><img src="~/Images/logo.png" alt=""/></a>
+    <header id="top" role="banner">
+        <div class="nav-header">
+            <div class="nav-content">
+                <div class="nav-join-button"><a href="http://nicklm.com/">SHOPTHOCON.VN</a>
+                </div>
+                <ul class="nav-left">
+                    <li><a href="http://nicklm.com/napthe">Nạp thẻ</a></li>
+                    <li></li>
+                </ul>
+                <ul class="nav-right">
+                    <li></li>
+                    <li><a href="http://nicklm.com/dangnhap">Đăng nhập bằng FB</a></li>
+                </ul>
             </div>
-            <ul class="shopping_grid">
-                <a href="#"><li>Join</li></a>
-                <a href="login.html"><li>Sign In</li></a>
-                <a href="#"><li><span class="m_1">Shopping Bag</span>&nbsp;&nbsp;(0) &nbsp;<img src="~/Images/bag.png" alt=""/></li></a>
-                <div class="clearfix"> </div>
-            </ul>
-            <div class="clearfix"> </div>
+        </div>
+        <div class="mobile_nav">
+            <div class="navbar-header">
+                <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span> <span class="glyphicon glyphicon-th-list"></span>
+                </button>
+                <a href="http://nicklm.com/" title="Trang chủ" class="navbar-brand">SHOPTHOCON</a>
+            </div>
+            <nav id="bs-navbar" class="collapse navbar-collapse">
+                <ul class="navbar-nav">
+                    <li><a href="http://nicklm.com/">Trang chủ</a></li>
+                    <li><a href="http://nicklm.com/dangnhap">Đăng nhập/đăng ký</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="title_top text-center row">
+        <div class="col-lg-12" align="center">
+            <div class="col-lg-4 col-centered" style="min-height: 300px">
+            </div>
+            <div class="col-lg-4 col-centered">
+
+            </div>
         </div>
     </div>
-    <div class="h_menu4">
-        <!-- start h_menu4 -->
-        <div class="container">
-            <a class="toggleMenu" href="#">Menu</a>
-            <ul class="nav">
-                <li class="active"><a href="index.html" data-hover="Home">Home</a></li>
-                <li><a href="about.html" data-hover="About Us">About Us</a></li>
-                <li><a href="careers.html" data-hover="Careers">Careers</a></li>
-                <li><a href="contact.html" data-hover="Contact Us">Contact Us</a></li>
-                <li><a href="404.html" data-hover="Company Profile">Company Profile</a></li>
-                <li><a href="register.html" data-hover="Company Registration">Company Registration</a></li>
-                <li><a href="wishlist.html" data-hover="Wish List">Wish List</a></li>
-            </ul>
-            <script type="text/javascript" src="~/Scripts/AppScripts/nav.js"></script>
-        </div><!-- end h_menu4 -->
-    </div>
+    <div class="hr"></div>
 </div>
-<div class="row">
+@*<div class="row">
     <div class="col-lg-12 banner-index" align="center">
         <div class="col-lg-4 col-centered">
             <img src="~/Images/banner.png" class="img-responsive"/>
@@ -77,7 +95,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
         </div>
     </div>
-</div>
+</div>*@
     @*<div class="slider">
         <div class="callbacks_container">
             <ul class="rslides" id="slider">
@@ -105,191 +123,112 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </ul>
         </div>
     </div>*@
-    <div class="column_center">
-        <div class="container">
-            <div class="search">
-                <div class="stay">Search Product</div>
-                <div class="stay_right">
-                    <input type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}">
-                    <input type="submit" value="">
-                </div>
-                <div class="clearfix"> </div>
-            </div>
-            <div class="clearfix"> </div>
-        </div>
-    </div>
     <div class="main">
         <div class="content_top">
-            <div class="container">
+            <div class="container back-ground-color-container">
+                <div class="row filter">
+                    <div class="col-md-12 filter-back-ground">
+                        <!-- Single button -->
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default dropdown-toggle filter-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Tìm Theo Gank <span class="caret"></span>
+                            </button>
 
-                <div class="col-md-9 content_right">
-                    @RenderBody()
-                </div>
-                <div class="col-md-3 sidebar_box">
-                    <div class="sidebar">
-                        <div class="menu_box">
-                            <h3 class="menu_head">Products Menu</h3>
-                            <ul class="menu">
-                                <li class="item1">
-                                    <a href="#"><img class="arrow-img" src="~/Images/f_menu.png" alt="" /> Man</a>
-                                    <ul class="cute">
-                                        <li class="subitem1"><a href="#">Cute Kittens </a></li>
-                                        <li class="subitem2"><a href="#">Strange Stuff </a></li>
-                                        <li class="subitem3"><a href="#">Automatic Fails </a></li>
-                                    </ul>
-                                </li>
-                                <li class="item2">
-                                    <a href="#"><img class="arrow-img" src="~/Images/f_menu.png" alt="" />Women</a>
-                                    <ul class="cute">
-                                        <li class="subitem1"><a href="#">Cute Kittens </a></li>
-                                        <li class="subitem2"><a href="#">Strange Stuff </a></li>
-                                        <li class="subitem3"><a href="#">Automatic Fails </a></li>
-                                    </ul>
-                                </li>
-                                <li class="item3">
-                                    <a href="#"><img class="arrow-img" src="~/Images/f_menu.png" alt="" />Fashion 2015</a>
-                                    <ul class="cute">
-                                        <li class="subitem1"><a href="#">Cute Kittens </a></li>
-                                        <li class="subitem2"><a href="#">Strange Stuff </a></li>
-                                        <li class="subitem3"><a href="#">Automatic Fails</a></li>
-                                    </ul>
-                                </li>
-                                <li class="item4">
-                                    <a href="#"><img class="arrow-img" src="~/Images/f_menu.png" alt="" />Kids</a>
-                                    <ul class="cute">
-                                        <li class="subitem1"><a href="#">Cute Kittens </a></li>
-                                        <li class="subitem2"><a href="#">Strange Stuff </a></li>
-                                        <li class="subitem3"><a href="#">Automatic Fails </a></li>
-                                    </ul>
-                                </li>
-                                <li class="item5">
-                                    <a href="#"><img class="arrow-img" src="~/Images/f_menu.png" alt="" />Jeans</a>
-                                    <ul class="cute">
-                                        <li class="subitem1"><a href="#">Cute Kittens </a></li>
-                                        <li class="subitem2"><a href="#">Strange Stuff </a></li>
-                                        <li class="subitem3"><a href="#">Automatic Fails </a></li>
-                                    </ul>
-                                </li>
-                                <li class="item6">
-                                    <a href="#"><img class="arrow-img" src="~/Images/f_menu.png" alt="" />Tshirt</a>
-                                    <ul class="cute">
-                                        <li class="subitem1"><a href="#">Cute Kittens </a></li>
-                                        <li class="subitem2"><a href="#">Strange Stuff </a></li>
-                                        <li class="subitem3"><a href="#">Automatic Fails </a></li>
-                                    </ul>
-                                </li>
-                                <li class="item7">
-                                    <a href="#"><img class="arrow-img" src="~/Images/f_menu.png" alt="" />Top Fashion</a>
-                                    <ul class="cute">
-                                        <li class="subitem1"><a href="#">Cute Kittens </a></li>
-                                        <li class="subitem2"><a href="#">Strange Stuff </a></li>
-                                        <li class="subitem3"><a href="#">Automatic Fails </a></li>
-                                    </ul>
-                                </li>
-                                <li class="item8">
-                                    <a href="#"><img class="arrow-img" src="~/Images/f_menu.png" alt="" />Summer Collection</a>
-                                    <ul class="cute">
-                                        <li class="subitem1"><a href="#">Cute Kittens </a></li>
-                                        <li class="subitem2"><a href="#">Strange Stuff </a></li>
-                                        <li class="subitem3"><a href="#">Automatic Fails </a></li>
-                                    </ul>
-                                </li>
-                                <li class="item9">
-                                    <a href="#"><img class="arrow-img" src="~/Images/f_menu.png" alt="" />Special Offer</a>
-                                    <ul class="cute">
-                                        <li class="subitem1"><a href="#">Cute Kittens </a></li>
-                                        <li class="subitem2"><a href="#">Strange Stuff </a></li>
-                                        <li class="subitem3"><a href="#">Automatic Fails </a></li>
-                                    </ul>
-                                </li>
+                            <ul class="dropdown-menu">
+                                <li><a href="javascript:;" class="acfiit" data-filter="tim-theo-rank=thach-dau">Thách đấu</a></li>
+                                <li><a href="javascript:;" class="acfiit" data-filter="tim-theo-rank=cao-thu">Cao thủ</a></li>
+                                <li><a href="javascript:;" class="acfiit" data-filter="tim-theo-rank=kim-cuong"> Kim Cương</a></li>
+                                <li><a href="javascript:;" class="acfiit" data-filter="tim-theo-rank=bach-kim">Bạch Kim</a></li>
+                                <li><a href="javascript:;" class="acfiit" data-filter="tim-theo-rank=vang">Vàng</a></li>
+                                <li><a href="javascript:;" class="acfiit" data-filter="tim-theo-rank=bac">Bạc</a></li>
+                                <li><a href="javascript:;" class="acfiit" data-filter="tim-theo-rank=dong">Đồng</a></li>
+                                <li><a href="javascript:;" class="acfiit" data-filter="tim-theo-rank=chua-rank">Chưa rank</a></li>
                             </ul>
                         </div>
-                        <!--initiate accordion-->
-                        <script type="text/javascript">
-			$(function() {
-			    var menu_ul = $('.menu > li > ul'),
-			           menu_a  = $('.menu > li > a');
-			    menu_ul.hide();
-			    menu_a.click(function(e) {
-			        e.preventDefault();
-			        if(!$(this).hasClass('active')) {
-			            menu_a.removeClass('active');
-			            menu_ul.filter(':visible').slideUp('normal');
-			            $(this).addClass('active').next().stop(true,true).slideDown('normal');
-			        } else {
-			            $(this).removeClass('active');
-			            $(this).next().stop(true,true).slideUp('normal');
-			        }
-			    });
-
-			});
-                        </script>
-                    </div>
-                    <div class="delivery">
-                        <img src="~/Images/delivery.jpg" class="img-responsive" alt="" />
-                        <h3>Delivering</h3>
-                        <h4>World Wide</h4>
-                    </div>
-                    <div class="twitter">
-                        <h3>Latest From Twitter</h3>
-                        <ul class="twt1">
-                            <i class="twt"> </i>
-                            <li class="twt1_desc"><span class="m_1"></span> to popular belief, Lorem Ipsum is<span class="m_1"> not simply</span></li>
-                            <div class="clearfix"> </div>
-                        </ul>
-                        <ul class="twt1">
-                            <i class="twt"> </i>
-                            <li class="twt1_desc"><span class="m_1">There are many</span> variations of passages of Lorem Ipsum available, but the majority <span class="m_1">have suffered</span></li>
-                            <div class="clearfix"> </div>
-                        </ul>
-                        <ul class="twt1">
-                            <i class="twt"> </i>
-                            <li class="twt1_desc"><span class="m_1">Lorem Ipsum</span> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has <span class="m_1">been the industry's standard dummy text ever</span></li>
-                            <div class="clearfix"> </div>
-                        </ul>
-                    </div>
-                    <div class="clients">
-                        <h3>Our Happy Clients</h3>
-                        <h4>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae.</h4>
-                        <ul class="user">
-                            <i class="user_icon"></i>
-                            <li class="user_desc"><a href="#"><p>John Doe, Company Info</p></a></li>
-                            <div class="clearfix"> </div>
-                        </ul>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default dropdown-toggle filter-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Tìm Theo Giá <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="javascript:;" class="acfiit" data-filter="tim-theo-gia=1-000k-tro-len">1.000k Trở Lên</a></li>
+                                <li><a href="javascript:;" class="acfiit" data-filter="tim-theo-gia=500k-1-000k">500k- 1.000k</a></li>
+                                <li><a href="javascript:;" class="acfiit" data-filter="tim-theo-gia=200k-500k">200k-500k</a></li>
+                                <li><a href="javascript:;" class="acfiit" data-filter="tim-theo-gia=100k-200k">100k-200k</a></li>
+                                <li><a href="javascript:;" class="acfiit" data-filter="tim-theo-gia=duoi-100k">Dưới 100k</a></li>
+                            </ul>
+                        </div>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default dropdown-toggle filter-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Tìm Theo Trang Phục <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="javascript:;" class="acfiit" data-filter="tim-theo-skin-dac-biet=full-va-gan-full-tuong">Full và Gần Full Tướng</a></li>
+                                <li><a href="javascript:;" class="acfiit" data-filter="tim-theo-skin-dac-biet=skin-toi-thuong-799">Skin tối thượng (799)</a></li>
+                                <li><a href="javascript:;" class="acfiit" data-filter="tim-theo-skin-dac-biet=skin-hextech">Skin Hextech</a></li>
+                                <li><a href="javascript:;" class="acfiit" data-filter="tim-theo-skin-dac-biet=skin-quan-quan">Skin Quán Quân</a></li>
+                                <li><a href="javascript:;" class="acfiit" data-filter="tim-theo-skin-dac-biet=skin-vinh-quang">Skin Vinh Quang</a></li>
+                                <li><a href="javascript:;" class="acfiit" data-filter="tim-theo-skin-dac-biet=skin-riot">Skin Riot</a></li>
+                                <li><a href="javascript:;" class="acfiit" data-filter="tim-theo-skin-dac-biet=skin-halloween">Skin Halloween</a></li>
+                                <li><a href="javascript:;" class="acfiit" data-filter="tim-theo-skin-dac-biet=skin-thach-dau">Skin Thách Đấu</a></li>
+                                <li><a href="javascript:;" class="acfiit" data-filter="tim-theo-skin-dac-biet=skin-sieu-pham">Skin Siêu Phẩm</a></li>
+                                <li><a href="javascript:;" class="acfiit" data-filter="tim-theo-skin-dac-biet=skin-ve-binh-tinh-tu">Skin Vệ Binh Tinh Tú</a></li>
+                                <li><a href="javascript:;" class="acfiit" data-filter="tim-theo-skin-dac-biet=skin-tiec-be-boi">Skin Tiệc Bể Bơi</a></li>
+                                <li><a href="javascript:;" class="acfiit" data-filter="tim-theo-skin-dac-biet=skin-gia-lap">Skin Giả Lập</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
+                @RenderBody()
+                <div class="row">
+                    <div class="footer img-responsive">
+                        <div class="container">
+                            <div class="col-md-3 f_grid1">
+                                <h3>About</h3>
+                                <a href="#"><img src="~/Images/logo.png" alt=""/></a>
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
+                            </div>
+                            <div class="col-md-3 f_grid1 f_grid2">
+                                <h3>Follow Us</h3>
+                                <ul class="social">
+                                    <li><a href=""> <i class="fb"> </i>
+                                        <p class="m_3">Facebook</p>
+                                        <div class="clearfix"> </div></a></li>
+                                    <li><a href=""><i class="tw"> </i>
+                                        <p class="m_3">Twittter</p>
+                                        <div class="clearfix"> </div></a></li>
+                                    <li><a href=""><i class="google"> </i>
+                                        <p class="m_3">Google</p>
+                                        <div class="clearfix"> </div></a></li>
+                                    <li><a href=""><i class="instagram"> </i>
+                                        <p class="m_3">Instagram</p>
+                                        <div class="clearfix"> </div></a></li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6 f_grid3">
+                                <h3>Contact Info</h3>
+                                <ul class="list">
+                                    <li>
+                                        <p>Phone : 1.800.254.5487</p></li>
+                                    <li>
+                                        <p>Fax : 1.800.254.2548</p></li>
+                                    <li>
+                                        <p>Email : <a href="mailto:info(at)fashionpress.com"> info(at)fashionpress.com</a>
+                                        </p></li>
+                                </ul>
+                                <ul class="list1">
+                                    <li>
+                                        <p>Aliquam augue a bibendum ipsum diam, semper porttitor libero elit egestas gravida, ut quam, nunc taciti</p></li>
+                                </ul>
+                                <div class="clearfix"> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
-    <div class="footer img-responsive">
-        <div class="container">
-            <div class="col-md-3 f_grid1">
-                <h3>About</h3>
-                <a href="#"><img src="~/Images/logo.png" alt="" /></a>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
-            </div>
-            <div class="col-md-3 f_grid1 f_grid2">
-                <h3>Follow Us</h3>
-                <ul class="social">
-                    <li><a href=""> <i class="fb"> </i><p class="m_3">Facebook</p><div class="clearfix"> </div></a></li>
-                    <li><a href=""><i class="tw"> </i><p class="m_3">Twittter</p><div class="clearfix"> </div></a></li>
-                    <li><a href=""><i class="google"> </i><p class="m_3">Google</p><div class="clearfix"> </div></a></li>
-                    <li><a href=""><i class="instagram"> </i><p class="m_3">Instagram</p><div class="clearfix"> </div></a></li>
-                </ul>
-            </div>
-            <div class="col-md-6 f_grid3">
-                <h3>Contact Info</h3>
-                <ul class="list">
-                    <li><p>Phone : 1.800.254.5487</p></li>
-                    <li><p>Fax : 1.800.254.2548</p></li>
-                    <li><p>Email : <a href="mailto:info(at)fashionpress.com"> info(at)fashionpress.com</a></p></li>
-                </ul>
-                <ul class="list1">
-                    <li><p>Aliquam augue a bibendum ipsum diam, semper porttitor libero elit egestas gravida, ut quam, nunc taciti</p></li>
-                </ul>
-                <div class="clearfix"> </div>
-            </div>
-        </div>
-    </div>
+
+    <script src="~/Scripts/effect-hover-item/production.js"></script>
 </body>
 </html>		
