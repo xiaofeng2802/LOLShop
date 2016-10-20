@@ -225,6 +225,7 @@
     <Content Include="Content\AppCss\bootstrap.css" />
     <Content Include="Content\AppCss\custom.css" />
     <Content Include="Content\AppCss\etalage.css" />
+    <Content Include="Content\AppCss\jquery.scrolltop.css" />
     <Content Include="Content\AppCss\reset.css" />
     <Content Include="Content\AppCss\style.css" />
     <Content Include="Content\bootstrap.css" />
@@ -293,6 +294,7 @@
     <Content Include="Scripts\AppScripts\jquery-1.11.1.min.js" />
     <Content Include="Scripts\AppScripts\jquery-ui.js" />
     <Content Include="Scripts\AppScripts\jquery.etalage.min.js" />
+    <Content Include="Scripts\AppScripts\jquery.scrolltop.js" />
     <Content Include="Scripts\AppScripts\nav.js" />
     <Content Include="Scripts\AppScripts\responsiveslides.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -338,6 +340,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

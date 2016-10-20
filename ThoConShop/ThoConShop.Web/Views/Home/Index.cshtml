@@ -3,14 +3,71 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="row filter">
+
+    <div class="col-md-12 filter-back-ground">
+
+        <div class="btn-group">
+            <button type="button" class="btn btn-default dropdown-toggle filter-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Tìm Theo Gank <span class="caret"></span>
+            </button>
+
+            <ul class="dropdown-menu">
+                <li><a href="javascript:;" class="acfiit" data-filter="tim-theo-rank=thach-dau">Thách đấu</a></li>
+                <li><a href="javascript:;" class="acfiit" data-filter="tim-theo-rank=cao-thu">Cao thủ</a></li>
+                <li><a href="javascript:;" class="acfiit" data-filter="tim-theo-rank=kim-cuong"> Kim Cương</a></li>
+                <li><a href="javascript:;" class="acfiit" data-filter="tim-theo-rank=bach-kim">Bạch Kim</a></li>
+                <li><a href="javascript:;" class="acfiit" data-filter="tim-theo-rank=vang">Vàng</a></li>
+                <li><a href="javascript:;" class="acfiit" data-filter="tim-theo-rank=bac">Bạc</a></li>
+                <li><a href="javascript:;" class="acfiit" data-filter="tim-theo-rank=dong">Đồng</a></li>
+                <li><a href="javascript:;" class="acfiit" data-filter="tim-theo-rank=chua-rank">Chưa rank</a></li>
+            </ul>
+        </div>
+        <div class="btn-group">
+            <button type="button" class="btn btn-default dropdown-toggle filter-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Tìm Theo Giá <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a href="javascript:;" class="acfiit" data-filter="tim-theo-gia=1-000k-tro-len">1.000k Trở Lên</a></li>
+                <li><a href="javascript:;" class="acfiit" data-filter="tim-theo-gia=500k-1-000k">500k- 1.000k</a></li>
+                <li><a href="javascript:;" class="acfiit" data-filter="tim-theo-gia=200k-500k">200k-500k</a></li>
+                <li><a href="javascript:;" class="acfiit" data-filter="tim-theo-gia=100k-200k">100k-200k</a></li>
+                <li><a href="javascript:;" class="acfiit" data-filter="tim-theo-gia=duoi-100k">Dưới 100k</a></li>
+            </ul>
+        </div>
+        <div class="btn-group">
+            <button type="button" class="btn btn-default dropdown-toggle filter-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Tìm Theo Trang Phục <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a href="javascript:;" class="acfiit" data-filter="tim-theo-skin-dac-biet=full-va-gan-full-tuong">Full và Gần Full Tướng</a></li>
+                <li><a href="javascript:;" class="acfiit" data-filter="tim-theo-skin-dac-biet=skin-toi-thuong-799">Skin tối thượng (799)</a></li>
+                <li><a href="javascript:;" class="acfiit" data-filter="tim-theo-skin-dac-biet=skin-hextech">Skin Hextech</a></li>
+                <li><a href="javascript:;" class="acfiit" data-filter="tim-theo-skin-dac-biet=skin-quan-quan">Skin Quán Quân</a></li>
+                <li><a href="javascript:;" class="acfiit" data-filter="tim-theo-skin-dac-biet=skin-vinh-quang">Skin Vinh Quang</a></li>
+                <li><a href="javascript:;" class="acfiit" data-filter="tim-theo-skin-dac-biet=skin-riot">Skin Riot</a></li>
+                <li><a href="javascript:;" class="acfiit" data-filter="tim-theo-skin-dac-biet=skin-halloween">Skin Halloween</a></li>
+                <li><a href="javascript:;" class="acfiit" data-filter="tim-theo-skin-dac-biet=skin-thach-dau">Skin Thách Đấu</a></li>
+                <li><a href="javascript:;" class="acfiit" data-filter="tim-theo-skin-dac-biet=skin-sieu-pham">Skin Siêu Phẩm</a></li>
+                <li><a href="javascript:;" class="acfiit" data-filter="tim-theo-skin-dac-biet=skin-ve-binh-tinh-tu">Skin Vệ Binh Tinh Tú</a></li>
+                <li><a href="javascript:;" class="acfiit" data-filter="tim-theo-skin-dac-biet=skin-tiec-be-boi">Skin Tiệc Bể Bơi</a></li>
+                <li><a href="javascript:;" class="acfiit" data-filter="tim-theo-skin-dac-biet=skin-gia-lap">Skin Giả Lập</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
 <div class="row">
     <div class="col-xs-6 col-sm-4 col-md-3">
         <div class="thumbnail">
             <a href="#">
                 <div class="caption">
-                    <h4>A</h4>
-                    <h4>A</h4>
-                    <h4>A</h4>
+                    <h4>Acc trắng thông tin</h4>
+                    <h4>Rank: Bạch Kim 5</h4>
+                    <h4>Khung: Bạch Kim</h4>
+                    <h4>Tướng: 120</h4>
+                    <h4>Skin: 20</h4>
+                    <h4>IP: 70000</h4>
                 </div>
                 <span class="header-item">Acc #14 - Acc HOT</span>
                 <div class="body-item" align="center">
@@ -38,9 +95,78 @@
         <div class="thumbnail">
             <a href="#">
                 <div class="caption">
-                    <h4>Thumbnail Headline</h4>
-                    <p>short thumbnail description</p>
+                    <h4>Acc trắng thông tin</h4>
+                    <h4>Rank: Bạch Kim 5</h4>
+                    <h4>Khung: Bạch Kim</h4>
+                    <h4>Tướng: 120</h4>
+                    <h4>Skin: 20</h4>
+                    <h4>IP: 70000</h4>
+                </div>
+                <span class="header-item">Acc #14 - Acc HOT</span>
+                <div class="body-item" align="center">
+                    <img src="http://img.shopacclm.vn/UploadFile/Images/636125624628296510_Untitled.jpg" alt="..." class="img-responsive">
+                </div>
+            </a>
+        </div>
+        <div class="col-xs-12 footer-item clearfix">
+            <div class="col-xs-5 col-md-6 no_padding">
+                <ul>
+                    <li>Rank: KC 5</li>
+                    <li>Tướng: 120</li>
+                    <li>Skin: 17</li>
+                </ul>
+            </div>
+            <div class="col-xs-7 col-md-6 stay_right footer-item-right">
+                <p class="">1.000.000<sup>đ</sup>
+                </p>
+                <button class="btn">Mua Ngay</button>
+            </div>
 
+        </div>
+    </div>
+    <div class="col-xs-6 col-sm-4 col-md-3">
+        <div class="thumbnail">
+            <a href="#">
+                <div class="caption">
+                    <h4>Acc trắng thông tin</h4>
+                    <h4>Rank: Bạch Kim 5</h4>
+                    <h4>Khung: Bạch Kim</h4>
+                    <h4>Tướng: 120</h4>
+                    <h4>Skin: 20</h4>
+                    <h4>IP: 70000</h4>
+                </div>
+                <span class="header-item">Acc #14 - Acc HOT</span>
+                <div class="body-item" align="center">
+                    <img src="http://img.shopacclm.vn/UploadFile/Images/636123433605573351_Untitled.png" alt="..." class="img-responsive">
+                </div>
+            </a>
+        </div>
+        <div class="col-xs-12 footer-item clearfix">
+            <div class="col-xs-5 col-md-6 no_padding">
+                <ul>
+                    <li>Rank: KC 5</li>
+                    <li>Tướng: 120</li>
+                    <li>Skin: 17</li>
+                </ul>
+            </div>
+            <div class="col-xs-7 col-md-6 stay_right footer-item-right">
+                <p class="">1.000.000<sup>đ</sup>
+                </p>
+                <button class="btn">Mua Ngay</button>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-xs-6 col-sm-4 col-md-3">
+        <div class="thumbnail">
+            <a href="#">
+                <div class="caption">
+                    <h4>Acc trắng thông tin</h4>
+                    <h4>Rank: Bạch Kim 5</h4>
+                    <h4>Khung: Bạch Kim</h4>
+                    <h4>Tướng: 120</h4>
+                    <h4>Skin: 20</h4>
+                    <h4>IP: 70000</h4>
                 </div>
                 <span class="header-item">Acc #14 - Acc HOT</span>
                 <div class="body-item" align="center">
@@ -68,9 +194,12 @@
         <div class="thumbnail">
             <a href="#">
                 <div class="caption">
-                    <h4>Thumbnail Headline</h4>
-                    <p>short thumbnail description</p>
-
+                    <h4>Acc trắng thông tin</h4>
+                    <h4>Rank: Bạch Kim 5</h4>
+                    <h4>Khung: Bạch Kim</h4>
+                    <h4>Tướng: 120</h4>
+                    <h4>Skin: 20</h4>
+                    <h4>IP: 70000</h4>
                 </div>
                 <span class="header-item">Acc #14 - Acc HOT</span>
                 <div class="body-item" align="center">
@@ -98,69 +227,12 @@
         <div class="thumbnail">
             <a href="#">
                 <div class="caption">
-                    <h4>Thumbnail Headline</h4>
-                    <p>short thumbnail description</p>
-
-                </div>
-                <span class="header-item">Acc #14 - Acc HOT</span>
-                <div class="body-item" align="center">
-                    <img src="http://img.shopacclm.vn/UploadFile/Images/636123439970019078_Untitled.png" alt="..." class="img-responsive">
-                </div>
-            </a>
-        </div>
-        <div class="col-xs-12 footer-item clearfix">
-            <div class="col-xs-5 col-md-6 no_padding">
-                <ul>
-                    <li>Rank: KC 5</li>
-                    <li>Tướng: 120</li>
-                    <li>Skin: 17</li>
-                </ul>
-            </div>
-            <div class="col-xs-7 col-md-6 stay_right footer-item-right">
-                <p class="">1.000.000<sup>đ</sup>
-                </p>
-                <button class="btn">Mua Ngay</button>
-            </div>
-
-        </div>
-    </div>
-    <div class="col-xs-6 col-sm-4 col-md-3">
-        <div class="thumbnail">
-            <a href="#">
-                <div class="caption">
-                    <h4>Thumbnail Headline</h4>
-                    <p>short thumbnail description</p>
-
-                </div>
-                <span class="header-item">Acc #14 - Acc HOT</span>
-                <div class="body-item" align="center">
-                    <img src="http://img.shopacclm.vn/UploadFile/Images/636123439970019078_Untitled.png" alt="..." class="img-responsive">
-                </div>
-            </a>
-        </div>
-        <div class="col-xs-12 footer-item clearfix">
-            <div class="col-xs-5 col-md-6 no_padding">
-                <ul>
-                    <li>Rank: KC 5</li>
-                    <li>Tướng: 120</li>
-                    <li>Skin: 17</li>
-                </ul>
-            </div>
-            <div class="col-xs-7 col-md-6 stay_right footer-item-right">
-                <p class="">1.000.000<sup>đ</sup>
-                </p>
-                <button class="btn">Mua Ngay</button>
-            </div>
-
-        </div>
-    </div>
-    <div class="col-xs-6 col-sm-4 col-md-3">
-        <div class="thumbnail">
-            <a href="#">
-                <div class="caption">
-                    <h4>Thumbnail Headline</h4>
-                    <p>short thumbnail description</p>
-
+                    <h4>Acc trắng thông tin</h4>
+                    <h4>Rank: Bạch Kim 5</h4>
+                    <h4>Khung: Bạch Kim</h4>
+                    <h4>Tướng: 120</h4>
+                    <h4>Skin: 20</h4>
+                    <h4>IP: 70000</h4>
                 </div>
                 <span class="header-item">Acc #14 - Acc HOT</span>
                 <div class="body-item" align="center">
@@ -180,16 +252,9 @@
                 <p class="">1.000.000<sup>đ</sup></p>
                 <button class="btn">Mua Ngay</button>
             </div>
-
         </div>
     </div>
 </div>
-
-
-
-
-
-
     <div class="row">
         <div class="col-md-12">
                 <ul class="body-pagging">

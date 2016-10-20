@@ -13,5 +13,10 @@ namespace ThoConShop.Web.Controllers
         {
             return View();
         }
+
+        public ActionResult Details()
+        {
+            return View();
+        }
     }
 }
