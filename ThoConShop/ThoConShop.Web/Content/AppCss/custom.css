@@ -806,30 +806,36 @@ ol li {
     width: 100%;
     background: url(../../Images/divider-arrow-large.png) center top no-repeat;
     margin-top: -6px;
-    margin-bottom: 20px;
     position: relative;
     z-index: 10;
     pointer-events: none;
 }
 
 .title_top {
-    background: url(../../Images/banner1.png) 50% -40px no-repeat;
+    background: url(../../Images/banner1.png) no-repeat;
     /*height: 226px;*/
     padding-top: 5px;
     background-size: cover;
 }
 
-.nav-header {
-    background: black;
-    height: 60px;
-    z-index: 9;
-    color: #95834c;
-    border-top: 1px solid;
-    border-bottom: 1px solid #5f5740;
-    margin-top: 2px;
-    font-family: 'Roboto Condensed',sans-serif;
+    .nav-header {
+        background: black;
+        height: 60px;
+        z-index: 9;
+        color: #95834c;
+        border-top: 1px solid;
+        border-bottom: 1px solid #5f5740;
+        margin-top: 2px;
+        font-family: 'Roboto Condensed',sans-serif;
+        display: inherit;
+    }
+@media (max-width: 768px) {
+    .nav-header {
+        display: none;
+    }
 }
 
+    
     .nav-header:after, .nav-header:before {
         content: " ";
         height: 1px;
@@ -862,7 +868,7 @@ ol li {
             height: 81px;
             width: 326px;
             font-size: 26px;
-            color: #cef8f8;
+            /*color: #cef8f8;*/
             display: block;
             text-transform: uppercase;
             text-align: center;
@@ -896,7 +902,6 @@ ol li {
             .nav-header .nav-join-button a:active:after, .nav-header .nav-join-button a:hover:before {
                 opacity: 1;
             }
-
 .nav-content {
     font-style: normal;
     font-size: 16px;

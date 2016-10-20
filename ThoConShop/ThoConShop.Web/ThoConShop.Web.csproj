@@ -229,9 +229,7 @@
     <Content Include="Content\AppCss\style.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\effect-hover-item\effects.css" />
-    <Content Include="Content\effect-hover-item\effectspre.css" />
-    <Content Include="Content\effect-hover-item\font-awesome.min.css" />
+    <Content Include="Content\effect-hover-item\hover.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\colabthi-webfont.svg" />
     <Content Include="fonts\fontawesome-webfont.svg" />
@@ -293,6 +291,7 @@
     <Content Include="Scripts\AppScripts\easyResponsiveTabs.js" />
     <Content Include="Scripts\AppScripts\hover_pack.js" />
     <Content Include="Scripts\AppScripts\jquery-1.11.1.min.js" />
+    <Content Include="Scripts\AppScripts\jquery-ui.js" />
     <Content Include="Scripts\AppScripts\jquery.etalage.min.js" />
     <Content Include="Scripts\AppScripts\nav.js" />
     <Content Include="Scripts\AppScripts\responsiveslides.min.js" />
@@ -375,7 +374,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>57127</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:57127/</IISUrl>
+          <IISUrl>http://localhost:57127/ShopThoCon</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
