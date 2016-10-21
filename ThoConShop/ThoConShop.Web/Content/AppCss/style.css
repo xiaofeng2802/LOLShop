@@ -2506,3 +2506,12 @@ p.cart {
 .no-margin {
     margin: 0 0;
 }
+
+.body-details {
+    margin-top: 0 !important;
+    color: #d3c7a9;
+    background-color: #000 !important;
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
