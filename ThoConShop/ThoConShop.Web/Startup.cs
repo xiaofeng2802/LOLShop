@@ -9,6 +9,7 @@ namespace ThoConShop.Web
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+            
         }
     }
 }
