@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.Entity.ModelConfiguration.Configuration;
 using System.Linq;
 using System.Reflection;
 using System.Web;
@@ -8,6 +10,7 @@ using System.Web.Mvc;
 using Autofac;
 using Autofac.Integration.WebApi;
 using Owin;
+using ThoConShop.Business;
 
 namespace ThoConShop.Web.App_Start
 {
@@ -19,6 +22,9 @@ namespace ThoConShop.Web.App_Start
 
             // Get your HttpConfiguration.
             var config = GlobalConfiguration.Configuration;
+
+            string connectionString = ConfigurationManager.ConnectionStrings["ShopThoConDb"].ToString();
+            builder.RegisterModule(new BusinessModule(connectionString));
 
             // Register your Web API controllers.
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
