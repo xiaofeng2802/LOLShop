@@ -18,7 +18,7 @@ namespace ThoConShop.DAL
         }
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterInstance(typeof(IShopConThoDbContext)).As(new ShopThoCon(_connection).GetType());
+            builder.RegisterInstance(typeof(IShopConThoDbContext)).As(new Entities.ShopThoCon(_connection).GetType());
             base.Load(builder);
         }
     }

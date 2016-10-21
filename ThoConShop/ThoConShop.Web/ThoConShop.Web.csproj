@@ -377,6 +377,10 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ShopThoCon.DataSeedWork\ShopThoCon.DataSeedWork.csproj">
+      <Project>{5b4bd348-e482-4dfc-978c-73a617fe080d}</Project>
+      <Name>ShopThoCon.DataSeedWork</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ThoConShop.Business\ThoConShop.Business.csproj">
       <Project>{7cb4bf10-01ed-4099-b83c-7d159d1bf3f4}</Project>
       <Name>ThoConShop.Business</Name>

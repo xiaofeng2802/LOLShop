@@ -1,0 +1,4 @@
+D:\Projects\LOL\LOLShop\ThoConShop\ShopThoCon.DataSeedWork\bin\Debug\ShopThoCon.DataSeedWork.dll
+D:\Projects\LOL\LOLShop\ThoConShop\ShopThoCon.DataSeedWork\bin\Debug\ShopThoCon.DataSeedWork.pdb
+D:\Projects\LOL\LOLShop\ThoConShop\ShopThoCon.DataSeedWork\obj\Debug\ShopThoCon.DataSeedWork.dll
+D:\Projects\LOL\LOLShop\ThoConShop\ShopThoCon.DataSeedWork\obj\Debug\ShopThoCon.DataSeedWork.pdb
