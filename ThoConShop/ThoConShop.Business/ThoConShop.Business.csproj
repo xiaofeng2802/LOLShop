@@ -62,10 +62,6 @@
     <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ShopThoCon.DataSeedWork\ShopThoCon.DataSeedWork.csproj">
-      <Project>{5b4bd348-e482-4dfc-978c-73a617fe080d}</Project>
-      <Name>ShopThoCon.DataSeedWork</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ThoConShop.DAL\ThoConShop.DAL.csproj">
       <Project>{93e37804-6dd4-41ed-bd08-aca26b546408}</Project>
       <Name>ThoConShop.DAL</Name>

@@ -71,12 +71,6 @@
     <Compile Include="Repositories\Repositories.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ShopThoCon.DataSeedWork\ShopThoCon.DataSeedWork.csproj">
-      <Project>{5b4bd348-e482-4dfc-978c-73a617fe080d}</Project>
-      <Name>ShopThoCon.DataSeedWork</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
