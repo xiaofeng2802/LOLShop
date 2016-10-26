@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace ShopThoCon.Api
+namespace ThoConShop.Api
 {
     public class FilterConfig
     {

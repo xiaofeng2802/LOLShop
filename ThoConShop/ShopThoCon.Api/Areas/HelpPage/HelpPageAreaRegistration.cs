@@ -1,7 +1,7 @@
 using System.Web.Http;
 using System.Web.Mvc;
 
-namespace ShopThoCon.Api.Areas.HelpPage
+namespace ThoConShop.Api.Areas.HelpPage
 {
     public class HelpPageAreaRegistration : AreaRegistration
     {

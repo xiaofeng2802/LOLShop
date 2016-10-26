@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThoConShop.DAL", "ThoConSho
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopThoCon.DataSeedWork", "ShopThoCon.DataSeedWork\ShopThoCon.DataSeedWork.csproj", "{5B4BD348-E482-4DFC-978C-73A617FE080D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopThoCon.Api", "ShopThoCon.Api\ShopThoCon.Api.csproj", "{0B270DC6-760A-4DC6-A2BA-4C31F138D464}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThoConShop.Api", "ShopThoCon.Api\ThoConShop.Api.csproj", "{0B270DC6-760A-4DC6-A2BA-4C31F138D464}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

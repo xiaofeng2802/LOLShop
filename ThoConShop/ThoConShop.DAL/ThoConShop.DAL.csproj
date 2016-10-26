@@ -66,6 +66,7 @@
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserRechargeHistory.cs" />
     <Compile Include="Entities\UserTradingHistory.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Repositories.cs" />
   </ItemGroup>

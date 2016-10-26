@@ -1,10 +1,10 @@
 using System;
 using System.Web.Http;
 using System.Web.Mvc;
-using ShopThoCon.Api.Areas.HelpPage.ModelDescriptions;
-using ShopThoCon.Api.Areas.HelpPage.Models;
+using ThoConShop.Api.Areas.HelpPage.ModelDescriptions;
+using ThoConShop.Api.Areas.HelpPage.Models;
 
-namespace ShopThoCon.Api.Areas.HelpPage.Controllers
+namespace ThoConShop.Api.Areas.HelpPage.Controllers
 {
     /// <summary>
     /// The controller that will handle requests for the help page.

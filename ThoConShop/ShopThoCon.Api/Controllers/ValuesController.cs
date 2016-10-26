@@ -5,7 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace ShopThoCon.Api.Controllers
+namespace ThoConShop.Api.Controllers
 {
     public class ValuesController : ApiController
     {

@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Net.Http.Headers;
 using System.Web.Http.Description;
-using ShopThoCon.Api.Areas.HelpPage.ModelDescriptions;
+using ThoConShop.Api.Areas.HelpPage.ModelDescriptions;
 
-namespace ShopThoCon.Api.Areas.HelpPage.Models
+namespace ThoConShop.Api.Areas.HelpPage.Models
 {
     /// <summary>
     /// The model that represents an API displayed on the help page.

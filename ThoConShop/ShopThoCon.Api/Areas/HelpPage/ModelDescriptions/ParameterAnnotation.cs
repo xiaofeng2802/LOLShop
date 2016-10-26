@@ -1,6 +1,6 @@
 using System;
 
-namespace ShopThoCon.Api.Areas.HelpPage.ModelDescriptions
+namespace ThoConShop.Api.Areas.HelpPage.ModelDescriptions
 {
     public class ParameterAnnotation
     {

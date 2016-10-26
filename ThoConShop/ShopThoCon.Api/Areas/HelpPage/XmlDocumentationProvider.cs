@@ -5,9 +5,9 @@ using System.Reflection;
 using System.Web.Http.Controllers;
 using System.Web.Http.Description;
 using System.Xml.XPath;
-using ShopThoCon.Api.Areas.HelpPage.ModelDescriptions;
+using ThoConShop.Api.Areas.HelpPage.ModelDescriptions;
 
-namespace ShopThoCon.Api.Areas.HelpPage
+namespace ThoConShop.Api.Areas.HelpPage
 {
     /// <summary>
     /// A custom <see cref="IDocumentationProvider"/> that reads the API documentation from an XML documentation file.

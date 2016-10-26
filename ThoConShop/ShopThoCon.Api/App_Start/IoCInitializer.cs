@@ -10,7 +10,7 @@ using Autofac;
 using Autofac.Integration.WebApi;
 using ThoConShop.Business;
 
-namespace ShopThoCon.Api.App_Start
+namespace ThoConShop.Api.App_Start
 {
     public class IoCInitializer
     {

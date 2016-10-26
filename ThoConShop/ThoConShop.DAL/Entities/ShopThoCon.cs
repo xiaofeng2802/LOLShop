@@ -10,10 +10,16 @@ namespace ThoConShop.DAL.Entities
 
     public partial class ShopThoCon : DbContext, IShopConThoDbContext
     {
+        public ShopThoCon()
+        {
+                
+        }
         public ShopThoCon(string connectionString)
             : base(connectionString)
         {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<ShopThoCon, ThoConShop.DAL.Migrations.Configuration>(connectionString));
         }
+    
 
         public DbEntityEntry<TEntity> Entry<TKey, TEntity>(TEntity entity)
            where TKey : struct

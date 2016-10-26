@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace ShopThoCon.Api.Areas.HelpPage.ModelDescriptions
+namespace ThoConShop.Api.Areas.HelpPage.ModelDescriptions
 {
     public class ParameterDescription
     {

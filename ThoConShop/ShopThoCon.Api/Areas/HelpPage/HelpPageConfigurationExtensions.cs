@@ -11,10 +11,10 @@ using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Description;
-using ShopThoCon.Api.Areas.HelpPage.ModelDescriptions;
-using ShopThoCon.Api.Areas.HelpPage.Models;
+using ThoConShop.Api.Areas.HelpPage.ModelDescriptions;
+using ThoConShop.Api.Areas.HelpPage.Models;
 
-namespace ShopThoCon.Api.Areas.HelpPage
+namespace ThoConShop.Api.Areas.HelpPage
 {
     public static class HelpPageConfigurationExtensions
     {

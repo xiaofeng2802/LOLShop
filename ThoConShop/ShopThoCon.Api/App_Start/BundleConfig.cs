@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace ShopThoCon.Api
+namespace ThoConShop.Api
 {
     public class BundleConfig
     {
