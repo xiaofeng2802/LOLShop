@@ -22,20 +22,27 @@
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/AppScripts/jquery-ui.js"></script>
     <script src="~/Scripts/AppScripts/jquery.scrolltop.js"></script>
+    <script src="../../node_modules/es6-shim/es6-shim.min.js"></script>
+    <script src="../../node_modules/systemjs/dist/system-polyfills.js"></script>
+    <script src="../../node_modules/angular2/es6/dev/src/testing/shims_for_IE.js"></script>
 
-    @*
+    <script src="../../node_modules/angular2/bundles/angular2-polyfills.js"></script>
+    <script src="../../node_modules/systemjs/dist/system.src.js"></script>
+    <script src="../../node_modules/rxjs/bundles/Rx.js"></script>
+    <script src="../../node_modules/angular2/bundles/angular2.dev.js"></script>
+
     <script>
-    $(function () {
-      $("#slider").responsiveSlides({
-      	auto: true,
-      	nav: true,
-      	speed: 500,
-        namespace: "callbacks",
-        pager: true,
-      });
-    });
-    </script>*@
-
+        System.config({
+            packages: {
+                'my-app': {
+                    format: 'register',
+                    defaultExtension: 'js'
+                }
+            }
+        });
+        System.import('my-app/main')
+            .then(null, console.error.bind(console));
+    </script>
 </head>
 <body>
     <div class="header">
