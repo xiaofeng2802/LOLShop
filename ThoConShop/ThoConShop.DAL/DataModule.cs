@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Autofac;
 using ThoConShop.DAL.Contracts;
 using ThoConShop.DAL.Entities;
+using ShopThoCon = ThoConShop.DAL.Entities.ShopThoCon;
 
 namespace ThoConShop.DAL
 {
@@ -18,7 +19,7 @@ namespace ThoConShop.DAL
         }
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterInstance(typeof(IShopConThoDbContext)).As(new Entities.ShopThoCon(_connection).GetType());
+            //builder.RegisterType<IShopConThoDbContext>().As(new DAL.Entities.ShopThoCon(""));
             base.Load(builder);
         }
     }
