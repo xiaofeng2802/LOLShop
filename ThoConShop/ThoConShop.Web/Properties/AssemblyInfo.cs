@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ThoConShop.Api")]
+[assembly: AssemblyTitle("ThoConShop.Web")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ThoConShop.Api")]
+[assembly: AssemblyProduct("ThoConShop.Web")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("3943e64e-9bd7-4edc-8ce1-183417a53c7c")]
+[assembly: Guid("adc58076-b2c1-4a9f-8926-c32027f87166")]
 
 // Version information for an assembly consists of the following four values:
 //
