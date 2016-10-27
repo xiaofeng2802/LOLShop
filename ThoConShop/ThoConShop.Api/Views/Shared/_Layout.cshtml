@@ -8,7 +8,29 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
+    @Scripts.Render("~/bundles/angular2")
 
+    <script>
+//angular2 beta fix for IE
+if (!Object.hasOwnProperty('name')) {
+     Object.defineProperty(Function.prototype, 'name', {
+          get: function() {
+              var matches = this.toString().match(/^\s*function\s*(\S*)\s*\(/);
+              var name = matches && matches.length > 1 ? matches[1] : "";
+              Object.defineProperty(this, 'name', {value : name });
+              return name;
+          }
+     });
+}
+
+System.config({
+       transpiler: 'typescript',
+       typescriptOptions: { emitDecoratorMetadata: true },
+       packages: { 'app': {defaultExtension: 'js'} }
+});
+
+System.import('app/app').then(null, console.error.bind(console));
+    </script>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
