@@ -13,10 +13,12 @@ namespace ThoConShop.Business
     public class BusinessModule : Module
     {
         private readonly string _connectionString;
+
         public BusinessModule(string con)
         {
             _connectionString = con;
         }
+
         protected override void Load(ContainerBuilder builder)
         {
             MappingConfig.RegisteMapper();
