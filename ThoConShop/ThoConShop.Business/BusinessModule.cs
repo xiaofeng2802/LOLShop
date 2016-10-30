@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Autofac;
 using ThoConShop.DAL;
+using ThoConShop.Business.Contracts;
+using ThoConShop.Business.Services;
 
 namespace ThoConShop.Business
 {
@@ -17,6 +19,10 @@ namespace ThoConShop.Business
         }
         protected override void Load(ContainerBuilder builder)
         {
+            MappingConfig.RegisteMapper();
+
+            builder.RegisterType<AccountService>().As<IAccountService>().InstancePerRequest();
+
             builder.RegisterModule(new DataModule(_connectionString));
             base.Load(builder);
         }

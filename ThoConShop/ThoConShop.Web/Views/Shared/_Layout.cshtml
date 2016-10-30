@@ -1,66 +1,112 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE HTML>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
 
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-    @Scripts.Render("~/bundles/angular2")
+
+    <link href="~/Content/AppCss/bootstrap.css" rel='stylesheet' type='text/css' />
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- Custom Theme files -->
+    <link href="~/Content/AppCss/reset.css" rel="stylesheet" />
+    <link href="~/Content/AppCss/style.css" rel='stylesheet' type='text/css' />
+    <!-- Custom Theme files -->
+    <link href="~/Content/AppCss/custom.css" rel="stylesheet" />
+    <link href="~/Content/effect-hover-item/hover.css" rel="stylesheet" />
+    <link href="~/Content/AppCss/jquery.scrolltop.css" rel="stylesheet" />
+    <!--webfont-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700&amp;subset=latin,vietnamese" rel="stylesheet" type="text/css">
+    <script src="~/Scripts/AppScripts/jquery-1.11.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/AppScripts/jquery-ui.js"></script>
+    <script src="~/Scripts/AppScripts/jquery.scrolltop.js"></script>
+    <script src="../../node_modules/es6-shim/es6-shim.min.js"></script>
+    <script src="../../node_modules/systemjs/dist/system-polyfills.js"></script>
+    <script src="../../node_modules/angular2/es6/dev/src/testing/shims_for_IE.js"></script>
+
+    <script src="../../node_modules/angular2/bundles/angular2-polyfills.js"></script>
+    <script src="../../node_modules/systemjs/dist/system.src.js"></script>
+    <script src="../../node_modules/rxjs/bundles/Rx.js"></script>
+    <script src="../../node_modules/angular2/bundles/angular2.dev.js"></script>
 
     <script>
-//angular2 beta fix for IE
-if (!Object.hasOwnProperty('name')) {
-     Object.defineProperty(Function.prototype, 'name', {
-          get: function() {
-              var matches = this.toString().match(/^\s*function\s*(\S*)\s*\(/);
-              var name = matches && matches.length > 1 ? matches[1] : "";
-              Object.defineProperty(this, 'name', {value : name });
-              return name;
-          }
-     });
-}
-
-System.config({
-       transpiler: 'typescript',
-       typescriptOptions: { emitDecoratorMetadata: true },
-       packages: { 'app': {defaultExtension: 'js'} }
-});
-
-System.import('app/app').then(null, console.error.bind(console));
+        System.config({
+            packages: {
+                'my-app': {
+                    format: 'register',
+                    defaultExtension: 'js'
+                }
+            }
+        });
+        System.import('my-app/main')
+            .then(null, console.error.bind(console));
     </script>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    <div class="header">
+        <header id="top" role="banner">
+            <div class="nav-header">
+                <div class="nav-content">
+                    <div class="nav-join-button">
+                        <a href="http://nicklm.com/">ThoConShop.VN</a>
+                    </div>
+                    <ul class="nav-left">
+                        <li><a href="http://nicklm.com/napthe">Nạp thẻ</a></li>
+                        <li></li>
+                    </ul>
+                    <ul class="nav-right">
+                        <li></li>
+                        <li><a href="http://nicklm.com/dangnhap">Đăng nhập bằng FB</a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
-                    <li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>
-                </ul>
+            <div class="mobile_nav">
+                <div class="navbar-header">
+                    <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span> <span class="glyphicon glyphicon-th-list"></span>
+                    </button>
+                    <a href="http://nicklm.com/" title="Trang chủ" class="navbar-brand">ThoConShop</a>
+                </div>
+                <nav id="bs-navbar" class="collapse navbar-collapse">
+                    <ul class="navbar-nav no-margin">
+                        <li><a href="http://nicklm.com/">Trang chủ</a></li>
+                        <li><a href="http://nicklm.com/dangnhap">Đăng nhập/đăng ký</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <div class="title_top text-center row no-margin">
+            <div class="col-lg-12" align="center">
+                <div class="col-lg-4 col-centered" style="min-height: 300px">
+                </div>
+                <div class="col-lg-4 col-centered">
+
+                </div>
+            </div>
+        </div>
+        <div class="hr"></div>
+    </div>
+    <div class="main">
+        <div class="content_top">
+            <div class="container back-ground-color-container">
+                @RenderBody()
+                <div class="row">
+                    <div class="footer img-responsive">
+                        <div class="container">
+
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    <a href="#" class="scrolltop custom-scrolltop"><i class="fa fa-chevron-up"></i></a>
+    <script>
+    $(document).ready(function() {
+        $.scrolltop();
+    });
+    </script>
 </body>
-</html>
+</html>		

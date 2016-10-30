@@ -13,10 +13,14 @@ namespace ThoConShop.DAL.Entities
         {
             Skins = new HashSet<Skin>();
             UserTradingHistories = new HashSet<UserTradingHistory>();
+            Champions = new HashSet<Champion>();
         }
 
         [StringLength(50)]
         public string AccountName { get; set; }
+
+        [StringLength(50)]
+        public string UserName { get; set; }
 
         [StringLength(50)]
         public string Password { get; set; }
@@ -34,6 +38,9 @@ namespace ThoConShop.DAL.Entities
 
         public bool? IsAvailable { get; set; }
 
+        public bool? IsHot { get; set; }
+
+
         [StringLength(100)]
         public string Avatar { get; set; }
 
@@ -46,5 +53,7 @@ namespace ThoConShop.DAL.Entities
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserTradingHistory> UserTradingHistories { get; set; }
+
+        public virtual ICollection<Champion> Champions { get; set; }
     }
 }

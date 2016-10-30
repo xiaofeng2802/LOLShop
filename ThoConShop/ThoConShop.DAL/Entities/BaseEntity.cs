@@ -9,6 +9,7 @@ namespace ThoConShop.DAL.Entities
     public abstract class BaseEntity<TKey> where TKey : struct 
     {
         public TKey Id { get; set; }
+
         public DateTime CreatedDate { get; set; }
 
         public DateTime? UpdatedDate { get; set; }

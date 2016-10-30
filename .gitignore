@@ -6,3 +6,6 @@
 /ThoConShop/ThoConShop.Web/obj
 /ThoConShop/ThoConShop.Web/bin
 /ThoConShop/.vs
+/ThoConShop/ThoConShop.Api/node_modules
+/ThoConShop/ThoConShop.Api/bin
+/ThoConShop/ThoConShop.Api/obj

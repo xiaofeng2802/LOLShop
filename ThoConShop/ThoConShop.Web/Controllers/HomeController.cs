@@ -3,14 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ThoConShop.Business.Contracts;
 
 namespace ThoConShop.Web.Controllers
 {
     public class HomeController : Controller
     {
+        readonly IAccountService accountService;
+
+        public HomeController(IAccountService _accountService)
+        {
+            accountService = _accountService;
+        }
+
         public ActionResult Index()
         {
-            return View();
+            var result = accountService.Read();
+            return View(result);
         }
 
         public ActionResult About()

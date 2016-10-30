@@ -93,6 +93,11 @@ namespace ThoConShop.DAL.Entities
             modelBuilder.Entity<UserRechargeHistory>()
                 .Property(e => e.PinNumber)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<Account>()
+                .HasMany(a => a.Champions)
+                .WithRequired(a => a.Account)
+                .HasForeignKey(a => a.AccountId);
         }
     }
 }

@@ -60,6 +60,7 @@
     <Compile Include="DataModule.cs" />
     <Compile Include="Entities\Account.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
+    <Compile Include="Entities\Champion.cs" />
     <Compile Include="Entities\Gank.cs" />
     <Compile Include="Entities\ShopThoCon.cs" />
     <Compile Include="Entities\Skin.cs" />

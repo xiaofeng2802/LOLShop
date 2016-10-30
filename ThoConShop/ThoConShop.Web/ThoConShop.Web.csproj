@@ -205,6 +205,7 @@
     <Content Include="fonts\stylesheet.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\Account_1.jpg" />
     <Content Include="Images\arrows.png" />
     <Content Include="Images\back-ground-lol.jpg" />
     <Content Include="Images\background-body.jpg" />

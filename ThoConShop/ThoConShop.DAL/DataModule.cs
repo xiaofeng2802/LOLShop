@@ -19,7 +19,9 @@ namespace ThoConShop.DAL
         }
         protected override void Load(ContainerBuilder builder)
         {
-            //builder.RegisterType<IShopConThoDbContext>().As(new DAL.Entities.ShopThoCon(""));
+            builder.RegisterInstance(new DAL.Entities.ShopThoCon(_connection)).As<IShopConThoDbContext>().SingleInstance();
+
+            builder.RegisterType<Repositories.Repositories<int, Account>>().As<IRepositories<int, Account>>().InstancePerRequest();
             base.Load(builder);
         }
     }

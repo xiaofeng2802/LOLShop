@@ -18,8 +18,8 @@ namespace ThoConShop.Web.App_Start
 
             // Get your HttpConfiguration.
 
-            string connectionString = ConfigurationManager.ConnectionStrings["ShopThoConDb"].ToString();
-            builder.RegisterModule(new BusinessModule(connectionString));
+            string connectionName = "ShopThoConDb";
+            builder.RegisterModule(new BusinessModule(connectionName));
 
             // Register your Web API controllers.
             // Register dependencies in controllers

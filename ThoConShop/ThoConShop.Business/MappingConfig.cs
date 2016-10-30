@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using ThoConShop.DAL.Entities;
+using ThoConShop.Business.Dtos;
 
 namespace ThoConShop.Business
 {
@@ -11,7 +13,7 @@ namespace ThoConShop.Business
     {
         public static void RegisteMapper()
         {
-            
+            Mapper.Initialize(a => a.CreateMap<Account, AccountDto>().ReverseMap());
         }
     }
 }
