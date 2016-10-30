@@ -14,7 +14,8 @@ namespace ThoConShop.DAL.Entities
         {
                 
         }
-        public ShopThoCon(string connectionString)
+
+        public ShopThoCon(string connectionString = "ShopThoConDb")
             : base(connectionString)
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<ShopThoCon, ThoConShop.DAL.Migrations.Configuration>(connectionString));
