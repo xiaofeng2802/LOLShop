@@ -13,12 +13,19 @@ namespace ThoConShop.DAL.Entities
         public Skin()
         {
             Accounts = new HashSet<Account>();
+            Children = new HashSet<Skin>();
         }
 
         [StringLength(100)]
         public string SkinName { get; set; }
 
         public bool? IsSpecial { get; set; }
+
+        public int? GroupId { get; set; }
+
+        public Skin Group { get; set; }
+
+        public ICollection<Skin> Children { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Account> Accounts { get; set; }

@@ -62,6 +62,7 @@
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\Champion.cs" />
     <Compile Include="Entities\Gank.cs" />
+    <Compile Include="Entities\PageGem.cs" />
     <Compile Include="Entities\ShopThoCon.cs" />
     <Compile Include="Entities\Skin.cs" />
     <Compile Include="Entities\User.cs" />

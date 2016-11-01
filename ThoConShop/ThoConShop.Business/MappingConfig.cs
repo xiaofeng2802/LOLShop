@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using ThoConShop.DAL.Entities;
 using ThoConShop.Business.Dtos;
+using PagedList;
 
 namespace ThoConShop.Business
 {
@@ -13,7 +14,12 @@ namespace ThoConShop.Business
     {
         public static void RegisteMapper()
         {
-            Mapper.Initialize(a => a.CreateMap<Account, AccountDto>().ReverseMap());
+            Mapper.Initialize(a =>
+            {
+                a.CreateMap<Account, AccountDto>().ReverseMap();
+                a.CreateMap<Gank, GankDto>().ReverseMap();
+                a.CreateMap<Skin, SkinDto>().ReverseMap();
+            }); 
         }
     }
 }

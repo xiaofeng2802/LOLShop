@@ -2426,6 +2426,7 @@ p.cart {
    font-size: 14px;
    border: 2px solid #262626;
    background: #676767;     
+   margin-right: 5px;
 }
 
 .body-pagging li a:hover,
@@ -2453,7 +2454,7 @@ p.cart {
 }
 
 .body-item {
-    margin-top: 35px;
+    margin-top: 75px;
 }
 
 .footer-item {

@@ -14,6 +14,7 @@ namespace ThoConShop.DAL.Entities
             Skins = new HashSet<Skin>();
             UserTradingHistories = new HashSet<UserTradingHistory>();
             Champions = new HashSet<Champion>();
+            NumberOfPageGems = new HashSet<PageGem>();
         }
 
         [StringLength(50)]
@@ -44,7 +45,6 @@ namespace ThoConShop.DAL.Entities
         [StringLength(100)]
         public string Avatar { get; set; }
 
-        public byte? NumberOfPageGem { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Skin> Skins { get; set; }
@@ -55,5 +55,7 @@ namespace ThoConShop.DAL.Entities
         public virtual ICollection<UserTradingHistory> UserTradingHistories { get; set; }
 
         public virtual ICollection<Champion> Champions { get; set; }
+
+        public virtual ICollection<PageGem> NumberOfPageGems { get; set; }
     }
 }

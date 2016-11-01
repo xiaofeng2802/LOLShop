@@ -98,6 +98,19 @@ namespace ThoConShop.DAL.Entities
                 .HasMany(a => a.Champions)
                 .WithRequired(a => a.Account)
                 .HasForeignKey(a => a.AccountId);
+
+            modelBuilder.Entity<Account>()
+                .HasMany(a => a.NumberOfPageGems)
+                .WithRequired(a => a.Account)
+                .HasForeignKey(a => a.AccountId);
+
+            modelBuilder.Entity<UserTradingHistory>().Ignore(a => a.Id);
+
+            modelBuilder.Entity<Skin>()
+                .HasMany(a => a.Children)
+                .WithOptional(a => a.Group)
+                .HasForeignKey(a => a.GroupId);
+
         }
     }
 }

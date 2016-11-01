@@ -1,0 +1,40 @@
+﻿@model PagedList.IPagedList<ThoConShop.Business.Dtos.AccountDto>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-xs-6 col-sm-4 col-md-3">
+            <div class="thumbnail">
+                <a href="#">
+                    <div class="caption">
+                        <h4>Acc trắng thông tin</h4>
+                        <h4>Rank: Bạch Kim 5</h4>
+                        <h4>Khung: Bạch Kim</h4>
+                        <h4>Tướng: 120</h4>
+                        <h4>Skin: 20</h4>
+                        <h4>IP: 70000</h4>
+                    </div>
+                    <span class="header-item">@item.Title</span>
+                    <div class="body-item" align="center">
+                        <img src="@item.Avatar" alt="..." class="img-responsive">
+                    </div>
+                </a>
+            </div>
+            <div class="col-xs-12 footer-item clearfix">
+                <div class="col-xs-5 col-md-6 no_padding">
+                    <ul>
+                        <li>Rank: KC 5</li>
+                        <li>Tướng: 120</li>
+                        <li>Skin: 17</li>
+                    </ul>
+                </div>
+                <div class="col-xs-7 col-md-6 stay_right footer-item-right">
+                    <p class="">
+                        @item.Price<sup>đ</sup>
+                    </p>
+                    <button class="btn">Mua Ngay</button>
+                </div>
+
+            </div>
+        </div>
+    }
+</div>

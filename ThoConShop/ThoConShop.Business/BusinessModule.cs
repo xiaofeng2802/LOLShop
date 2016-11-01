@@ -24,6 +24,7 @@ namespace ThoConShop.Business
             MappingConfig.RegisteMapper();
 
             builder.RegisterType<AccountService>().As<IAccountService>().InstancePerRequest();
+            builder.RegisterType<AccountRelationDataService>().As<IAccountRelationDataService>().InstancePerRequest();
 
             builder.RegisterModule(new DataModule(_connectionString));
             base.Load(builder);

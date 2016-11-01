@@ -22,6 +22,14 @@ namespace ThoConShop.DAL
             builder.RegisterInstance(new DAL.Entities.ShopThoCon(_connection)).As<IShopConThoDbContext>().SingleInstance();
 
             builder.RegisterType<Repositories.Repositories<int, Account>>().As<IRepositories<int, Account>>().InstancePerRequest();
+            builder.RegisterType<Repositories.Repositories<int, Gank>>().As<IRepositories<int, Gank>>().InstancePerRequest();
+            builder.RegisterType<Repositories.Repositories<int, User>>().As<IRepositories<int, User>>().InstancePerRequest();
+            builder.RegisterType<Repositories.Repositories<int, Champion>>().As<IRepositories<int, Champion>>().InstancePerRequest();
+            builder.RegisterType<Repositories.Repositories<int, PageGem>>().As<IRepositories<int, PageGem>>().InstancePerRequest();
+            builder.RegisterType<Repositories.Repositories<int, Skin>>().As<IRepositories<int, Skin>>().InstancePerRequest();
+            builder.RegisterType<Repositories.Repositories<int, UserRechargeHistory>>().As<IRepositories<int, UserRechargeHistory>>().InstancePerRequest();
+            builder.RegisterType<Repositories.Repositories<int, UserTradingHistory>>().As<IRepositories<int, UserTradingHistory>>().InstancePerRequest();
+
             base.Load(builder);
         }
     }

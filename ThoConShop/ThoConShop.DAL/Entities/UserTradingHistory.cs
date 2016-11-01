@@ -7,8 +7,10 @@ namespace ThoConShop.DAL.Entities
     using System.Data.Entity.Spatial;
 
     [Table("UserTradingHistory")]
-    public partial class UserTradingHistory
+    public partial class UserTradingHistory : BaseEntity<int>
     {
+        public int Id { get; set; }
+
         [Key]
         [Column(Order = 0)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]

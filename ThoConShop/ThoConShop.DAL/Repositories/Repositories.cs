@@ -32,7 +32,7 @@ namespace ThoConShop.DAL.Repositories
 
         public IQueryable<TEntity> Read(Expression<Func<TEntity, bool>> expression)
         {
-            return _dbContext.Set<TKey, TEntity>().Where(expression);
+            return _dbContext.Set<TKey, TEntity>().Where(expression).AsNoTracking();
         }
 
         public TEntity ReadOne(Expression<Func<TEntity, bool>> expression)

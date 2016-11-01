@@ -1006,14 +1006,14 @@ ol li {
     border-radius: 0 !important;
     font-weight: bold;
     color: #FFF !important;
-    border-color: #705425 !important;
+    border-color: #d3c7a9 !important;
 }
 
 .pagination a {
-    background: #000 !important;
+    /*background: #000 !important;
     color: #d3c7a9 !important;
     border-radius: 0;
-    border-color: #705425 !important;
+    border-color: #705425 !important;*/
 }
 
 @media (min-width: 768px) {
