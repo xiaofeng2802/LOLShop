@@ -31,12 +31,12 @@ namespace ThoConShop.Business.Services
             throw new NotImplementedException();
         }
 
-        public IPagedList<AccountDto> FilterByGankPriceSkin(int currentIndex, int pageSize, int? gankFilter, string priceFilter, int? skinFilter)
+        public IPagedList<AccountDto> FilterByRankPriceSkin(int currentIndex, int pageSize, int? gankFilter, string priceFilter, int? skinFilter)
         {
             var result = _repo.Read(a => true);
             if (gankFilter != null)
             {
-                result = result.Where(a => a.GankId == gankFilter);
+                result = result.Where(a => a.RankId == gankFilter);
             }
 
             if (!string.IsNullOrEmpty(priceFilter))
@@ -72,7 +72,7 @@ namespace ThoConShop.Business.Services
             return result.Select(a => new AccountDto()
             {
                 CreatedDate = a.CreatedDate,
-                GankId = a.GankId,
+                GankId = a.RankId,
                 UserName = a.UserName,
                 Avatar = a.Avatar,
                 IsAvailable = a.IsAvailable,
@@ -98,7 +98,7 @@ namespace ThoConShop.Business.Services
                               .Select(a =>  new AccountDto()
                                 {
                                     CreatedDate = a.CreatedDate,
-                                    GankId = a.GankId,
+                                    GankId = a.RankId,
                                     UserName = a.UserName,
                                     Avatar = a.Avatar,
                                     IsAvailable = a.IsAvailable,

@@ -10,13 +10,13 @@ namespace ThoConShop.Web.Models
     {
         public PagedList.IPagedList<AccountDto> DataSource { get; set; }
 
-        public IList<GankDto> GanksFilter { get; set; }
+        public IList<RankDto> RanksFilter { get; set; }
 
         public IList<SkinDto> SkinsFilter { get; set; }
 
         public IList<string> PriceFilter { get; set; }
 
-        public int? CurrentGankFilter { get; set; }
+        public int? CurrentRankFilter { get; set; }
 
         public int? CurrentSkinFilter { get; set; }
 

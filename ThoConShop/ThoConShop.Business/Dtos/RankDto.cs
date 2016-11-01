@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace ThoConShop.Business.Dtos
 {
-    public class GankDto : BaseDto<int>
+    public class RankDto : BaseDto<int>
     {
-        public string GankName { get; set; }
+        public string RankName { get; set; }
 
-        public string GankImage { get; set; }
+        public string RankImage { get; set; }
     }
 }

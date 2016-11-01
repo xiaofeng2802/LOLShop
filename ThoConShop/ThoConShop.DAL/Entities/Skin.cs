@@ -23,7 +23,7 @@ namespace ThoConShop.DAL.Entities
 
         public int? GroupId { get; set; }
 
-        public Skin Group { get; set; }
+        public Skin Parent { get; set; }
 
         public ICollection<Skin> Children { get; set; }
 

@@ -17,7 +17,7 @@ namespace ThoConShop.Business
             Mapper.Initialize(a =>
             {
                 a.CreateMap<Account, AccountDto>().ReverseMap();
-                a.CreateMap<Gank, GankDto>().ReverseMap();
+                a.CreateMap<Rank, RankDto>().ReverseMap();
                 a.CreateMap<Skin, SkinDto>().ReverseMap();
             }); 
         }

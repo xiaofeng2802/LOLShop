@@ -62,8 +62,8 @@ namespace ThoConShop.DAL.Entities
                 .WithRequired(e => e.Account)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Gank>()
-                .Property(e => e.GankImage)
+            modelBuilder.Entity<Rank>()
+                .Property(e => e.RankImage)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Skin>()
@@ -104,12 +104,18 @@ namespace ThoConShop.DAL.Entities
                 .WithRequired(a => a.Account)
                 .HasForeignKey(a => a.AccountId);
 
-            modelBuilder.Entity<UserTradingHistory>().Ignore(a => a.Id);
+            modelBuilder.Entity<UserTradingHistory>()
+                .Ignore(a => a.Id);
 
             modelBuilder.Entity<Skin>()
                 .HasMany(a => a.Children)
-                .WithOptional(a => a.Group)
+                .WithOptional(a => a.Parent)
                 .HasForeignKey(a => a.GroupId);
+
+            modelBuilder.Entity<Rank>()
+              .HasMany(a => a.Children)
+              .WithOptional(a => a.Parent)
+              .HasForeignKey(a => a.GroupId);
 
         }
     }

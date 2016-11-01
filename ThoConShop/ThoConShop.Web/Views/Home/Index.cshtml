@@ -6,7 +6,7 @@
 
 }
 
-@Html.HiddenFor(a => Model.CurrentGankFilter)
+@Html.HiddenFor(a => Model.CurrentRankFilter)
 @Html.HiddenFor(a => Model.CurrentPriceFilter)
 @Html.HiddenFor(a => Model.CurrentSkinFilter)
 
@@ -14,21 +14,21 @@
     <div class="col-md-12 filter-back-ground">
         <div class="btn-group">
             <button type="button" class="btn btn-default dropdown-toggle filter-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                @if (Model.CurrentGankFilter == null)
+                @if (Model.CurrentRankFilter == null)
                 {
-                    <span>Tìm Theo Gank</span> <span class="caret"></span>
+                    <span>Tìm Theo Rank</span> <span class="caret"></span>
                 }
                 else
                 {
-                    <span>@Model.GanksFilter.SingleOrDefault(a => a.Id == Model.CurrentGankFilter).GankName</span> <span class="caret"></span>
+                    <span>@Model.RanksFilter.SingleOrDefault(a => a.Id == Model.CurrentRankFilter).RankName</span> <span class="caret"></span>
                 }
                 
             </button>
 
             <ul class="dropdown-menu">
-                @foreach (var gankFilter in Model.GanksFilter)
+                @foreach (var rankFilter in Model.RanksFilter)
                 {
-                    <li>@Html.ActionLink(gankFilter.GankName, "Index", new { CurrentGankFilter = gankFilter.Id, CurrentPriceFilter = Model.CurrentPriceFilter, CurrentSkinFilter = Model.CurrentSkinFilter })</li>
+                    <li>@Html.ActionLink(rankFilter.RankName, "Index", new { CurrentRankFilter = rankFilter.Id, CurrentPriceFilter = Model.CurrentPriceFilter, CurrentSkinFilter = Model.CurrentSkinFilter })</li>
                 }
             </ul>
         </div>
@@ -47,7 +47,7 @@
                 @foreach (var price in Model.PriceFilter)
                 {
 
-                    <li>@Html.ActionLink(price, "Index", new { CurrentPriceFilter = price, CurrentGankFilter = Model.CurrentGankFilter, CurrentSkinFilter = Model.CurrentSkinFilter })</li>
+                    <li>@Html.ActionLink(price, "Index", new { CurrentPriceFilter = price, CurrentRankFilter = Model.CurrentRankFilter, CurrentSkinFilter = Model.CurrentSkinFilter })</li>
                 }
             </ul>
         </div>
@@ -65,7 +65,7 @@
             <ul class="dropdown-menu">
                 @foreach (var skin in Model.SkinsFilter)
                 {
-                    <li>@Html.ActionLink(skin.SkinName, "Index", new { CurrentSkinFilter = skin.Id, CurrentGankFilter = Model.CurrentGankFilter, CurrentPriceFilter = Model.CurrentPriceFilter })</li>
+                    <li>@Html.ActionLink(skin.SkinName, "Index", new { CurrentSkinFilter = skin.Id, CurrentRankFilter = Model.CurrentRankFilter, CurrentPriceFilter = Model.CurrentPriceFilter })</li>
                 }
             </ul>
         </div>
@@ -81,6 +81,6 @@
 
 <div class="row">
     <div class="col-md-12 body-pagging">
-        @Html.PagedListPager(Model.DataSource, page => Url.Action("Index", new { page, CurrentGankFilter = Model.CurrentGankFilter, CurrentPriceFilter = Model.CurrentPriceFilter, CurrentSkinFilter = Model.CurrentSkinFilter }))
+        @Html.PagedListPager(Model.DataSource, page => Url.Action("Index", new { page, CurrentRankFilter = Model.CurrentRankFilter, CurrentPriceFilter = Model.CurrentPriceFilter, CurrentSkinFilter = Model.CurrentSkinFilter }))
     </div>
 </div>

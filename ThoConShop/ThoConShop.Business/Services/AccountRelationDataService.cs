@@ -13,13 +13,13 @@ namespace ThoConShop.Business.Services
 {
     public class AccountRelationDataService : IAccountRelationDataService
     {
-        readonly IRepositories<int, Gank> _repoGank;
+        readonly IRepositories<int, Rank> _repoGank;
 
         readonly IRepositories<int, Skin> _repoSkin;
 
         readonly IRepositories<int, Account> _repoAccount;
 
-        public AccountRelationDataService(IRepositories<int, Gank> repoGank,
+        public AccountRelationDataService(IRepositories<int, Rank> repoGank,
             IRepositories<int, Skin> repoSkin,
             IRepositories<int, Account> repoAccount)
         {
@@ -28,9 +28,9 @@ namespace ThoConShop.Business.Services
             _repoAccount = repoAccount;
         }
 
-        public IList<GankDto> ReadGankForFilter()
+        public IList<RankDto> ReadRankForFilter()
         {
-            return Mapper.Map<IList<GankDto>>(_repoGank.Read(a => true));
+            return Mapper.Map<IList<RankDto>>(_repoGank.Read(a => a.GroupId == null));
         }
 
         public IList<SkinDto> ReadSkinForFilter()

@@ -10,7 +10,7 @@ namespace ThoConShop.Business.Contracts
 {
     public interface IAccountRelationDataService
     {
-        IList<GankDto> ReadGankForFilter();
+        IList<RankDto> ReadRankForFilter();
 
         IList<SkinDto> ReadSkinForFilter();
 

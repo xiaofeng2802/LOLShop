@@ -70,7 +70,7 @@
     <Compile Include="Contracts\IAccountService.cs" />
     <Compile Include="Dtos\AccountDto.cs" />
     <Compile Include="Dtos\BaseDto.cs" />
-    <Compile Include="Dtos\GankDto.cs" />
+    <Compile Include="Dtos\RankDto.cs" />
     <Compile Include="Dtos\SkinDto.cs" />
     <Compile Include="MappingConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

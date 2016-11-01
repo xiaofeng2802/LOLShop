@@ -223,14 +223,17 @@
     <Content Include="Images\banner2.jpg" />
     <Content Include="Images\banner3.jpg" />
     <Content Include="Images\bg.jpg" />
+    <Content Include="Images\challenger-medal.png" />
     <Content Include="Images\compare.png" />
     <Content Include="Images\coper-medal.png" />
     <Content Include="Images\delivery.jpg" />
+    <Content Include="Images\diamond-medal.png" />
     <Content Include="Images\divider-arrow-large.png" />
     <Content Include="Images\footer.png" />
     <Content Include="Images\footer_bg.jpg" />
     <Content Include="Images\f_menu.png" />
     <Content Include="Images\gold-medal.png" />
+    <Content Include="Images\gosu-medal.png" />
     <Content Include="Images\img-sprite.png" />
     <Content Include="Images\join_button.png" />
     <Content Include="Images\LCU_AlphaWebsite_Button_NavTier1.png" />
@@ -297,7 +300,6 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Views\Home\Details.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -314,6 +316,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_DetailsLayout.cshtml" />
     <Content Include="Views\Home\_bodyIndex.cshtml" />
+    <Content Include="Views\Home\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -13,6 +13,7 @@ namespace ThoConShop.DAL.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(ThoConShop.DAL.Entities.ShopThoCon context)
@@ -29,6 +30,7 @@ namespace ThoConShop.DAL.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+
             //context.Set<Skin>().AddOrUpdate(new Skin[]
             //{
             //    new Skin()
@@ -86,12 +88,12 @@ namespace ThoConShop.DAL.Migrations
             //});
 
 
-            //context.Set<Gank>().AddOrUpdate(new Gank[]
+            //context.Set<Rank>().AddOrUpdate(new Rank[]
             //{
-            //   new Gank()
+            //   new Rank()
             //   {
-            //       GankName = "Chưa Có Gank",
-            //       GankImage = "../Images/no-medal.png",
+            //       RankName = "Chưa Có Rank",
+            //       RankImage = "../Images/no-medal.png",
             //       CreatedDate = DateTime.Now,
             //        Accounts = new List<Account>()
             //       {
@@ -100,23 +102,43 @@ namespace ThoConShop.DAL.Migrations
             //               AccountName = "Thuan",
             //               CreatedDate = DateTime.Now,
             //               Avatar = "../Images/yasou.jpg",
-            //               Price = 300000,
+            //               Price = 30000,
             //               IsAvailable = true,
             //               IsHot = true,
             //               UserName = "ABC",
             //               Password = "123",
             //               Title = "So Hot 1",
             //               Description = "For testing",
-            //               GankId = 1
+            //               RankId = 1
             //           }
             //       }
 
             //   },
-            //   new Gank()
+            //   new Rank()
             //   {
-            //       GankName = "Đồng",
+            //       RankName = "Đồng",
             //       CreatedDate = DateTime.Now,
-            //       GankImage = "../Images/coper-medal.jpg",
+            //       RankImage = "../Images/coper-medal.jpg",
+            //       Children = new List<Rank>() {
+            //           new Rank()
+            //           {
+            //                    RankName = "Đồng 1",
+            //                   CreatedDate = DateTime.Now,
+            //                   RankImage = "../Images/coper-medal.jpg"
+            //           },
+            //            new Rank()
+            //           {
+            //                    RankName = "Đồng 2",
+            //                   CreatedDate = DateTime.Now,
+            //                   RankImage = "../Images/coper-medal.jpg"
+            //           },
+            //             new Rank()
+            //           {
+            //                    RankName = "Đồng 3",
+            //                   CreatedDate = DateTime.Now,
+            //                   RankImage = "../Images/coper-medal.jpg"
+            //           }
+            //       },
             //       Accounts = new List<Account>()
             //       {
             //           new Account()
@@ -124,22 +146,22 @@ namespace ThoConShop.DAL.Migrations
             //               AccountName = "Thuan",
             //               CreatedDate = DateTime.Now,
             //               Avatar = "../Images/yasou.jpg",
-            //               Price = 300000,
+            //               Price = 3000000,
             //               IsAvailable = true,
             //               IsHot = true,
             //               UserName = "ABC",
             //               Password = "123",
             //               Title = "So Hot 2",
             //               Description = "For testing",
-            //               GankId = 2
+            //               RankId = 2
             //           }
             //       }
             //   },
-            //   new Gank()
+            //   new Rank()
             //   {
-            //       GankName = "Bạc",
+            //       RankName = "Bạc",
             //       CreatedDate = DateTime.Now,
-            //       GankImage = "../Images/silver-medal.png",
+            //       RankImage = "../Images/silver-medal.png",
             //         Accounts = new List<Account>()
             //       {
             //           new Account()
@@ -154,15 +176,15 @@ namespace ThoConShop.DAL.Migrations
             //               Password = "123",
             //               Title = "So Hot 3",
             //               Description = "For testing",
-            //               GankId = 3
+            //               RankId = 3
             //           }
             //       }
             //   },
-            //     new Gank()
+            //     new Rank()
             //   {
-            //       GankName = "Vàng",
+            //       RankName = "Vàng",
             //       CreatedDate = DateTime.Now,
-            //       GankImage = "../Images/gold-medal.png",
+            //       RankImage = "../Images/gold-medal.png",
             //         Accounts = new List<Account>()
             //       {
             //           new Account()
@@ -177,33 +199,33 @@ namespace ThoConShop.DAL.Migrations
             //               Password = "123",
             //               Title = "So Hot 4",
             //               Description = "For testing",
-            //               GankId = 4
+            //               RankId = 4
             //           }
             //       }
             //   },
-            //      new Gank()
+            //      new Rank()
             //   {
-            //       GankName = "Bạch Kim",
+            //       RankName = "Bạch Kim",
             //       CreatedDate = DateTime.Now,
-            //       GankImage = "../Images/platinum-medal.png"
+            //       RankImage = "../Images/platinum-medal.png"
             //   },
-            //    new Gank()
+            //    new Rank()
             //   {
-            //       GankName = "Kim Cương",
+            //       RankName = "Kim Cương",
             //       CreatedDate = DateTime.Now,
-            //       GankImage = "../Images/silver-medal.png"
+            //       RankImage = "../Images/diamond-medal.png"
             //   },
-            //    new Gank()
+            //    new Rank()
             //    {
-            //        GankName = "Cao Thu",
+            //        RankName = "Cao Thu",
             //        CreatedDate = DateTime.Now,
-            //        GankImage = "../Images/silver-medal.png"
+            //        RankImage = "../Images/gosu-medal.png"
             //    },
-            //    new Gank()
+            //    new Rank()
             //    {
-            //        GankName = "Thach Dau",
+            //        RankName = "Thach Dau",
             //        CreatedDate = DateTime.Now,
-            //        GankImage = "../Images/silver-medal.png"
+            //        RankImage = "../Images/challenger-medal.png"
             //    }
             //});
 

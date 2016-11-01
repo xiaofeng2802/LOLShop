@@ -23,31 +23,36 @@ namespace ThoConShop.Web.Controllers
             _accountRelationDataService = accountRelationDataService;
         }
 
-        public ActionResult Index(int? page, int? currentGankFilter, string currentPriceFilter, int? currentSkinFilter)
+        public ActionResult Index(int? page, int? currentRankFilter, string currentPriceFilter, int? currentSkinFilter)
         {
             int pageIndex = page ?? 1;
             IPagedList<AccountDto> result;
 
-            if (currentGankFilter == null && string.IsNullOrEmpty(currentPriceFilter) && currentSkinFilter == null)
+            if (currentRankFilter == null && string.IsNullOrEmpty(currentPriceFilter) && currentSkinFilter == null)
             {
                 result = _accountService.Read(pageIndex, _pageSize);
             }
             else
             {
-                result = _accountService.FilterByGankPriceSkin(pageIndex, _pageSize, currentGankFilter, currentPriceFilter, currentSkinFilter);
+                result = _accountService.FilterByRankPriceSkin(pageIndex, _pageSize, currentRankFilter, currentPriceFilter, currentSkinFilter);
             }
 
             AccountIndexViewModel viewModel = new AccountIndexViewModel()
             {
                 DataSource = result,
-                GanksFilter = _accountRelationDataService.ReadGankForFilter(),
+                RanksFilter = _accountRelationDataService.ReadRankForFilter(),
                 SkinsFilter = _accountRelationDataService.ReadSkinForFilter(),
                 PriceFilter = _accountRelationDataService.ReadPriceRangeForFilter(),
-                CurrentGankFilter = currentGankFilter,
+                CurrentRankFilter = currentRankFilter,
                 CurrentPriceFilter = currentPriceFilter,
                 CurrentSkinFilter = currentSkinFilter
             };
             return View(viewModel);
+        }
+
+        public ActionResult Edit(int? accountId)
+        {
+            return View();
         }
     }
 }
