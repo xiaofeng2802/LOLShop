@@ -229,6 +229,7 @@
     <Content Include="Images\delivery.jpg" />
     <Content Include="Images\diamond-medal.png" />
     <Content Include="Images\divider-arrow-large.png" />
+    <Content Include="Images\Champs\Ezreal.png" />
     <Content Include="Images\footer.png" />
     <Content Include="Images\footer_bg.jpg" />
     <Content Include="Images\f_menu.png" />
@@ -238,6 +239,7 @@
     <Content Include="Images\join_button.png" />
     <Content Include="Images\LCU_AlphaWebsite_Button_NavTier1.png" />
     <Content Include="Images\LCU_AlphaWebsite_Nav_Button_BarBG.png" />
+    <Content Include="Images\LCU_AlphaWebsite_Overview_Image1.png" />
     <Content Include="Images\logo.png" />
     <Content Include="Images\magic-page-top-short.jpg" />
     <Content Include="Images\no-medal.png" />
@@ -263,6 +265,7 @@
     <Content Include="Images\s4.jpg" />
     <Content Include="Images\search.png" />
     <Content Include="Images\silver-medal.png" />
+    <Content Include="Images\Skins\championsskin_81005.jpg" />
     <Content Include="Images\tick1.png" />
     <Content Include="Images\wishlist.png" />
     <Content Include="Images\yasou.jpg" />
@@ -357,7 +360,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>49833</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:49833/</IISUrl>
+          <IISUrl>http://localhost:49834/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

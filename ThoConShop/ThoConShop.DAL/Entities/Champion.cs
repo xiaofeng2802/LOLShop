@@ -9,6 +9,12 @@ namespace ThoConShop.DAL.Entities
 {
     public class Champion : BaseEntity<int> 
     {
+
+        public Champion()
+        {
+            Skins = new HashSet<Skin>();
+        }
+
         [StringLength(50)]
         public string ChampionName { get; set; }
 
@@ -18,5 +24,7 @@ namespace ThoConShop.DAL.Entities
         public int AccountId { get; set; }
 
         public virtual Account Account { get; set; }
+
+        public virtual ICollection<Skin> Skins { get; set; }
     }
 }

@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace ThoConShop.Business.Dtos
 {
-    public class SkinDto : BaseDto<int>
+    public class ChampionDto : BaseDto<int>
     {
-        public string SkinName { get; set; }
-
-        public bool IsSpecial { get; set; }
+        public string ChampionName { get; set; }
 
         public string Avatar { get; set; }
+
+        public int AccountId { get; set; }
     }
 }

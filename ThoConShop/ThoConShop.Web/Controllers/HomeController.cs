@@ -26,20 +26,10 @@ namespace ThoConShop.Web.Controllers
         public ActionResult Index(int? page, int? currentRankFilter, string currentPriceFilter, int? currentSkinFilter)
         {
             int pageIndex = page ?? 1;
-            IPagedList<AccountDto> result;
-
-            if (currentRankFilter == null && string.IsNullOrEmpty(currentPriceFilter) && currentSkinFilter == null)
-            {
-                result = _accountService.Read(pageIndex, _pageSize);
-            }
-            else
-            {
-                result = _accountService.FilterByRankPriceSkin(pageIndex, _pageSize, currentRankFilter, currentPriceFilter, currentSkinFilter);
-            }
 
             AccountIndexViewModel viewModel = new AccountIndexViewModel()
             {
-                DataSource = result,
+                DataSource = Filter(pageIndex, currentRankFilter, currentPriceFilter, currentSkinFilter),
                 RanksFilter = _accountRelationDataService.ReadRankForFilter(),
                 SkinsFilter = _accountRelationDataService.ReadSkinForFilter(),
                 PriceFilter = _accountRelationDataService.ReadPriceRangeForFilter(),
@@ -50,9 +40,34 @@ namespace ThoConShop.Web.Controllers
             return View(viewModel);
         }
 
-        public ActionResult Edit(int? accountId)
+        public ActionResult Edit(int accountId = 0)
         {
-            return View();
+            var result = _accountService.Edit(accountId);
+            decimal fromValue = (result.Price - 300000)
+                    , toValue = (result.Price + 300000);
+            fromValue = fromValue < 0 ? 0 : fromValue;
+
+            AccountEditViewModel vm = new AccountEditViewModel
+            {
+                CurrentAccount = result,
+                SuggestionAccounts = _accountRelationDataService.ReadAccountByPriceRange(fromValue, toValue)
+            };
+
+            return View(vm);
+        }
+
+        private IPagedList<AccountDto> Filter(int pageIndex, int? currentRankFilter, string currentPriceFilter, int? currentSkinFilter)
+        {
+            IPagedList<AccountDto> result;
+            if (currentRankFilter == null && string.IsNullOrEmpty(currentPriceFilter) && currentSkinFilter == null)
+            {
+                result = _accountService.Read(pageIndex, _pageSize);
+            }
+            else
+            {
+                result = _accountService.FilterByRankPriceSkin(pageIndex, _pageSize, currentRankFilter, currentPriceFilter, currentSkinFilter);
+            }
+            return result;
         }
     }
 }

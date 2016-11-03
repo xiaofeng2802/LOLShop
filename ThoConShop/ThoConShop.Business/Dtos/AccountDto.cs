@@ -8,6 +8,14 @@ namespace ThoConShop.Business.Dtos
 {
     public class AccountDto : BaseDto<int>
     {
+
+        public AccountDto()
+        {
+            Champions = new List<ChampionDto>();
+            Skins = new List<SkinDto>();
+
+        }
+
         public string AccountName { get; set; }
 
         public string UserName { get; set; }
@@ -16,7 +24,7 @@ namespace ThoConShop.Business.Dtos
 
         public string Title { get; set; }
 
-        public decimal? Price { get; set; }
+        public decimal Price { get; set; }
 
         public int? GankId { get; set; }
 
@@ -29,5 +37,9 @@ namespace ThoConShop.Business.Dtos
         public string Avatar { get; set; }
 
         public byte? NumberOfPageGem { get; set; }
+
+        public IList<SkinDto> Skins { get; set; }
+
+        public IList<ChampionDto> Champions { get; set; }
     }
 }

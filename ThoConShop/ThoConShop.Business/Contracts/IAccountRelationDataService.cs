@@ -15,5 +15,7 @@ namespace ThoConShop.Business.Contracts
         IList<SkinDto> ReadSkinForFilter();
 
         IList<string> ReadPriceRangeForFilter();
+
+        IList<AccountDto> ReadAccountByPriceRange(decimal from, decimal to);
     }
 }

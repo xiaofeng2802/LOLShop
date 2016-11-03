@@ -49,5 +49,15 @@ namespace ThoConShop.Business.Services
                 "< 100k"
             };
         }
+
+        public IList<AccountDto> ReadAccountByPriceRange(decimal from, decimal to)
+        {
+            var result = _repoAccount.Read(a => a.IsAvailable && (a.Price >= from && a.Price <= to))
+                                     .OrderBy(a => a.IsHot)
+                                     .ThenByDescending(a => a.CreatedDate)
+                                     .Take(4);
+
+            return Mapper.Map<IList<AccountDto>>(result);
+        }
     }
 }

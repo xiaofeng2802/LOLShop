@@ -22,5 +22,7 @@ namespace ThoConShop.Business.Contracts
         int Delete(int entityId);
 
         IPagedList<AccountDto> FilterByRankPriceSkin(int currentIndex, int pageSize, int? gankFilter, string priceFilter, int? skinFilter);
+
+        AccountDto Edit(int accountId);
     }
 }

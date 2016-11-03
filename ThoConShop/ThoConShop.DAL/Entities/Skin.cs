@@ -19,15 +19,20 @@ namespace ThoConShop.DAL.Entities
         [StringLength(100)]
         public string SkinName { get; set; }
 
-        public bool? IsSpecial { get; set; }
+        public bool IsSpecial { get; set; } = false;
 
         public int? GroupId { get; set; }
 
         public Skin Parent { get; set; }
 
-        public ICollection<Skin> Children { get; set; }
+        public int? BelongToChampion { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public string Avatar { get; set; }
+
+        public virtual ICollection<Skin> Children { get; set; }
+
         public virtual ICollection<Account> Accounts { get; set; }
+
+        public virtual Champion Champion { get; set; }
     }
 }

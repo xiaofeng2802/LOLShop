@@ -117,6 +117,11 @@ namespace ThoConShop.DAL.Entities
               .WithOptional(a => a.Parent)
               .HasForeignKey(a => a.GroupId);
 
+            modelBuilder.Entity<Champion>()
+                        .HasMany(a => a.Skins)
+                        .WithOptional(a => a.Champion)
+                        .HasForeignKey(a => a.BelongToChampion);
+
         }
     }
 }

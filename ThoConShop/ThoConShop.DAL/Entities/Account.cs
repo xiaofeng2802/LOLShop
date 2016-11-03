@@ -30,16 +30,16 @@ namespace ThoConShop.DAL.Entities
         public string Title { get; set; }
 
         [Column(TypeName = "money")]
-        public decimal? Price { get; set; }
+        public decimal Price { get; set; }
 
-        public int? RankId { get; set; }
+        public int RankId { get; set; }
 
         [StringLength(200)]
         public string Description { get; set; }
 
-        public bool? IsAvailable { get; set; }
+        public bool IsAvailable { get; set; } = true;
 
-        public bool? IsHot { get; set; }
+        public bool IsHot { get; set; } = false;
 
 
         [StringLength(100)]

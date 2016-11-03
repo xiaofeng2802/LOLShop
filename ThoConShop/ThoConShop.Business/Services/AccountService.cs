@@ -14,11 +14,17 @@ namespace ThoConShop.Business.Services
 {
     public class AccountService : IAccountService
     {
-        readonly IRepositories<int, Account> _repo;
+        readonly IRepositories<int, Account> _repoAccount;
+        readonly IRepositories<int, Rank> _repoRank;
+        readonly IRepositories<int, Skin> _repoSkin;
 
-        public AccountService(IRepositories<int, Account> repo)
+        public AccountService(IRepositories<int, Account> repo,
+            IRepositories<int, Rank> repoRank,
+             IRepositories<int, Skin> repoSkin)
         {
-            _repo = repo;
+            _repoAccount = repo;
+            _repoRank = repoRank;
+            _repoSkin = repoSkin;
         }
 
         public AccountDto Create(AccountDto entity)
@@ -31,12 +37,30 @@ namespace ThoConShop.Business.Services
             throw new NotImplementedException();
         }
 
+        public AccountDto Edit(int accountId)
+        {
+            if (accountId > 0)
+            {
+                var accountDto = Mapper.Map<AccountDto>(_repoAccount.Read(a => true)
+                                                              .Include(a => a.Champions)
+                                                              .Include(a => a.Skins)
+                                                              .SingleOrDefault(a => a.Id == accountId));
+                return accountDto;
+            }
+            return null;
+        }
+
         public IPagedList<AccountDto> FilterByRankPriceSkin(int currentIndex, int pageSize, int? gankFilter, string priceFilter, int? skinFilter)
         {
-            var result = _repo.Read(a => true);
-            if (gankFilter != null)
+            var result = _repoAccount.Read(a => a.IsAvailable);
+
+            if (gankFilter != null && gankFilter > 0)
             {
-                result = result.Where(a => a.RankId == gankFilter);
+                var idList = _repoRank.ReadOne(a => a.Id == gankFilter).Children.Select(a => a.Id).ToList();
+              
+                idList.Add(gankFilter ?? 0);
+                
+                result = result.Where(a => idList.Any(b => b == a.RankId));
             }
 
             if (!string.IsNullOrEmpty(priceFilter))
@@ -64,9 +88,13 @@ namespace ThoConShop.Business.Services
                 }
             }
 
-            if (skinFilter != null)
+            if (skinFilter != null && skinFilter > 0)
             {
-                result = result.Include(a => a.Skins).Where(a => a.Skins.Any(b => b.GroupId == skinFilter));
+                var idList = _repoSkin.ReadOne(a => a.Id == skinFilter).Children.Select(a => a.Id).ToList();
+
+                idList.Add(skinFilter ?? 0);
+
+                result = result.Include(a => a.Skins).Where(a => a.Skins.Any(b => idList.Contains(b.Id)));
             }
 
             return result.Select(a => new AccountDto()
@@ -84,17 +112,19 @@ namespace ThoConShop.Business.Services
                 Price = a.Price,
                 Title = a.Title,
                 UpdatedDate = a.UpdatedDate
-            }).OrderByDescending(a => a.IsHot).ThenByDescending(a => a.CreatedDate).ToPagedList(currentIndex, pageSize);
+            }).OrderByDescending(a => a.IsHot)
+                .ThenByDescending(a => a.CreatedDate)
+                .ToPagedList(currentIndex, pageSize);
         }
 
         public IList<AccountDto> Read()
         {
-            return Mapper.Map<IList<AccountDto>>(_repo.Read(a => true).ToList());
+            return Mapper.Map<IList<AccountDto>>(_repoAccount.Read(a => true).ToList());
         }
 
         public IPagedList<AccountDto> Read(int currentIndex, int pageSize)
         {
-            var result = _repo.Read(a => true)
+            var result = _repoAccount.Read(a => true)
                               .Select(a =>  new AccountDto()
                                 {
                                     CreatedDate = a.CreatedDate,

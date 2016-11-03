@@ -222,6 +222,7 @@ input, textarea, select {
     position: relative;
     font-size: 2.25em;
     margin: 0;
+    text-align: center; margin-bottom: 20px;
 }
 
 @media (min-width: 480px) {
@@ -687,7 +688,9 @@ ol li {
     background: rgba(0,0,0,0.48);
     position: absolute;
     font-weight: bold;
-    width: 100%;
+    margin-right: 1px; 
+    margin-left: 1px; 
+    width: 82%
 }
 
 .assembly_install, .assembly_detail {
@@ -1206,4 +1209,8 @@ h5 {
     .random_assemblies h3 {
         font-size: 16px;
     }
+}
+
+.skin-champion{
+    margin-bottom: 20px;
 }

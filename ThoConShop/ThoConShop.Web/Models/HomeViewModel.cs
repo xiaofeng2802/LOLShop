@@ -22,4 +22,15 @@ namespace ThoConShop.Web.Models
 
         public string CurrentPriceFilter { get; set; }
     }
+
+    public class AccountEditViewModel
+    {
+        public AccountEditViewModel()
+        {
+            SuggestionAccounts = new List<AccountDto>();
+        }
+        public AccountDto CurrentAccount { get; set; }
+
+        public IList<AccountDto> SuggestionAccounts { get; set; }
+    }
 }
