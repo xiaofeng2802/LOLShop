@@ -1,3 +1,5 @@
+using ThoConShop.DataSeedWork;
+
 namespace ThoConShop.DAL.Entities
 {
     using System;
@@ -28,10 +30,15 @@ namespace ThoConShop.DAL.Entities
 
         public bool? IsDeleted { get; set; }
 
+        [ForeignKey("")]
+        public string GeneralUserId { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserRechargeHistory> UserRechargeHistories { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserTradingHistory> UserTradingHistories { get; set; }
+
+        public virtual ApplicationUser GeneralUser { get; set; }
     }
 }

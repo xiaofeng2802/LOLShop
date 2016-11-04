@@ -1,3 +1,5 @@
+using Microsoft.AspNet.Identity.EntityFramework;
+using ThoConShop.DataSeedWork;
 using ThoConShop.DAL.Contracts;
 
 namespace ThoConShop.DAL.Entities
@@ -121,6 +123,16 @@ namespace ThoConShop.DAL.Entities
                         .HasMany(a => a.Skins)
                         .WithOptional(a => a.Champion)
                         .HasForeignKey(a => a.BelongToChampion);
+
+            modelBuilder.Entity<User>()
+                .HasRequired(a => a.GeneralUser);
+
+            modelBuilder.Entity<IdentityUserLogin>().HasKey<string>(l => l.UserId);
+            modelBuilder.Entity<IdentityRole>().HasKey<string>(r => r.Id);
+            modelBuilder.Entity<IdentityUserRole>().HasKey(r => new { r.RoleId, r.UserId });
+            modelBuilder.Entity<ApplicationUser>().HasKey(a => a.Id);
+            
+
 
         }
     }
