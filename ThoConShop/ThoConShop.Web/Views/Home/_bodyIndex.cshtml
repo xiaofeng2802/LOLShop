@@ -1,4 +1,8 @@
-﻿@model PagedList.IPagedList<ThoConShop.Business.Dtos.AccountDto>
+﻿@using System.Globalization
+@model PagedList.IPagedList<ThoConShop.Business.Dtos.AccountDto>
+@{
+        CultureInfo cul = CultureInfo.GetCultureInfo("vi-VN");   // try with "en-US"
+}
 <div class="row">
     @foreach (var item in Model)
     {
@@ -29,7 +33,7 @@
                 </div>
                 <div class="col-xs-7 col-md-6 stay_right footer-item-right">
                     <p class="">
-                        @item.Price<sup>đ</sup>
+                        @item.Price.ToString("#,###", cul.NumberFormat)<sup>đ</sup>
                     </p>
                     <button class="btn">Mua Ngay</button>
                 </div>

@@ -1,6 +1,9 @@
-﻿@using Facebook
-@using Microsoft.AspNet.Identity
-@using ThoConShop.Web.Models
+﻿@using Microsoft.AspNet.Identity
+@{
+    WebResponse response = null;
+    WebRequest request = WebRequest.Create(string.Format("https://graph.facebook.com/{0}/picture", User.Identity.GetUserId()));
+    response = request.GetResponse();
+}
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -42,12 +45,8 @@
                         <li>
                            @if (User.Identity.IsAuthenticated)
                            {
-                               WebResponse response = null;
-                               WebRequest request = WebRequest.Create(string.Format("https://graph.facebook.com/{0}/picture", User.Identity.GetUserId()));
-                               response = request.GetResponse();
-
+                             
                                <img src="@response.ResponseUri.ToString()" />
-
                                <a>@User.Identity.Name</a>
                            }
                            else
@@ -75,9 +74,26 @@
                 </div>
                 <nav id="bs-navbar" class="collapse navbar-collapse">
                     <ul class="navbar-nav no-margin">
-                        <li><a href="http://nicklm.com/">Trang chủ</a></li>
+                        <li><a href="@Url.Action("Index", "Home")">Trang chủ</a></li>
                         <li>
-                            <a href="@Url.Action("ExternalLogin", "User", new { ReturnUrl = Url.Action("Index", "Home") })">Đăng nhập/đăng ký</a>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+
+                                <img src="@response.ResponseUri.ToString()" />
+                                <a>@User.Identity.Name</a>
+                            }
+                            else
+                            {
+                                using (Html.BeginForm("ExternalLogin", "User", new { ReturnUrl = Url.Action("Index", "Home") }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <div id="socialLoginList">
+                                        <p>
+                                            <button type="submit" class="" id="" name="provider" value="Facebook">Đăng Nhập Bằng FB</button>
+                                        </p>
+                                    </div>
+                                }
+                            }
                         </li>
                     </ul>
                 </nav>

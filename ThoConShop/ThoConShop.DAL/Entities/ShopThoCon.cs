@@ -77,7 +77,7 @@ namespace ThoConShop.DAL.Entities
 
             modelBuilder.Entity<User>()
                 .Property(e => e.Balance)
-                .HasPrecision(19, 4);
+                .HasPrecision(19, 0);
 
             modelBuilder.Entity<User>()
                 .HasMany(e => e.UserTradingHistories)
@@ -86,7 +86,7 @@ namespace ThoConShop.DAL.Entities
 
             modelBuilder.Entity<UserRechargeHistory>()
                 .Property(e => e.ParValue)
-                .HasPrecision(19, 4);
+                .HasPrecision(19, 0);
 
             modelBuilder.Entity<UserRechargeHistory>()
                 .Property(e => e.SerialNumber)

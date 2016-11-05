@@ -2473,7 +2473,11 @@ p.cart {
     .footer-item {
         font-size: 13px;
     }
+    .footer-item .footer-item-right p {
+        font-size: 13px !important;
+    }
 }
+
 .footer-item .footer-item-right {
     
 }
