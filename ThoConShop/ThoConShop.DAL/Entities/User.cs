@@ -1,4 +1,4 @@
-using ThoConShop.DataSeedWork;
+using ThoConShop.DataSeedWork.Identity;
 
 namespace ThoConShop.DAL.Entities
 {
@@ -17,11 +17,6 @@ namespace ThoConShop.DAL.Entities
             UserRechargeHistories = new HashSet<UserRechargeHistory>();
             UserTradingHistories = new HashSet<UserTradingHistory>();
         }
-
-        [StringLength(50)]
-        public string UserName { get; set; }
-
-        public byte[] Password { get; set; }
 
         [Column(TypeName = "money")]
         public decimal? Balance { get; set; }

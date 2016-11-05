@@ -1,5 +1,5 @@
 using Microsoft.AspNet.Identity.EntityFramework;
-using ThoConShop.DataSeedWork;
+using ThoConShop.DataSeedWork.Identity;
 using ThoConShop.DAL.Contracts;
 
 namespace ThoConShop.DAL.Entities
@@ -10,11 +10,11 @@ namespace ThoConShop.DAL.Entities
     using System.Linq;
     using System.Data.Entity.Infrastructure;
 
-    public partial class ShopThoCon : DbContext, IShopConThoDbContext
+    public partial class ShopThoCon : IdentityDbContext<ApplicationUser, ApplicationRole, string, ApplicationUserLogin, ApplicationUserRole, ApplicationUserClaim>, IShopConThoDbContext
     {
-        public ShopThoCon()
+        public ShopThoCon(): base("ShopThoConDb")
         {
-                
+
         }
 
         public ShopThoCon(string connectionString = "ShopThoConDb")
@@ -22,7 +22,11 @@ namespace ThoConShop.DAL.Entities
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<ShopThoCon, ThoConShop.DAL.Migrations.Configuration>(connectionString));
         }
-    
+
+        public static ShopThoCon Create()
+        {
+            return new ShopThoCon();
+        }
 
         public DbEntityEntry<TEntity> Entry<TKey, TEntity>(TEntity entity)
            where TKey : struct
@@ -70,10 +74,6 @@ namespace ThoConShop.DAL.Entities
 
             modelBuilder.Entity<Skin>()
                 .HasMany(e => e.Accounts);
-
-            modelBuilder.Entity<User>()
-                .Property(e => e.UserName)
-                .IsUnicode(false);
 
             modelBuilder.Entity<User>()
                 .Property(e => e.Balance)
@@ -127,11 +127,12 @@ namespace ThoConShop.DAL.Entities
             modelBuilder.Entity<User>()
                 .HasRequired(a => a.GeneralUser);
 
-            modelBuilder.Entity<IdentityUserLogin>().HasKey<string>(l => l.UserId);
-            modelBuilder.Entity<IdentityRole>().HasKey<string>(r => r.Id);
-            modelBuilder.Entity<IdentityUserRole>().HasKey(r => new { r.RoleId, r.UserId });
+            modelBuilder.Entity<ApplicationUserLogin>().HasKey<string>(l => l.UserId);
+            modelBuilder.Entity<ApplicationRole>().HasKey<string>(r => r.Id);
+            modelBuilder.Entity<ApplicationUserRole>().HasKey(r => new { r.RoleId, r.UserId });
             modelBuilder.Entity<ApplicationUser>().HasKey(a => a.Id);
-            
+
+
 
 
         }

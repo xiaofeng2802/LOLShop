@@ -1,35 +1,61 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
-using System.Web;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
-using ThoConShop.DataSeedWork;
-using ThoConShop.Web.Models;
+using Microsoft.Owin.Security.Cookies;
+using Owin;
+using ThoConShop.DataSeedWork.Identity;
+using ThoConShop.DAL.Entities;
 
-namespace ThoConShop.Web
+namespace ThoConShop.Business.Identity
 {
-    public class EmailService : IIdentityMessageService
+    public class IdentityConfig
     {
-        public Task SendAsync(IdentityMessage message)
+        public static void Builder(IAppBuilder app)
         {
-            // Plug in your email service here to send an email.
-            return Task.FromResult(0);
-        }
-    }
+            // Configure the db context and user manager to use a single instance per request
+            app.CreatePerOwinContext(ShopThoCon.Create);
+            app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
+            app.CreatePerOwinContext<ApplicationSignInManager>(ApplicationSignInManager.Create);
+            // Enable the application to use a cookie to store information for the signed in user
+            // and to use a cookie to temporarily store information about a user logging in with a third party login provider
+            // Configure the sign in cookie
+            app.UseCookieAuthentication(new CookieAuthenticationOptions
+            {
+                AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
+                LoginPath = new PathString("/User/Login"),
+                Provider = new CookieAuthenticationProvider
+                {
+                    OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, ApplicationUser>(
+                        validateInterval: TimeSpan.FromMinutes(30),
+                        regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
+                }
+            });
 
-    public class SmsService : IIdentityMessageService
-    {
-        public Task SendAsync(IdentityMessage message)
-        {
-            // Plug in your SMS service here to send a text message.
-            return Task.FromResult(0);
+            app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
+
+            // Uncomment the following lines to enable logging in with third party login providers
+            //app.UseMicrosoftAccountAuthentication(
+            //    clientId: "",
+            //    clientSecret: "");
+
+            //app.UseTwitterAuthentication(
+            //   consumerKey: "",
+            //   consumerSecret: "");
+
+            app.UseFacebookAuthentication(
+               appId: "1668227693490054",
+               appSecret: "8150b37198c05e3fcd7e3104102980be");
+
+            //app.UseGoogleAuthentication(
+            //     clientId: "000-000.apps.googleusercontent.com",
+            //     clientSecret: "00000000000");
         }
     }
 
@@ -41,9 +67,9 @@ namespace ThoConShop.Web
         {
         }
 
-        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context) 
+        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
-            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()));
+            var manager = new ApplicationUserManager(new ApplicationUserStore(context.Get<ShopThoCon>()));
             // Configure validation logic for usernames
             manager.UserValidator = new UserValidator<ApplicationUser>(manager)
             {
@@ -77,12 +103,12 @@ namespace ThoConShop.Web
                 Subject = "Security Code",
                 BodyFormat = "Your security code is {0}"
             });
-            manager.EmailService = new EmailService();
-            manager.SmsService = new SmsService();
+            //manager.EmailService = new EmailService();
+            //manager.SmsService = new SmsService();
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {
-                manager.UserTokenProvider = 
+                manager.UserTokenProvider =
                     new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
             return manager;
