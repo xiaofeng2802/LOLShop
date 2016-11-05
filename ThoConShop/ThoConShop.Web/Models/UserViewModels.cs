@@ -8,6 +8,8 @@ namespace ThoConShop.Web.Models
         [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
+        public string Name { get; set; }
     }
 
     public class ExternalLoginListViewModel

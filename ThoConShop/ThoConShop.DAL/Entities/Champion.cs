@@ -13,6 +13,7 @@ namespace ThoConShop.DAL.Entities
         public Champion()
         {
             Skins = new HashSet<Skin>();
+            Accounts = new HashSet<Account>();
         }
 
         [StringLength(50)]
@@ -21,9 +22,7 @@ namespace ThoConShop.DAL.Entities
         [StringLength(255)]
         public string Avatar { get; set; }
 
-        public int AccountId { get; set; }
-
-        public virtual Account Account { get; set; }
+        public virtual ICollection<Account> Accounts { get; set; }
 
         public virtual ICollection<Skin> Skins { get; set; }
     }

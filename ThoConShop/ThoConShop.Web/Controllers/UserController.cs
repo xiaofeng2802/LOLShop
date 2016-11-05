@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Facebook;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -24,6 +25,7 @@ namespace ThoConShop.Web.Controllers
 
         public UserController()
         {
+           
         }
 
         public UserController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
@@ -345,18 +347,13 @@ namespace ThoConShop.Web.Controllers
                     // If the user does not have an account, then prompt the user to create an account
                     ViewBag.ReturnUrl = returnUrl;
                     ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                    return View("ExternalLoginConfirmation",
-                        new ExternalLoginConfirmationViewModel {Email = loginInfo.Email});
+                    return await ExternalLoginConfirmation(Url.Action("Index", "Home"));
             }
         }
 
         //
         // POST: /Account/ExternalLoginConfirmation
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model,
-            string returnUrl)
+        public async Task<ActionResult> ExternalLoginConfirmation(string returnUrl)
         {
             if (User.Identity.IsAuthenticated)
             {
@@ -367,17 +364,17 @@ namespace ThoConShop.Web.Controllers
             {
                 // Get the information about the user from the external login provider
                 var info = await AuthenticationManager.GetExternalLoginInfoAsync();
+                
                 if (info == null)
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser {UserName = model.Email, Email = model.Email};
-
-                try
-                {
+                //model.
+                //info.ExternalIdentity.
+                var user = new ApplicationUser {UserName = info.Email, Email = info.Email };
                     if (user.Id == null)
                     {
-                        user.Id = Guid.NewGuid().ToString();
+                        user.Id = info.ExternalIdentity.GetUserId();
                     }
                     var result = await UserManager.CreateAsync(user);
                     if (result.Succeeded)
@@ -390,27 +387,8 @@ namespace ThoConShop.Web.Controllers
                         }
                     }
                     AddErrors(result);
-                }
-                catch (DbEntityValidationException e)
-                {
-                    foreach (var eve in e.EntityValidationErrors)
-                    {
-                        Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                            eve.Entry.Entity.GetType().Name, eve.Entry.State);
-                        foreach (var ve in eve.ValidationErrors)
-                        {
-                            Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-                                ve.PropertyName, ve.ErrorMessage);
-                        }
-                    }
-                    throw;
-                }
-
-
             }
-
-            ViewBag.ReturnUrl = returnUrl;
-            return View(model);
+            return RedirectToAction("ExternalLoginFailure");
         }
 
         //

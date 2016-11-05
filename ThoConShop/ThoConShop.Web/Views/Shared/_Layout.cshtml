@@ -1,5 +1,6 @@
-﻿@using Microsoft.Owin.Security
-
+﻿@using Facebook
+@using Microsoft.AspNet.Identity
+@using ThoConShop.Web.Models
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -39,14 +40,28 @@
                     <ul class="nav-right">
                         <li></li>
                         <li>
-                            @using (Html.BeginForm("ExternalLogin", "User", new { ReturnUrl = Url.Action("Index", "Home") })) {
-                            @Html.AntiForgeryToken()
-                            <div id="socialLoginList">
-                                <p>
-                                    <button type="submit" class="" id="" name="provider" value="Facebook">Đăng Nhập Bằng FB</button>
-                                </p>
-                            </div>
-                            }
+                           @if (User.Identity.IsAuthenticated)
+                           {
+                               WebResponse response = null;
+                               WebRequest request = WebRequest.Create(string.Format("https://graph.facebook.com/{0}/picture", User.Identity.GetUserId()));
+                               response = request.GetResponse();
+
+                               <img src="@response.ResponseUri.ToString()" />
+
+                               <a>@User.Identity.Name</a>
+                           }
+                           else
+                           {
+                                using (Html.BeginForm("ExternalLogin", "User", new { ReturnUrl = Url.Action("Index", "Home") }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <div id="socialLoginList">
+                                        <p>
+                                            <button type="submit" class="" id="" name="provider" value="Facebook">Đăng Nhập Bằng FB</button>
+                                        </p>
+                                    </div>
+                                }
+                           }
                         </li>
                     </ul>
                 </div>

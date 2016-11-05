@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
+using Microsoft.Owin.Security.Facebook;
 using Owin;
 using ThoConShop.DataSeedWork.Identity;
 using ThoConShop.DAL.Entities;
@@ -36,6 +38,7 @@ namespace ThoConShop.Business.Identity
                         validateInterval: TimeSpan.FromMinutes(30),
                         regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
                 }
+                
             });
 
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
@@ -49,13 +52,41 @@ namespace ThoConShop.Business.Identity
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            app.UseFacebookAuthentication(
-               appId: "1668227693490054",
-               appSecret: "8150b37198c05e3fcd7e3104102980be");
+
+            app.UseFacebookAuthentication(FacebookDataConfig());
 
             //app.UseGoogleAuthentication(
             //     clientId: "000-000.apps.googleusercontent.com",
             //     clientSecret: "00000000000");
+        }
+
+        public static FacebookAuthenticationOptions FacebookDataConfig()
+        {
+            var config = new FacebookAuthenticationOptions()
+            {
+                Scope = { "email", "user_photos", "publish_actions", "user_posts" },
+                AppId = "1668227693490054",
+                AppSecret = "8150b37198c05e3fcd7e3104102980be",
+                BackchannelHttpHandler = new FacebookBackChannelHandler(),
+                UserInformationEndpoint = "https://graph.facebook.com/v2.4/me?fields=id,name,email"
+            };
+         
+
+            return config;
+        }
+    }
+
+    public class FacebookBackChannelHandler : HttpClientHandler
+    {
+        protected override async System.Threading.Tasks.Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, System.Threading.CancellationToken cancellationToken)
+        {
+            // Replace the RequestUri so it's not malformed
+            if (!request.RequestUri.AbsolutePath.Contains("/oauth"))
+            {
+                request.RequestUri = new Uri(request.RequestUri.AbsoluteUri.Replace("?access_token", "&access_token"));
+            }
+
+            return await base.SendAsync(request, cancellationToken);
         }
     }
 

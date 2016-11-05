@@ -14,6 +14,7 @@ namespace ThoConShop.Web.Controllers
     public class HomeController : Controller
     {
         readonly int _pageSize = int.Parse(ConfigurationManager.AppSettings["PageSize"]);
+
         readonly IAccountService _accountService;
         private readonly IAccountRelationDataService _accountRelationDataService;
 
@@ -37,8 +38,10 @@ namespace ThoConShop.Web.Controllers
                 CurrentPriceFilter = currentPriceFilter,
                 CurrentSkinFilter = currentSkinFilter
             };
+
             return View(viewModel);
         }
+
 
         public ActionResult Edit(int accountId = 0)
         {

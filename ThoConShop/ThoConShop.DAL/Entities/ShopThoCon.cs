@@ -97,11 +97,6 @@ namespace ThoConShop.DAL.Entities
                 .IsUnicode(false);
 
             modelBuilder.Entity<Account>()
-                .HasMany(a => a.Champions)
-                .WithRequired(a => a.Account)
-                .HasForeignKey(a => a.AccountId);
-
-            modelBuilder.Entity<Account>()
                 .HasMany(a => a.NumberOfPageGems)
                 .WithRequired(a => a.Account)
                 .HasForeignKey(a => a.AccountId);
