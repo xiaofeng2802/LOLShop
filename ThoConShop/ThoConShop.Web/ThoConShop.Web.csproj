@@ -342,6 +342,7 @@
     <Content Include="Views\User\VerifyCode.cshtml" />
     <Content Include="Views\User\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\User\ViewRechargeHistoriesUser.cshtml" />
+    <Content Include="Views\User\ExternalLoginConfirmationFacebook.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -352,6 +352,15 @@ namespace ThoConShop.Web.Controllers
                 return RedirectToAction("Login");
             }
 
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            //else
+            //{
+            //    await UserManager.AddLoginAsync(loginInfo.ExternalIdentity.GetUserId(), loginInfo.Login);
+            //}
+            //loginInfo.Email =  "01203195108";
             // Sign in the user with this external login provider if the user already has a login
             var result = await SignInManager.ExternalSignInAsync(loginInfo, isPersistent: false);
             switch (result)
@@ -364,12 +373,66 @@ namespace ThoConShop.Web.Controllers
                     return RedirectToAction("SendCode", new {ReturnUrl = returnUrl, RememberMe = false});
                 case SignInStatus.Failure:
                 default:
+                    //if (string.IsNullOrEmpty(loginInfo.Email))
+                    //{
+                    //    return RedirectToAction("ExternalLoginConfirmationFacebook", new { email = "", returnUrl="" });
+                    //}
                     // If the user does not have an account, then prompt the user to create an account
-                    ViewBag.ReturnUrl = returnUrl;
-                    ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
                     return await ExternalLoginConfirmation(Url.Action("Index", "Home"));
             }
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [AllowAnonymous]
+        public async Task<ActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel userInfor, string returnUrl)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Manage");
+            }
+
+            if (ModelState.IsValid)
+            {
+                // Get the information about the user from the external login provider
+                var info = await AuthenticationManager.GetExternalLoginInfoAsync();
+
+                if (info == null)
+                {
+                    return View("ExternalLoginFailure");
+                }
+                //model.
+                //info.ExternalIdentity.
+                var user = new ApplicationUser { UserName = userInfor.Email, Email = userInfor.Email };
+                if (user.Id == null)
+                {
+                    user.Id = info.ExternalIdentity.GetUserId();
+                }
+                var result = await UserManager.CreateAsync(user);
+                if (result.Succeeded)
+                {
+                    var firstName = info.ExternalIdentity.Claims.First(c => c.Type == "urn:facebook:first_name").Value;
+                    _userService.Create(new UserDto()
+                    {
+                        Balance = 0,
+                        CreatedDate = DateTime.Now,
+                        GeneralUserId = user.Id,
+                        IsActive = true,
+                        IsDeleted = false,
+                        NameDisplay = firstName
+                    });
+                    //result = await UserManager.AddLoginAsync(user.Id, info.Login);
+                    if (result.Succeeded)
+                    {
+                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                        return RedirectToLocal(returnUrl ?? Url.Action("Index", "Home"));
+                    }
+                }
+                AddErrors(result);
+            }
+            return RedirectToAction("ExternalLoginFailure");
+        }
+
 
         //
         // POST: /Account/ExternalLoginConfirmation
@@ -391,32 +454,55 @@ namespace ThoConShop.Web.Controllers
                 }
                 //model.
                 //info.ExternalIdentity.
-                var user = new ApplicationUser { UserName = info.Email, Email = info.Email };
+                var user = new ApplicationUser { UserName = info.Email ?? info.DefaultUserName, Email = info.Email };
                 if (user.Id == null)
                 {
                     user.Id = info.ExternalIdentity.GetUserId();
                 }
-                var result = await UserManager.CreateAsync(user);
-                var firstName = info.ExternalIdentity.Claims.First(c => c.Type == "urn:facebook:first_name").Value;
-                if (result.Succeeded)
+                
+                if (_userService.ReadByGeneralUserId(info.ExternalIdentity.Claims.First(c => c.Type == "urn:facebook:id").Value) == null)
                 {
-                    _userService.Create(new UserDto()
-                    {
-                        Balance = 0,
-                        CreatedDate = DateTime.Now,
-                        GeneralUserId = user.Id,
-                        IsActive = true,
-                        IsDeleted = false,
-                        NameDisplay = firstName
-                    });
-                    result = await UserManager.AddLoginAsync(user.Id, info.Login);
+                    var result = await UserManager.CreateAsync(user);
                     if (result.Succeeded)
                     {
-                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                        return RedirectToLocal(returnUrl);
+                        var firstName = info.ExternalIdentity.Claims.First(c => c.Type == "urn:facebook:first_name").Value;
+                        _userService.Create(new UserDto()
+                        {
+                            Balance = 0,
+                            CreatedDate = DateTime.Now,
+                            GeneralUserId = user.Id,
+                            IsActive = true,
+                            IsDeleted = false,
+                            NameDisplay = firstName
+                        });
+                        var data = await UserManager.GetLoginsAsync(user.Id);
+                        if (data == null)
+                        {
+                            result = await UserManager.AddLoginAsync(user.Id, info.Login);
+                        }
+
+                        if (result.Succeeded)
+                        {
+                            await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                            return RedirectToLocal(returnUrl ?? Url.Action("Index", "Home"));
+                        }
                     }
+                    AddErrors(result);
                 }
-                AddErrors(result);
+                else
+                {
+                    var data = await UserManager.GetLoginsAsync(user.Id);
+                    IdentityResult result;
+                    if (data == null)
+                    {
+                        result =  await UserManager.AddLoginAsync(user.Id, info.Login);  
+                    }
+
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    return RedirectToLocal(returnUrl ?? Url.Action("Index", "Home"));
+                }
+
+                
             }
             return RedirectToAction("ExternalLoginFailure");
         }
