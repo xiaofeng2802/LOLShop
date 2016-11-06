@@ -8,8 +8,7 @@ namespace ThoConShop.DAL.Entities
 
     [Table("UserTradingHistory")]
     public partial class UserTradingHistory : BaseEntity<int>
-    {
-        public int Id { get; set; }
+    { 
 
         [Key]
         [Column(Order = 0)]
@@ -20,11 +19,6 @@ namespace ThoConShop.DAL.Entities
         [Column(Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int AccountId { get; set; }
-
-        public DateTime? CreatedDate { get; set; }
-
-        [Column(TypeName = "datetime2")]
-        public DateTime? UpdatedDate { get; set; }
 
         public virtual Account Account { get; set; }
 

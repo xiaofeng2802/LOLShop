@@ -26,7 +26,9 @@ namespace ThoConShop.Business.Dtos
 
         public decimal Price { get; set; }
 
-        public int? GankId { get; set; }
+        public int? RankId { get; set; }
+
+        public string RankName { get; set; }
 
         public string Description { get; set; }
 

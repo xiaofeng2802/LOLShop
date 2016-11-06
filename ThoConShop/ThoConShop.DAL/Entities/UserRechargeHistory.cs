@@ -13,7 +13,7 @@ namespace ThoConShop.DAL.Entities
         public int? UserId { get; set; }
 
         [Column(TypeName = "money")]
-        public decimal? ParValue { get; set; }
+        public decimal ParValue { get; set; } = 0;
 
         [StringLength(50)]
         public string SerialNumber { get; set; }

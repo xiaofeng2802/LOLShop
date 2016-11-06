@@ -1,8 +1,23 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using PagedList;
+using ThoConShop.Business.Dtos;
 
 namespace ThoConShop.Web.Models
 {
+    public class DetailsUserViewModel
+    {
+        public DetailsUserViewModel()
+        { 
+        }
+
+        public UserDto User { get; set; }
+
+        public IPagedList<UserRechargeHistoryDto> RechargeHistories { get; set; }
+
+        public IPagedList<UserTradingHistoryDto> TradingHistories { get; set; }
+    }
+
     public class ExternalLoginConfirmationViewModel
     {
         [Required]

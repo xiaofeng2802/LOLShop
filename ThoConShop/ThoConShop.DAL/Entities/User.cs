@@ -18,14 +18,15 @@ namespace ThoConShop.DAL.Entities
             UserTradingHistories = new HashSet<UserTradingHistory>();
         }
 
+        public string NameDisplay { get; set; }
+
         [Column(TypeName = "money")]
-        public decimal? Balance { get; set; }
+        public decimal Balance { get; set; } = 0;
 
-        public bool? IsActive { get; set; }
+        public bool IsActive { get; set; } = true;
 
-        public bool? IsDeleted { get; set; }
+        public bool IsDeleted { get; set; } = false;
 
-        [ForeignKey("")]
         public string GeneralUserId { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

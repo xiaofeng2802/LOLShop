@@ -1,0 +1,75 @@
+﻿@using System.Globalization
+@using ThoConShop.DataSeedWork
+@model PagedList.IPagedList<ThoConShop.Business.Dtos.UserRechargeHistoryDto>
+@{
+    ViewBag.Title = "ViewRechargeHistoriesUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    CultureInfo cul = CultureInfo.GetCultureInfo("vi-VN");   // try with "en-US"
+}
+
+<div class="row">
+    <h2 class="details-title">Lịch Sử Nạp Thẻ</h2>
+    <hr />
+</div>
+
+<div class="row details-footer">
+    <div class="col-md-12 col-xs-12 col-lg-12" align="center">
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="recharge-table-border-bottom">
+                    Thời Gian
+                </th>
+                <th class="recharge-table-border-bottom">
+                    Serial Thẻ
+                </th>
+                <th class="recharge-table-border-bottom">
+                    PIN Thẻ
+                </th>
+                <th class="recharge-table-border-bottom">
+                    Mệnh Giá
+                </th>
+                <th class="recharge-table-border-bottom">
+                    Thông Điệp
+                </th>
+            </tr>
+            </thead>
+            @if (Model.Count == 0)
+            {
+                <tbody>
+                    <tr>
+                        <td colspan="5" class="text-center">
+                            <p>Bạn Chưa Có Cuộc Giao Dịch Nào</p>
+                        </td>
+                    </tr>
+                </tbody>
+            }
+            else
+            {
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="recharge-table-border-top">
+                            <td>
+                                @item.CreatedDate.ToShortDateString()
+                            </td>
+                            <td>
+                                @item.SerialNumber
+                            </td>
+                            <td>
+                                @item.PinNumber
+                            </td>
+                            <td>
+                                @item.ParValue.ToString("#,###", cul.NumberFormat)<sup>đ</sup>
+                            </td>
+                            <td>
+                                @item.Message.Truncate(15)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            }
+          
+        </table>
+    </div>
+</div>

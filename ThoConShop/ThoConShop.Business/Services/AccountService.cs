@@ -97,10 +97,11 @@ namespace ThoConShop.Business.Services
                 result = result.Include(a => a.Skins).Where(a => a.Skins.Any(b => idList.Contains(b.Id)));
             }
 
-            return result.Select(a => new AccountDto()
+            return result.Include(a => a.Rank).Select(a => new AccountDto()
             {
                 CreatedDate = a.CreatedDate,
-                GankId = a.RankId,
+                RankId = a.RankId,
+                RankName = a.Rank.RankName,
                 UserName = a.UserName,
                 Avatar = a.Avatar,
                 IsAvailable = a.IsAvailable,
@@ -125,10 +126,12 @@ namespace ThoConShop.Business.Services
         public IPagedList<AccountDto> Read(int currentIndex, int pageSize)
         {
             var result = _repoAccount.Read(a => true)
+                                .Include(a => a.Rank)
                               .Select(a =>  new AccountDto()
                                 {
                                     CreatedDate = a.CreatedDate,
-                                    GankId = a.RankId,
+                                    RankId = a.RankId,
+                                    RankName = a.Rank.RankName,
                                     UserName = a.UserName,
                                     Avatar = a.Avatar,
                                     IsAvailable = a.IsAvailable,
@@ -141,7 +144,7 @@ namespace ThoConShop.Business.Services
                                     Title = a.Title,
                                     UpdatedDate = a.UpdatedDate
                                 })
-                              .OrderBy(a => a.GankId)
+                              .OrderBy(a => a.RankId)
                               .ToPagedList(currentIndex, pageSize);
 
             return result;

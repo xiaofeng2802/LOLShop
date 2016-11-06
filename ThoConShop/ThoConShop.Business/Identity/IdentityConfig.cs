@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.Entity.ModelConfiguration.Configuration;
 using System.Linq;
 using System.Net.Http;
 using System.Security.Claims;
@@ -36,7 +38,8 @@ namespace ThoConShop.Business.Identity
                 {
                     OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, ApplicationUser>(
                         validateInterval: TimeSpan.FromMinutes(30),
-                        regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
+                        regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager)),
+                   
                 }
                 
             });
@@ -64,11 +67,27 @@ namespace ThoConShop.Business.Identity
         {
             var config = new FacebookAuthenticationOptions()
             {
-                Scope = { "email", "user_photos", "publish_actions", "user_posts" },
-                AppId = "1668227693490054",
-                AppSecret = "8150b37198c05e3fcd7e3104102980be",
+                Scope = { "email" },
+                AppId = ConfigurationManager.AppSettings["FBAppId"],
+                AppSecret = ConfigurationManager.AppSettings["FBAppSecret"],
                 BackchannelHttpHandler = new FacebookBackChannelHandler(),
-                UserInformationEndpoint = "https://graph.facebook.com/v2.4/me?fields=id,name,email"
+                Provider = new FacebookAuthenticationProvider()
+                {
+                    OnAuthenticated = async context =>
+                    {
+                        context.Identity.AddClaim(new System.Security.Claims.Claim("FacebookAccessToken", context.AccessToken));
+                        foreach (var claim in context.User)
+                        {
+                            var claimType = string.Format("urn:facebook:{0}", claim.Key);
+                            string claimValue = claim.Value.ToString();
+                            if (!context.Identity.HasClaim(claimType, claimValue))
+                                context.Identity.AddClaim(new System.Security.Claims.Claim(claimType, claimValue, "XmlSchemaString", "Facebook"));
+
+                        }
+
+                    }
+                },
+                UserInformationEndpoint = "https://graph.facebook.com/v2.4/me?fields=id,name,email,first_name,last_name"
             };
          
 

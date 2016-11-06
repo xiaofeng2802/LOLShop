@@ -6,24 +6,17 @@ using System.Threading.Tasks;
 
 namespace ThoConShop.Business.Dtos
 {
-    public class UserDto 
+    public class UserDto : BaseDto<int>
     {
-        public string Id { get; set; }
 
-        public DateTime CreatedDateTime { get; set; }
+        public decimal Balance { get; set; } = 0;
 
-        public DateTime? UpdatedDateTime { get; set; }
+        public bool IsActive { get; set; }
 
-        public byte[] Password { get; set; }
+        public bool IsDeleted { get; set; }
 
-        public decimal? Balance { get; set; }
+        public string GeneralUserId { get; set; }
 
-        public bool? IsActive { get; set; }
-
-        public bool? IsDeleted { get; set; }
-
-        public string UserName { get; set; }
-
-        public string Email { get; set; }
+        public string NameDisplay { get; set; }
     }
 }

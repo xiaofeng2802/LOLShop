@@ -5,6 +5,9 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using System.Web.Script.Serialization;
+using System.Web.Security;
+using ThoConShop.DataSeedWork.Identity;
 using ThoConShop.Web.App_Start;
 
 namespace ThoConShop.Web
@@ -18,5 +21,6 @@ namespace ThoConShop.Web
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             IoCInitializer.Init();
         }
+
     }
 }

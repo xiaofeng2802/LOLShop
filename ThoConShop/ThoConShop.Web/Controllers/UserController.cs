@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Data.Entity.Validation;
 using System.Globalization;
 using System.Linq;
@@ -6,10 +7,14 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
+using System.Web.Security;
 using Facebook;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using ThoConShop.Business.Contracts;
+using ThoConShop.Business.Dtos;
 using ThoConShop.Business.Identity;
 using ThoConShop.DataSeedWork;
 using ThoConShop.DataSeedWork.Identity;
@@ -20,12 +25,20 @@ namespace ThoConShop.Web.Controllers
     [Authorize]
     public class UserController : Controller
     {
+
+        readonly int _pageSize = int.Parse(ConfigurationManager.AppSettings["PageSize"]);
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-        public UserController()
+        private readonly IUserService _userService;
+
+        private readonly IAccountRelationDataService _accountRelationDataService;
+
+        public UserController(IUserService userService,
+            IAccountRelationDataService accountRelationDataService)
         {
-           
+            _userService = userService;
+            _accountRelationDataService = accountRelationDataService;
         }
 
         public UserController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
@@ -44,6 +57,13 @@ namespace ThoConShop.Web.Controllers
         {
             get { return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
             private set { _userManager = value; }
+        }
+
+        public ActionResult ViewRechargeHistoriesUser(int? page)
+        {
+            
+            var result = _accountRelationDataService.ReadRechargeHistories(User.Identity.GetUserId(), page ?? 1, _pageSize);
+            return View(result);
         }
 
         //
@@ -371,22 +391,32 @@ namespace ThoConShop.Web.Controllers
                 }
                 //model.
                 //info.ExternalIdentity.
-                var user = new ApplicationUser {UserName = info.Email, Email = info.Email };
-                    if (user.Id == null)
+                var user = new ApplicationUser { UserName = info.Email, Email = info.Email };
+                if (user.Id == null)
+                {
+                    user.Id = info.ExternalIdentity.GetUserId();
+                }
+                var result = await UserManager.CreateAsync(user);
+                var firstName = info.ExternalIdentity.Claims.First(c => c.Type == "urn:facebook:first_name").Value;
+                if (result.Succeeded)
+                {
+                    _userService.Create(new UserDto()
                     {
-                        user.Id = info.ExternalIdentity.GetUserId();
-                    }
-                    var result = await UserManager.CreateAsync(user);
+                        Balance = 0,
+                        CreatedDate = DateTime.Now,
+                        GeneralUserId = user.Id,
+                        IsActive = true,
+                        IsDeleted = false,
+                        NameDisplay = firstName
+                    });
+                    result = await UserManager.AddLoginAsync(user.Id, info.Login);
                     if (result.Succeeded)
                     {
-                        result = await UserManager.AddLoginAsync(user.Id, info.Login);
-                        if (result.Succeeded)
-                        {
-                            await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                            return RedirectToLocal(returnUrl);
-                        }
+                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                        return RedirectToLocal(returnUrl);
                     }
-                    AddErrors(result);
+                }
+                AddErrors(result);
             }
             return RedirectToAction("ExternalLoginFailure");
         }

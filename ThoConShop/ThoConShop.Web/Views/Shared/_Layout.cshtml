@@ -1,4 +1,7 @@
 ﻿@using Microsoft.AspNet.Identity
+@using ThoConShop.Business.Services
+@using ThoConShop.DataSeedWork
+@using ThoConShop.DataSeedWork.Identity
 @{
     WebResponse response = null;
     WebRequest request = WebRequest.Create(string.Format("https://graph.facebook.com/{0}/picture", User.Identity.GetUserId()));
@@ -37,26 +40,60 @@
                         <a href="@Url.Action("Index", "Home")">ThoConShop.VN</a>
                     </div>
                     <ul class="nav-left">
-                        <li><a href="http://nicklm.com/napthe">Nạp thẻ</a></li>
-                        <li></li>
+                        <li>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <a>Nạp thẻ</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <a>
+                                    <span>Chào </span>
+                                    <img style="height: 30px;" src="@response.ResponseUri.ToString()" />
+                                    <span>[0 VND]</span>
+                                </a>
+                            }
+                        </li>
                     </ul>
                     <ul class="nav-right">
-                        <li></li>
+                        <li>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+
+                                <a href="@Url.Action("ViewRechargeHistoriesUser", "User")">Lịch Sử Nạp/Mua</a>
+                            }
+                        </li>
                         <li>
                            @if (User.Identity.IsAuthenticated)
                            {
-                             
-                               <img src="@response.ResponseUri.ToString()" />
-                               <a>@User.Identity.Name</a>
+
+                               using (Html.BeginForm("LogOff", "User"))
+                               {
+                                @Html.AntiForgeryToken()
+                                <div id="socialLoginList">
+                                    <p>
+                                        <a>
+                                            <button type="submit" class="button-to-link" id="" name="provider" value="Facebook">Đăng Xuất</button>
+                                        </a>
+                                       
+                                    </p>
+                                </div>
+                               }
                            }
                            else
                            {
-                                using (Html.BeginForm("ExternalLogin", "User", new { ReturnUrl = Url.Action("Index", "Home") }))
-                                {
+                               using (Html.BeginForm("ExternalLogin", "User", new { ReturnUrl = Url.Action("Index", "Home") }))
+                               {
                                     @Html.AntiForgeryToken()
                                     <div id="socialLoginList">
                                         <p>
-                                            <button type="submit" class="" id="" name="provider" value="Facebook">Đăng Nhập Bằng FB</button>
+                                            <a>
+                                                <button type="submit" class="button-to-link" id="" name="provider" value="Facebook">Đăng Nhập Bằng FB</button>
+                                            </a>
+                                           
                                         </p>
                                     </div>
                                 }
@@ -70,17 +107,42 @@
                     <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="false">
                         <span class="sr-only">Toggle navigation</span> <span class="glyphicon glyphicon-th-list"></span>
                     </button>
-                    <a href="@Url.Action("ExternalLogin", "User", new { ReturnUrl = Url.Action("Index", "Home") })">Đăng nhập FB</a>
                 </div>
                 <nav id="bs-navbar" class="collapse navbar-collapse">
                     <ul class="navbar-nav no-margin">
                         <li><a href="@Url.Action("Index", "Home")">Trang chủ</a></li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li>
+
+                                <a>
+                                    <span>Chào </span>
+                                    <img style="height: 30px;" src="@response.ResponseUri.ToString()"/>
+                                    <span>[0 VND]</span>
+                                </a>
+
+                            </li>
+                            <li>
+                                 <a href="@Url.Action("ViewRechargeHistoriesUser", "User")">Lịch Sử Nạp/Mua</a>
+                            </li>
+                        }
+                       
                         <li>
                             @if (User.Identity.IsAuthenticated)
                             {
 
-                                <img src="@response.ResponseUri.ToString()" />
-                                <a>@User.Identity.Name</a>
+                                using (Html.BeginForm("LogOff", "User"))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <div id="socialLoginList">
+                                        <p>
+                                            <a>
+                                                <button type="submit" class="button-to-link" id="" name="provider" value="Facebook">Đăng Xuất</button>
+                                            </a>
+
+                                        </p>
+                                    </div>
+                                }
                             }
                             else
                             {
@@ -89,7 +151,10 @@
                                     @Html.AntiForgeryToken()
                                     <div id="socialLoginList">
                                         <p>
-                                            <button type="submit" class="" id="" name="provider" value="Facebook">Đăng Nhập Bằng FB</button>
+                                            <a>
+                                                <button type="submit" class="button-to-link" id="" name="provider" value="Facebook">Đăng Nhập Bằng FB</button>
+                                            </a>
+
                                         </p>
                                     </div>
                                 }
@@ -128,6 +193,9 @@
     <script>
     $(document).ready(function() {
         $.scrolltop();
+    });
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
     });
     </script>
 </body>

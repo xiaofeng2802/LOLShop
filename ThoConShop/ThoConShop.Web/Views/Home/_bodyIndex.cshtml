@@ -1,4 +1,5 @@
 ﻿@using System.Globalization
+@using PagedList.Mvc
 @model PagedList.IPagedList<ThoConShop.Business.Dtos.AccountDto>
 @{
         CultureInfo cul = CultureInfo.GetCultureInfo("vi-VN");   // try with "en-US"
@@ -26,7 +27,7 @@
             <div class="col-xs-12 footer-item clearfix">
                 <div class="col-xs-5 col-md-6 no_padding">
                     <ul>
-                        <li>Rank: KC 5</li>
+                        <li>Rank: @item.RankName</li>
                         <li>Tướng: 120</li>
                         <li>Skin: 17</li>
                     </ul>
@@ -42,3 +43,8 @@
         </div>
     }
 </div>
+@*<div class="row">
+    <div class="col-md-12 body-pagging">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+    </div>
+</div>*@

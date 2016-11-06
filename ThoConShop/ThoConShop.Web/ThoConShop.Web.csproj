@@ -297,6 +297,7 @@
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="Images\img-sprite.psd" />
+    <None Include="Properties\PublishProfiles\Thuan.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\effect-hover-item\production.js" />
     <Content Include="Scripts\effect-hover-item\rbootstrap.min.js" />
@@ -340,7 +341,7 @@
     <Content Include="Views\User\SendCode.cshtml" />
     <Content Include="Views\User\VerifyCode.cshtml" />
     <Content Include="Views\User\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Views\Shared\_Layout1.cshtml" />
+    <Content Include="Views\User\ViewRechargeHistoriesUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -363,6 +364,9 @@
       <Project>{5b4bd348-e482-4dfc-978c-73a617fe080d}</Project>
       <Name>ThoConShop.DataSeedWork</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

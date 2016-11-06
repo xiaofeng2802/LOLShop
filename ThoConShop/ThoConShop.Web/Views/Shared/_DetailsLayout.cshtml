@@ -40,17 +40,48 @@
                         <a href="@Url.Action("Index", "Home")">ThoConShop.VN</a>
                     </div>
                     <ul class="nav-left">
-                        <li><a href="http://nicklm.com/napthe">Nạp thẻ</a></li>
-                        <li></li>
+                        <li>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <a>Nạp thẻ</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <a>
+                                    <span>Chào </span>
+                                    <img style="height: 30px;" src="@response.ResponseUri.ToString()" />
+                                    <span>[0 VND]</span>
+                                </a>
+                            }
+                        </li>
                     </ul>
                     <ul class="nav-right">
-                        <li></li>
                         <li>
                             @if (User.Identity.IsAuthenticated)
                             {
 
-                                <img src="@response.ResponseUri.ToString()" />
-                                <a>@User.Identity.Name</a>
+                                <a href="@Url.Action("ViewRechargeHistoriesUser", "User")">Lịch Sử Nạp/Mua</a>
+                            }
+                        </li>
+                        <li>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+
+                                using (Html.BeginForm("LogOff", "User"))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <div id="socialLoginList">
+                                        <p>
+                                            <a>
+                                                <button type="submit" class="button-to-link" id="" name="provider" value="Facebook">Đăng Xuất</button>
+                                            </a>
+
+                                        </p>
+                                    </div>
+                                }
                             }
                             else
                             {
@@ -59,7 +90,10 @@
                                     @Html.AntiForgeryToken()
                                     <div id="socialLoginList">
                                         <p>
-                                            <button type="submit" class="" id="" name="provider" value="Facebook">Đăng Nhập Bằng FB</button>
+                                            <a>
+                                                <button type="submit" class="button-to-link" id="" name="provider" value="Facebook">Đăng Nhập Bằng FB</button>
+                                            </a>
+
                                         </p>
                                     </div>
                                 }
@@ -77,13 +111,39 @@
                 </div>
                 <nav id="bs-navbar" class="collapse navbar-collapse">
                     <ul class="navbar-nav no-margin">
-                        <li><a href="http://nicklm.com/">Trang chủ</a></li>
+                        <li><a href="@Url.Action("Index", "Home")">Trang chủ</a></li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li>
+
+                                <a>
+                                    <span>Chào </span>
+                                    <img style="height: 30px;" src="@response.ResponseUri.ToString()" />
+                                    <span>[0 VND]</span>
+                                </a>
+
+                            </li>
+                            <li>
+                                <a href="@Url.Action("ViewRechargeHistoriesUser", "User")">Lịch Sử Nạp/Mua</a>
+                            </li>
+                        }
+
                         <li>
                             @if (User.Identity.IsAuthenticated)
                             {
 
-                                <img src="@response.ResponseUri.ToString()" />
-                                <a>@User.Identity.Name</a>
+                                using (Html.BeginForm("LogOff", "User"))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <div id="socialLoginList">
+                                        <p>
+                                            <a>
+                                                <button type="submit" class="button-to-link" id="" name="provider" value="Facebook">Đăng Xuất</button>
+                                            </a>
+
+                                        </p>
+                                    </div>
+                                }
                             }
                             else
                             {
@@ -92,7 +152,10 @@
                                     @Html.AntiForgeryToken()
                                     <div id="socialLoginList">
                                         <p>
-                                            <button type="submit" class="" id="" name="provider" value="Facebook">Đăng Nhập Bằng FB</button>
+                                            <a>
+                                                <button type="submit" class="button-to-link" id="" name="provider" value="Facebook">Đăng Nhập Bằng FB</button>
+                                            </a>
+
                                         </p>
                                     </div>
                                 }
@@ -110,6 +173,9 @@
     <script>
     $(document).ready(function() {
         $.scrolltop();
+    });
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
     });
     </script>
 
