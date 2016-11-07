@@ -9,6 +9,7 @@ using ThoConShop.DAL.Contracts;
 using ThoConShop.DAL.Entities;
 using PagedList;
 using ThoConShop.DataSeedWork;
+using ThoConShop.DataSeedWork.Extensions;
 
 namespace ThoConShop.Business.Services
 {
@@ -48,6 +49,29 @@ namespace ThoConShop.Business.Services
                 return accountDto;
             }
             return null;
+        }
+
+        public AccountDto ReadOneById(int accountId)
+        {
+            var result = _repoAccount.ReadOne(a => a.Id == accountId);
+
+            return Mapper.Map<AccountDto>(result);
+        }
+
+        public void SoldAccount(int accountId)
+        {
+            var acc = _repoAccount.ReadOne(a => a.Id == accountId);
+            acc.IsAvailable = false;
+             _repoAccount.Update(acc);
+
+            _repoAccount.SaveChanges();
+
+        }
+
+        public double GetPrice(int accountId)
+        {
+            var result = _repoAccount.ReadOne(a => a.Id == accountId);
+            return (double) result.Price;
         }
 
         public IPagedList<AccountDto> FilterByRankPriceSkin(int currentIndex, int pageSize, int? gankFilter, string priceFilter, int? skinFilter)
@@ -97,7 +121,7 @@ namespace ThoConShop.Business.Services
                 result = result.Include(a => a.Skins).Where(a => a.Skins.Any(b => idList.Contains(b.Id)));
             }
 
-            return result.Include(a => a.Rank).Select(a => new AccountDto()
+            return result.Include(a => a.Rank).Where(a => a.IsAvailable).Select(a => new AccountDto()
             {
                 CreatedDate = a.CreatedDate,
                 RankId = a.RankId,
@@ -120,13 +144,14 @@ namespace ThoConShop.Business.Services
 
         public IList<AccountDto> Read()
         {
-            return Mapper.Map<IList<AccountDto>>(_repoAccount.Read(a => true).ToList());
+            return Mapper.Map<IList<AccountDto>>(_repoAccount.Read(a => true).Where(a => a.IsAvailable).ToList());
         }
 
         public IPagedList<AccountDto> Read(int currentIndex, int pageSize)
         {
             var result = _repoAccount.Read(a => true)
-                                .Include(a => a.Rank)
+                              .Include(a => a.Rank)
+                              .Where(a => a.IsAvailable)
                               .Select(a =>  new AccountDto()
                                 {
                                     CreatedDate = a.CreatedDate,

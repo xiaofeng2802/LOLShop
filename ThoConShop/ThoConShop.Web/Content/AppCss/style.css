@@ -971,7 +971,7 @@ ul.grid_2-bottom {
     border-radius: 2px;
 }
 
-.btn {
+/*.btn {
     display: inline-block;
     padding: 4px 12px;
     margin-bottom: 0;
@@ -983,7 +983,7 @@ ul.grid_2-bottom {
     /*text-shadow:1px 1px 0px #cccccc;*/
     border: 1px solid #ccc;
     border-bottom-color: #b3b3b3;
-}
+}*/
 
 .btn-primary {
     color: #fff;
@@ -2559,4 +2559,7 @@ p.cart {
     list-style: disc;
         margin-left: 15px;
     margin-bottom: 10px;
+}
+.control-label {
+    margin-top: 5px;
 }

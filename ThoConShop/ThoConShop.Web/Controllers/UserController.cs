@@ -17,6 +17,7 @@ using ThoConShop.Business.Dtos;
 using ThoConShop.Business.Identity;
 using ThoConShop.DataSeedWork;
 using ThoConShop.DataSeedWork.Identity;
+using ThoConShop.DataSeedWork.UserExternalService;
 using ThoConShop.Web.AuthAttribute;
 using ThoConShop.Web.GameBank;
 using ThoConShop.Web.Models;
@@ -35,11 +36,15 @@ namespace ThoConShop.Web.Controllers
 
         private readonly IAccountRelationDataService _accountRelationDataService;
 
+        private readonly IRechargeHistoryService _rechargeHistoryService;
+
         public UserController(IUserService userService,
-            IAccountRelationDataService accountRelationDataService)
+            IAccountRelationDataService accountRelationDataService,
+             IRechargeHistoryService rechargeHistoryService)
         {
             _userService = userService;
             _accountRelationDataService = accountRelationDataService;
+            _rechargeHistoryService = rechargeHistoryService;
         }
 
         public UserController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
@@ -68,8 +73,9 @@ namespace ThoConShop.Web.Controllers
         }
 
         [CustomAuthorize]
-        public ActionResult ChargingView()
+        public ActionResult ChargingView(string message)
         {
+            ViewBag.Message = message;
             return View();    
         }
 
@@ -77,10 +83,24 @@ namespace ThoConShop.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ChargingView(ChargingViewModel vm)
         {
+            var userId = User.Identity.GetUserId();
+            UserDto user = _userService.ReadByGeneralUserId(userId);
             GameBankAPI api = new GameBankAPI();
-            string result = api.VerifiedCard(vm.SerialNumber, vm.PinNumber, vm.CardType, "Thong Tin Test");
+            int price;
+            string result = api.VerifiedCard(vm.SerialNumber, vm.PinNumber, vm.CardType, "Nap Tien Game Lien Minh", out price);
             if (string.IsNullOrEmpty(result))
             {
+                UserExternalService.SetUserBalance(userId, price);
+                _rechargeHistoryService.Create(new UserRechargeHistoryDto()
+                {
+                    CreatedDate = DateTime.Now,
+                    Message = "Nap Tien Game Lien Minh",
+                    ParValue = price,
+                    SerialNumber = vm.SerialNumber,
+                    PinNumber = vm.PinNumber,
+                    UserId = user.Id
+                });
+
                 return RedirectToAction("Index", "Home");
             }
             ModelState.AddModelError("", result);
@@ -384,10 +404,10 @@ namespace ThoConShop.Web.Controllers
                 return RedirectToAction("Login");
             }
 
-            if (User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("Index", "Home");
-            }
+            //if (User.Identity.IsAuthenticated)
+            //{
+            //    return RedirectToAction("Index", "Home");
+            //}
             //else
             //{
             //    await UserManager.AddLoginAsync(loginInfo.ExternalIdentity.GetUserId(), loginInfo.Login);
@@ -398,6 +418,11 @@ namespace ThoConShop.Web.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    returnUrl = returnUrl ?? Url.Action("Index", "Home");
+                    if (returnUrl != null && returnUrl.Contains("ChargingView"))
+                    {
+                        returnUrl = Url.Action("ChargingView", "User");
+                    }
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -410,6 +435,7 @@ namespace ThoConShop.Web.Controllers
                     //    return RedirectToAction("ExternalLoginConfirmationFacebook", new { email = "", returnUrl="" });
                     //}
                     // If the user does not have an account, then prompt the user to create an account
+
                     returnUrl = returnUrl ?? Url.Action("Index", "Home");
                     if (returnUrl != null && returnUrl.Contains("ChargingView"))
                     {

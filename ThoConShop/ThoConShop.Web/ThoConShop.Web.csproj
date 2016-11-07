@@ -191,12 +191,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="AuthAttribute\CustomAuth.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="GameBank\GameBankAPI.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\FacebookUserModel.cs" />
     <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -301,6 +303,7 @@
     <Content Include="Images\img-sprite.psd" />
     <None Include="Properties\PublishProfiles\Thuan.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\Custom\Index.js" />
     <Content Include="Scripts\effect-hover-item\production.js" />
     <Content Include="Scripts\effect-hover-item\rbootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -332,7 +335,6 @@
     <Content Include="Views\Home\_bodyIndex.cshtml" />
     <Content Include="Views\Home\Edit.cshtml" />
     <Content Include="Views\User\ConfirmEmail.cshtml" />
-    <Content Include="Views\User\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\User\ExternalLoginFailure.cshtml" />
     <Content Include="Views\User\ForgotPassword.cshtml" />
     <Content Include="Views\User\ForgotPasswordConfirmation.cshtml" />
@@ -344,12 +346,12 @@
     <Content Include="Views\User\VerifyCode.cshtml" />
     <Content Include="Views\User\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\User\ViewRechargeHistoriesUser.cshtml" />
-    <Content Include="Views\User\ExternalLoginConfirmationFacebook.cshtml" />
     <Content Include="Views\User\ChargingView.cshtml" />
+    <Content Include="Views\Account\SellAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Scripts\Custom\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

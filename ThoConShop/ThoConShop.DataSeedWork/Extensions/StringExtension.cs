@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ThoConShop.DataSeedWork
+namespace ThoConShop.DataSeedWork.Extensions
 {
     public static class StringExtension
     {

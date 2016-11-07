@@ -31,10 +31,10 @@ namespace ThoConShop.Web.GameBank
         private string conversion_rate = "10000:10000; 20000:20000; 30000:30000; 50000:500; 100000:100000; 200000:200000; 300000:300000; 500000:500000; 1000000:1000000";
 
 
-        public string VerifiedCard(string seri, string pin, TypeCard type, string note)
+        public string VerifiedCard(string seri, string pin, TypeCard type, string note, out int price)
         {
             //string datetime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            int status = 9999, price, coins;
+            int status = 9999, coins;
             string msg = "";
             string POST_DATA = "merchant_id=" + ConfigurationManager.AppSettings["Merchant_ID"] + "&card_type=" + (int)type + "&seri=" + seri + "&pin=" + pin + "&note=" + note;
 
@@ -52,6 +52,7 @@ namespace ThoConShop.Web.GameBank
                 //insertMySQL(datetime, seri, pin, type, price, coins, msg, status);
                 return "";
             }
+            price = 0;
             return ResultsNotication(code);
         }
 

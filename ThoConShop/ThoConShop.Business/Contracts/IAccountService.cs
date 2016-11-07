@@ -24,5 +24,11 @@ namespace ThoConShop.Business.Contracts
         IPagedList<AccountDto> FilterByRankPriceSkin(int currentIndex, int pageSize, int? gankFilter, string priceFilter, int? skinFilter);
 
         AccountDto Edit(int accountId);
+
+        AccountDto ReadOneById(int accountId);
+
+        void SoldAccount(int accountId);
+
+        double GetPrice(int accountId);
     }
 }

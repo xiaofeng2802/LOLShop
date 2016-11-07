@@ -18,10 +18,10 @@ namespace ThoConShop.DAL.Entities
             UserTradingHistories = new HashSet<UserTradingHistory>();
         }
 
-        public string NameDisplay { get; set; }
-
         [Column(TypeName = "money")]
         public decimal Balance { get; set; } = 0;
+
+        public string NameDisplay { get; set; }
 
         public bool IsActive { get; set; } = true;
 

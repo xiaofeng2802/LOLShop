@@ -4,8 +4,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="row">
-    <div class="col-md-8 col-md-offset-2 divForm">
-        <div class="panel panel-danger" style="background:none">
+    
+    <div class="col-md-8 col-md-offset-2 divForm" style="margin-top: 15px;">
+        <div>
+            <span class="text-danger">@ViewBag.Message </span>
+        </div>
+        <div class="panel panel-danger" style="background: none">
             <div class="panel-heading">
                 Nạp Thẻ
             </div>
@@ -25,26 +29,26 @@
                     <div class="text-danger validation-summary-errors error-message">
                         @Html.ValidationSummary()
                     </div>
-                    
+
                     <div class="form-group">
-                        <label class="col-md-3 control-label" for="SoSeri">Số seri</label>
-                                              <div class="col-md-8" style="margin-bottom: 10px;">
-                                                  @Html.TextBoxFor(a => a.SerialNumber, new { @class = "form-control" })
-                                                  @Html.ValidationMessageFor(a => a.SerialNumber)
-                                                  @*<input class="form-control" data-val="true" data-val-required="Bạn chưa nhập seri" id="SoSeri" name="SoSeri" type="text" value="">*@
-                                              </div>
+                        <label class="col-md-2 control-label" for="SoSeri">Số seri</label>
+                        <div class="col-md-9" style="margin-bottom: 10px;">
+                            @Html.TextBoxFor(a => a.SerialNumber, new {@class = "form-control"})
+                            @Html.ValidationMessageFor(a => a.SerialNumber)
+                            @*<input class="form-control" data-val="true" data-val-required="Bạn chưa nhập seri" id="SoSeri" name="SoSeri" type="text" value="">*@
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label" for="Pin">Mã thẻ</label>
-                        <div class="col-md-8" style="margin-bottom: 10px;">
-                            @Html.TextBoxFor(a => a.PinNumber, new { @class="form-control"})
+                        <label class="col-md-2 control-label" for="Pin">Mã thẻ</label>
+                        <div class="col-md-9" style="margin-bottom: 10px;">
+                            @Html.TextBoxFor(a => a.PinNumber, new {@class = "form-control"})
                             @Html.ValidationMessageFor(a => a.PinNumber)
                             @*<input class="form-control" data-val="true" data-val-required="Bạn chưa nhập mã thẻ" id="Pin" name="Pin" type="text" value="">*@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-3">Loại Thẻ</label>
-                        <div class="col-md-8" style="margin-bottom: 10px;">
+                        <label class="control-label col-md-2">Loại Thẻ</label>
+                        <div class="col-md-9" style="margin-bottom: 10px;">
                             <select class="form-control valid" id="CardType" name="CardType" aria-invalid="false">
                                 <option value="1" selected="selected">Thẻ Viettel</option>
                                 <option value="2">Thẻ MobiFone</option>
@@ -56,9 +60,8 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-md-offset-3 col-md-8">
+                        <div class="col-md-offset-2 col-md-9">
                             <input type="submit" class="btn btn-success btn-md" value="Nạp thẻ">
-                            <button type="reset" class="sa-lib-del btn btn-default">Nhập lại</button>
                         </div>
                     </div>
                 }

@@ -1,8 +1,8 @@
-﻿@using Microsoft.AspNet.Identity
-@using ThoConShop.Business.Services
-@using ThoConShop.DataSeedWork
-@using ThoConShop.DataSeedWork.Identity
+﻿@using System.Globalization
+@using Microsoft.AspNet.Identity
+@using ThoConShop.DataSeedWork.UserExternalService
 @{
+    CultureInfo cul = CultureInfo.GetCultureInfo("vi-VN");
     WebResponse response = null;
     WebRequest request = WebRequest.Create(string.Format("https://graph.facebook.com/{0}/picture", User.Identity.GetUserId()));
     response = request.GetResponse();
@@ -15,11 +15,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 
-    <link href="~/Content/AppCss/bootstrap.css" rel='stylesheet' type='text/css' />
+   
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <!-- Custom Theme files -->
     <link href="~/Content/AppCss/reset.css" rel="stylesheet" />
     <link href="~/Content/AppCss/style.css" rel='stylesheet' type='text/css' />
+    <link href="~/Content/AppCss/bootstrap.css" rel='stylesheet' type='text/css' />
     <!-- Custom Theme files -->
     <link href="~/Content/AppCss/custom.css" rel="stylesheet" />
     <link href="~/Content/effect-hover-item/hover.css" rel="stylesheet" />
@@ -53,7 +54,7 @@
                                 <a>
                                     <span>Chào </span>
                                     <img style="height: 30px;" src="@response.ResponseUri.ToString()" />
-                                    <span>[0 VND]</span>
+                                    <span>[<span>@UserExternalService.GetUserBalance(User.Identity.GetUserId()).ToString("#,###", cul.NumberFormat)</span> VND]</span>
                                 </a>
                             }
                         </li>
@@ -119,7 +120,7 @@
                                 <a>
                                     <span>Chào </span>
                                     <img style="height: 30px;" src="@response.ResponseUri.ToString()"/>
-                                    <span>[0 VND]</span>
+                                    <span>[<span>@UserExternalService.GetUserBalance(User.Identity.GetUserId()).ToString("#,###", cul.NumberFormat)</span> VND]</span>
                                 </a>
 
                             </li>

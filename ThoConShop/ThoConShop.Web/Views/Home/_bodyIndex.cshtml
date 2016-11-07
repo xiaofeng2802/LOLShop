@@ -36,7 +36,12 @@
                     <p class="">
                         @item.Price.ToString("#,###", cul.NumberFormat)<sup>đ</sup>
                     </p>
-                    <button class="btn">Mua Ngay</button>
+                    @using (Html.BeginForm("SellAccount", "Account", FormMethod.Post, new { id = "formSell"}))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.Hidden("AccountId", item.Id)
+                        <button type="submit" class="btn" >Mua Ngay</button>
+                    }
                 </div>
 
             </div>
@@ -48,3 +53,5 @@
         @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
     </div>
 </div>*@
+
+<script src="~/Scripts/Custom/Index.js"></script>
