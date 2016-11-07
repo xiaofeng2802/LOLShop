@@ -9,7 +9,6 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using System.Web.Security;
-using Facebook;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -18,6 +17,8 @@ using ThoConShop.Business.Dtos;
 using ThoConShop.Business.Identity;
 using ThoConShop.DataSeedWork;
 using ThoConShop.DataSeedWork.Identity;
+using ThoConShop.Web.AuthAttribute;
+using ThoConShop.Web.GameBank;
 using ThoConShop.Web.Models;
 
 namespace ThoConShop.Web.Controllers
@@ -64,6 +65,26 @@ namespace ThoConShop.Web.Controllers
             
             var result = _accountRelationDataService.ReadRechargeHistories(User.Identity.GetUserId(), page ?? 1, _pageSize);
             return View(result);
+        }
+
+        [CustomAuthorize]
+        public ActionResult ChargingView()
+        {
+            return View();    
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChargingView(ChargingViewModel vm)
+        {
+            GameBankAPI api = new GameBankAPI();
+            string result = api.VerifiedCard(vm.SerialNumber, vm.PinNumber, vm.CardType, "Thong Tin Test");
+            if (string.IsNullOrEmpty(result))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            ModelState.AddModelError("", result);
+            return View();
         }
 
         //
@@ -291,16 +312,27 @@ namespace ThoConShop.Web.Controllers
             return View();
         }
 
+
         //
         // POST: /Account/ExternalLogin
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult ExternalLogin(string provider, string returnUrl)
+        public ActionResult ExternalLogin(string provider = "Facebook")
         {
             // Request a redirect to the external login provider
             return new ChallengeResult(provider,
-                Url.Action("ExternalLoginCallback", "User", new {ReturnUrl = returnUrl}));
+                Url.Action("ExternalLoginCallback", "User", new {ReturnUrl = Url.Action("Index", "Home") }));
+        }
+
+
+
+        [AllowAnonymous]
+        public ActionResult ExternalLogin(string returnUrl, string provider = "Facebook")
+        {
+            // Request a redirect to the external login provider
+            return new ChallengeResult(provider,
+                Url.Action("ExternalLoginCallback", "User", new { ReturnUrl = Url.Action("Index", "Home", new { ReturnUrl = returnUrl }) }));
         }
 
         //
@@ -378,7 +410,12 @@ namespace ThoConShop.Web.Controllers
                     //    return RedirectToAction("ExternalLoginConfirmationFacebook", new { email = "", returnUrl="" });
                     //}
                     // If the user does not have an account, then prompt the user to create an account
-                    return await ExternalLoginConfirmation(Url.Action("Index", "Home"));
+                    returnUrl = returnUrl ?? Url.Action("Index", "Home");
+                    if (returnUrl != null && returnUrl.Contains("ChargingView"))
+                    {
+                        returnUrl = Url.Action("ChargingView", "User");
+                    }
+                    return await ExternalLoginConfirmation(returnUrl);
             }
         }
 

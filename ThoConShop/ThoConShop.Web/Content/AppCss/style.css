@@ -2555,3 +2555,8 @@ p.cart {
     border: none;
     background-color: black;
 }
+.error-message ul {
+    list-style: disc;
+        margin-left: 15px;
+    margin-bottom: 10px;
+}

@@ -987,13 +987,13 @@ ol li {
     height: 8px;
 }
 
-.form-control {
+/*.form-control {
     background: #000;
     border-radius: 0 !important;
     border-color: #705425 !important;
     color: #d3c7a9 !important;
     width: 98% !important;
-}
+}*/
 
 .search_nick {
     margin-top: 25px;

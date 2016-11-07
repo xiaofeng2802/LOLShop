@@ -190,8 +190,10 @@
     <Compile Include="App_Start\IoCInitializer.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="AuthAttribute\CustomAuth.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="GameBank\GameBankAPI.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -343,6 +345,7 @@
     <Content Include="Views\User\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\User\ViewRechargeHistoriesUser.cshtml" />
     <Content Include="Views\User\ExternalLoginConfirmationFacebook.cshtml" />
+    <Content Include="Views\User\ChargingView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

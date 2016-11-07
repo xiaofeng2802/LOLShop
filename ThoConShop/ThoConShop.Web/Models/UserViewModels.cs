@@ -2,9 +2,21 @@
 using System.ComponentModel.DataAnnotations;
 using PagedList;
 using ThoConShop.Business.Dtos;
+using ThoConShop.DataSeedWork.Enum;
 
 namespace ThoConShop.Web.Models
 {
+
+    public class ChargingViewModel
+    {
+        [Required(ErrorMessage = "Bạn chưa nhập seri")]
+        public string SerialNumber { get; set; }
+
+        [Required(ErrorMessage = "Bạn chưa nhập mã thẻ")]
+        public string PinNumber { get; set; }
+
+        public TypeCard CardType { get; set; }
+    }
     public class DetailsUserViewModel
     {
         public DetailsUserViewModel()
