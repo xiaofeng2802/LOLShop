@@ -5,6 +5,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ThoConShop.Business.Contracts;
+using ThoConShop.Business.Dtos;
+using ThoConShop.Web.Models;
 
 namespace ThoConShop.Web.Controllers
 {
@@ -13,10 +15,13 @@ namespace ThoConShop.Web.Controllers
         readonly int _pageSize = int.Parse(ConfigurationManager.AppSettings["PageSize"]);
         private readonly IAccountService _accountService;
 
+        private readonly IRankService _rankService;
 
-        public ManagementController(IAccountService accountService)
+
+        public ManagementController(IAccountService accountService, IRankService rankService)
         {
             _accountService = accountService;
+            _rankService = rankService;
         }
 
 
@@ -27,6 +32,28 @@ namespace ThoConShop.Web.Controllers
             var result = _accountService.Read(page ?? 1, _pageSize, false);
 
             return View(result);
+        }
+
+        public ActionResult CreateAccount()
+        {
+            CreateAccountViewModel vm = new CreateAccountViewModel()
+            {
+                RankList = _rankService.Read().Select(a => new SelectListItem()
+                {
+                    Value = a.Id.ToString(),
+                    Text = a.RankName
+                }).ToList(),
+
+            };
+            return View(vm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateAccount(AccountDto data)
+        {
+           
+            return View();
         }
 
         public ActionResult UserManagement()

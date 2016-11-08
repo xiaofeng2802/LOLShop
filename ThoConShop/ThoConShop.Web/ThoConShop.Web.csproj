@@ -2091,6 +2091,7 @@
     <Content Include="Views\Management\ChargingHistories.cshtml" />
     <Content Include="Views\Management\TradingHistories.cshtml" />
     <Content Include="Views\Management\FeedManagement.cshtml" />
+    <Content Include="Views\Management\CreateAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

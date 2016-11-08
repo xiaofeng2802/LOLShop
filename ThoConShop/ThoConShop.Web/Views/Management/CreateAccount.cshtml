@@ -1,0 +1,95 @@
+﻿@model ThoConShop.Web.Models.CreateAccountViewModel
+
+@{
+    ViewBag.Title = "CreateAccount";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="col-lg-12">
+    
+    @using (Html.BeginForm("CreateAccount", "Management", FormMethod.Post, new { @class="form-horizontal", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="card">
+            <div class="card-head style-primary">
+                <header>Tạo Tài Khoản LMHT</header>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="Firstname5" class="col-sm-2 control-label">Rank</label>
+                            <div class="col-sm-10">
+                                <div class="form-group floating-label">
+                                    @Html.DropDownListFor(a => a.RankId, Model.RankList, new { @class="form-control" , @id = "select2" })
+                                </div>
+                                <div class="form-control-line"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="Lastname5" class="col-sm-2 control-label">Đơn Giá</label>
+                            <div class="col-sm-10">
+                                @*<input type="number" class="form-control" id="Lastname5">*@
+                                @Html.TextBoxFor(a => a.Price, new { @class="form-control", type = "number" })
+                                <div class="form-control-line"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="Username5" class="col-sm-2 control-label">Tài Khoản</label>
+                            <div class="col-sm-10">
+                                @*<input type="text" class="form-control" id="Username5">*@
+                                @Html.TextBoxFor(a => a.UserName, new { @class = "form-control" })
+                                <div class="form-control-line"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="Password5" class="col-sm-2 control-label">Mật Khẩu</label>
+                            <div class="col-sm-10">
+                                @*<input type="password" class="form-control" id="Password5">*@
+                                @Html.PasswordFor(a => a.Password, new { @class = "form-control" })
+                                <div class="form-control-line"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="Username5" class="col-sm-2 control-label">Ghi Chú</label>
+                            <div class="col-sm-10">
+                                @Html.TextAreaFor(a => a.Description, new {  @class="form-control", rows="3", placeholder="" })
+                                @*<textarea name="textarea1" id="textarea1" class="form-control" rows="3" placeholder=""></textarea>*@
+                                <div class="form-control-line"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="Password5" class="col-sm-2 control-label">Trang Ngọc Bổ Trợ</label>
+                            <div class="col-sm-10">
+                                @*<input type="file" class="form-control" multiple id="Password5">*@
+                                @Html.TextBoxFor(a => a.Avatar, new { type="file" })
+                                <div class="form-control-line"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div><!--end .card-body -->
+            <div class="card-actionbar">
+                <div class="card-actionbar-row">
+                    <button type="submit" class="btn btn-flat btn-primary ink-reaction">Tạo</button>
+                </div>
+            </div>
+        </div><!--end .card -->
+
+    }
+</div>

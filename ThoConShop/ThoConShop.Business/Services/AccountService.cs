@@ -10,6 +10,7 @@ using ThoConShop.DAL.Entities;
 using PagedList;
 using ThoConShop.DataSeedWork;
 using ThoConShop.DataSeedWork.Extensions;
+using ThoConShop.DataSeedWork.Ulti;
 
 namespace ThoConShop.Business.Services
 {
@@ -73,7 +74,7 @@ namespace ThoConShop.Business.Services
             var acc = _repoAccount.ReadOne(a => a.Id == accountId);
             acc.IsAvailable = false;
              _repoAccount.Update(acc);
-
+            FileUlti.DeleteFile(acc.Avatar);
             _repoAccount.SaveChanges();
 
         }

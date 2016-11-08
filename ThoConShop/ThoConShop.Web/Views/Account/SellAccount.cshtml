@@ -12,18 +12,17 @@
         </div>
         <div class="panel panel-danger" style="background: none">
             <div class="panel-heading">
-                Nạp Thẻ
+                Thông Báo
             </div>
             <div class="panel-body">
                 @using (Html.BeginForm("ChargingView", "User", FormMethod.Post))
                 {
                     @Html.AntiForgeryToken()
-                  
-                   
 
                     <div class="form-group">
                         <div class="col-md-9" style="margin-bottom: 10px;">
-                          Chúc mừng bạn đã mua thành công, đây là thông tin tài khoản:
+                            
+                            Chúc mừng bạn đã mua thành công, đây là thông tin tài khoản:
                             @*<input class="form-control" data-val="true" data-val-required="Bạn chưa nhập seri" id="SoSeri" name="SoSeri" type="text" value="">*@
                         </div>
                     </div>

@@ -27,6 +27,7 @@ namespace ThoConShop.Business
             builder.RegisterType<AccountRelationDataService>().As<IAccountRelationDataService>().InstancePerRequest();
             builder.RegisterType<UserService>().As<IUserService>().InstancePerRequest();
             builder.RegisterType<HistoryService>().As<IHistoryService>().InstancePerRequest();
+            builder.RegisterType<RankService>().As<IRankService>().InstancePerRequest();
 
             builder.RegisterModule(new DataModule(_connectionString));
             base.Load(builder);
