@@ -21,6 +21,8 @@ namespace ThoConShop.Business.Services
 
         readonly IRepositories<int, Account> _repoAccount;
 
+        readonly IRepositories<int, User> _repoUser;
+
         private readonly IRepositories<int, UserRechargeHistory> _rechargeRepositories;
 
         private readonly IRepositories<int, UserTradingHistory> _tradingRepositories;
@@ -29,13 +31,15 @@ namespace ThoConShop.Business.Services
             IRepositories<int, Skin> repoSkin,
             IRepositories<int, Account> repoAccount,
             IRepositories<int, UserRechargeHistory> rechargeRepositories,
-            IRepositories<int, UserTradingHistory> tradingRepositories)
+            IRepositories<int, UserTradingHistory> tradingRepositories,
+            IRepositories<int, User> repoUser)
         {
             _repoGank = repoGank;
             _repoSkin = repoSkin;
             _repoAccount = repoAccount;
             _rechargeRepositories = rechargeRepositories;
             _tradingRepositories = tradingRepositories;
+            _repoUser = repoUser;
         }
 
         public IList<RankDto> ReadRankForFilter()
@@ -109,9 +113,25 @@ namespace ThoConShop.Business.Services
             return result;
         }
 
-        public IPagedList<UserTradingHistoryDto> ReadtrTradingHistories(string generalUserId, int currentIndex, int pageSize)
+        public IPagedList<UserTradingHistoryDto> ReadTradingHistories(string generalUserId, int currentIndex, int pageSize)
         {
-            throw new NotImplementedException();
+            var result = _tradingRepositories.Read(a => a.User.GeneralUserId == generalUserId)
+                                            .Include(a => a.User)
+                                            .Include(a => a.Account)
+                                            .Include(a => a.Account.Rank)
+                                            .OrderByDescending(a => a.CreatedDate)
+                                            .Select(a => new UserTradingHistoryDto()
+                                            {
+                                                UserName = a.User.GeneralUser.UserName,
+                                                PriceOfAccount = a.Account.Price,
+                                                CreatedDate = a.CreatedDate,
+                                                AccountId = a.AccountId,
+                                                Password = "*********",
+                                                RankName = a.Account.Rank.RankName,
+                                                UserId = a.UserId,
+                                                AccountName = a.Account.AccountName
+                                            }).ToPagedList(currentIndex, pageSize);
+            return result;
         }
     }
 }

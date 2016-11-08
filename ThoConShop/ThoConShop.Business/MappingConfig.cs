@@ -22,6 +22,7 @@ namespace ThoConShop.Business
                 a.CreateMap<Champion, ChampionDto>().ReverseMap();
                 a.CreateMap<User, UserDto>().ReverseMap();
                 a.CreateMap<UserRechargeHistoryDto, UserRechargeHistory>().ReverseMap();
+                a.CreateMap<UserTradingHistory, UserTradingHistoryDto>().ReverseMap();
             }); 
         }
     }

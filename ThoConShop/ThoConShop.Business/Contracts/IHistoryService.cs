@@ -7,8 +7,9 @@ using ThoConShop.Business.Dtos;
 
 namespace ThoConShop.Business.Contracts
 {
-    public interface IRechargeHistoryService
+    public interface IHistoryService
     {
         UserRechargeHistoryDto Create(UserRechargeHistoryDto rechargeHistory);
+        UserTradingHistoryDto Create(UserTradingHistoryDto tradingHistory);
     }
 }

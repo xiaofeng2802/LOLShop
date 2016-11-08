@@ -21,6 +21,6 @@ namespace ThoConShop.Business.Contracts
 
         IPagedList<UserRechargeHistoryDto> ReadRechargeHistories(string generalUserId, int currentIndex, int pageSize);
 
-        IPagedList<UserTradingHistoryDto> ReadtrTradingHistories(string generalUserId, int currentIndex, int pageSize);
+        IPagedList<UserTradingHistoryDto> ReadTradingHistories(string generalUserId, int currentIndex, int pageSize);
     }
 }

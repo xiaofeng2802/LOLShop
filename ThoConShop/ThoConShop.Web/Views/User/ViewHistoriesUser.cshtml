@@ -1,0 +1,14 @@
+﻿@using ThoConShop.DataSeedWork
+@model ThoConShop.Web.Models.HistoryViewModel
+@{
+    ViewBag.Title = "ViewRechargeHistoriesUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    // try with "en-US"
+}
+
+@Html.Partial("_RechargeHistory", Model.RechargeHistories)
+
+@Html.Partial("_TradingHistory", Model.TradingHistories)
+
+
+

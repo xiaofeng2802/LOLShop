@@ -11,13 +11,29 @@ using ThoConShop.DAL.Entities;
 
 namespace ThoConShop.Business.Services
 {
-    public class RechargeHistoryService : IRechargeHistoryService
+    public class HistoryService : IHistoryService
     {
         private readonly IRepositories<int, UserRechargeHistory> _rechargeRepositories;
+        private readonly IRepositories<int, UserTradingHistory> _tradingHistory;
 
-        public RechargeHistoryService(IRepositories<int, UserRechargeHistory> rechargeRepositories)
+        public HistoryService(IRepositories<int, UserRechargeHistory> rechargeRepositories,
+            IRepositories<int, UserTradingHistory> tradingHistory)
         {
             _rechargeRepositories = rechargeRepositories;
+            _tradingHistory = tradingHistory; 
+        }
+
+        public UserTradingHistoryDto Create(UserTradingHistoryDto tradingHistory)
+        {
+            var data = Mapper.Map<UserTradingHistory>(tradingHistory);
+
+            _tradingHistory.Create(data);
+
+            if (_tradingHistory.SaveChanges() > 0)
+            {
+                return tradingHistory;
+            }
+            return null;
         }
 
         public UserRechargeHistoryDto Create(UserRechargeHistoryDto rechargeHistory)

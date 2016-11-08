@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using ThoConShop.Business.Contracts;
 using ThoConShop.DataSeedWork.UserExternalService;
 using ThoConShop.Web.Models;
+using ThoConShop.Business.Dtos;
 
 namespace ThoConShop.Web.Controllers
 {
@@ -14,9 +15,17 @@ namespace ThoConShop.Web.Controllers
     public class AccountController : Controller
     {
         private readonly IAccountService _accountService;
-        public AccountController(IAccountService accountService)
+
+        private readonly IHistoryService _historyService;
+
+        private readonly IUserService _userService;
+        public AccountController(IAccountService accountService,
+            IHistoryService historyService,
+            IUserService userService)
         {
             _accountService = accountService;
+            _historyService = historyService;
+            _userService = userService;
         }
         
         [HttpPost]
@@ -25,6 +34,7 @@ namespace ThoConShop.Web.Controllers
         {
 
             var account = _accountService.ReadOneById(accountId);
+            var user = _userService.ReadByGeneralUserId(User.Identity.GetUserId());
 
             if (account.Price > (decimal) UserExternalService.GetUserBalance(User.Identity.GetUserId()))
             {
@@ -33,7 +43,15 @@ namespace ThoConShop.Web.Controllers
             }
 
             _accountService.SoldAccount(accountId);
-            UserExternalService.SetUserBalance(User.Identity.GetUserId(), (account.Price * -1));
+            UserExternalService.SetUserBalance(user.GeneralUserId, (account.Price * -1));
+
+            _historyService.Create(new UserTradingHistoryDto()
+            {
+                AccountId = account.Id,
+                UserId = user.Id,
+                CreatedDate = DateTime.Now
+            });
+
             AccountSoldViewModel vm = new AccountSoldViewModel()
             {
                 AccountName = account.AccountName,

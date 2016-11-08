@@ -36,11 +36,11 @@ namespace ThoConShop.Web.Controllers
 
         private readonly IAccountRelationDataService _accountRelationDataService;
 
-        private readonly IRechargeHistoryService _rechargeHistoryService;
+        private readonly IHistoryService _rechargeHistoryService;
 
         public UserController(IUserService userService,
             IAccountRelationDataService accountRelationDataService,
-             IRechargeHistoryService rechargeHistoryService)
+             IHistoryService rechargeHistoryService)
         {
             _userService = userService;
             _accountRelationDataService = accountRelationDataService;
@@ -65,10 +65,14 @@ namespace ThoConShop.Web.Controllers
             private set { _userManager = value; }
         }
 
-        public ActionResult ViewRechargeHistoriesUser(int? page)
+        public ActionResult ViewHistoriesUser()
         {
-            
-            var result = _accountRelationDataService.ReadRechargeHistories(User.Identity.GetUserId(), page ?? 1, _pageSize);
+
+            var result = new HistoryViewModel() {
+                RechargeHistories = _accountRelationDataService.ReadRechargeHistories(User.Identity.GetUserId(), 1, _pageSize),
+                TradingHistories = _accountRelationDataService.ReadTradingHistories(User.Identity.GetUserId(), 1, _pageSize)
+            };
+
             return View(result);
         }
 

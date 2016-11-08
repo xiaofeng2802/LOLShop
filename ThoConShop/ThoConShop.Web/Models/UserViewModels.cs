@@ -7,6 +7,13 @@ using ThoConShop.DataSeedWork.Enum;
 namespace ThoConShop.Web.Models
 {
 
+    public class HistoryViewModel
+    {
+        public IPagedList<UserTradingHistoryDto> TradingHistories { get; set; }
+
+        public IPagedList<UserRechargeHistoryDto> RechargeHistories { get; set; }
+    }
+
     public class ChargingViewModel
     {
         [Required(ErrorMessage = "Bạn chưa nhập seri")]

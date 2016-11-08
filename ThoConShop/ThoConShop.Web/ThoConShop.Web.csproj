@@ -345,9 +345,11 @@
     <Content Include="Views\User\SendCode.cshtml" />
     <Content Include="Views\User\VerifyCode.cshtml" />
     <Content Include="Views\User\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Views\User\ViewRechargeHistoriesUser.cshtml" />
+    <Content Include="Views\User\ViewHistoriesUser.cshtml" />
     <Content Include="Views\User\ChargingView.cshtml" />
     <Content Include="Views\Account\SellAccount.cshtml" />
+    <Content Include="Views\User\_TradingHistory.cshtml" />
+    <Content Include="Views\User\_RechargeHistory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
