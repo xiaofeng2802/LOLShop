@@ -14,8 +14,23 @@
         <h1 class="c-hero__title u-text-gradient">@Model.CurrentAccount.Title</h1>
         <h5>Mã số <span>@Model.CurrentAccount.Id</span> giá <span>@Model.CurrentAccount.Price.ToString("#,###", cul.NumberFormat)</span>đ</h5>
 
+        @if (Model.CurrentAccount.IsAvailable)
+        {
+            using (Html.BeginForm("SellAccount", "Account", FormMethod.Post, new { id = "formSell" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.Hidden("AccountId", Model.CurrentAccount.Id)
 
-        <div class="btn btn-danger">Nick này đã được bán</div>
+                <button type="submit" class="btn btn-danger">Mua Ngay</button>
+             }
+          }
+
+          else
+          {
+            <div class="btn btn-danger">Nick này đã được bán</div>
+          }
+
+        
         <br> <img src="@Model.CurrentAccount.Avatar" alt="@Model.CurrentAccount.Title" title="@Model.CurrentAccount.Title">
     </div>
     <div class="clearfix"></div>
@@ -122,3 +137,4 @@
 </div>
 <div class="hr-gold-double-fade"></div>
 
+<script src="~/Scripts/Custom/Index.js"></script>

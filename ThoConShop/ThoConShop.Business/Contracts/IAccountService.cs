@@ -13,7 +13,7 @@ namespace ThoConShop.Business.Contracts
 
         AccountDto Create(AccountDto entity);
 
-        IPagedList<AccountDto> Read(int currentIndex, int pageSize);
+        IPagedList<AccountDto> Read(int currentIndex, int pageSize, bool isAvailableOnly = true);
 
         IList<AccountDto> Read();
 

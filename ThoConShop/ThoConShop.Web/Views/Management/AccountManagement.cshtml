@@ -1,0 +1,86 @@
+﻿@using System.Globalization
+@model PagedList.IPagedList<ThoConShop.Business.Dtos.AccountDto>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@using ThoConShop.DataSeedWork.Extensions
+
+
+<div class="card">
+
+    <!-- BEGIN SEARCH HEADER -->
+    <div class="card-head style-primary">
+        <div class="tools pull-left">
+            <form class="navbar-search" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="contactSearch" placeholder="Tìm Theo Tên, Mã số">
+                </div>
+                <button type="submit" class="btn btn-icon-toggle ink-reaction"><i class="fa fa-search"></i></button>
+            </form>
+          
+        </div>
+     
+        <div class="tools">
+            <a class="btn btn-floating-action btn-default-light" href="@Url.Action("CreateAccount", "Management")"><i class="fa fa-plus"></i></a>
+        </div>
+    </div><!--end .card-head -->
+    <!-- END SEARCH HEADER -->
+    <!-- BEGIN SEARCH RESULTS -->
+    <div class="card-body">
+        <div class="row">
+            <div class="form-group">
+                <select id="select2" name="select2" class="form-control">
+                    <option value="">&nbsp;</option>
+                    <option value="30">30</option>
+                    <option value="40">40</option>
+                    <option value="50">50</option>
+                    <option value="60">60</option>
+                    <option value="70">70</option>
+                </select>
+                <label for="select2">Select</label>
+            </div>
+            <!-- BEGIN SEARCH NAV -->
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Mã Số</th>
+                                <th class="text-center">Trang Phục</th>
+                                <th class="text-center">Tướng</th>
+                                <th class="text-center">Bảng Ngọc</th>
+                                <th>Giá</th>
+                                <th>Ngày Cập Nhật</th>
+                                <th>Rank</th>
+                                <th class="text-right"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                           @foreach (var item in Model)
+                           {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td class="text-center">@item.NumberOfSkins</td>
+                                <td class="text-center">@item.NumberOfChamps</td>
+                                <td class="text-center">@item.NumberOfPageGem</td>
+                                <td>@item.Price.VietNameseMoneyFormat()</td>
+                                <td>@item.CreatedDate.ToShortDateString()</td>
+                                <td>@item.RankName</td>
+                                <td class="text-right">
+                                    <button type="button" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Sửa thông tin"><i class="fa fa-pencil"></i></button>
+                                    <button type="button" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Xóa"><i class="fa fa-trash-o"></i></button>
+                                </td>
+                            </tr>
+                           }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div><!--end .col -->
+            <!-- END SEARCH NAV -->
+        </div><!--end .row -->
+    </div><!--end .card-body -->
+    <!-- END SEARCH RESULTS -->
+
+</div>

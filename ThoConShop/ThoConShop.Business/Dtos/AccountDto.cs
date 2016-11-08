@@ -32,13 +32,19 @@ namespace ThoConShop.Business.Dtos
 
         public string Description { get; set; }
 
-        public bool? IsAvailable { get; set; }
+        public bool IsAvailable { get; set; }
 
-        public bool? IsHot { get; set; }
+        public bool IsHot { get; set; }
+
+        public bool IsDelete { get; set; }
 
         public string Avatar { get; set; }
 
-        public byte? NumberOfPageGem { get; set; }
+        public int NumberOfPageGem { get; set; }
+    
+        public int NumberOfChamps { get; set; }
+
+        public int NumberOfSkins { get; set; }
 
         public IList<SkinDto> Skins { get; set; }
 

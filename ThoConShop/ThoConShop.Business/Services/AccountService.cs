@@ -30,12 +30,22 @@ namespace ThoConShop.Business.Services
 
         public AccountDto Create(AccountDto entity)
         {
-            throw new NotImplementedException();
+            var account = Mapper.Map<Account>(entity);
+            var result = _repoAccount.Create(account);
+            
+            if (_repoAccount.SaveChanges() > 0)
+            {
+                return entity;
+            }
+
+            return null;
         }
 
         public int Delete(int entityId)
         {
-            throw new NotImplementedException();
+            var acc = _repoAccount.ReadOne(a => a.Id == entityId);
+            acc.IsDelete = true;
+            return _repoAccount.SaveChanges();
         }
 
         public AccountDto Edit(int accountId)
@@ -147,11 +157,14 @@ namespace ThoConShop.Business.Services
             return Mapper.Map<IList<AccountDto>>(_repoAccount.Read(a => true).Where(a => a.IsAvailable).ToList());
         }
 
-        public IPagedList<AccountDto> Read(int currentIndex, int pageSize)
+        public IPagedList<AccountDto> Read(int currentIndex, int pageSize, bool isAvailableOnly = true)
         {
             var result = _repoAccount.Read(a => true)
                               .Include(a => a.Rank)
-                              .Where(a => a.IsAvailable)
+                              .Include(a => a.NumberOfPageGems)
+                              .Include(a => a.Champions)
+                              .Include(a => a.Skins)
+                              .Where(a => a.IsAvailable == isAvailableOnly)
                               .Select(a =>  new AccountDto()
                                 {
                                     CreatedDate = a.CreatedDate,
@@ -167,9 +180,12 @@ namespace ThoConShop.Business.Services
                                     Password = a.Password,
                                     Price = a.Price,
                                     Title = a.Title,
-                                    UpdatedDate = a.UpdatedDate
+                                    UpdatedDate = a.UpdatedDate,
+                                    NumberOfPageGem = a.NumberOfPageGems.Count,
+                                    NumberOfChamps = a.Champions.Count,
+                                    NumberOfSkins = a.Skins.Count
                                 })
-                              .OrderBy(a => a.RankId)
+                              .OrderByDescending(a => a.CreatedDate)
                               .ToPagedList(currentIndex, pageSize);
 
             return result;
