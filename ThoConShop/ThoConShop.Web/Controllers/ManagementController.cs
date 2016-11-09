@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
 using ThoConShop.Business.Contracts;
 using ThoConShop.Business.Dtos;
 using ThoConShop.Web.Models;
@@ -36,7 +37,7 @@ namespace ThoConShop.Web.Controllers
 
         public ActionResult CreateAccount()
         {
-            CreateAccountViewModel vm = new CreateAccountViewModel()
+            CreateOrUpdateAccountViewModel vm = new CreateOrUpdateAccountViewModel()
             {
                 RankList = _rankService.Read().Select(a => new SelectListItem()
                 {
@@ -50,10 +51,24 @@ namespace ThoConShop.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateAccount(AccountDto data)
+        public ActionResult CreateAccount(CreateOrUpdateAccountViewModel data)
         {
-           
-            return View();
+            if (ModelState.IsValid)
+            {
+                var result = new AccountDto()
+                {
+                    UserName = data.UserName,
+                    Password = data.Password,
+                    CreatedDate = DateTime.Now,
+                    Description = data.Description,
+                    Price = data.Price,
+                    RankId = data.RankId,
+                    Avatar = ""
+                };
+                _accountService.Create(result);
+                return RedirectToAction("AccountManagement");
+            }
+            return View(data);
         }
 
         public ActionResult UserManagement()

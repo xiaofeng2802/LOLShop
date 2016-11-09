@@ -44,9 +44,6 @@ namespace ThoConShop.DAL.Entities
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Account>()
-                .Property(e => e.AccountName)
-                .IsUnicode(false);
 
             modelBuilder.Entity<Account>()
                 .Property(e => e.Password)

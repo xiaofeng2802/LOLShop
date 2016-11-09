@@ -75,7 +75,6 @@ namespace ThoConShop.Business.Services
                                            UserName = a.UserName,
                                            Avatar = a.Avatar,
                                            IsAvailable = a.IsAvailable,
-                                           AccountName = a.AccountName,
                                            Description = a.Description,
                                            Id = a.Id,
                                            IsHot = a.IsHot,
@@ -126,10 +125,9 @@ namespace ThoConShop.Business.Services
                                                 PriceOfAccount = a.Account.Price,
                                                 CreatedDate = a.CreatedDate,
                                                 AccountId = a.AccountId,
-                                                Password = "*********",
+                                                Password = a.Account.Password,
                                                 RankName = a.Account.Rank.RankName,
-                                                UserId = a.UserId,
-                                                AccountName = a.Account.AccountName
+                                                UserId = a.UserId
                                             }).ToPagedList(currentIndex, pageSize);
             return result;
         }

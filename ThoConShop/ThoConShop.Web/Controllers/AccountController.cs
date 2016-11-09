@@ -54,7 +54,7 @@ namespace ThoConShop.Web.Controllers
 
             AccountSoldViewModel vm = new AccountSoldViewModel()
             {
-                AccountName = account.AccountName,
+                AccountName = account.UserName,
                 Password = account.Password
             };
             return View(vm);

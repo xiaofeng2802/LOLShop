@@ -32,7 +32,7 @@ namespace ThoConShop.Business.Services
         public AccountDto Create(AccountDto entity)
         {
             var account = Mapper.Map<Account>(entity);
-            var result = _repoAccount.Create(account);
+             _repoAccount.Create(account);
             
             if (_repoAccount.SaveChanges() > 0)
             {
@@ -140,7 +140,6 @@ namespace ThoConShop.Business.Services
                 UserName = a.UserName,
                 Avatar = a.Avatar,
                 IsAvailable = a.IsAvailable,
-                AccountName = a.AccountName,
                 Description = a.Description,
                 Id = a.Id,
                 IsHot = a.IsHot,
@@ -160,12 +159,16 @@ namespace ThoConShop.Business.Services
 
         public IPagedList<AccountDto> Read(int currentIndex, int pageSize, bool isAvailableOnly = true)
         {
-            var result = _repoAccount.Read(a => true)
-                              .Include(a => a.Rank)
+            var query = _repoAccount.Read(a => true);
+
+            if (isAvailableOnly)
+            {
+                query = query.Where(a => a.IsAvailable == isAvailableOnly);
+            }
+            var result = query.Include(a => a.Rank)
                               .Include(a => a.NumberOfPageGems)
                               .Include(a => a.Champions)
                               .Include(a => a.Skins)
-                              .Where(a => a.IsAvailable == isAvailableOnly)
                               .Select(a =>  new AccountDto()
                                 {
                                     CreatedDate = a.CreatedDate,
@@ -174,7 +177,6 @@ namespace ThoConShop.Business.Services
                                     UserName = a.UserName,
                                     Avatar = a.Avatar,
                                     IsAvailable = a.IsAvailable,
-                                    AccountName = a.AccountName,
                                     Description = a.Description,
                                     Id = a.Id,
                                     IsHot = a.IsHot,

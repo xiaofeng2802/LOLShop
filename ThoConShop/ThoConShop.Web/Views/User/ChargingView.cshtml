@@ -34,7 +34,6 @@
                         <label class="col-md-2 control-label" for="SoSeri">Số seri</label>
                         <div class="col-md-9" style="margin-bottom: 10px;">
                             @Html.TextBoxFor(a => a.SerialNumber, new {@class = "form-control"})
-                            @Html.ValidationMessageFor(a => a.SerialNumber)
                             @*<input class="form-control" data-val="true" data-val-required="Bạn chưa nhập seri" id="SoSeri" name="SoSeri" type="text" value="">*@
                         </div>
                     </div>
@@ -42,7 +41,6 @@
                         <label class="col-md-2 control-label" for="Pin">Mã thẻ</label>
                         <div class="col-md-9" style="margin-bottom: 10px;">
                             @Html.TextBoxFor(a => a.PinNumber, new {@class = "form-control"})
-                            @Html.ValidationMessageFor(a => a.PinNumber)
                             @*<input class="form-control" data-val="true" data-val-required="Bạn chưa nhập mã thẻ" id="Pin" name="Pin" type="text" value="">*@
                         </div>
                     </div>
