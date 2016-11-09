@@ -47,11 +47,11 @@ namespace ThoConShop.Web.Models
         public bool IsDelete { get; set; }
 
         [Required(ErrorMessage = "Hình đại diện không được trống.")]
-        [FileExtensions(ErrorMessage = "Your error message.", Extensions = "jpg,jpeg,png")]
+        //[FileExtensions(ErrorMessage = "Your error message.", Extensions = "jpg,jpeg,png")]
         public HttpPostedFileBase Avatar { get; set; }
 
 
-        [FileExtensions(ErrorMessage = "Your error message.", Extensions = "jpg,jpeg,png")]
+        //[FileExtensions(ErrorMessage = "Your error message.", Extensions = "jpg,jpeg,png")]
         public HttpPostedFileBase[] PageGem { get; set; }
     }
 }
