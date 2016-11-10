@@ -32,11 +32,11 @@ namespace ThoConShop.Business.Services
         public AccountDto Create(AccountDto entity)
         {
             var account = Mapper.Map<Account>(entity);
-             _repoAccount.Create(account);
+             var result = _repoAccount.Create(account);
             
             if (_repoAccount.SaveChanges() > 0)
             {
-                return entity;
+                return Mapper.Map<AccountDto>(result);
             }
 
             return null;
@@ -75,6 +75,12 @@ namespace ThoConShop.Business.Services
             acc.IsAvailable = false;
              _repoAccount.Update(acc);
             FileUlti.DeleteFile(acc.Avatar);
+
+            foreach (var page in acc.NumberOfPageGems)
+            {
+                FileUlti.DeleteFile(page.ImageUrl);
+            }
+
             _repoAccount.SaveChanges();
 
         }
@@ -196,7 +202,13 @@ namespace ThoConShop.Business.Services
 
         public AccountDto Update(AccountDto entity)
         {
-            throw new NotImplementedException();
+            var data = _repoAccount.ReadOne(a => a.Id == entity.Id);
+            var result = Mapper.Map(entity, data);
+            if (_repoAccount.SaveChanges() > 0)
+            {
+                return entity;
+            }
+            return null;
         }
     }
 }

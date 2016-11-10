@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.UI;
 using AutoMapper;
 using ThoConShop.DAL.Entities;
 using ThoConShop.Business.Dtos;
@@ -23,6 +24,7 @@ namespace ThoConShop.Business
                 a.CreateMap<User, UserDto>().ReverseMap();
                 a.CreateMap<UserRechargeHistoryDto, UserRechargeHistory>().ReverseMap();
                 a.CreateMap<UserTradingHistory, UserTradingHistoryDto>().ReverseMap();
+                a.CreateMap<PageGem, PageGemDto>().ReverseMap();
             }); 
         }
     }
