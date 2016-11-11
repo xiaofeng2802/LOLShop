@@ -16,6 +16,8 @@ namespace ThoConShop.Web.Models
 
     public class CreateOrUpdateAccountViewModel
     {
+        public int AccounId { get; set; }
+
         public CreateOrUpdateAccountViewModel()
         {
                 RankList = new List<SelectListItem>();
@@ -33,16 +35,16 @@ namespace ThoConShop.Web.Models
 
         [Required,
          Range(1000, int.MaxValue, ErrorMessage = "Đơn giá không được nhỏ hơn 1000.")]
-        public decimal Price { get; set; }
+        public double Price { get; set; }
 
         [Range(1, int.MaxValue, ErrorMessage = "Xin hãy chọn thông tin tồn tại.")]
         public int RankId { get; set; }
 
         public string Description { get; set; }
 
-        public bool IsAvailable { get; set; }
+        public bool IsAvailable { get; set; } = true;
 
-        public bool IsHot { get; set; }
+        public bool IsHot { get; set; } = true;
 
         public bool IsDelete { get; set; }
 

@@ -7,12 +7,19 @@
 
 <div class="col-lg-12">
 
-    @using (Html.BeginForm("CreateAccount", "Management", FormMethod.Post, new {@class = "form-horizontal", enctype = "multipart/form-data"}))
+    @using (Html.BeginForm("CreateOrUpdateAccount", "Management", FormMethod.Post, new {@class = "form-horizontal", enctype = "multipart/form-data"}))
     {
         @Html.AntiForgeryToken()
         <div class="card">
             <div class="card-head style-primary">
-                <header>Tạo Tài Khoản LMHT</header>
+                @if (Model.AccounId != 0)
+                {
+                    <header>Cập nhật Tài Khoản LMHT</header>
+                }
+                else
+                {
+                    <header>Tạo Tài Khoản LMHT</header>
+                }
             </div>
             <div class="card-body">
                 <div class="row">
@@ -34,8 +41,9 @@
                             <div class="col-sm-10">
                                 @*<input type="number" class="form-control" id="Lastname5">*@
                                 @Html.TextBoxFor(a => a.Price, new {@class = "form-control", type = "number"})
-                                @Html.ValidationMessageFor(a => a.Price, "", new { @class = "text-danger" })
                                 <div class="form-control-line"></div>
+                                @Html.ValidationMessageFor(a => a.Price, "", new { @class = "text-danger" })
+                                
                             </div>
                         </div>
                     </div>
@@ -47,8 +55,9 @@
                             <div class="col-sm-10">
                                 @*<input type="text" class="form-control" id="Username5">*@
                                 @Html.TextBoxFor(a => a.UserName, new {@class = "form-control"})
-                                @Html.ValidationMessageFor(a => a.UserName, "", new { @class = "text-danger" })
                                 <div class="form-control-line"></div>
+                                @Html.ValidationMessageFor(a => a.UserName, "", new { @class = "text-danger" })
+                                
                             </div>
                         </div>
                     </div>
@@ -57,9 +66,10 @@
                             <label class="col-sm-2 control-label">Mật Khẩu</label>
                             <div class="col-sm-10">
                                 @*<input type="password" class="form-control" id="Password5">*@
-                                @Html.PasswordFor(a => a.Password, new {@class = "form-control"})
-                                @Html.ValidationMessageFor(a => a.Password, "", new { @class = "text-danger" })
+                                @Html.TextBoxFor(a => a.Password, new {@class = "form-control"})
                                 <div class="form-control-line"></div>
+                                @Html.ValidationMessageFor(a => a.Password, "", new { @class = "text-danger" })
+                               
                             </div>
                         </div>
                     </div>
@@ -70,8 +80,9 @@
                             <label class="col-sm-2 control-label">Hình Đại Diện</label>
                             <div class="col-sm-10">
                                 @Html.TextBoxFor(a => a.Avatar, new {type = "file"})
-                                @Html.ValidationMessageFor(a => a.Avatar, "", new { @class = "text-danger" })
                                 <div class="form-control-line"></div>
+                                @Html.ValidationMessageFor(a => a.Avatar, "", new { @class = "text-danger" })
+                                
                             </div>
                         </div>
 
@@ -82,8 +93,9 @@
                             <div class="col-sm-10">
                                 @*<input type="file" class="form-control" multiple id="Password5">*@
                                 @Html.TextBoxFor(a => a.PageGem, new {type = "file", multiple = "multiple"})
-                                @Html.ValidationMessageFor(a => a.PageGem, "", new { @class = "text-danger" })
                                 <div class="form-control-line"></div>
+                                @Html.ValidationMessageFor(a => a.PageGem, "", new { @class = "text-danger" })
+                                
                             </div>
                         </div>
                     </div>
@@ -94,8 +106,9 @@
                             <label class="col-sm-2 control-label">Ghi Chú</label>
                             <div class="col-sm-10">
                                 @Html.TextAreaFor(a => a.Description, new {@class = "form-control", rows = "3", placeholder = ""})
-                                @Html.ValidationMessageFor(a => a.Description, "", new { @class = "text-danger" })
                                 <div class="form-control-line"></div>
+                                @Html.ValidationMessageFor(a => a.Description, "", new { @class = "text-danger" })
+                               
                             </div>
                         </div>
                     </div>
@@ -103,7 +116,15 @@
             </div><!--end .card-body -->
             <div class="card-actionbar">
                 <div class="card-actionbar-row">
-                    <button type="submit" class="btn btn-flat btn-primary ink-reaction">Tạo</button>
+                    @if (Model.AccounId == 0)
+                    {
+                        <button type="submit" class="btn btn-flat btn-primary ink-reaction">Tạo</button>
+                    }
+                    else
+                    {
+                        @Html.HiddenFor(a => a.AccounId)
+                        <button type="submit" class="btn btn-flat btn-primary ink-reaction">Cập Nhật</button>
+                    }
                 </div>
             </div>
         </div><!--end .card -->

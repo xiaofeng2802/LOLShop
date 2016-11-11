@@ -11,6 +11,14 @@ namespace ThoConShop.Business.Contracts
 {
     public interface IAccountRelationDataService
     {
+
+        PageGemDto CreatePageGem(PageGemDto data);
+
+        int DeletePageGemById(int pageGemId);
+
+        int DeletePageGemByAccountId(int accountId);
+
+        IPagedList<PageGemDto> ReadPageGem(int currentIndex, int pageSize);
         IList<RankDto> ReadRankForFilter();
 
         IList<SkinDto> ReadSkinForFilter();

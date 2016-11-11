@@ -40,7 +40,6 @@ namespace ThoConShop.DAL.Entities
 
         public bool IsDelete { get; set; } = false;
 
-        [StringLength(100)]
         public string Avatar { get; set; }
 
 

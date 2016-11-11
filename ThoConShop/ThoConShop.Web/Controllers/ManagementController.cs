@@ -7,6 +7,8 @@ using System.Web.Mvc;
 using AutoMapper;
 using ThoConShop.Business.Contracts;
 using ThoConShop.Business.Dtos;
+using ThoConShop.DataSeedWork.Extensions;
+using ThoConShop.DataSeedWork.Ulti;
 using ThoConShop.Web.Models;
 
 namespace ThoConShop.Web.Controllers
@@ -16,13 +18,17 @@ namespace ThoConShop.Web.Controllers
         readonly int _pageSize = int.Parse(ConfigurationManager.AppSettings["PageSize"]);
         private readonly IAccountService _accountService;
 
+        private readonly IAccountRelationDataService _accountRelationDataService;
+
         private readonly IRankService _rankService;
 
 
-        public ManagementController(IAccountService accountService, IRankService rankService)
+        public ManagementController(IAccountService accountService, IRankService rankService,
+            IAccountRelationDataService accountRelationDataService)
         {
             _accountService = accountService;
             _rankService = rankService;
+            _accountRelationDataService = accountRelationDataService;
         }
 
 
@@ -35,25 +41,54 @@ namespace ThoConShop.Web.Controllers
             return View(result);
         }
 
-        public ActionResult CreateAccount()
+        public ActionResult CreateOrUpdateAccount(int? accountId)
         {
-            CreateOrUpdateAccountViewModel vm = new CreateOrUpdateAccountViewModel()
-            {
-                RankList = _rankService.Read().Select(a => new SelectListItem()
-                {
-                    Value = a.Id.ToString(),
-                    Text = a.RankName
-                }).ToList(),
+            CreateOrUpdateAccountViewModel vm;
 
-            };
+            if (accountId == null)
+            {
+                vm = new CreateOrUpdateAccountViewModel()
+                {
+                    RankList = _rankService.Read().Select(a => new SelectListItem()
+                    {
+                        Value = a.Id.ToString(),
+                        Text = a.RankName
+                    }).ToList()
+
+                };
+            }
+            else
+            {
+                var accountDto = _accountService.ReadOneById(accountId ?? 0);
+                vm = new CreateOrUpdateAccountViewModel()
+                {
+                    RankList = _rankService.Read().Select(a => new SelectListItem()
+                    {
+                        Value = a.Id.ToString(),
+                        Text = a.RankName,
+                        Selected = (a.Id == accountDto.RankId) 
+                    }).ToList(),
+                    Price = (double)accountDto.Price,
+                    Description = accountDto.Description,
+                    UserName = accountDto.UserName,
+                    Password = accountDto.Password,
+                    RankId = accountDto.RankId,
+                    AccounId = accountDto.Id
+                    
+                };
+            }
+
             return View(vm);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateAccount(CreateOrUpdateAccountViewModel data)
+        public ActionResult CreateOrUpdateAccount(CreateOrUpdateAccountViewModel data)
         {
-            if (ModelState.IsValid)
+
+            var path = Server.MapPath(ConfigurationManager.AppSettings["AvatarUrl"]);
+            AccountDto createOrpdateResult;
+            if (data.AccounId == 0)
             {
                 var result = new AccountDto()
                 {
@@ -61,14 +96,59 @@ namespace ThoConShop.Web.Controllers
                     Password = data.Password,
                     CreatedDate = DateTime.Now,
                     Description = data.Description,
-                    Price = data.Price,
+                    Price = (decimal) data.Price,
                     RankId = data.RankId,
-                    Avatar = ""
+                    Avatar = FileUlti.SaveFile(data.Avatar, path),
+                    IsAvailable = true,
+                    IsHot = true
                 };
-                _accountService.Create(result);
-                return RedirectToAction("AccountManagement");
+                createOrpdateResult = _accountService.Create(result);
             }
-            return View(data);
+            else
+            {
+                var accountDto = _accountService.ReadOneById(data.AccounId);
+
+                accountDto.Price = (decimal) data.Price;
+                accountDto.Description = data.Description;
+                accountDto.Password = data.Password;
+                accountDto.UserName = data.UserName;
+                accountDto.RankId = data.RankId;
+                accountDto.Avatar = FileUlti.SaveFile(data.Avatar, path) ?? accountDto.Avatar;
+
+                if (data.PageGem != null)
+                {
+                    _accountRelationDataService.DeletePageGemByAccountId(data.AccounId);
+                }
+                createOrpdateResult = _accountService.Update(accountDto);
+
+            }
+
+            if (createOrpdateResult != null)
+            {
+                var pathPageGem = Server.MapPath(ConfigurationManager.AppSettings["PageGemUrl"]);
+                if (data.PageGem != null)
+                {
+                    foreach (var item in data.PageGem)
+                    {
+                        var pageGem = new PageGemDto()
+                        {
+                            AccountId = createOrpdateResult.Id,
+                            CreatedDate = DateTime.Now,
+                            ImageUrl = FileUlti.SaveFile(item, pathPageGem)
+                        };
+
+                        _accountRelationDataService.CreatePageGem(pageGem);
+                    }
+                }
+            }
+            return RedirectToAction("AccountManagement");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult UpdateAccount()
+        {
+            return null;
         }
 
         public ActionResult UserManagement()

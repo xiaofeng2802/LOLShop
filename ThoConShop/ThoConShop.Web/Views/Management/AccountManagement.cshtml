@@ -57,9 +57,9 @@
                                 <td>@item.CreatedDate.ToShortDateString()</td>
                                 <td>@item.RankName</td>
                                 <td class="text-right">
-                                    <button type="button" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Sửa thông tin"><i class="fa fa-pencil"></i></button>
-                                    <button type="button" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Xóa"><i class="fa fa-trash-o"></i></button>
-                                    <button type="button" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Thêm Tướng/Trang Phục"><i class="md md-visibility"></i></button>
+                                    <a href="@Url.Action("CreateOrUpdateAccount", "Management", new { accountId = item.Id })" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Sửa thông tin"><i class="fa fa-pencil"></i></a>
+                                    <a class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Xóa"><i class="fa fa-trash-o"></i></a>
+                                    <a class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Thêm Tướng/Trang Phục"><i class="md md-visibility"></i></a>
                                 </td>
                             </tr>
                            }

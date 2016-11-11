@@ -27,11 +27,11 @@ namespace ThoConShop.Business.Services
         {
             var data = Mapper.Map<UserTradingHistory>(tradingHistory);
 
-            _tradingHistory.Create(data);
+            var result = _tradingHistory.Create(data);
 
             if (_tradingHistory.SaveChanges() > 0)
             {
-                return tradingHistory;
+                return Mapper.Map<UserTradingHistoryDto>(result);
             }
             return null;
         }
@@ -40,10 +40,10 @@ namespace ThoConShop.Business.Services
         {
             var data = Mapper.Map<UserRechargeHistory>(rechargeHistory);
 
-            _rechargeRepositories.Create(data);
+            var result = _rechargeRepositories.Create(data);
             if (_rechargeRepositories.SaveChanges() > 0)
             {
-                return rechargeHistory;
+                return Mapper.Map<UserRechargeHistoryDto>(result);
             }
 
             return null;

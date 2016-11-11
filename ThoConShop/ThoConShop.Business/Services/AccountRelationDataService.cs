@@ -8,6 +8,7 @@ using AutoMapper;
 using PagedList;
 using ThoConShop.Business.Contracts;
 using ThoConShop.Business.Dtos;
+using ThoConShop.DataSeedWork.Ulti;
 using ThoConShop.DAL.Contracts;
 using ThoConShop.DAL.Entities;
 
@@ -27,12 +28,15 @@ namespace ThoConShop.Business.Services
 
         private readonly IRepositories<int, UserTradingHistory> _tradingRepositories;
 
+        private readonly IRepositories<int, PageGem> _pageGemRepositories;
+
         public AccountRelationDataService(IRepositories<int, Rank> repoGank,
             IRepositories<int, Skin> repoSkin,
             IRepositories<int, Account> repoAccount,
             IRepositories<int, UserRechargeHistory> rechargeRepositories,
             IRepositories<int, UserTradingHistory> tradingRepositories,
-            IRepositories<int, User> repoUser)
+            IRepositories<int, User> repoUser,
+            IRepositories<int, PageGem> pageGemRepositories)
         {
             _repoGank = repoGank;
             _repoSkin = repoSkin;
@@ -40,6 +44,58 @@ namespace ThoConShop.Business.Services
             _rechargeRepositories = rechargeRepositories;
             _tradingRepositories = tradingRepositories;
             _repoUser = repoUser;
+            _pageGemRepositories = pageGemRepositories;
+        }
+
+        public PageGemDto CreatePageGem(PageGemDto data)
+        {
+            var pg = Mapper.Map<PageGem>(data);
+
+            _pageGemRepositories.Create(pg);
+
+            if (_pageGemRepositories.SaveChanges() > 0)
+            {
+                return data;
+            }
+            return null;
+
+        }
+
+        public int DeletePageGemById(int pageGemId)
+        {
+            var imagesDeleted = _pageGemRepositories.ReadOne(a => a.Id == pageGemId);
+            _pageGemRepositories.Delete(a => a.Id == pageGemId);
+            int result = _pageGemRepositories.SaveChanges();
+
+            if (result > 0)
+            {
+               FileUlti.DeleteFile(imagesDeleted.ImageUrl);
+            }
+
+            return result;
+        }
+
+        public int DeletePageGemByAccountId(int accountId)
+        {
+            var imagesDeleted = _pageGemRepositories.Read(a => a.AccountId == accountId).Select(a => a.ImageUrl);
+
+            _pageGemRepositories.Delete(a => a.AccountId == accountId);
+            int result = _pageGemRepositories.SaveChanges();
+
+            if (result > 0)
+            {
+                foreach (var img in imagesDeleted)
+                {
+                    FileUlti.DeleteFile(img);
+                }
+            }
+
+            return result;
+        }
+
+        public IPagedList<PageGemDto> ReadPageGem(int currentIndex, int pageSize)
+        {
+            throw new NotImplementedException();
         }
 
         public IList<RankDto> ReadRankForFilter()

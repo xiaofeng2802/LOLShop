@@ -60,7 +60,7 @@ namespace ThoConShop.DAL.Repositories
 
         public int Delete(Expression<Func<TEntity, bool>> expression)
         {
-            var result = Read(expression);
+            var result = _dbContext.Set<TKey, TEntity>().Where(expression);
             foreach (var item in result)
             {
                 _dbContext.Set<TKey, TEntity>().Remove(item);
