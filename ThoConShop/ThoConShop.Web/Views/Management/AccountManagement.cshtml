@@ -23,7 +23,7 @@
         </div>
      
         <div class="tools">
-            <a class="btn btn-floating-action btn-default-light" href="@Url.Action("CreateAccount", "Management")"><i class="fa fa-plus"></i></a>
+            <a class="btn btn-floating-action btn-default-light" href="@Url.Action("CreateOrUpdateAccount", "Management")"><i class="fa fa-plus"></i></a>
         </div>
     </div><!--end .card-head -->
     <!-- END SEARCH HEADER -->
@@ -50,20 +50,19 @@
                            {
                             <tr>
                                 <td>@item.Id</td>
-                                <td class="text-center">@item.NumberOfSkins</td>
-                                <td class="text-center">@item.NumberOfChamps</td>
+                                <td class="text-center"><a href="@Url.Action("UpdateSkinAccount", "Management", new { accountId = item.Id })">@item.NumberOfSkins</a></td>
+                                <td class="text-center"><a href="@Url.Action("UpdateChampAccount", "Management", new { accountId = item.Id })">@item.NumberOfChamps</a></td>
                                 <td class="text-center">@item.NumberOfPageGem</td>
                                 <td>@item.Price.VietNameseMoneyFormat()</td>
                                 <td>@item.CreatedDate.ToShortDateString()</td>
                                 <td>@item.RankName</td>
                                 <td class="text-right">
                                     <a href="@Url.Action("CreateOrUpdateAccount", "Management", new { accountId = item.Id })" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Sửa thông tin"><i class="fa fa-pencil"></i></a>
-                                    <a class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Xóa"><i class="fa fa-trash-o"></i></a>
-                                    <a class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Thêm Tướng/Trang Phục"><i class="md md-visibility"></i></a>
+                                    <a id="deleteButton" href="@Url.Action("DeleteAccount", "Management", new { accountId = item.Id })" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Xóa"><i class="fa fa-trash-o"></i></a>
+                                    @*<a class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Thêm Tướng/Trang Phục"><i class="md md-visibility"></i></a>*@
                                 </td>
                             </tr>
                            }
-
                         </tbody>
                     </table>
                 </div>
@@ -79,3 +78,4 @@
 </div><!--end .card-body -->
     <!-- END SEARCH RESULTS -->
 
+<script src="~/Scripts/Custom/AccountManagement.js"></script>

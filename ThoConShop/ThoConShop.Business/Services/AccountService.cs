@@ -44,8 +44,7 @@ namespace ThoConShop.Business.Services
 
         public int Delete(int entityId)
         {
-            var acc = _repoAccount.ReadOne(a => a.Id == entityId);
-            acc.IsDelete = true;
+            _repoAccount.Delete(a => a.Id == entityId);
             return _repoAccount.SaveChanges();
         }
 
@@ -160,7 +159,7 @@ namespace ThoConShop.Business.Services
 
         public IList<AccountDto> Read()
         {
-            return Mapper.Map<IList<AccountDto>>(_repoAccount.Read(a => true).Where(a => a.IsAvailable).ToList());
+            return Mapper.Map<IList<AccountDto>>(_repoAccount.Read(a => a.IsAvailable).ToList());
         }
 
         public IPagedList<AccountDto> Read(int currentIndex, int pageSize, bool isAvailableOnly = true)

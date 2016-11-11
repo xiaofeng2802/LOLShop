@@ -51,13 +51,6 @@ namespace ThoConShop.DAL.Repositories
             return entity;
         }
 
-        public bool Delete(TKey entityId)
-        {
-            var result = _dbContext.Set<TKey, TEntity>().Remove(ReadOne(a => a.Id.Equals(entityId)));
-
-            return (result != null);
-        }
-
         public int Delete(Expression<Func<TEntity, bool>> expression)
         {
             var result = _dbContext.Set<TKey, TEntity>().Where(expression);

@@ -34,8 +34,6 @@ namespace ThoConShop.Business.Dtos
 
         public bool IsHot { get; set; }
 
-        public bool IsDelete { get; set; }
-
         public string Avatar { get; set; }
 
         public int NumberOfPageGem { get; set; }

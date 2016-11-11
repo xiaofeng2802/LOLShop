@@ -38,8 +38,6 @@ namespace ThoConShop.DAL.Entities
 
         public bool IsHot { get; set; } = false;
 
-        public bool IsDelete { get; set; } = false;
-
         public string Avatar { get; set; }
 
 

@@ -144,12 +144,28 @@ namespace ThoConShop.Web.Controllers
             return RedirectToAction("AccountManagement");
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult UpdateAccount()
+        public ActionResult DeleteAccount(int accountId = 0)
         {
-            return null;
+            _accountService.Delete(accountId);
+            return RedirectToAction("AccountManagement");
         }
+
+
+        public ActionResult UpdateSkinAccount(int accountId = 0)
+        {
+            return View();
+        }
+
+
+        public ActionResult UpdateChampAccount(int accountId = 0)
+        {
+            return View();
+        }
+
+
+
+
+
 
         public ActionResult UserManagement()
         {

@@ -65,6 +65,12 @@ namespace ThoConShop.DAL.Entities
                 .WithRequired(e => e.Account)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<Account>()
+                .HasMany(e => e.NumberOfPageGems)
+                .WithRequired(a => a.Account)
+                .HasForeignKey(a => a.AccountId)
+                .WillCascadeOnDelete(true);
+
             modelBuilder.Entity<Rank>()
                 .Property(e => e.RankImage)
                 .IsUnicode(false);
@@ -96,7 +102,8 @@ namespace ThoConShop.DAL.Entities
             modelBuilder.Entity<Account>()
                 .HasMany(a => a.NumberOfPageGems)
                 .WithRequired(a => a.Account)
-                .HasForeignKey(a => a.AccountId);
+                .HasForeignKey(a => a.AccountId)
+                .WillCascadeOnDelete(true);
 
             modelBuilder.Entity<UserTradingHistory>()
                 .Ignore(a => a.Id);

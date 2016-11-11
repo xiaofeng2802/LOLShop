@@ -19,8 +19,6 @@ namespace ThoConShop.DAL.Contracts
 
         TEntity Update(TEntity entity);
 
-        bool Delete(TKey entityId);
-
         int Delete(Expression<Func<TEntity, bool>> expression);
 
         int SaveChanges();
