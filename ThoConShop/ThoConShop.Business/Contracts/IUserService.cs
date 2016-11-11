@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using PagedList;
 using ThoConShop.Business.Dtos;
+using ThoConShop.DataSeedWork.Identity;
 
 namespace ThoConShop.Business.Contracts
 {
@@ -19,6 +20,8 @@ namespace ThoConShop.Business.Contracts
         UserDto Update(UserDto entity);
 
         int Delete(int entityId);
+
+        int DeactiveOrActive(int entityId);
 
         UserDto Edit(int accountId);
 

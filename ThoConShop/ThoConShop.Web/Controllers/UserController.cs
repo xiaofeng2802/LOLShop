@@ -180,7 +180,9 @@ namespace ThoConShop.Web.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
+           
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
+
             if (loginInfo == null)
             {
                 return RedirectToAction("Login");
@@ -197,6 +199,12 @@ namespace ThoConShop.Web.Controllers
             //loginInfo.Email =  "01203195108";
             // Sign in the user with this external login provider if the user already has a login
             var result = await SignInManager.ExternalSignInAsync(loginInfo, isPersistent: false);
+            var isActive = UserExternalService.GetUserStatus(loginInfo.ExternalIdentity.Claims.First(c => c.Type == "urn:facebook:id").Value);
+            if (!isActive)
+            {
+                LogOff();
+                return RedirectToAction("LockNoticeView", "Home", new { userName = loginInfo.Email ?? loginInfo.DefaultUserName  });
+            }
             switch (result)
             {
                 case SignInStatus.Success:
@@ -263,7 +271,6 @@ namespace ThoConShop.Web.Controllers
                         CreatedDate = DateTime.Now,
                         GeneralUserId = user.Id,
                         IsActive = true,
-                        IsDeleted = false,
                         NameDisplay = firstName
                     });
                     //result = await UserManager.AddLoginAsync(user.Id, info.Login);
@@ -317,7 +324,6 @@ namespace ThoConShop.Web.Controllers
                             CreatedDate = DateTime.Now,
                             GeneralUserId = user.Id,
                             IsActive = true,
-                            IsDeleted = false,
                             NameDisplay = firstName
                         });
                         var data = await UserManager.GetLoginsAsync(user.Id);

@@ -85,7 +85,7 @@ namespace ThoConShop.DAL.Entities
             modelBuilder.Entity<User>()
                 .HasMany(e => e.UserTradingHistories)
                 .WithRequired(e => e.User)
-                .WillCascadeOnDelete(false);
+                .WillCascadeOnDelete(true);
 
             modelBuilder.Entity<UserRechargeHistory>()
                 .Property(e => e.ParValue)

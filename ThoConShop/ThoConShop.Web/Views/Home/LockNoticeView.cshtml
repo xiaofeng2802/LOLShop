@@ -1,0 +1,14 @@
+﻿@using Microsoft.AspNet.Identity
+@model object
+@{
+    ViewBag.Title = "LockNoticeView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div align="center">
+        <h3>Tài khoản @Model.ToString() hiện đang tạm khóa.</h3>
+        <h4>Xin vui lòng liên hệ admin trang chủ để lấy lại. Cám ơn !</h4>
+    </div>
+</div>
+

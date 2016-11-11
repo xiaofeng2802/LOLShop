@@ -2037,7 +2037,7 @@
     <Content Include="Content\assets\less\shared\variables.less" />
     <None Include="Properties\PublishProfiles\Thuan.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\Custom\AccountManagement.js" />
+    <Content Include="Scripts\Custom\GlobalManagement.js" />
     <Content Include="Scripts\Custom\Index.js" />
     <Content Include="Scripts\effect-hover-item\production.js" />
     <Content Include="Scripts\effect-hover-item\rbootstrap.min.js" />
@@ -2095,6 +2095,7 @@
     <Content Include="Views\Management\CreateOrUpdateAccount.cshtml" />
     <Content Include="Views\Management\UpdateSkinAccount.cshtml" />
     <Content Include="Views\Management\UpdateChampAccount.cshtml" />
+    <Content Include="Views\Home\LockNoticeView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

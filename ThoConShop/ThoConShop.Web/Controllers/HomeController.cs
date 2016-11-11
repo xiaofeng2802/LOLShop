@@ -24,6 +24,12 @@ namespace ThoConShop.Web.Controllers
             _accountRelationDataService = accountRelationDataService;
         }
 
+        [AllowAnonymous]
+        public ActionResult LockNoticeView(string userName)
+        {
+            return View("LockNoticeView", (object)userName);
+        }
+
         public ActionResult Index(int? page, int? currentRankFilter, string currentPriceFilter, int? currentSkinFilter)
         {
             int pageIndex = page ?? 1;

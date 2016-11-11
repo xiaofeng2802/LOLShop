@@ -1,4 +1,6 @@
-﻿
+﻿@using PagedList.Mvc
+@using ThoConShop.DataSeedWork.Extensions
+@model PagedList.IPagedList<ThoConShop.Business.Dtos.UserDto>
 @{
     ViewBag.Title = "UserManagement";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -11,28 +13,75 @@
         <div class="tools pull-left">
             <form class="navbar-search" role="search">
                 <div class="form-group">
-                    <input type="text" class="form-control" name="contactSearch" placeholder="Enter your keyword">
+                    <input type="text" class="form-control" name="contactSearch" placeholder="Tìm Theo Tên, Mã số">
                 </div>
                 <button type="submit" class="btn btn-icon-toggle ink-reaction"><i class="fa fa-search"></i></button>
             </form>
+
         </div>
+
         <div class="tools">
-            <a class="btn btn-floating-action btn-default-light" href="../../../html/pages/contacts/add.html"><i class="fa fa-plus"></i></a>
+            <a class="btn btn-floating-action btn-default-light" href="@Url.Action("CreateOrUpdateAccount", "Management")"><i class="fa fa-plus"></i></a>
         </div>
     </div><!--end .card-head -->
     <!-- END SEARCH HEADER -->
     <!-- BEGIN SEARCH RESULTS -->
     <div class="card-body">
+        <!-- BEGIN SEARCH NAV -->
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Email/Tên Tài Khoản</th>
+                            <th>Khóa Đến Ngày</th>
+                            <th>Số Dư</th>
+                            <th>Ngày Tham Gia</th>
+                            <th class="text-right"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@(string.IsNullOrEmpty(item.Email) ? item.UserName : item.Email )</td>
+                                <td>
+                                    @if (!item.IsActive)
+                                    {
+                                        <span>Tài khoản đã bị khóa</span>
+                                    }
+                                    else
+                                    {
+                                        <span>Không bi khóa</span>
+                                    }
+                                </td>
+                                <td>@item.Balance.VietNameseMoneyFormat()</td>
+                                <td>@item.CreatedDate.ToShortDateString()</td>
+                                <td class="text-right">
+                                    @if (item.IsActive)
+                                    {
+                                        <a href="@Url.Action("DeactiveOrActiveUser", "Management", new {userId = item.Id})" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Khóa thông tin"><i class="md md-lock"></i></a>
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Action("DeactiveOrActiveUser", "Management", new {userId = item.Id})" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Khóa thông tin"><i class="md md-lock-open"></i></a>
+                                    }
+                                    <a id="deleteButton" href="@Url.Action("DeleteUser", "Management", new { userId = item.Id})" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Xóa"><i class="fa fa-trash-o"></i></a>
+                                    @*<a class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Thêm Tướng/Trang Phục"><i class="md md-visibility"></i></a>*@
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div><!--end .col -->
+        <!-- END SEARCH NAV -->
         <div class="row">
+            <div class="col-md-12 body-pagging">
+                @Html.PagedListPager(Model, page => Url.Action("UserManagement", "Management", new { page }))
+            </div>
+        </div>
+    </div><!--end .row -->
 
-            <!-- BEGIN SEARCH NAV -->
-            <div class="col-sm-4 col-md-3 col-lg-2">
-
-            </div><!--end .col -->
-            <!-- END SEARCH NAV -->
-        </div><!--end .row -->
-    </div><!--end .card-body -->
-    <!-- END SEARCH RESULTS -->
-
-</div>
-
+</div><!--end .card-body -->
+<!-- END SEARCH RESULTS -->

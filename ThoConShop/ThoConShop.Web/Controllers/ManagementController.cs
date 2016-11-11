@@ -22,13 +22,16 @@ namespace ThoConShop.Web.Controllers
 
         private readonly IRankService _rankService;
 
+        private readonly IUserService _userService;
 
         public ManagementController(IAccountService accountService, IRankService rankService,
-            IAccountRelationDataService accountRelationDataService)
+            IAccountRelationDataService accountRelationDataService,
+            IUserService userService)
         {
             _accountService = accountService;
             _rankService = rankService;
             _accountRelationDataService = accountRelationDataService;
+            _userService = userService;
         }
 
 
@@ -167,9 +170,28 @@ namespace ThoConShop.Web.Controllers
 
 
 
-        public ActionResult UserManagement()
+        public ActionResult UserManagement(int? page)
         {
-            return View();
+            var result = _userService.Read(page ?? 1, _pageSize);
+            return View(result);
+        }
+
+        public ActionResult DeactiveOrActiveUser(int userId = 0)
+        {
+            if (_userService.DeactiveOrActive(userId) > 0)
+            {
+                return RedirectToAction("UserManagement");
+            }
+            return null;
+        }
+
+        public ActionResult DeleteUser(int userId = 0)
+        {
+            if (_userService.Delete(userId) > 0)
+            {
+                return RedirectToAction("UserManagement");
+            }
+            return null;
         }
 
         public ActionResult RankManagement()

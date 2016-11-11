@@ -4,6 +4,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Microsoft.AspNet.Identity;
+using ThoConShop.Business.Contracts;
+using ThoConShop.Business.Services;
+using ThoConShop.DataSeedWork.UserExternalService;
 
 namespace ThoConShop.Web.AuthAttribute
 {
@@ -15,9 +19,9 @@ namespace ThoConShop.Web.AuthAttribute
         public string ResourceKey { get; set; }
         public string OperationKey { get; set; }
 
-
         public override void OnAuthorization(AuthorizationContext filterContext)
         {
+           
             if (this.AuthorizeCore(filterContext.HttpContext))
             {
                 base.OnAuthorization(filterContext);
@@ -35,6 +39,7 @@ namespace ThoConShop.Web.AuthAttribute
             if (!filterContext.HttpContext.User.Identity.IsAuthenticated)
             {
                 string controller = filterContext.Controller.ToString();
+
                 if (controller.Contains("User"))
                 {
                     filterContext.Result = new RedirectToRouteResult(
@@ -61,7 +66,7 @@ namespace ThoConShop.Web.AuthAttribute
             else
             {
                 filterContext.Result = new RedirectToRouteResult(
-                        new RouteValueDictionary(new { controller = "Account", action = "NotAuthorized" })
+                        new RouteValueDictionary(new { controller = "Home", action = "LockNoticeView" })
                 );
             }
         }

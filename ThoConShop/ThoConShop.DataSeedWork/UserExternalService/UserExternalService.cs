@@ -31,5 +31,14 @@ namespace ThoConShop.DataSeedWork.UserExternalService
 
             return result;
         }
+
+        public static bool GetUserStatus(string generalUserId)
+        {
+            string query = string.Format("Select TOP 1 IsActive From [dbo].[User] WHERE GeneralUserId = {0}", generalUserId);
+
+            var result = db.QueryFirst<bool>(query);
+
+            return result;
+        }
     }
 }

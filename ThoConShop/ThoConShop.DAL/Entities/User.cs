@@ -25,8 +25,6 @@ namespace ThoConShop.DAL.Entities
 
         public bool IsActive { get; set; } = true;
 
-        public bool IsDeleted { get; set; } = false;
-
         public string GeneralUserId { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

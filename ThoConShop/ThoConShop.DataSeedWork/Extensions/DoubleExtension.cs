@@ -11,6 +11,10 @@ namespace ThoConShop.DataSeedWork.Extensions
     {
         public static string VietNameseMoneyFormat(this decimal value)
         {
+            if (value == 0)
+            {
+                return "0";
+            }
             CultureInfo cul = CultureInfo.GetCultureInfo("vi-VN");   // try with "en-US"
 
             return value.ToString("#,###",cul.NumberFormat);
