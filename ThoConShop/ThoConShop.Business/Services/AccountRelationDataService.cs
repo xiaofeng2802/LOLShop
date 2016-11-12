@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using AutoMapper.Configuration;
 using PagedList;
 using ThoConShop.Business.Contracts;
 using ThoConShop.Business.Dtos;
@@ -30,13 +31,19 @@ namespace ThoConShop.Business.Services
 
         private readonly IRepositories<int, PageGem> _pageGemRepositories;
 
+        private readonly IRepositories<int, Champion> _champRepositories;
+
+        private readonly IRepositories<int, Skin> _skinRepositories;
+
         public AccountRelationDataService(IRepositories<int, Rank> repoGank,
             IRepositories<int, Skin> repoSkin,
             IRepositories<int, Account> repoAccount,
             IRepositories<int, UserRechargeHistory> rechargeRepositories,
             IRepositories<int, UserTradingHistory> tradingRepositories,
             IRepositories<int, User> repoUser,
-            IRepositories<int, PageGem> pageGemRepositories)
+            IRepositories<int, PageGem> pageGemRepositories,
+            IRepositories<int, Champion> champRepositories,
+            IRepositories<int, Skin> skinRepositories)
         {
             _repoGank = repoGank;
             _repoSkin = repoSkin;
@@ -45,6 +52,117 @@ namespace ThoConShop.Business.Services
             _tradingRepositories = tradingRepositories;
             _repoUser = repoUser;
             _pageGemRepositories = pageGemRepositories;
+            _champRepositories = champRepositories;
+            _skinRepositories = skinRepositories;
+        }
+
+        public ChampionDto CreateChampion(ChampionDto champ)
+        {
+
+            var champTemp = Mapper.Map<Champion>(champ);
+            var result = _champRepositories.Create(champTemp);
+            if (_champRepositories.SaveChanges() > 0)
+            {
+                return Mapper.Map<ChampionDto>(result);
+            }
+
+            return null;
+        }
+
+        public SkinDto CreateSkin(SkinDto skin)
+        {
+            var skinTemp = Mapper.Map<Skin>(skin);
+            var result = _skinRepositories.Create(skinTemp);
+            if (_skinRepositories.SaveChanges() > 0)
+            {
+                return Mapper.Map<SkinDto>(result);
+            }
+
+            return null;
+        }
+
+        public IPagedList<ChampionDto> ReadChamp(int currentIndex, int pageSize, string searchString = "")
+        {
+            var query = _champRepositories.Read(a => !a.IsDeleted);
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                query = query.Where(a => a.ChampionName.Contains(searchString));
+            }
+            var result = query
+                .OrderBy(a => a.ChampionName)
+                .Select(a => new ChampionDto()
+                {
+                    CreatedDate = a.CreatedDate,
+                    Id = a.Id,
+                    IsDeleted = a.IsDeleted,
+                    ChampionName = a.ChampionName,
+                    Avatar = a.Avatar,
+                    UpdatedDate = a.UpdatedDate
+                }).ToPagedList(currentIndex, pageSize);
+
+            return result;
+        }
+
+        public IList<ChampionDto> ReadChamp(string searchString = "")
+        {
+            var result = _champRepositories.Read(a => !a.IsDeleted);
+            return Mapper.Map<IList<ChampionDto>>(result);
+        }
+
+        public int DeleteChamp(int champId)
+        {
+            var champ = _champRepositories.ReadOne(a => a.Id == champId);
+
+            champ.IsDeleted = true;
+
+            return _champRepositories.SaveChanges();
+        }
+
+        public IPagedList<SkinDto> ReadSkin(int currentIndex, int pageSize, string searchString = "")
+        {
+            var query = _skinRepositories.Read(a => !a.IsDeleted);
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                query = query.Where(a => a.SkinName.Contains(searchString));
+            }
+            var result = query
+                .OrderByDescending(a => a.IsOnFilter)
+                .ThenBy(a => a.SkinName)
+                .Select(a => new SkinDto()
+                {
+                    CreatedDate = a.CreatedDate,
+                    Id = a.Id,
+                    IsOnFilter = a.IsOnFilter,
+                    IsDeleted = a.IsDeleted,
+                    SkinName = a.SkinName,
+                    Avatar = a.Avatar,
+                    UpdatedDate = a.UpdatedDate
+                }).ToPagedList(currentIndex, pageSize);
+
+            return result;
+        }
+
+        public IList<SkinDto> ReadSkin(string searchString = "", bool isParentOnly = false)
+        {
+            IQueryable<Skin> result;
+            if (isParentOnly)
+            {
+                result = _skinRepositories.Read(a => !a.IsDeleted && a.GroupId == null && a.IsOnFilter);
+
+                return Mapper.Map<IList<SkinDto>>(result);
+            }
+            result = _skinRepositories.Read(a => !a.IsDeleted && !a.IsOnFilter);
+
+            return Mapper.Map<IList<SkinDto>>(result);
+        }
+
+        public int DeleteSkin(int skinId)
+        {
+            var skin = _skinRepositories.ReadOne(a => a.Id == skinId);
+
+            skin.IsDeleted = true;
+
+            return _skinRepositories.SaveChanges();
         }
 
         public PageGemDto CreatePageGem(PageGemDto data)
@@ -100,12 +218,12 @@ namespace ThoConShop.Business.Services
 
         public IList<RankDto> ReadRankForFilter()
         {
-            return Mapper.Map<IList<RankDto>>(_repoGank.Read(a => a.GroupId == null));
+            return Mapper.Map<IList<RankDto>>(_repoGank.Read(a => a.GroupId == null && !a.IsDeleted));
         }
 
         public IList<SkinDto> ReadSkinForFilter()
         {
-            return Mapper.Map<IList<SkinDto>>(_repoSkin.Read(a => a.GroupId == null));
+            return Mapper.Map<IList<SkinDto>>(_repoSkin.Read(a => a.IsOnFilter && !a.IsDeleted));
         }
 
         public IList<string> ReadPriceRangeForFilter()
@@ -181,11 +299,93 @@ namespace ThoConShop.Business.Services
                                                 PriceOfAccount = a.Account.Price,
                                                 CreatedDate = a.CreatedDate,
                                                 AccountId = a.AccountId,
+                                                AccountName = a.Account.UserName,
                                                 Password = a.Account.Password,
                                                 RankName = a.Account.Rank.RankName,
                                                 UserId = a.UserId
                                             }).ToPagedList(currentIndex, pageSize);
             return result;
+        }
+
+        public IPagedList<UserRechargeHistoryDto> ReadRechargeHistories(int currentIndex, int pageSize, int month)
+        {
+            var result =
+               _rechargeRepositories.Read(a => a.CreatedDate.Month == month)
+               .Include(a => a.User)
+               .OrderByDescending(a => a.CreatedDate)
+               .Select(a => new UserRechargeHistoryDto()
+               {
+                   Id = a.Id,
+                   UserId = a.UserId,
+                   CreatedDate = a.CreatedDate,
+                   SerialNumber = a.SerialNumber,
+                   Message = a.Message,
+                   ParValue = a.ParValue,
+                   PinNumber = a.PinNumber,
+                   UpdatedDate = a.UpdatedDate
+               })
+               .ToPagedList(currentIndex, pageSize);
+
+            return result;
+        }
+
+        public IPagedList<UserTradingHistoryDto> ReadTradingHistories(int currentIndex, int pageSize)
+        {
+            var result = _tradingRepositories.Read(a => true)
+                                .Include(a => a.User)
+                                .Include(a => a.Account)
+                                .Include(a => a.Account.Rank)
+                                .OrderByDescending(a => a.CreatedDate)
+                                .Select(a => new UserTradingHistoryDto()
+                                {
+                                    UserName = a.User.GeneralUser.UserName,
+                                    PriceOfAccount = a.Account.Price,
+                                    CreatedDate = a.CreatedDate,
+                                    AccountId = a.AccountId,
+                                    AccountName = a.Account.UserName,
+                                    Password = a.Account.Password,
+                                    RankName = a.Account.Rank.RankName,
+                                    UserId = a.UserId
+                                }).ToPagedList(currentIndex, pageSize);
+            return result;
+        }
+
+        public IList<SkinDto> ReadSkinByAccount(int accountId)
+        {
+            var result = _repoSkin.Read(a => !a.IsDeleted && a.Accounts.Any(b => b.Id == accountId));
+            return Mapper.Map<IList<SkinDto>>(result);
+        }
+
+        public IList<ChampionDto> ReadChampByAccount(int accountId)
+        {
+            var result = _champRepositories.Read(a => !a.IsDeleted && a.Accounts.Any(b => b.Id == accountId));
+            return Mapper.Map<IList<ChampionDto>>(result);
+        }
+
+        public int AssignOrUnassignChamp(int accountId, string champs)
+        {
+            var chmps = champs.Split(',').Distinct();
+
+            var account = _repoAccount.ReadOne(a => a.Id == accountId);
+            var champ = _champRepositories.Read(a => !a.IsDeleted && chmps.Contains(a.ChampionName), true).ToList();
+
+            account.Champions.Clear();
+            account.Champions = champ;
+           
+            return _repoAccount.SaveChanges();
+        }
+
+        public int AssignOrUnassignSkin(int accountId, string skins)
+        {
+            var skns = skins.Split(',').Distinct();
+
+            var account = _repoAccount.ReadOne(a => a.Id == accountId);
+            var sks = _skinRepositories.Read(a => !a.IsDeleted && skns.Contains(a.SkinName), true).ToList();
+
+            account.Skins.Clear();
+            account.Skins = sks;
+
+            return _repoAccount.SaveChanges();
         }
     }
 }

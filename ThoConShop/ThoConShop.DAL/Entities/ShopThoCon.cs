@@ -63,7 +63,7 @@ namespace ThoConShop.DAL.Entities
             modelBuilder.Entity<Account>()
                 .HasMany(e => e.UserTradingHistories)
                 .WithRequired(e => e.Account)
-                .WillCascadeOnDelete(false);
+                .WillCascadeOnDelete(true);
 
             modelBuilder.Entity<Account>()
                 .HasMany(e => e.NumberOfPageGems)
@@ -118,11 +118,6 @@ namespace ThoConShop.DAL.Entities
               .WithOptional(a => a.Parent)
               .HasForeignKey(a => a.GroupId);
 
-            modelBuilder.Entity<Champion>()
-                        .HasMany(a => a.Skins)
-                        .WithOptional(a => a.Champion)
-                        .HasForeignKey(a => a.BelongToChampion);
-
             modelBuilder.Entity<User>()
                 .HasRequired(a => a.GeneralUser);
 
@@ -131,7 +126,10 @@ namespace ThoConShop.DAL.Entities
             modelBuilder.Entity<ApplicationUserRole>().HasKey(r => new { r.RoleId, r.UserId });
             modelBuilder.Entity<ApplicationUser>().HasKey(a => a.Id);
 
-
+            modelBuilder.Entity<Champion>()
+                .HasMany(a => a.Skins)
+                .WithOptional(a => a.Champion)
+                .HasForeignKey(a => a.ChampionId);
 
 
         }

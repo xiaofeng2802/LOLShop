@@ -11,5 +11,9 @@ namespace ThoConShop.Business.Dtos
         public string RankName { get; set; }
 
         public string RankImage { get; set; }
+
+        public int? GroupId { get; set; }
+
+        public bool IsDeleted { get; set; }
     }
 }

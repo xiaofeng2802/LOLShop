@@ -1,4 +1,5 @@
-﻿
+﻿@using PagedList.Mvc
+@model ThoConShop.Web.Models.UserRechargeViewModel
 @{
     ViewBag.Title = "ChargingHistories";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -8,31 +9,65 @@
 
     <!-- BEGIN SEARCH HEADER -->
     <div class="card-head style-primary">
-        <div class="tools pull-left">
-            <form class="navbar-search" role="search">
-                <div class="form-group">
-                    <input type="text" class="form-control" name="contactSearch" placeholder="Enter your keyword">
+        <div class="tools pull-left" style="width: 100%;">
+            @using (Html.BeginForm("ChargingHistories", "Management", FormMethod.Post, new { @class = "", role = "search" }))
+            {
+                <div class="col-lg-3 no-padding">
+                    <div class="form-group">
+                        @Html.DropDownListFor(a => a.ReportMonth, Model.FilterList, new
+                        {
+                            @id = "select2", name = "select2", @class="form-control", style="background-color: white;"
+                        })
+                    </div>
                 </div>
-                <button type="submit" class="btn btn-icon-toggle ink-reaction"><i class="fa fa-search"></i></button>
-            </form>
-        </div>
-        <div class="tools">
-            <a class="btn btn-floating-action btn-default-light" href="../../../html/pages/contacts/add.html"><i class="fa fa-plus"></i></a>
+                <div class="col-lg-1 no-padding">
+                    <button type="submit" class="btn ink-reaction btn-primary"><i class="fa fa-line-chart"></i></button>
+                </div>
+                
+                
+            }
         </div>
     </div><!--end .card-head -->
     <!-- END SEARCH HEADER -->
     <!-- BEGIN SEARCH RESULTS -->
     <div class="card-body">
+        <!-- BEGIN SEARCH NAV -->
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Thời Gian</th>
+                            <th>Serial Thẻ</th>
+                            <th>Pin Thẻ</th>
+                            <th>Mệnh Giá</th>
+                            <th>Loại Thẻ</th>
+                            <th>Thành Viên</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.DataSource)
+                        {
+                            <tr>
+                                <td>@item.CreatedDate</td>
+                                <td>@item.SerialNumber</td>
+                                <td>@item.PinNumber</td>
+                                <td>@item.ParValue</td>
+                                <td>@item.CardType</td>
+                                <td>@item.Email</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div><!--end .col -->
+        <!-- END SEARCH NAV -->
         <div class="row">
+            <div class="col-md-12 body-pagging">
+                @Html.PagedListPager(Model.DataSource, page => Url.Action("ChargingHistories", "Management", new { page, ReportMonth = Model.ReportMonth }))
+            </div>
+        </div>
+    </div><!--end .row -->
 
-            <!-- BEGIN SEARCH NAV -->
-            <div class="col-sm-4 col-md-3 col-lg-2">
-
-            </div><!--end .col -->
-            <!-- END SEARCH NAV -->
-        </div><!--end .row -->
-    </div><!--end .card-body -->
-    <!-- END SEARCH RESULTS -->
-
-</div>
-
+</div><!--end .card-body -->
+<!-- END SEARCH RESULTS -->

@@ -12,9 +12,9 @@ namespace ThoConShop.Business.Contracts
     {
         RankDto Create(RankDto data);
 
-        IPagedList<RankDto> Read(int currentPage, int pageSize, bool isParentOnly = false);
+        IPagedList<RankDto> Read(int currentPage, int pageSize, bool isParentOnly = false, string searchString = "");
 
-        IList<RankDto> Read( bool isParentOnly = false);
+        IList<RankDto> Read(bool? isParentOnly = false);
 
         int Updated(RankDto data);
 

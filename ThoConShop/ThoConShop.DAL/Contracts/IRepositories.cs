@@ -13,7 +13,7 @@ namespace ThoConShop.DAL.Contracts
     {
         TEntity Create(TEntity entity);
 
-        IQueryable<TEntity> Read(Expression<Func<TEntity, bool>> expression);
+        IQueryable<TEntity> Read(Expression<Func<TEntity, bool>> expression, bool tracking = false);
 
         TEntity ReadOne(Expression<Func<TEntity, bool>> expression);
 

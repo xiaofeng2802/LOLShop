@@ -1,87 +1,40 @@
-﻿@{
-    ViewBag.Title = "Index";
+﻿@using PagedList.Mvc
+@model IList<string>
+@{
+    ViewBag.Title = "UpdateChampAccount";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-<div class="row">
-    <div class="col-lg-12">
-        <h4>Multi-select</h4>
-    </div><!--end .col -->
-    <div class="col-lg-3 col-md-4">
-        <article class="margin-bottom-xxl">
-            <p>
-                Use this multi-select to display the user multiple options.
-            </p>
-        </article>
-    </div><!--end .col -->
-    <div class="col-lg-offset-1 col-md-8">
-        <div class="card">
-            <div class="card-body">
-                <form class="form">
-                    <select id="optgroup" multiple="multiple" style="position: absolute; left: -9999px;">
-                        <optgroup label="Alaskan/Hawaiian Time Zone">
-                            <option value="AK">Alaska</option>
-                            <option value="HI">Hawaii</option>
-                        </optgroup>
-                        <optgroup label="Pacific Time Zone">
-                            <option value="CA">California</option>
-                            <option value="NV">Nevada</option>
-                            <option value="OR">Oregon</option>
-                            <option value="WA">Washington</option>
-                        </optgroup>
-                        <optgroup label="Mountain Time Zone">
-                            <option value="AZ">Arizona</option>
-                            <option value="CO">Colorado</option>
-                            <option value="ID">Idaho</option>
-                            <option value="MT">Montana</option>
-                            <option value="NE">Nebraska</option>
-                            <option value="NM">New Mexico</option>
-                            <option value="ND">North Dakota</option>
-                            <option value="UT">Utah</option>
-                            <option value="WY">Wyoming</option>
-                        </optgroup>
-                        <optgroup label="Central Time Zone">
-                            <option value="AL">Alabama</option>
-                            <option value="AR">Arkansas</option>
-                            <option value="IL">Illinois</option>
-                            <option value="IA">Iowa</option>
-                            <option value="KS">Kansas</option>
-                            <option value="KY">Kentucky</option>
-                            <option value="LA">Louisiana</option>
-                            <option value="MN">Minnesota</option>
-                            <option value="MS">Mississippi</option>
-                            <option value="MO">Missouri</option>
-                            <option value="OK">Oklahoma</option>
-                            <option value="SD">South Dakota</option>
-                            <option value="TX">Texas</option>
-                            <option value="TN">Tennessee</option>
-                            <option value="WI">Wisconsin</option>
-                        </optgroup>
-                        <optgroup label="Eastern Time Zone">
-                            <option value="CT">Connecticut</option>
-                            <option value="DE">Delaware</option>
-                            <option value="FL">Florida</option>
-                            <option value="GA">Georgia</option>
-                            <option value="IN">Indiana</option>
-                            <option value="ME">Maine</option>
-                            <option value="MD">Maryland</option>
-                            <option value="MA">Massachusetts</option>
-                            <option value="MI">Michigan</option>
-                            <option value="NH">New Hampshire</option>
-                            <option value="NJ">New Jersey</option>
-                            <option value="NY">New York</option>
-                            <option value="NC">North Carolina</option>
-                            <option value="OH">Ohio</option>
-                            <option value="PA">Pennsylvania</option>
-                            <option value="RI">Rhode Island</option>
-                            <option value="SC">South Carolina</option>
-                            <option value="VT">Vermont</option>
-                            <option value="VA">Virginia</option>
-                            <option value="WV">West Virginia</option>
-                        </optgroup>
-                    </select><div class="ms-container" id="ms-optgroup"><div class="ms-selectable"><ul class="ms-list" tabindex="-1"><li class="ms-optgroup-container" id="optgroup-selectable-1929759235"><ul class="ms-optgroup"><li class="ms-optgroup-label" style="display: list-item;"><span>Alaskan/Hawaiian Time Zone</span></li><li class="ms-elem-selectable" id="2090-selectable" style="display: list-item;"><span>Alaska</span></li><li class="ms-elem-selectable" id="2305-selectable" style="display: list-item;"><span>Hawaii</span></li></ul></li><li class="ms-optgroup-container" id="optgroup-selectable--721749976"><ul class="ms-optgroup"><li class="ms-optgroup-label"><span>Pacific Time Zone</span></li><li class="ms-elem-selectable" id="2142-selectable"><span>California</span></li><li class="ms-elem-selectable" id="2504-selectable"><span>Nevada</span></li><li class="ms-elem-selectable" id="2531-selectable"><span>Oregon</span></li><li class="ms-elem-selectable" id="2762-selectable"><span>Washington</span></li></ul></li><li class="ms-optgroup-container" id="optgroup-selectable--1492321428"><ul class="ms-optgroup"><li class="ms-optgroup-label"><span>Mountain Time Zone</span></li><li class="ms-elem-selectable" id="2105-selectable"><span>Arizona</span></li><li class="ms-elem-selectable" id="2156-selectable"><span>Colorado</span></li><li class="ms-elem-selectable" id="2331-selectable"><span>Idaho</span></li><li class="ms-elem-selectable" id="2471-selectable"><span>Montana</span></li><li class="ms-elem-selectable" id="2487-selectable"><span>Nebraska</span></li><li class="ms-elem-selectable" id="2495-selectable"><span>New Mexico</span></li><li class="ms-elem-selectable" id="2486-selectable"><span>North Dakota</span></li><li class="ms-elem-selectable" id="2719-selectable"><span>Utah</span></li><li class="ms-elem-selectable" id="2786-selectable"><span>Wyoming</span></li></ul></li><li class="ms-optgroup-container" id="optgroup-selectable-3723284"><ul class="ms-optgroup"><li class="ms-optgroup-label"><span>Central Time Zone</span></li><li class="ms-elem-selectable" id="2091-selectable"><span>Alabama</span></li><li class="ms-elem-selectable" id="2097-selectable"><span>Arkansas</span></li><li class="ms-elem-selectable" id="2339-selectable"><span>Illinois</span></li><li class="ms-elem-selectable" id="2328-selectable"><span>Iowa</span></li><li class="ms-elem-selectable" id="2408-selectable"><span>Kansas</span></li><li class="ms-elem-selectable" id="2414-selectable"><span>Kentucky</span></li><li class="ms-elem-selectable" id="2421-selectable"><span>Louisiana</span></li><li class="ms-elem-selectable" id="2465-selectable"><span>Minnesota</span></li><li class="ms-elem-selectable" id="2470-selectable"><span>Mississippi</span></li><li class="ms-elem-selectable" id="2466-selectable"><span>Missouri</span></li><li class="ms-elem-selectable" id="2524-selectable"><span>Oklahoma</span></li><li class="ms-elem-selectable" id="2641-selectable"><span>South Dakota</span></li><li class="ms-elem-selectable" id="2692-selectable"><span>Texas</span></li><li class="ms-elem-selectable" id="2682-selectable"><span>Tennessee</span></li><li class="ms-elem-selectable" id="2770-selectable"><span>Wisconsin</span></li></ul></li><li class="ms-optgroup-container" id="optgroup-selectable-1820079139"><ul class="ms-optgroup"><li class="ms-optgroup-label"><span>Eastern Time Zone</span></li><li class="ms-elem-selectable" id="2161-selectable"><span>Connecticut</span></li><li class="ms-elem-selectable" id="2177-selectable"><span>Delaware</span></li><li class="ms-elem-selectable" id="2246-selectable"><span>Florida</span></li><li class="ms-elem-selectable" id="2266-selectable"><span>Georgia</span></li><li class="ms-elem-selectable" id="2341-selectable"><span>Indiana</span></li><li class="ms-elem-selectable" id="2456-selectable"><span>Maine</span></li><li class="ms-elem-selectable" id="2455-selectable"><span>Maryland</span></li><li class="ms-elem-selectable" id="2452-selectable"><span>Massachusetts</span></li><li class="ms-elem-selectable" id="2460-selectable"><span>Michigan</span></li><li class="ms-elem-selectable" id="2490-selectable"><span>New Hampshire</span></li><li class="ms-elem-selectable" id="2492-selectable"><span>New Jersey</span></li><li class="ms-elem-selectable" id="2507-selectable"><span>New York</span></li><li class="ms-elem-selectable" id="2485-selectable"><span>North Carolina</span></li><li class="ms-elem-selectable" id="2521-selectable"><span>Ohio</span></li><li class="ms-elem-selectable" id="2545-selectable"><span>Pennsylvania</span></li><li class="ms-elem-selectable" id="2615-selectable"><span>Rhode Island</span></li><li class="ms-elem-selectable" id="2640-selectable"><span>South Carolina</span></li><li class="ms-elem-selectable" id="2750-selectable"><span>Vermont</span></li><li class="ms-elem-selectable" id="2731-selectable"><span>Virginia</span></li><li class="ms-elem-selectable" id="2783-selectable"><span>West Virginia</span></li></ul></li></ul></div><div class="ms-selection"><ul class="ms-list" tabindex="-1"><li class="ms-optgroup-container" id="optgroup-selection-1929759235"><ul class="ms-optgroup"><li class="ms-optgroup-label" style="display: none;"><span>Alaskan/Hawaiian Time Zone</span></li><li class="ms-elem-selection" id="2090-selection" style="display: none;"><span>Alaska</span></li><li class="ms-elem-selection" id="2305-selection" style="display: none;"><span>Hawaii</span></li></ul></li><li class="ms-optgroup-container" id="optgroup-selection--721749976"><ul class="ms-optgroup"><li class="ms-optgroup-label" style="display: none;"><span>Pacific Time Zone</span></li><li class="ms-elem-selection" id="2142-selection" style="display: none;"><span>California</span></li><li class="ms-elem-selection" id="2504-selection" style="display: none;"><span>Nevada</span></li><li class="ms-elem-selection" id="2531-selection" style="display: none;"><span>Oregon</span></li><li class="ms-elem-selection" id="2762-selection" style="display: none;"><span>Washington</span></li></ul></li><li class="ms-optgroup-container" id="optgroup-selection--1492321428"><ul class="ms-optgroup"><li class="ms-optgroup-label" style="display: none;"><span>Mountain Time Zone</span></li><li class="ms-elem-selection" id="2105-selection" style="display: none;"><span>Arizona</span></li><li class="ms-elem-selection" id="2156-selection" style="display: none;"><span>Colorado</span></li><li class="ms-elem-selection" id="2331-selection" style="display: none;"><span>Idaho</span></li><li class="ms-elem-selection" id="2471-selection" style="display: none;"><span>Montana</span></li><li class="ms-elem-selection" id="2487-selection" style="display: none;"><span>Nebraska</span></li><li class="ms-elem-selection" id="2495-selection" style="display: none;"><span>New Mexico</span></li><li class="ms-elem-selection" id="2486-selection" style="display: none;"><span>North Dakota</span></li><li class="ms-elem-selection" id="2719-selection" style="display: none;"><span>Utah</span></li><li class="ms-elem-selection" id="2786-selection" style="display: none;"><span>Wyoming</span></li></ul></li><li class="ms-optgroup-container" id="optgroup-selection-3723284"><ul class="ms-optgroup"><li class="ms-optgroup-label" style="display: none;"><span>Central Time Zone</span></li><li class="ms-elem-selection" id="2091-selection" style="display: none;"><span>Alabama</span></li><li class="ms-elem-selection" id="2097-selection" style="display: none;"><span>Arkansas</span></li><li class="ms-elem-selection" id="2339-selection" style="display: none;"><span>Illinois</span></li><li class="ms-elem-selection" id="2328-selection" style="display: none;"><span>Iowa</span></li><li class="ms-elem-selection" id="2408-selection" style="display: none;"><span>Kansas</span></li><li class="ms-elem-selection" id="2414-selection" style="display: none;"><span>Kentucky</span></li><li class="ms-elem-selection" id="2421-selection" style="display: none;"><span>Louisiana</span></li><li class="ms-elem-selection" id="2465-selection" style="display: none;"><span>Minnesota</span></li><li class="ms-elem-selection" id="2470-selection" style="display: none;"><span>Mississippi</span></li><li class="ms-elem-selection" id="2466-selection" style="display: none;"><span>Missouri</span></li><li class="ms-elem-selection" id="2524-selection" style="display: none;"><span>Oklahoma</span></li><li class="ms-elem-selection" id="2641-selection" style="display: none;"><span>South Dakota</span></li><li class="ms-elem-selection" id="2692-selection" style="display: none;"><span>Texas</span></li><li class="ms-elem-selection" id="2682-selection" style="display: none;"><span>Tennessee</span></li><li class="ms-elem-selection" id="2770-selection" style="display: none;"><span>Wisconsin</span></li></ul></li><li class="ms-optgroup-container" id="optgroup-selection-1820079139"><ul class="ms-optgroup"><li class="ms-optgroup-label" style="display: none;"><span>Eastern Time Zone</span></li><li class="ms-elem-selection" id="2161-selection" style="display: none;"><span>Connecticut</span></li><li class="ms-elem-selection" id="2177-selection" style="display: none;"><span>Delaware</span></li><li class="ms-elem-selection" id="2246-selection" style="display: none;"><span>Florida</span></li><li class="ms-elem-selection" id="2266-selection" style="display: none;"><span>Georgia</span></li><li class="ms-elem-selection" id="2341-selection" style="display: none;"><span>Indiana</span></li><li class="ms-elem-selection" id="2456-selection" style="display: none;"><span>Maine</span></li><li class="ms-elem-selection" id="2455-selection" style="display: none;"><span>Maryland</span></li><li class="ms-elem-selection" id="2452-selection" style="display: none;"><span>Massachusetts</span></li><li class="ms-elem-selection" id="2460-selection" style="display: none;"><span>Michigan</span></li><li class="ms-elem-selection" id="2490-selection" style="display: none;"><span>New Hampshire</span></li><li class="ms-elem-selection" id="2492-selection" style="display: none;"><span>New Jersey</span></li><li class="ms-elem-selection" id="2507-selection" style="display: none;"><span>New York</span></li><li class="ms-elem-selection" id="2485-selection" style="display: none;"><span>North Carolina</span></li><li class="ms-elem-selection" id="2521-selection" style="display: none;"><span>Ohio</span></li><li class="ms-elem-selection" id="2545-selection" style="display: none;"><span>Pennsylvania</span></li><li class="ms-elem-selection" id="2615-selection" style="display: none;"><span>Rhode Island</span></li><li class="ms-elem-selection" id="2640-selection" style="display: none;"><span>South Carolina</span></li><li class="ms-elem-selection" id="2750-selection" style="display: none;"><span>Vermont</span></li><li class="ms-elem-selection" id="2731-selection" style="display: none;"><span>Virginia</span></li><li class="ms-elem-selection" id="2783-selection" style="display: none;"><span>West Virginia</span></li></ul></li></ul></div></div>
-                </form>
-            </div><!--end .card-body -->
-        </div><!--end .card -->
-        <em class="text-caption">Multi-select</em>
-    </div><!--end .col -->
-</div>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.4/typeahead.bundle.min.js"></script>
+<link href="~/Content/typeahead.tagging.css" rel="stylesheet" />
+<script src="~/Scripts/typeahead.bundle.min.js"></script>
+<script src="~/Scripts/typeahead.tagging.js"></script>
+
+<div class="card">
+    <!-- BEGIN SEARCH HEADER -->
+    <div class="card-head style-primary">
+        <div class="tools pull-left" style="width: 85%;">
+            <header>Quản Lý Trang Phục Cho Tài Khoản (#@ViewBag.AccountId)</header>
+        </div>
+    </div><!--end .card-head -->
+    <!-- END SEARCH HEADER -->
+    <!-- BEGIN SEARCH RESULTS -->
+    @using (Html.BeginForm("AssignOrUnassignSkin", "Management", FormMethod.Post))
+    {
+        <input type="hidden" value="@ViewBag.AccountId" name="accountId" id="accountId" />
+        <div class="card-body">
+            <!-- BEGIN SEARCH NAV -->
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <input id="skin" class="tags-input" name="skins" value="@string.Join(",", @Model)">
+            </div><!--end .col -->
+            <!-- END SEARCH NAV -->
+        </div><!--end .row -->
+        <div class="card-actionbar">
+            <div class="card-actionbar-row">
+                <button type="submit" class="btn btn-flat btn-primary ink-reaction">Cập Nhật</button>
+            </div>
+        </div>
+    }
+
+</div><!--end .card-body -->
+<!-- END SEARCH RESULTS -->
+<script src="~/Scripts/Custom/_updateAccountSkin.js"></script>

@@ -30,8 +30,12 @@ namespace ThoConShop.DAL.Repositories
             return result;
         }
 
-        public IQueryable<TEntity> Read(Expression<Func<TEntity, bool>> expression)
+        public IQueryable<TEntity> Read(Expression<Func<TEntity, bool>> expression, bool tracking = false)
         {
+            if (tracking)
+            {
+                return _dbContext.Set<TKey, TEntity>().Where(expression);
+            }
             return _dbContext.Set<TKey, TEntity>().Where(expression).AsNoTracking();
         }
 

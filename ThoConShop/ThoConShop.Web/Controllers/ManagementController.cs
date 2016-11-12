@@ -156,23 +156,63 @@ namespace ThoConShop.Web.Controllers
 
         public ActionResult UpdateSkinAccount(int accountId = 0)
         {
-            return View();
+            if (accountId <= 0)
+            {
+                return RedirectToAction("AccountManagement");
+            }
+
+            ViewBag.AccountId = accountId;
+
+            var result = _accountRelationDataService.ReadSkinByAccount(accountId).Select(a => a.SkinName).ToList();
+
+            return View(result);
         }
 
 
         public ActionResult UpdateChampAccount(int accountId = 0)
         {
-            return View();
+            if (accountId <= 0)
+            {
+                return RedirectToAction("AccountManagement");
+            }
+            ViewBag.AccountId = accountId;
+
+            var result = _accountRelationDataService.ReadChampByAccount(accountId).Select(a => a.ChampionName).ToList();
+
+            return View(result);
+        }
+
+        public ActionResult AssignOrUnassignChamp(int accountId = 0, string champs = "")
+        {
+            if (accountId <= 0)
+            {
+                return RedirectToAction("AccountManagement");
+            }
+            ViewBag.AccountId = accountId;
+            _accountRelationDataService.AssignOrUnassignChamp(accountId, champs);
+
+            return RedirectToAction("UpdateChampAccount", new { accountId = accountId });
+        }
+
+        public ActionResult AssignOrUnassignSkin(int accountId = 0, string skins = "")
+        {
+            if (accountId <= 0)
+            {
+                return RedirectToAction("AccountManagement");
+            }
+            ViewBag.AccountId = accountId;
+            _accountRelationDataService.AssignOrUnassignSkin(accountId, skins);
+
+            return RedirectToAction("UpdateSkinAccount", new { accountId = accountId });
         }
 
 
 
 
-
-
-        public ActionResult UserManagement(int? page)
+        public ActionResult UserManagement(int? page, string searchString = "")
         {
-            var result = _userService.Read(page ?? 1, _pageSize);
+            var result = _userService.Read(page ?? 1, _pageSize, searchString);
+            ViewBag.SearchString = searchString;
             return View(result);
         }
 
@@ -194,25 +234,181 @@ namespace ThoConShop.Web.Controllers
             return null;
         }
 
-        public ActionResult RankManagement(int? page)
+        public ActionResult RankManagement(int? page, string searchString)
         {
-            var result = _rankService.Read(page ?? 1, _pageSize);
+            var result = _rankService.Read(page ?? 1, _pageSize, searchString: searchString);
             return View(result);
         }
 
-        public ActionResult ChargingHistories()
+        public ActionResult CreateRankView()
         {
-            return View();
+            CreateRankViewModel vm = new CreateRankViewModel()
+            {
+                DataSourceRank = _rankService.Read(null).Select(a => new SelectListItem()
+                {
+                    Text = a.RankName,
+                    Value = a.Id.ToString()
+                }).ToList()
+            };
+
+            vm.DataSourceRank.Add(new SelectListItem()
+            {
+                Text = "",
+                Value = "0",
+                Selected = true
+            });
+            return View(vm);
         }
 
-        public ActionResult TradingHistories()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateRank(CreateRankViewModel data)
         {
-            return View();
+            var path = Server.MapPath("~/Images");
+            var rankdto = new RankDto()
+            {
+                GroupId = data.GroupId == 0 ? null : data.GroupId,
+                CreatedDate = DateTime.Now,
+                RankName = data.RankName,
+                RankImage = FileUlti.SaveFile(data.RankImage, path)
+            };
+
+            _rankService.Create(rankdto);
+
+            return RedirectToAction("RankManagement");
+        }
+
+        public ActionResult DeleteRank(int rankId = 0)
+        {
+            _rankService.Delete(rankId);
+            return RedirectToAction("RankManagement");
+        }
+
+        public ActionResult ChargingHistories(UserRechargeViewModel data, int page = 1)
+        {
+            data.ReportMonth = data.ReportMonth == 0 ? DateTime.Now.Month : data.ReportMonth;
+            var result = _accountRelationDataService.ReadRechargeHistories(page, _pageSize, data.ReportMonth);
+
+            UserRechargeViewModel vm = new UserRechargeViewModel
+            {
+                DataSource = result,
+                ReportMonth = data.ReportMonth
+            };
+            return View(vm);
+        }
+
+        public ActionResult TradingHistories(int page = 1)
+        {
+            var data = _accountRelationDataService.ReadTradingHistories(page, _pageSize);
+            return View(data);
         }
 
         public ActionResult FeedManagement()
         {
             return View();
+        }
+
+        public ActionResult ChampManagement(int page = 1)
+        {
+            var result = _accountRelationDataService.ReadChamp(page, _pageSize);
+            return View(result);
+        }
+
+        public ActionResult CreateChamp()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateChamp(ChampCreationViewModel data)
+        {
+            var pathChamp = Server.MapPath(ConfigurationManager.AppSettings["ChampUrl"]);
+            var champ = new ChampionDto()
+            {
+                CreatedDate = DateTime.Now,
+                Avatar = FileUlti.SaveFile(data.Avatar, pathChamp),
+                ChampionName = data.ChampName
+            };
+            _accountRelationDataService.CreateChampion(champ);
+            return RedirectToAction("ChampManagement");
+        }
+
+        public ActionResult DeleteChamp(int champId = 0)
+        {
+            _accountRelationDataService.DeleteChamp(champId);
+            return RedirectToAction("ChampManagement");
+        }
+
+        public ActionResult SkinManagement(int page = 1)
+        {
+            var result = _accountRelationDataService.ReadSkin(page, _pageSize);
+            return View(result);
+        }
+
+        public ActionResult DeleteSkin(int skinId = 0)
+        {
+            _accountRelationDataService.DeleteSkin(skinId);
+            return RedirectToAction("SkinManagement");
+        }
+
+        public ActionResult CreateSkin()
+        {
+            SkinCreationViewModel vm = new SkinCreationViewModel()
+            {
+                ParentData = _accountRelationDataService.ReadSkin(isParentOnly: true).Select(a => new SelectListItem()
+                {
+                    Value = a.Id.ToString(),
+                    Text = a.SkinName
+                }).ToList()
+            };
+            vm.ParentData.Add(new SelectListItem()
+            {
+                Value = "",
+                Text = "",
+                Selected = true
+            });
+            return View(vm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateSkin(SkinCreationViewModel data)
+        {
+            var pathSkin = Server.MapPath(ConfigurationManager.AppSettings["SkinUrl"]);
+            var skin = new SkinDto()
+            {
+                CreatedDate = DateTime.Now,
+                Avatar = FileUlti.SaveFile(data.Avatar, pathSkin),
+                SkinName = data.SkinName,
+                GroupId = data.GroupId == null || data.GroupId == 0 ? null : data.GroupId,
+                IsSpecial = true,
+                IsOnFilter = data.IsOnFilter == "on"
+            };
+            _accountRelationDataService.CreateSkin(skin);
+            return RedirectToAction("SkinManagement");
+        }
+
+        public JsonResult ChampDataSource(int accountId = 0)
+        {
+            if (accountId > 0)
+            {
+                var result = _accountRelationDataService.ReadChamp().Select(a => a.ChampionName);
+
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            return Json(null, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult SkinDataSource(int accountId = 0)
+        {
+            if (accountId > 0)
+            {
+                var result = _accountRelationDataService.ReadSkin(isParentOnly: false).Select(a => a.SkinName);
+
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            return Json(null, JsonRequestBehavior.AllowGet);
         }
     }
 }

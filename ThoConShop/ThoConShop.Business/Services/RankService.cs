@@ -7,6 +7,7 @@ using AutoMapper;
 using PagedList;
 using ThoConShop.Business.Contracts;
 using ThoConShop.Business.Dtos;
+using ThoConShop.DataSeedWork.Extensions;
 using ThoConShop.DAL.Contracts;
 using ThoConShop.DAL.Entities;
 
@@ -23,12 +24,21 @@ namespace ThoConShop.Business.Services
 
         public RankDto Create(RankDto data)
         {
-            throw new NotImplementedException();
+            var rank = Mapper.Map<Rank>(data);
+
+            var result = _repoRank.Create(rank);
+
+            if (_repoRank.SaveChanges() > 0)
+            {
+                return Mapper.Map<RankDto>(result);
+            }
+            return null;
         }
 
-        public IPagedList<RankDto> Read(int currentPage, int pageSize, bool isParentOnly = false)
+        public IPagedList<RankDto> Read(int currentPage, int pageSize, bool isParentOnly = false, string searchString = "")
         {
-            var data = _repoRank.Read(a => true);
+            var data = _repoRank.Read(a => !a.IsDeleted);
+
             if (isParentOnly)
             {
                 data = data.Where(a => a.GroupId == null);
@@ -36,6 +46,11 @@ namespace ThoConShop.Business.Services
             else
             {
                 data = data.Where(a => a.GroupId != null);
+            }
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                data = data.Where(a => a.RankName.Contains(searchString));
             }
 
             IPagedList<RankDto> result = data.OrderBy(a => a.RankName).Select(a => new RankDto()
@@ -50,19 +65,22 @@ namespace ThoConShop.Business.Services
             return result;
         }
 
-        public IList<RankDto> Read(bool isParentOnly = false)
+        public IList<RankDto> Read(bool? isParentOnly = false)
         {
-            var result = _repoRank.Read(a => true);
-            if (isParentOnly)
+            var result = _repoRank.Read(a => !a.IsDeleted);
+            if (isParentOnly != null)
             {
-                result = result.Where(a => a.GroupId == null);
+                if ((bool)isParentOnly)
+                {
+                    result = result.Where(a => a.GroupId == null);
+                }
+                else
+                {
+                    result = result.Where(a => a.GroupId != null);
+                }
             }
-            else
-            {
-                result = result.Where(a => a.GroupId != null);
-            }
-
-            return Mapper.Map<IList<RankDto>>(result.OrderByDescending(a => a.CreatedDate));
+          
+            return Mapper.Map<IList<RankDto>>(result.OrderBy(a => a.RankName));
         }
 
         public int Updated(RankDto data)
@@ -72,7 +90,10 @@ namespace ThoConShop.Business.Services
 
         public int Delete(int rankId)
         {
-            throw new NotImplementedException();
+            var rank = _repoRank.ReadOne(a => a.Id == rankId);
+            rank.IsDeleted = true;
+
+            return _repoRank.SaveChanges();
         }
     }
 }

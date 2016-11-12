@@ -11,6 +11,27 @@ namespace ThoConShop.Business.Contracts
 {
     public interface IAccountRelationDataService
     {
+        IList<SkinDto> ReadSkinByAccount(int accountId);
+
+        IList<ChampionDto> ReadChampByAccount(int accountId);
+
+        int AssignOrUnassignChamp(int accountId, string champs);
+        int AssignOrUnassignSkin(int accountId, string skins);
+
+        Dtos.ChampionDto CreateChampion(ChampionDto champ);
+        Dtos.SkinDto CreateSkin(SkinDto skin);
+
+        IPagedList<ChampionDto> ReadChamp(int currentIndex, int pageSize, string searchString = "");
+
+        IList<ChampionDto> ReadChamp(string searchString = "");
+
+        int DeleteChamp(int champId);
+
+        IPagedList<SkinDto> ReadSkin(int currentIndex, int pageSize, string searchString = "");
+
+        IList<SkinDto> ReadSkin(string searchString = "", bool isParentOnly = false);
+
+        int DeleteSkin(int skinId);
 
         PageGemDto CreatePageGem(PageGemDto data);
 
@@ -30,5 +51,9 @@ namespace ThoConShop.Business.Contracts
         IPagedList<UserRechargeHistoryDto> ReadRechargeHistories(string generalUserId, int currentIndex, int pageSize);
 
         IPagedList<UserTradingHistoryDto> ReadTradingHistories(string generalUserId, int currentIndex, int pageSize);
+
+        IPagedList<UserRechargeHistoryDto> ReadRechargeHistories(int currentIndex, int pageSize, int month);
+
+        IPagedList<UserTradingHistoryDto> ReadTradingHistories(int currentIndex, int pageSize);
     }
 }

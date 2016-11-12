@@ -1,0 +1,86 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<ThoConShop.Business.Dtos.ChampionDto>
+@{
+    ViewBag.Title = "ChampManagement";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+<div class="card">
+
+    <!-- BEGIN SEARCH HEADER -->
+    <div class="card-head style-primary">
+        <div class="tools pull-left" style="width: 85%;">
+            <header>Quản Lý Tướng</header>
+            @* @using (Html.BeginForm("UserManagement", "Management", FormMethod.Get, new
+                {
+                    role = "search"
+                }))
+                {
+
+                    <div class="col-lg-3 no-padding">
+                        <div class="form-group">
+                            <input type="text" style="background-color: white;" class="form-control" name="searchString" value="@ViewBag.SearchString" placeholder="Nhập Email Cần Tìm">
+                        </div>
+                    </div>
+                    <div class="col-lg-3 no-padding">
+
+                    </div>
+                    <div class="col-lg-1 no-padding">
+                        <button type="submit" class="btn ink-reaction btn-primary"><i class="fa fa-search"></i></button>
+                    </div>
+                }*@
+        </div>
+
+        <div class="tools">
+            <a class="btn btn-floating-action btn-default-light" href="@Url.Action("CreateChamp", "Management")"><i class="fa fa-plus"></i></a>
+        </div>
+    </div><!--end .card-head -->
+    <!-- END SEARCH HEADER -->
+    <!-- BEGIN SEARCH RESULTS -->
+    <div class="card-body">
+        <!-- BEGIN SEARCH NAV -->
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="row">
+                
+            </div>
+            <div class="row">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Hình Ảnh</th>
+                                <th>Tên Tướng</th>
+                                <th class="text-right"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="text-center"><img src="@item.Avatar" /></td>
+                                    <td>@item.ChampionName</td>
+                                    <td class="text-right">
+                                        <a id="deleteButton" href="@Url.Action("DeleteChamp", "Management", new {champId = item.Id})" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Xóa"><i class="fa fa-trash-o"></i></a>
+                                        @*<a class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Thêm Tướng/Trang Phục"><i class="md md-visibility"></i></a>*@
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+          
+        </div><!--end .col -->
+        <!-- END SEARCH NAV -->
+        <div class="row">
+            <div class="col-md-12 body-pagging">
+                @Html.PagedListPager(Model, page => Url.Action("ChampManagement", "Management", new { page }))
+            </div>
+        </div>
+    </div><!--end .row -->
+
+</div><!--end .card-body -->
+<!-- END SEARCH RESULTS -->
+

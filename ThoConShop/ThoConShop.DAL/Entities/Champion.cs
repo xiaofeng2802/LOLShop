@@ -22,6 +22,8 @@ namespace ThoConShop.DAL.Entities
         [StringLength(255)]
         public string Avatar { get; set; }
 
+        public bool IsDeleted { get; set; }
+
         public virtual ICollection<Account> Accounts { get; set; }
 
         public virtual ICollection<Skin> Skins { get; set; }

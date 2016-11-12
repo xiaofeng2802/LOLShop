@@ -10,18 +10,22 @@
 
     <!-- BEGIN SEARCH HEADER -->
     <div class="card-head style-primary">
-        <div class="tools pull-left">
-            <form class="navbar-search" role="search">
-                <div class="form-group">
-                    <input type="text" class="form-control" name="contactSearch" placeholder="Tìm Theo Tên, Mã số">
+        <div class="tools pull-left" style="width: 100%">
+            @using (Html.BeginForm("UserManagement", "Management", FormMethod.Get, new
+            {
+                role = "search"
+            }))
+            {
+
+                <div class="col-lg-3 no-padding">
+                    <div class="form-group">
+                        <input type="text" style="background-color: white;" class="form-control" name="searchString" value="@ViewBag.SearchString" placeholder="Nhập Email Cần Tìm">
+                    </div>
                 </div>
-                <button type="submit" class="btn btn-icon-toggle ink-reaction"><i class="fa fa-search"></i></button>
-            </form>
-
-        </div>
-
-        <div class="tools">
-            <a class="btn btn-floating-action btn-default-light" href="@Url.Action("CreateOrUpdateAccount", "Management")"><i class="fa fa-plus"></i></a>
+                <div class="col-lg-1 no-padding">
+                    <button type="submit" class="btn ink-reaction btn-primary"><i class="fa fa-search"></i></button>
+                </div>
+            }
         </div>
     </div><!--end .card-head -->
     <!-- END SEARCH HEADER -->
@@ -78,7 +82,7 @@
         <!-- END SEARCH NAV -->
         <div class="row">
             <div class="col-md-12 body-pagging">
-                @Html.PagedListPager(Model, page => Url.Action("UserManagement", "Management", new { page }))
+                @Html.PagedListPager(Model, page => Url.Action("UserManagement", "Management", new { page, searchString = ViewBag.SearchString }))
             </div>
         </div>
     </div><!--end .row -->

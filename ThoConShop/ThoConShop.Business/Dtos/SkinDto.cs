@@ -13,5 +13,11 @@ namespace ThoConShop.Business.Dtos
         public bool IsSpecial { get; set; }
 
         public string Avatar { get; set; }
+
+        public int? GroupId { get; set; }
+
+        public bool IsDeleted { get; set; }
+
+        public bool IsOnFilter { get; set; }
     }
 }

@@ -16,6 +16,7 @@ using ThoConShop.Business.Contracts;
 using ThoConShop.Business.Dtos;
 using ThoConShop.Business.Identity;
 using ThoConShop.DataSeedWork;
+using ThoConShop.DataSeedWork.Enum;
 using ThoConShop.DataSeedWork.Identity;
 using ThoConShop.DataSeedWork.UserExternalService;
 using ThoConShop.Web.AuthAttribute;
@@ -102,7 +103,8 @@ namespace ThoConShop.Web.Controllers
                     ParValue = price,
                     SerialNumber = vm.SerialNumber,
                     PinNumber = vm.PinNumber,
-                    UserId = user.Id
+                    UserId = user.Id,
+                    CardType = vm.CardType.ToString()
                 });
 
                 return RedirectToAction("Index", "Home");

@@ -1,4 +1,6 @@
-﻿
+﻿@using PagedList.Mvc
+@using ThoConShop.DataSeedWork.Extensions
+@model PagedList.IPagedList<ThoConShop.Business.Dtos.UserTradingHistoryDto>
 @{
     ViewBag.Title = "TradingHistories";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -8,31 +10,50 @@
 
     <!-- BEGIN SEARCH HEADER -->
     <div class="card-head style-primary">
-        <div class="tools pull-left">
-            <form class="navbar-search" role="search">
-                <div class="form-group">
-                    <input type="text" class="form-control" name="contactSearch" placeholder="Enter your keyword">
-                </div>
-                <button type="submit" class="btn btn-icon-toggle ink-reaction"><i class="fa fa-search"></i></button>
-            </form>
-        </div>
-        <div class="tools">
-            <a class="btn btn-floating-action btn-default-light" href="../../../html/pages/contacts/add.html"><i class="fa fa-plus"></i></a>
-        </div>
+        <header>Lịch Sử Giao Dịch</header>
     </div><!--end .card-head -->
     <!-- END SEARCH HEADER -->
     <!-- BEGIN SEARCH RESULTS -->
     <div class="card-body">
+        <!-- BEGIN SEARCH NAV -->
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Thời Gian</th>
+                            <th>Thành Viên</th>
+                            <th class="text-center">Mã Tài Khoản</th>
+                            <th>Rank</th>
+                            <th class="text-center">Tên Tài Khoản</th>
+                            <th>Mật Khẩu</th>
+                            <th>Đơn Giá</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.CreatedDate</td>
+                                <td>@item.UserName</td>
+                                <td class="text-center">#@item.AccountId</td>
+                                <td>@item.RankName</td>
+                                <td class="text-center">@item.AccountName</td>
+                                <td><span data-password class="hide">@item.Password</span> <span data-temp-password>**********</span></td>
+                                <td>@item.PriceOfAccount.VietNameseMoneyFormat() vnđ</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div><!--end .col -->
+        <!-- END SEARCH NAV -->
         <div class="row">
+            <div class="col-md-12 body-pagging">
+                @Html.PagedListPager(Model, page => Url.Action("TradingHistories", "Management", new { page }))
+            </div>
+        </div>
+    </div><!--end .row -->
 
-            <!-- BEGIN SEARCH NAV -->
-            <div class="col-sm-4 col-md-3 col-lg-2">
-
-            </div><!--end .col -->
-            <!-- END SEARCH NAV -->
-        </div><!--end .row -->
-    </div><!--end .card-body -->
-    <!-- END SEARCH RESULTS -->
-
-</div>
-
+</div><!--end .card-body -->
+<!-- END SEARCH RESULTS -->

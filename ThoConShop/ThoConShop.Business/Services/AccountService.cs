@@ -96,7 +96,7 @@ namespace ThoConShop.Business.Services
 
             if (gankFilter != null && gankFilter > 0)
             {
-                var idList = _repoRank.ReadOne(a => a.Id == gankFilter).Children.Select(a => a.Id).ToList();
+                var idList = _repoRank.ReadOne(a => a.Id == gankFilter && !a.IsDeleted).Children.Select(a => a.Id).ToList();
               
                 idList.Add(gankFilter ?? 0);
                 

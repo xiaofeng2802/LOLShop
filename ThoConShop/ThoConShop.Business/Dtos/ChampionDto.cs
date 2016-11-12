@@ -12,6 +12,6 @@ namespace ThoConShop.Business.Dtos
 
         public string Avatar { get; set; }
 
-        public int AccountId { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

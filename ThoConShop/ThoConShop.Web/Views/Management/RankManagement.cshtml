@@ -10,16 +10,20 @@
     <!-- BEGIN SEARCH HEADER -->
     <div class="card-head style-primary">
         <div class="tools pull-left">
-            <form class="navbar-search" role="search">
+            @using (Html.BeginForm("RankManagement", "Management", FormMethod.Post, new { @class = "navbar-search", role = "search" }))
+            {
                 <div class="form-group">
-                    <input type="text" class="form-control" name="headerSearch" placeholder="Enter your keyword">
+                    <input type="text" class="form-control" name="searchString" placeholder="Nhập tên Rank">
                 </div>
                 <button type="submit" class="btn btn-icon-toggle ink-reaction"><i class="fa fa-search"></i></button>
-            </form>
+            }
+            @*<form class="navbar-search" role="search">
+               
+            </form>*@
         </div>
 
         <div class="tools">
-            <a class="btn btn-floating-action btn-default-light" href="@Url.Action("CreateOrUpdateAccount", "Management")"><i class="fa fa-plus"></i></a>
+            <a class="btn btn-floating-action btn-default-light" href="@Url.Action("CreateRankView", "Management")"><i class="fa fa-plus"></i></a>
         </div>
     </div><!--end .card-head -->
     <!-- END SEARCH HEADER -->
@@ -41,9 +45,9 @@
                         {
                             <tr>
                                 <td><img src="@item.RankImage" class="img-responsive"/></td>
-                                <td>@item.RankName</td>
-                                <td class="text-right">
-                                    <a id="deleteButton" href="@Url.Action("DeleteAccount", "Management", new { accountId = item.Id })" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Xóa"><i class="fa fa-trash-o"></i></a>
+                                <td style="vertical-align: middle;">@item.RankName</td>
+                                <td style="vertical-align: middle;" class="text-right">
+                                    <a id="deleteButton" href="@Url.Action("DeleteRank", "Management", new { rankId = item.Id })" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Xóa"><i class="fa fa-trash-o"></i></a>
                                     @*<a class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Thêm Tướng/Trang Phục"><i class="md md-visibility"></i></a>*@
                                 </td>
                             </tr>

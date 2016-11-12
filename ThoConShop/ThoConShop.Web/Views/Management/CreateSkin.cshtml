@@ -1,0 +1,88 @@
+﻿@model ThoConShop.Web.Models.SkinCreationViewModel
+@{
+    ViewBag.Title = "CreateSkin";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="col-lg-12">
+
+    @using (Html.BeginForm("CreateSkin", "Management", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="card">
+            <div class="card-head style-primary">
+                <header>Tạo Trang Phục</header>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Tên Rank</label>
+                            <div class="col-sm-10">
+                                @*<input type="number" class="form-control" id="Lastname5">*@
+                                @Html.TextBoxFor(a => a.SkinName, new { @class = "form-control" })
+                                <div class="form-control-line"></div>
+                                @Html.ValidationMessageFor(a => a.SkinName, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Nhóm Rank</label>
+                            <div class="col-sm-10">
+                                <div class="form-group floating-label">
+                                    @Html.DropDownListFor(a => a.GroupId, Model.ParentData, new { @class = "form-control", @id = "select2" })
+                                    @Html.ValidationMessageFor(a => a.GroupId, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-control-line"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Tài Khoản</label>
+                            <div class="col-sm-10">
+                                @*<input type="text" class="form-control" id="Username5">*@
+                                @Html.TextBoxFor(a => a.Avatar, new { type = "file", multiple = "multiple" })
+                                <div class="form-control-line"></div>
+                                @Html.ValidationMessageFor(a => a.Avatar, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Nằm Trong Bộ Lọc</label>
+                            <div class="col-sm-10">
+                                @*<input type="text" class="form-control" id="Username5">*@
+                                <label class="checkbox-inline checkbox-styled checkbox-primary">
+                                    <input type="checkbox" name="IsOnFilter">
+                                </label>
+                                
+                                <div class="form-control-line"></div>
+                                @Html.ValidationMessageFor(a => a.IsOnFilter, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!--end .card-body -->
+            <div class="card-actionbar">
+                <div class="card-actionbar-row">
+
+                    <button type="submit" class="btn btn-flat btn-primary ink-reaction">Tạo</button>
+
+                </div>
+            </div>
+        </div><!--end .card -->
+
+    }
+</div>
+
+@Scripts.Render("~/bundles/jqueryval")
+

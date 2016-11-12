@@ -13,7 +13,7 @@ namespace ThoConShop.Business.Contracts
     {
         UserDto Create(UserDto entity);
 
-        IPagedList<UserDto> Read(int currentIndex, int pageSize);
+        IPagedList<UserDto> Read(int currentIndex, int pageSize, string searchString = "");
 
         IList<UserDto> Read();
 

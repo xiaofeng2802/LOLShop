@@ -7,36 +7,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="your,keywords">
+    <meta name="description" content="Short explanation about this website">
     <!-- END META -->
     <!-- BEGIN STYLESHEETS -->
-    <link href='//fonts.googleapis.com/css?family=Roboto:300italic,400italic,300,400,500,700,900' rel='stylesheet' type='text/css' />
-    <link type="text/css" rel="stylesheet" href="~/Content/assets/css/theme-default/bootstrap.css?1422823238" />
-
-    <link type="text/css" rel="stylesheet" href="~/Content/assets/css/theme-default/materialadmin.css?1422823243" />
-
-    <link type="text/css" rel="stylesheet" href="~/Content/assets/css/theme-default/font-awesome.min.css?1422823239" />
-
-    <link type="text/css" rel="stylesheet" href="~/Content/assets/css/theme-default/material-design-iconic-font.min.css?1422823240" />
-
-
-    <link type="text/css" rel="stylesheet" href="~/Content/assets/css/theme-default/libs/select2/select2.css?1422823373" />
-
-    <link type="text/css" rel="stylesheet" href="~/Content/assets/css/theme-default/libs/multi-select/multi-select.css?1422823371" />
-
-    <link type="text/css" rel="stylesheet" href="~/Content/assets/css/theme-default/libs/bootstrap-datepicker/datepicker3.css?1422823364" />
-
-    <link type="text/css" rel="stylesheet" href="~/Content/assets/css/theme-default/libs/jquery-ui/jquery-ui-theme.css?1422823370" />
-
-    <link type="text/css" rel="stylesheet" href="~/Content/assets/css/theme-default/libs/bootstrap-colorpicker/bootstrap-colorpicker.css?1422823362" />
-
-    <link type="text/css" rel="stylesheet" href="~/Content/assets/css/theme-default/libs/bootstrap-tagsinput/bootstrap-tagsinput.css?1422823365" />
-
-    <link type="text/css" rel="stylesheet" href="~/Content/assets/css/theme-default/libs/typeahead/typeahead.css?1422823375" />
-
-    <link type="text/css" rel="stylesheet" href="~/Content/assets/css/theme-default/libs/dropzone/dropzone-theme.css?1422823366" />
-
-
+    <link href='http://fonts.googleapis.com/css?family=Roboto:300italic,400italic,300,400,500,700,900' rel='stylesheet' type='text/css' />
+    <link type="text/css" rel="stylesheet" href="~/Content/assets/css/theme-default/bootstrap.css?1422792965" />
+    <link type="text/css" rel="stylesheet" href="~/Content/assets/css/theme-default/materialadmin.css?1425466319" />
+    <link type="text/css" rel="stylesheet" href="~/Content/assets/css/theme-default/font-awesome.min.css?1422529194" />
+    <link type="text/css" rel="stylesheet" href="~/Content/assets/css/theme-default/material-design-iconic-font.min.css?1421434286" />
     <!-- END STYLESHEETS -->
+    <script src="~/Content/assets/js/libs/jquery/jquery-1.11.2.min.js"></script>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script type="text/javascript" src="~/Content/assets/js/libs/utils/html5shiv.js?1403934957"></script>
@@ -65,6 +45,107 @@
                     </li>
                 </ul>
             </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            @*<div class="headerbar-right">
+                <ul class="header-nav header-nav-options">
+                    <li>
+                        <!-- Search form -->
+                        <form class="navbar-search" role="search">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="headerSearch" placeholder="Enter your keyword">
+                            </div>
+                            <button type="submit" class="btn btn-icon-toggle ink-reaction"><i class="fa fa-search"></i></button>
+                        </form>
+                    </li>
+                    <li class="dropdown hidden-xs">
+                        <a href="javascript:void(0);" class="btn btn-icon-toggle btn-default" data-toggle="dropdown">
+                            <i class="fa fa-bell"></i><sup class="badge style-danger">4</sup>
+                        </a>
+                        <ul class="dropdown-menu animation-expand">
+                            <li class="dropdown-header">Today's messages</li>
+                            <li>
+                                <a class="alert alert-callout alert-warning" href="javascript:void(0);">
+                                    <img class="pull-right img-circle dropdown-avatar" src="~/Content/assets/img/avatar2.jpg?1404026449" alt="" />
+                                    <strong>Alex Anistor</strong><br />
+                                    <small>Testing functionality...</small>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="alert alert-callout alert-info" href="javascript:void(0);">
+                                    <img class="pull-right img-circle dropdown-avatar" src="~/Content/assets/img/avatar3.jpg?1404026799" alt="" />
+                                    <strong>Alicia Adell</strong><br />
+                                    <small>Reviewing last changes...</small>
+                                </a>
+                            </li>
+                            <li class="dropdown-header">Options</li>
+                            <li><a href="~/Content/html/pages/login.html">View all messages <span class="pull-right"><i class="fa fa-arrow-right"></i></span></a></li>
+                            <li><a href="~/Content/html/pages/login.html">Mark as read <span class="pull-right"><i class="fa fa-arrow-right"></i></span></a></li>
+                        </ul><!--end .dropdown-menu -->
+                    </li><!--end .dropdown -->
+                    <li class="dropdown hidden-xs">
+                        <a href="javascript:void(0);" class="btn btn-icon-toggle btn-default" data-toggle="dropdown">
+                            <i class="fa fa-area-chart"></i>
+                        </a>
+                        <ul class="dropdown-menu animation-expand">
+                            <li class="dropdown-header">Server load</li>
+                            <li class="dropdown-progress">
+                                <a href="javascript:void(0);">
+                                    <div class="dropdown-label">
+                                        <span class="text-light">Server load <strong>Today</strong></span>
+                                        <strong class="pull-right">93%</strong>
+                                    </div>
+                                    <div class="progress"><div class="progress-bar progress-bar-danger" style="width: 93%"></div></div>
+                                </a>
+                            </li><!--end .dropdown-progress -->
+                            <li class="dropdown-progress">
+                                <a href="javascript:void(0);">
+                                    <div class="dropdown-label">
+                                        <span class="text-light">Server load <strong>Yesterday</strong></span>
+                                        <strong class="pull-right">30%</strong>
+                                    </div>
+                                    <div class="progress"><div class="progress-bar progress-bar-success" style="width: 30%"></div></div>
+                                </a>
+                            </li><!--end .dropdown-progress -->
+                            <li class="dropdown-progress">
+                                <a href="javascript:void(0);">
+                                    <div class="dropdown-label">
+                                        <span class="text-light">Server load <strong>Lastweek</strong></span>
+                                        <strong class="pull-right">74%</strong>
+                                    </div>
+                                    <div class="progress"><div class="progress-bar progress-bar-warning" style="width: 74%"></div></div>
+                                </a>
+                            </li><!--end .dropdown-progress -->
+                        </ul><!--end .dropdown-menu -->
+                    </li><!--end .dropdown -->
+                </ul><!--end .header-nav-options -->
+                <ul class="header-nav header-nav-profile">
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle ink-reaction" data-toggle="dropdown">
+                            <img src="~/Content/assets/img/avatar1.jpg?1403934956" alt="" />
+                            <span class="profile-info">
+                                Daniel Johnson
+                                <small>Administrator</small>
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu animation-dock">
+                            <li class="dropdown-header">Config</li>
+                            <li><a href="~/Content/html/pages/profile.html">My profile</a></li>
+                            <li><a href="~/Content/html/pages/blog/post.html">My blog <span class="badge style-danger pull-right">16</span></a></li>
+                            <li><a href="~/Content/html/pages/calendar.html">My appointments</a></li>
+                            <li class="divider"></li>
+                            <li><a href="~/Content/html/pages/locked.html"><i class="fa fa-fw fa-lock"></i> Lock</a></li>
+                            <li><a href="~/Content/html/pages/login.html"><i class="fa fa-fw fa-power-off text-danger"></i> Logout</a></li>
+                        </ul><!--end .dropdown-menu -->
+                    </li><!--end .dropdown -->
+                </ul><!--end .header-nav-profile -->
+                <ul class="header-nav header-nav-toggle">
+                    <li>
+                        <a class="btn btn-icon-toggle btn-default" href="#offcanvas-search" data-toggle="offcanvas" data-backdrop="false">
+                            <i class="fa fa-ellipsis-v"></i>
+                        </a>
+                    </li>
+                </ul><!--end .header-nav-toggle -->
+            </div><!--end #header-navbar-collapse -->*@
         </div>
     </header>
     <!-- END HEADER-->
@@ -118,7 +199,7 @@
                     <!-- BEGIN EMAIL -->
                     <li>
                         <a href="@Url.Action("UserManagement", "Management")">
-                            <div class="gui-icon"><i class="md md-email"></i></div>
+                            <div class="gui-icon"><i class="md md-account-box"></i></div>
                             <span class="title">Quản Lý Thành Viên</span>
                         </a>
                         <!--start submenu -->
@@ -130,6 +211,22 @@
                         <a href="@Url.Action("RankManagement", "Management")">
                             <div class="gui-icon"><i class="md md-web"></i></div>
                             <span class="title">Quản Lý Rank</span>
+                        </a>
+                    </li><!--end /menu-li -->
+                    <!-- END DASHBOARD -->
+                    <!-- BEGIN DASHBOARD -->
+                    <li>
+                        <a href="@Url.Action("SkinManagement", "Management")">
+                            <div class="gui-icon"><i class="md md-web"></i></div>
+                            <span class="title">Quản Lý Trang Phục</span>
+                        </a>
+                    </li><!--end /menu-li -->
+                    <!-- END DASHBOARD -->
+                    <!-- BEGIN DASHBOARD -->
+                    <li>
+                        <a href="@Url.Action("ChampManagement", "Management")">
+                            <div class="gui-icon"><i class="md md-web"></i></div>
+                            <span class="title">Quản Lý Tướng</span>
                         </a>
                     </li><!--end /menu-li -->
                     <!-- END DASHBOARD -->
@@ -146,7 +243,7 @@
                     <!-- BEGIN TABLES -->
                     <li>
                         <a href="@Url.Action("TradingHistories", "Management")">
-                            <div class="gui-icon"><i class="fa fa-table"></i></div>
+                            <div class="gui-icon"><i class="fa fa-puzzle-piece fa-fw"></i></div>
                             <span class="title">Lịch Sử Mua Acc</span>
                         </a>
                         <!--start submenu -->
@@ -410,33 +507,25 @@
         <!-- END OFFCANVAS RIGHT -->
 
     </div><!--end #base-->
-<!-- END BASE -->
-
+    <!-- END BASE -->
     <!-- BEGIN JAVASCRIPT -->
-    <script src="~/Content/assets/js/libs/jquery/jquery-1.11.2.min.js"></script>
+
     <script src="~/Content/assets/js/libs/jquery/jquery-migrate-1.2.1.min.js"></script>
-    <script src="~/Content/assets/js/libs/jquery-ui/jquery-ui.min.js"></script>
     <script src="~/Content/assets/js/libs/bootstrap/bootstrap.min.js"></script>
     <script src="~/Content/assets/js/libs/spin.js/spin.min.js"></script>
     <script src="~/Content/assets/js/libs/autosize/jquery.autosize.min.js"></script>
-    <script src="~/Content/assets/js/libs/select2/select2.min.js"></script>
-    <script src="~/Content/assets/js/libs/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
-    <script src="~/Content/assets/js/libs/multi-select/jquery.multi-select.js"></script>
-    <script src="~/Content/assets/js/libs/inputmask/jquery.inputmask.bundle.min.js"></script>
-    <script src="~/Content/assets/js/libs/moment/moment.min.js"></script>
-    <script src="~/Content/assets/js/libs/bootstrap-datepicker/bootstrap-datepicker.js"></script>
-    <script src="~/Content/assets/js/libs/bootstrap-colorpicker/bootstrap-colorpicker.min.js"></script>
-    <script src="~/Content/assets/js/libs/typeahead/typeahead.bundle.min.js"></script>
-    <script src="~/Content/assets/js/libs/dropzone/dropzone.min.js"></script>
     <script src="~/Content/assets/js/libs/nanoscroller/jquery.nanoscroller.min.js"></script>
+    <script src="~/Content/assets/js/core/source/App.js"></script>
+    <script src="~/Content/assets/js/core/source/AppNavigation.js"></script>
+    <script src="~/Content/assets/js/core/source/AppOffcanvas.js"></script>
+    <script src="~/Content/assets/js/core/source/AppCard.js"></script>
+    <script src="~/Content/assets/js/core/source/AppForm.js"></script>
+    <script src="~/Content/assets/js/core/source/AppNavSearch.js"></script>
+    <script src="~/Content/assets/js/core/source/AppVendor.js"></script>
+    <script src="~/Content/assets/js/core/demo/Demo.js"></script>
+    <script src="~/Content/assets/js/core/demo/DemoLayouts.js"></script>
     <script src="~/Scripts/Custom/GlobalManagement.js"></script>
+    <!-- END JAVASCRIPT -->
 
-<!-- END JAVASCRIPT -->
-
-    <script>
-    $(document).ready(function() {
-        $('select').select2();
-    });
-    </script>
 </body>
 </html>

@@ -25,14 +25,18 @@ namespace ThoConShop.DAL.Entities
 
         public Skin Parent { get; set; }
 
-        public int? BelongToChampion { get; set; }
-
         public string Avatar { get; set; }
+
+        public bool IsDeleted { get; set; }
+
+        public bool IsOnFilter { get; set; }
+
+        public int? ChampionId { get; set; }
+
+        public virtual Champion Champion { get; set; }
 
         public virtual ICollection<Skin> Children { get; set; }
 
         public virtual ICollection<Account> Accounts { get; set; }
-
-        public virtual Champion Champion { get; set; }
     }
 }

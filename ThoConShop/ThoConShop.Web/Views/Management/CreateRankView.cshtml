@@ -1,0 +1,72 @@
+﻿@model ThoConShop.Web.Models.CreateRankViewModel
+@{
+    ViewBag.Title = "CreateRankView";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="col-lg-12">
+
+    @using (Html.BeginForm("CreateRank", "Management", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="card">
+            <div class="card-head style-primary">
+               <header>Tạo Rank</header>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Tên Rank</label>
+                            <div class="col-sm-10">
+                                @*<input type="number" class="form-control" id="Lastname5">*@
+                                @Html.TextBoxFor(a => a.RankName, new { @class = "form-control" })
+                                <div class="form-control-line"></div>
+                                @Html.ValidationMessageFor(a => a.RankName, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Nhóm Rank</label>
+                            <div class="col-sm-10">
+                                <div class="form-group floating-label">
+                                    @Html.DropDownListFor(a => a.GroupId, Model.DataSourceRank, new {@class = "form-control", @id = "select2"})
+                                    @Html.ValidationMessageFor(a => a.GroupId, "", new {@class = "text-danger"})
+                                </div>
+                                <div class="form-control-line"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Tài Khoản</label>
+                            <div class="col-sm-10">
+                                @*<input type="text" class="form-control" id="Username5">*@
+                                @Html.TextBoxFor(a => a.RankImage, new { type = "file" })
+                                <div class="form-control-line"></div>
+                                @Html.ValidationMessageFor(a => a.RankImage, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!--end .card-body -->
+            <div class="card-actionbar">
+                <div class="card-actionbar-row">
+                   
+                     <button type="submit" class="btn btn-flat btn-primary ink-reaction">Tạo</button>
+                   
+                </div>
+            </div>
+        </div><!--end .card -->
+
+    }
+</div>
+
+@Scripts.Render("~/bundles/jqueryval")
+

@@ -33,9 +33,14 @@ namespace ThoConShop.Business.Services
             return entity;
         }
 
-        public IPagedList<UserDto> Read(int currentIndex, int pageSize)
+        public IPagedList<UserDto> Read(int currentIndex, int pageSize, string searchString = "")
         {
-            var result = _userRepositories.Read(a => true)
+            var query = _userRepositories.Read(a => true);
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                query = query.Where(a => a.GeneralUser.UserName.Contains(searchString));
+            }
+            var result = query
                 .Include(a => a.GeneralUser)
                 .Select(a => new UserDto()
             {

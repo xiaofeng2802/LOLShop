@@ -12,14 +12,26 @@
 
     <!-- BEGIN SEARCH HEADER -->
     <div class="card-head style-primary">
-        <div class="tools pull-left">
-            <form class="navbar-search" role="search">
-                <div class="form-group">
-                    <input type="text" class="form-control" name="contactSearch" placeholder="Tìm Theo Tên, Mã số">
-                </div>
-                <button type="submit" class="btn btn-icon-toggle ink-reaction"><i class="fa fa-search"></i></button>
-            </form>
-          
+        <div class="tools pull-left" style="width: 85%;">
+            <header>Quản Lý Tài Khoản LMHT</header>
+            @* @using (Html.BeginForm("UserManagement", "Management", FormMethod.Get, new
+    {
+        role = "search"
+    }))
+    {
+
+        <div class="col-lg-3 no-padding">
+            <div class="form-group">
+                <input type="text" style="background-color: white;" class="form-control" name="searchString" value="@ViewBag.SearchString" placeholder="Nhập Email Cần Tìm">
+            </div>
+        </div>
+        <div class="col-lg-3 no-padding">
+
+        </div>
+        <div class="col-lg-1 no-padding">
+            <button type="submit" class="btn ink-reaction btn-primary"><i class="fa fa-search"></i></button>
+        </div>
+    }*@
         </div>
      
         <div class="tools">

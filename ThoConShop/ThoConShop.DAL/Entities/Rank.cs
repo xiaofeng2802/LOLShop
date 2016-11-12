@@ -19,12 +19,14 @@ namespace ThoConShop.DAL.Entities
         [StringLength(50)]
         public string RankName { get; set; }
 
-        [StringLength(100)]
+        [StringLength(500)]
         public string RankImage { get; set; }
 
         public int? GroupId { get; set; }
 
         public virtual Rank Parent { get; set; }
+
+        public bool IsDeleted { get; set; }
 
         public virtual ICollection<Rank> Children { get; set; }
 

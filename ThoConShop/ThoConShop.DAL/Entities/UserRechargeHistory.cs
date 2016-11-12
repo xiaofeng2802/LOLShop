@@ -24,6 +24,8 @@ namespace ThoConShop.DAL.Entities
         [StringLength(100)]
         public string Message { get; set; }
 
+        public string CardType { get; set; }
+
         public virtual User User { get; set; }
     }
 }
