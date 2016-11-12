@@ -194,9 +194,10 @@ namespace ThoConShop.Web.Controllers
             return null;
         }
 
-        public ActionResult RankManagement()
+        public ActionResult RankManagement(int? page)
         {
-            return View();
+            var result = _rankService.Read(page ?? 1, _pageSize);
+            return View(result);
         }
 
         public ActionResult ChargingHistories()

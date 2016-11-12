@@ -38,7 +38,7 @@ namespace ThoConShop.Business.Services
                 data = data.Where(a => a.GroupId != null);
             }
 
-            IPagedList<RankDto> result = data.OrderByDescending(a => a.CreatedDate).Select(a => new RankDto()
+            IPagedList<RankDto> result = data.OrderBy(a => a.RankName).Select(a => new RankDto()
             {
                 Id = a.Id,
                 CreatedDate = a.CreatedDate,

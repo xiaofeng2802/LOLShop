@@ -1,4 +1,5 @@
-﻿
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<ThoConShop.Business.Dtos.RankDto>
 @{
     ViewBag.Title = "RankManagement";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -11,28 +12,54 @@
         <div class="tools pull-left">
             <form class="navbar-search" role="search">
                 <div class="form-group">
-                    <input type="text" class="form-control" name="contactSearch" placeholder="Enter your keyword">
+                    <input type="text" class="form-control" name="headerSearch" placeholder="Enter your keyword">
                 </div>
                 <button type="submit" class="btn btn-icon-toggle ink-reaction"><i class="fa fa-search"></i></button>
             </form>
         </div>
+
         <div class="tools">
-            <a class="btn btn-floating-action btn-default-light" href="../../../html/pages/contacts/add.html"><i class="fa fa-plus"></i></a>
+            <a class="btn btn-floating-action btn-default-light" href="@Url.Action("CreateOrUpdateAccount", "Management")"><i class="fa fa-plus"></i></a>
         </div>
     </div><!--end .card-head -->
     <!-- END SEARCH HEADER -->
     <!-- BEGIN SEARCH RESULTS -->
     <div class="card-body">
+        <!-- BEGIN SEARCH NAV -->
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Hình</th>
+                            <th>Tên Rank</th>
+                            <th class="text-right"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td><img src="@item.RankImage" class="img-responsive"/></td>
+                                <td>@item.RankName</td>
+                                <td class="text-right">
+                                    <a id="deleteButton" href="@Url.Action("DeleteAccount", "Management", new { accountId = item.Id })" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Xóa"><i class="fa fa-trash-o"></i></a>
+                                    @*<a class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Thêm Tướng/Trang Phục"><i class="md md-visibility"></i></a>*@
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div><!--end .col -->
+        <!-- END SEARCH NAV -->
         <div class="row">
+            <div class="col-md-12 body-pagging">
+                @Html.PagedListPager(Model, page => Url.Action("RankManagement", "Management", new { page }))
+            </div>
+        </div>
+    </div><!--end .row -->
 
-            <!-- BEGIN SEARCH NAV -->
-            <div class="col-sm-4 col-md-3 col-lg-2">
-
-            </div><!--end .col -->
-            <!-- END SEARCH NAV -->
-        </div><!--end .row -->
-    </div><!--end .card-body -->
-    <!-- END SEARCH RESULTS -->
-
-</div>
+</div><!--end .card-body -->
+<!-- END SEARCH RESULTS -->
 
