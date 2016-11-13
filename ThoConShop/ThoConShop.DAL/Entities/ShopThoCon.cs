@@ -50,8 +50,7 @@ namespace ThoConShop.DAL.Entities
                 .IsUnicode(false);
 
             modelBuilder.Entity<Account>()
-                .Property(e => e.Price)
-                .HasPrecision(19, 4);
+                .Property(e => e.Price);
 
             modelBuilder.Entity<Account>()
                 .Property(e => e.Avatar)
@@ -79,8 +78,7 @@ namespace ThoConShop.DAL.Entities
                 .HasMany(e => e.Accounts);
 
             modelBuilder.Entity<User>()
-                .Property(e => e.Balance)
-                .HasPrecision(19, 0);
+                .Property(e => e.Balance);
 
             modelBuilder.Entity<User>()
                 .HasMany(e => e.UserTradingHistories)

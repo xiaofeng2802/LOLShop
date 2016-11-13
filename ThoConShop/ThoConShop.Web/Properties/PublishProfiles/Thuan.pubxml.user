@@ -124,7 +124,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/18/2016 22:12:54</publishTime>
     </File>
     <File Include="bin/ShopThoCon.DataSeedWork.dll">
-      <publishTime>11/13/2016 01:05:04</publishTime>
+      <publishTime>11/13/2016 15:04:48</publishTime>
     </File>
     <File Include="bin/System.Web.Helpers.dll">
       <publishTime>10/18/2016 22:12:43</publishTime>
@@ -148,13 +148,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/18/2016 22:12:43</publishTime>
     </File>
     <File Include="bin/ThoConShop.Business.dll">
-      <publishTime>11/13/2016 01:05:05</publishTime>
+      <publishTime>11/13/2016 15:04:49</publishTime>
     </File>
     <File Include="bin/ThoConShop.DAL.dll">
-      <publishTime>11/13/2016 01:05:05</publishTime>
+      <publishTime>11/13/2016 15:04:49</publishTime>
     </File>
     <File Include="bin/ThoConShop.Web.dll">
-      <publishTime>11/13/2016 01:05:10</publishTime>
+      <publishTime>11/13/2016 15:04:57</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>10/18/2016 22:12:56</publishTime>
@@ -5779,10 +5779,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/12/2016 20:42:53</publishTime>
     </File>
     <File Include="Views/Shared/_DetailsLayout.cshtml">
-      <publishTime>11/08/2016 19:19:24</publishTime>
+      <publishTime>11/13/2016 15:04:18</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>11/08/2016 19:19:24</publishTime>
+      <publishTime>11/13/2016 15:02:42</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
       <publishTime>10/27/2016 22:30:25</publishTime>
@@ -5848,7 +5848,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/26/2016 21:26:58</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>11/13/2016 01:06:28</publishTime>
+      <publishTime>11/13/2016 15:05:10</publishTime>
     </File>
   </ItemGroup>
 </Project>

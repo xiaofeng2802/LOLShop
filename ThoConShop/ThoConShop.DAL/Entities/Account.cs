@@ -26,8 +26,7 @@ namespace ThoConShop.DAL.Entities
         [StringLength(100)]
         public string Title { get; set; }
 
-        [Column(TypeName = "money")]
-        public decimal Price { get; set; }
+        public float Price { get; set; }
 
         public int RankId { get; set; }
 

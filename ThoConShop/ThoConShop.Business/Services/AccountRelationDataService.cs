@@ -238,7 +238,7 @@ namespace ThoConShop.Business.Services
             };
         }
 
-        public IList<AccountDto> ReadAccountByPriceRange(decimal from, decimal to)
+        public IList<AccountDto> ReadAccountByPriceRange(float from, float to)
         {
             var result = _repoAccount.Read(a => a.IsAvailable && (a.Price >= from && a.Price <= to))
                                        .Select(a => new AccountDto()

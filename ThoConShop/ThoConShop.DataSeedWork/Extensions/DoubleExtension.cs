@@ -9,9 +9,9 @@ namespace ThoConShop.DataSeedWork.Extensions
 {
     public static class DoubleExtension
     {
-        public static string VietNameseMoneyFormat(this decimal value)
+        public static string VietNameseMoneyFormat(this float value)
         {
-            if (value == 0)
+            if (value <= 0)
             {
                 return "0";
             }

@@ -190,23 +190,15 @@ namespace ThoConShop.Web.Controllers
                 return RedirectToAction("Login");
             }
 
-            //if (User.Identity.IsAuthenticated)
-            //{
-            //    return RedirectToAction("Index", "Home");
-            //}
-            //else
-            //{
-            //    await UserManager.AddLoginAsync(loginInfo.ExternalIdentity.GetUserId(), loginInfo.Login);
-            //}
-            //loginInfo.Email =  "01203195108";
             // Sign in the user with this external login provider if the user already has a login
             var result = await SignInManager.ExternalSignInAsync(loginInfo, isPersistent: false);
             var isActive = UserExternalService.GetUserStatus(loginInfo.ExternalIdentity.Claims.First(c => c.Type == "urn:facebook:id").Value);
-            if (!isActive)
+            if (isActive != null && !(bool) isActive)
             {
                 LogOff();
                 return RedirectToAction("LockNoticeView", "Home", new { userName = loginInfo.Email ?? loginInfo.DefaultUserName  });
             }
+
             switch (result)
             {
                 case SignInStatus.Success:

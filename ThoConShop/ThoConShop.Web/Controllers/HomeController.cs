@@ -52,7 +52,7 @@ namespace ThoConShop.Web.Controllers
         public ActionResult Edit(int accountId = 0)
         {
             var result = _accountService.Edit(accountId);
-            decimal fromValue = (result.Price - 300000)
+            float fromValue = (result.Price - 300000)
                     , toValue = (result.Price + 300000);
             fromValue = fromValue < 0 ? 0 : fromValue;
 

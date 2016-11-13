@@ -99,7 +99,6 @@ namespace ThoConShop.DAL.Migrations
             //       {
             //           new Account()
             //           {
-            //               AccountName = "Thuan",
             //               CreatedDate = DateTime.Now,
             //               Avatar = "../Images/yasou.jpg",
             //               Price = 30000,
@@ -109,7 +108,7 @@ namespace ThoConShop.DAL.Migrations
             //               Password = "123",
             //               Title = "So Hot 1",
             //               Description = "For testing",
-            //               RankId = 1
+            //               RankId = 5
             //           }
             //       }
 
@@ -143,7 +142,6 @@ namespace ThoConShop.DAL.Migrations
             //       {
             //           new Account()
             //           {
-            //               AccountName = "Thuan",
             //               CreatedDate = DateTime.Now,
             //               Avatar = "../Images/yasou.jpg",
             //               Price = 3000000,
@@ -153,7 +151,7 @@ namespace ThoConShop.DAL.Migrations
             //               Password = "123",
             //               Title = "So Hot 2",
             //               Description = "For testing",
-            //               RankId = 2
+            //               RankId = 6
             //           }
             //       }
             //   },
@@ -166,7 +164,7 @@ namespace ThoConShop.DAL.Migrations
             //       {
             //           new Account()
             //           {
-            //               AccountName = "Thuan",
+
             //               CreatedDate = DateTime.Now,
             //               Avatar = "../Images/yasou.jpg",
             //               Price = 300000,
@@ -176,7 +174,7 @@ namespace ThoConShop.DAL.Migrations
             //               Password = "123",
             //               Title = "So Hot 3",
             //               Description = "For testing",
-            //               RankId = 3
+            //               RankId = 7
             //           }
             //       }
             //   },
@@ -189,7 +187,6 @@ namespace ThoConShop.DAL.Migrations
             //       {
             //           new Account()
             //           {
-            //               AccountName = "Thuan",
             //               CreatedDate = DateTime.Now,
             //               Avatar = "../Images/yasou.jpg",
             //               Price = 300000,
@@ -199,7 +196,7 @@ namespace ThoConShop.DAL.Migrations
             //               Password = "123",
             //               Title = "So Hot 4",
             //               Description = "For testing",
-            //               RankId = 4
+            //               RankId = 7
             //           }
             //       }
             //   },

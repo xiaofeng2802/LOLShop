@@ -35,7 +35,7 @@ namespace ThoConShop.Web.Models
 
         [Required,
          Range(1000, int.MaxValue, ErrorMessage = "Đơn giá không được nhỏ hơn 1000.")]
-        public double Price { get; set; }
+        public float Price { get; set; }
 
         [Range(1, int.MaxValue, ErrorMessage = "Xin hãy chọn thông tin tồn tại.")]
         public int RankId { get; set; }

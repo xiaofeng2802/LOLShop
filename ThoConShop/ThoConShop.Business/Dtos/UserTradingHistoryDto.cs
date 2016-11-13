@@ -18,7 +18,7 @@ namespace ThoConShop.Business.Dtos
 
         public string Password { get; set; }
 
-        public decimal PriceOfAccount { get; set; }
+        public float PriceOfAccount { get; set; }
 
         public string AccountName { get; set; }
     }

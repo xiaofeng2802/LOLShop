@@ -71,7 +71,7 @@ namespace ThoConShop.Web.Controllers
                         Text = a.RankName,
                         Selected = (a.Id == accountDto.RankId) 
                     }).ToList(),
-                    Price = (double)accountDto.Price,
+                    Price = accountDto.Price,
                     Description = accountDto.Description,
                     UserName = accountDto.UserName,
                     Password = accountDto.Password,
@@ -99,7 +99,7 @@ namespace ThoConShop.Web.Controllers
                     Password = data.Password,
                     CreatedDate = DateTime.Now,
                     Description = data.Description,
-                    Price = (decimal) data.Price,
+                    Price = data.Price,
                     RankId = data.RankId,
                     Avatar = FileUlti.SaveFile(data.Avatar, path),
                     IsAvailable = true,
@@ -111,7 +111,7 @@ namespace ThoConShop.Web.Controllers
             {
                 var accountDto = _accountService.ReadOneById(data.AccounId);
 
-                accountDto.Price = (decimal) data.Price;
+                accountDto.Price = data.Price;
                 accountDto.Description = data.Description;
                 accountDto.Password = data.Password;
                 accountDto.UserName = data.UserName;

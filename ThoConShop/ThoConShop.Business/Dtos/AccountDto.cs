@@ -22,7 +22,7 @@ namespace ThoConShop.Business.Dtos
 
         public string Title { get; set; }
 
-        public decimal Price { get; set; }
+        public float Price { get; set; }
 
         public int RankId { get; set; }
 

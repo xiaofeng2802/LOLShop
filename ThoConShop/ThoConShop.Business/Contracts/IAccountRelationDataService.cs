@@ -46,7 +46,7 @@ namespace ThoConShop.Business.Contracts
 
         IList<string> ReadPriceRangeForFilter();
 
-        IList<AccountDto> ReadAccountByPriceRange(decimal from, decimal to);
+        IList<AccountDto> ReadAccountByPriceRange(float from, float to);
 
         IPagedList<UserRechargeHistoryDto> ReadRechargeHistories(string generalUserId, int currentIndex, int pageSize);
 

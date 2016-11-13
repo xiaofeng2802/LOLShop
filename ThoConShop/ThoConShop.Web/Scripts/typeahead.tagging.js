@@ -96,7 +96,7 @@
         // create a new tag from the input's value and insert it before the
         // input's parent li
         var $new_tag = globals.$TAGGING_TAG.clone()
-          , value = $input.val().replace(globals.CLEANING_PATTERN, '').trim()
+          , value = $input.val().trim()
           , limit_exceeded = false;
 
         if (original_input.data('max-tags') && original_input.data('max-tags') <= original_input.taglist.length) {
@@ -138,7 +138,7 @@
         // fill the ul with li containing the tag names
         for (var i=0; i<tags.length; i++) {
             $tagging_tag = globals.$TAGGING_TAG.clone();
-            value = tags[i].replace(globals.CLEANING_PATTERN, '').trim();
+            value = tags[i].trim();
             $tagging_tag.html(value + globals.TAG_DELETE);
             $tagging_ul.append($tagging_tag);
             $input.taglist.push(value);

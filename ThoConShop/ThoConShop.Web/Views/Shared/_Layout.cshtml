@@ -1,5 +1,6 @@
 ﻿@using System.Globalization
 @using Microsoft.AspNet.Identity
+@using ThoConShop.DataSeedWork.Extensions
 @using ThoConShop.DataSeedWork.UserExternalService
 @{
     CultureInfo cul = CultureInfo.GetCultureInfo("vi-VN");
@@ -54,7 +55,7 @@
                                 <a>
                                     <span>Chào </span>
                                     <img style="height: 30px;" src="@response.ResponseUri.ToString()" />
-                                    <span>[<span>@UserExternalService.GetUserBalance(User.Identity.GetUserId()).ToString("#,###", cul.NumberFormat)</span> VND]</span>
+                                    <span>[<span>@UserExternalService.GetUserBalance(User.Identity.GetUserId()).VietNameseMoneyFormat()</span> VND]</span>
                                 </a>
                             }
                         </li>
@@ -120,7 +121,7 @@
                                 <a>
                                     <span>Chào </span>
                                     <img style="height: 30px;" src="@response.ResponseUri.ToString()"/>
-                                    <span>[<span>@UserExternalService.GetUserBalance(User.Identity.GetUserId()).ToString("#,###", cul.NumberFormat)</span> VND]</span>
+                                    <span>[<span>@UserExternalService.GetUserBalance(User.Identity.GetUserId()).VietNameseMoneyFormat()</span> VND]</span>
                                 </a>
 
                             </li>

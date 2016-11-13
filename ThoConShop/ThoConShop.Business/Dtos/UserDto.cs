@@ -12,7 +12,7 @@ namespace ThoConShop.Business.Dtos
 
         public string Email { get; set; }
 
-        public decimal Balance { get; set; } = 0;
+        public float Balance { get; set; } = 0;
 
         public bool IsActive { get; set; }
 

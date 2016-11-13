@@ -10,7 +10,7 @@ namespace ThoConShop.DataSeedWork.Extensions
     public static class StringExtension
     {
 
-        public static string ConvertToUnsign(this string str)
+        public static string ConvertToUnsigna(this string str)
         {
             string[] signs = new string[]
             {

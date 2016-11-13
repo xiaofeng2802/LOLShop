@@ -18,8 +18,7 @@ namespace ThoConShop.DAL.Entities
             UserTradingHistories = new HashSet<UserTradingHistory>();
         }
 
-        [Column(TypeName = "money")]
-        public decimal Balance { get; set; } = 0;
+        public float Balance { get; set; } = 0;
 
         public string NameDisplay { get; set; }
 

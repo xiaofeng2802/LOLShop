@@ -36,7 +36,7 @@ namespace ThoConShop.Web.Controllers
             var account = _accountService.ReadOneById(accountId);
             var user = _userService.ReadByGeneralUserId(User.Identity.GetUserId());
 
-            if (account.Price > (decimal) UserExternalService.GetUserBalance(User.Identity.GetUserId()))
+            if (account.Price > UserExternalService.GetUserBalance(User.Identity.GetUserId()))
             {
                 return RedirectToAction("ChargingView", "User",
                     new {Message = "Tài khoản quý khách không đủ tiền, xin vui lòng nạp thêm. Cám ơn !"});
