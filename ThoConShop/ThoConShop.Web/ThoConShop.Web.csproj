@@ -2104,7 +2104,6 @@
     <Content Include="Views\Management\CreateRankView.cshtml" />
     <Content Include="Views\Management\ChampManagement.cshtml" />
     <Content Include="Views\Management\SkinManagement.cshtml" />
-    <Content Include="Views\Management\CreateChamp.cshtml" />
     <Content Include="Views\Management\CreateSkin.cshtml" />
   </ItemGroup>
   <ItemGroup>

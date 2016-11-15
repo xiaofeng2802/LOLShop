@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using PagedList;
@@ -11,6 +12,8 @@ namespace ThoConShop.Business.Contracts
 {
     public interface IAccountRelationDataService
     {
+
+        int UploadDataFromJson(string json);
         IList<SkinDto> ReadSkinByAccount(int accountId);
 
         IList<ChampionDto> ReadChampByAccount(int accountId);

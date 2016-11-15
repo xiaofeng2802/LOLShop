@@ -4,8 +4,10 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 using AutoMapper;
 using AutoMapper.Configuration;
+using Newtonsoft.Json;
 using PagedList;
 using ThoConShop.Business.Contracts;
 using ThoConShop.Business.Dtos;
@@ -348,6 +350,21 @@ namespace ThoConShop.Business.Services
                                     UserId = a.UserId
                                 }).ToPagedList(currentIndex, pageSize);
             return result;
+        }
+
+        public int UploadDataFromJson(string json)
+        {
+            JavaScriptSerializer json_serializer = new JavaScriptSerializer();
+            json_serializer.MaxJsonLength = Int32.MaxValue;
+
+            Dictionary<string, object> data = (Dictionary<string, object>)json_serializer.DeserializeObject(json);
+
+            var champData = JsonConvert.SerializeObject(data["data"]);
+
+            var detailsInformation = JsonConvert.DeserializeObject<Dictionary<string, ChampUploadDto>>(champData);
+            //TODO:
+
+            return -1;
         }
 
         public IList<SkinDto> ReadSkinByAccount(int accountId)

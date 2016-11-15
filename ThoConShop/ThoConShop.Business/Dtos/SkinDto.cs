@@ -20,4 +20,13 @@ namespace ThoConShop.Business.Dtos
 
         public bool IsOnFilter { get; set; }
     }
+
+    public class SkinDetailUploadDto
+    {
+        public string id { get; set; }
+
+        public int num { get; set; }
+
+        public string name { get; set; }
+    }
 }

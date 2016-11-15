@@ -13,24 +13,21 @@
     <div class="card-head style-primary">
         <div class="tools pull-left" style="width: 85%;">
             <header>Quản Lý Tướng</header>
-            @* @using (Html.BeginForm("UserManagement", "Management", FormMethod.Get, new
-                {
-                    role = "search"
-                }))
-                {
+             @using (Html.BeginForm("UploadChamp", "Management", FormMethod.Post, new
+             {
+                 enctype = "multipart/form-data"
+             }))
+             {
 
                     <div class="col-lg-3 no-padding">
                         <div class="form-group">
-                            <input type="text" style="background-color: white;" class="form-control" name="searchString" value="@ViewBag.SearchString" placeholder="Nhập Email Cần Tìm">
+                            <input type="file" class="form-control" name="champFull" >
                         </div>
-                    </div>
-                    <div class="col-lg-3 no-padding">
-
                     </div>
                     <div class="col-lg-1 no-padding">
                         <button type="submit" class="btn ink-reaction btn-primary"><i class="fa fa-search"></i></button>
                     </div>
-                }*@
+                }
         </div>
 
         <div class="tools">

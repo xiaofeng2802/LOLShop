@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
+using Newtonsoft.Json;
 using AutoMapper;
+using Newtonsoft.Json.Linq;
 using ThoConShop.Business.Contracts;
 using ThoConShop.Business.Dtos;
 using ThoConShop.DataSeedWork.Extensions;
@@ -314,25 +318,18 @@ namespace ThoConShop.Web.Controllers
             return View(result);
         }
 
-        public ActionResult CreateChamp()
-        {
-            return View();
-        }
-
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult CreateChamp(ChampCreationViewModel data)
+        public ActionResult UploadChamp(HttpPostedFileBase champFull)
         {
-            var pathChamp = Server.MapPath(ConfigurationManager.AppSettings["ChampUrl"]);
-            var champ = new ChampionDto()
-            {
-                CreatedDate = DateTime.Now,
-                Avatar = FileUlti.SaveFile(data.Avatar, pathChamp),
-                ChampionName = data.ChampName
-            };
-            _accountRelationDataService.CreateChampion(champ);
+            StreamReader reader = new StreamReader(champFull.InputStream);
+            string json = reader.ReadToEnd();
+
+            _accountRelationDataService.UploadDataFromJson(json);
+
+            //var dataa = (Dictionary<string, ChampUploadDto>)data["data"];
             return RedirectToAction("ChampManagement");
         }
+
 
         public ActionResult DeleteChamp(int champId = 0)
         {

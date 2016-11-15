@@ -14,4 +14,26 @@ namespace ThoConShop.Business.Dtos
 
         public bool IsDeleted { get; set; }
     }
+
+    public class ChampUploadDto
+    {
+        public string id { get; set; }
+
+        public int key { get; set; }
+
+        public string name { get; set; }
+
+        public string title { get; set; }
+
+        public ImageUpoloadDto image { get; set; }
+
+        public IList<SkinDetailUploadDto> skins { get; set; }
+    }
+
+    public class ImageUpoloadDto
+    {
+        public string full { get; set; }
+
+        public string sprite { get; set; }
+    }
 }
