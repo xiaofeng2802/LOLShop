@@ -39,14 +39,14 @@ namespace ThoConShop.Business.Services
         {
             var data = _repoRank.Read(a => !a.IsDeleted);
 
-            if (isParentOnly)
-            {
-                data = data.Where(a => a.GroupId == null);
-            }
-            else
-            {
-                data = data.Where(a => a.GroupId != null);
-            }
+            //if (isParentOnly)
+            //{
+            //    data = data.Where(a => a.GroupId == null);
+            //}
+            //else
+            //{
+            //    data = data.Where(a => a.GroupId != null);
+            //}
 
             if (!string.IsNullOrEmpty(searchString))
             {
@@ -90,9 +90,7 @@ namespace ThoConShop.Business.Services
 
         public int Delete(int rankId)
         {
-            var rank = _repoRank.ReadOne(a => a.Id == rankId);
-            rank.IsDeleted = true;
-
+            _repoRank.Delete(a => a.Id == rankId);
             return _repoRank.SaveChanges();
         }
     }

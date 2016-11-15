@@ -354,8 +354,7 @@ namespace ThoConShop.Business.Services
 
         public int UploadDataFromJson(string json)
         {
-            JavaScriptSerializer json_serializer = new JavaScriptSerializer();
-            json_serializer.MaxJsonLength = Int32.MaxValue;
+            JavaScriptSerializer json_serializer = new JavaScriptSerializer {MaxJsonLength = int.MaxValue};
 
             Dictionary<string, object> data = (Dictionary<string, object>)json_serializer.DeserializeObject(json);
 
@@ -363,18 +362,78 @@ namespace ThoConShop.Business.Services
 
             var detailsInformation = JsonConvert.DeserializeObject<Dictionary<string, ChampUploadDto>>(champs);
             //TODO:
+         
+
+            return ProccessingDataToDb(detailsInformation);
+        }
+
+        private int ProccessingDataToDb(Dictionary<string, ChampUploadDto> detailsInformation)
+        {
+            //TODO: Implement for case delete champ or skin if not existed in json file, upda skin problem
+
             foreach (KeyValuePair<string, ChampUploadDto> champ in detailsInformation)
             {
-                var champData = new Champion()
+                Champion champData;
+                if (_champRepositories.Read(a => a.Id == champ.Value.key).Any())
                 {
-                    ChampionName = champ.Value.name,
-                    CreatedDate = DateTime.Now,
-                    Id = champ.Value.key
-                };
-            }
+                    champData = _champRepositories.ReadOne(a => a.Id == champ.Value.key);
+                    champData.ChampionName = champ.Value.name;
+                    champData.UpdatedDate = DateTime.Now;
+                    champData.Avatar = $"../Images/champion/{champ.Key}.png";
+                    champData.Skins = champ.Value.skins.Select(a =>
+                    {
+                        Skin skinData;
+                        if (_repoSkin.Read(b => b.Id == a.id).Any())
+                        {
+                            skinData = _repoSkin.ReadOne(b => b.Id == a.id);
+                            skinData.Avatar = $"../Images/skins/championsskin_{a.id}.jpg";
+                            skinData.ChampionId = champ.Value.key;
+                            skinData.UpdatedDate = DateTime.Now;
+                            skinData.SkinName = a.name;
+                        }
+                        else
+                        {
+                            skinData= new Skin()
+                            {
+                                Avatar = $"../Images/skins/championsskin_{a.id}.jpg",
+                                ChampionId = champ.Value.key,
+                                CreatedDate = DateTime.Now,
+                                SkinName = a.name,
+                                Id = a.id
+                            };
+                        }
 
-            return -1;
+                        return skinData;
+                    }).ToList();
+
+                    _champRepositories.SaveChanges();
+                }
+                else
+                {
+                    champData = new Champion()
+                    {
+                        ChampionName = champ.Value.name,
+                        CreatedDate = DateTime.Now,
+                        Id = champ.Value.key,
+                        Avatar = $"../Images/champion/{champ.Key}.png",
+                        Skins = champ.Value.skins.Select(a => new Skin()
+                        {
+                            Avatar = $"../Images/skins/championsskin_{a.id}.jpg",
+                            ChampionId = champ.Value.key,
+                            CreatedDate = DateTime.Now,
+                            SkinName = a.name,
+                            Id = a.id
+                        }).ToList()
+                    };
+                }
+
+
+                _champRepositories.Create(champData);
+            }
+            return _champRepositories.SaveChanges();
         }
+
+
 
         public IList<SkinDto> ReadSkinByAccount(int accountId)
         {

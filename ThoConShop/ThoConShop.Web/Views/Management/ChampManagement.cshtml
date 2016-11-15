@@ -11,23 +11,26 @@
 
     <!-- BEGIN SEARCH HEADER -->
     <div class="card-head style-primary">
-        <div class="tools pull-left" style="width: 85%;">
+        <div class="tools pull-left">
             <header>Quản Lý Tướng</header>
-             @using (Html.BeginForm("UploadChamp", "Management", FormMethod.Post, new
-             {
-                 enctype = "multipart/form-data"
-             }))
-             {
-
-                    <div class="col-lg-3 no-padding">
-                        <div class="form-group">
-                            <input type="file" class="form-control" name="champFull" >
-                        </div>
+          
+        </div>
+        <div class="tools">
+            @using (Html.BeginForm("UploadChamp", "Management", FormMethod.Post, new
+            {
+                enctype = "multipart/form-data"
+            }))
+            {
+                <div class="col-lg-2 no-padding">
+                    <button type="submit" class="btn ink-reaction btn-primary"><i class="md md-file-upload"></i></button>
+                </div>
+                <div class="col-lg-10 no-padding">
+                    <div class="">
+                        <input type="file" class="form-control" name="champFull" placeholder="">
                     </div>
-                    <div class="col-lg-1 no-padding">
-                        <button type="submit" class="btn ink-reaction btn-primary"><i class="fa fa-search"></i></button>
-                    </div>
-                }
+                </div>
+               
+            }
         </div>
     </div><!--end .card-head -->
     <!-- END SEARCH HEADER -->

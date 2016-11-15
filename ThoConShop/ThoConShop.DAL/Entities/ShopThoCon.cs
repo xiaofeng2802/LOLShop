@@ -129,7 +129,8 @@ namespace ThoConShop.DAL.Entities
             modelBuilder.Entity<Champion>()
                 .HasMany(a => a.Skins)
                 .WithOptional(a => a.Champion)
-                .HasForeignKey(a => a.ChampionId);
+                .HasForeignKey(a => a.ChampionId)
+                .WillCascadeOnDelete(true);
 
 
         }

@@ -45,5 +45,7 @@ namespace ThoConShop.Business.Dtos
         public IList<SkinDto> Skins { get; set; }
 
         public IList<ChampionDto> Champions { get; set; }
+
+        public IList<PageGemDto> NumberOfPageGems { get; set; }
     }
 }

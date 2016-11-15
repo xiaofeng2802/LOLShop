@@ -55,5 +55,9 @@ namespace ThoConShop.Web.Models
 
         //[FileExtensions(ErrorMessage = "Your error message.", Extensions = "jpg,jpeg,png")]
         public HttpPostedFileBase[] PageGem { get; set; }
+
+        public HttpPostedFileBase Skins { get; set; }
+
+        public HttpPostedFileBase Champs { get; set; }
     }
 }

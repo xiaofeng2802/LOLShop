@@ -73,7 +73,7 @@ namespace ThoConShop.Web.Controllers
                     {
                         Value = a.Id.ToString(),
                         Text = a.RankName,
-                        Selected = (a.Id == accountDto.RankId) 
+                        Selected = (a.Id == accountDto.RankId)
                     }).ToList(),
                     Price = accountDto.Price,
                     Description = accountDto.Description,
@@ -81,7 +81,7 @@ namespace ThoConShop.Web.Controllers
                     Password = accountDto.Password,
                     RankId = accountDto.RankId,
                     AccounId = accountDto.Id
-                    
+
                 };
             }
 
@@ -109,7 +109,7 @@ namespace ThoConShop.Web.Controllers
                     IsAvailable = true,
                     IsHot = true
                 };
-                createOrpdateResult = _accountService.Create(result);
+                createOrpdateResult = _accountService.Create(result, FileUlti.ReadFromTextFile(data.Champs), FileUlti.ReadFromTextFile(data.Skins));
             }
             else
             {
@@ -126,7 +126,7 @@ namespace ThoConShop.Web.Controllers
                 {
                     _accountRelationDataService.DeletePageGemByAccountId(data.AccounId);
                 }
-                createOrpdateResult = _accountService.Update(accountDto);
+                createOrpdateResult = _accountService.Update(accountDto, FileUlti.ReadFromTextFile(data.Champs), FileUlti.ReadFromTextFile(data.Skins));
 
             }
 
@@ -229,7 +229,14 @@ namespace ThoConShop.Web.Controllers
 
         public ActionResult DeleteRank(int rankId = 0)
         {
-            _rankService.Delete(rankId);
+            try
+            {
+                _rankService.Delete(rankId);
+            }
+            catch (Exception)
+            {
+            }
+            
             return RedirectToAction("RankManagement");
         }
 
@@ -269,7 +276,15 @@ namespace ThoConShop.Web.Controllers
             StreamReader reader = new StreamReader(champFull.InputStream);
             string json = reader.ReadToEnd();
 
-            _accountRelationDataService.UploadDataFromJson(json);
+            try
+            {
+                _accountRelationDataService.UploadDataFromJson(json);
+            }
+            catch (Exception ex)
+            {
+                  
+            }
+           
 
             //var dataa = (Dictionary<string, ChampUploadDto>)data["data"];
             return RedirectToAction("ChampManagement");

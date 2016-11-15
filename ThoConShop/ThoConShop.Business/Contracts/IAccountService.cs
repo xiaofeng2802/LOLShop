@@ -11,13 +11,13 @@ namespace ThoConShop.Business.Contracts
     public interface IAccountService
     {
 
-        AccountDto Create(AccountDto entity);
+        AccountDto Create(AccountDto entity, string champ, string skin);
 
         IPagedList<AccountDto> Read(int currentIndex, int pageSize, bool isAvailableOnly = true);
 
         IList<AccountDto> Read();
 
-        AccountDto Update(AccountDto entity);
+        AccountDto Update(AccountDto entity, string champ, string skin);
 
         int Delete(int entityId);
 

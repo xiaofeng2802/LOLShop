@@ -23,7 +23,7 @@ namespace ThoConShop.Business.Dtos
 
     public class SkinDetailUploadDto
     {
-        public string id { get; set; }
+        public int id { get; set; }
 
         public int num { get; set; }
 

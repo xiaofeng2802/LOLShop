@@ -19,20 +19,27 @@ namespace ThoConShop.Business.Services
         readonly IRepositories<int, Account> _repoAccount;
         readonly IRepositories<int, Rank> _repoRank;
         readonly IRepositories<int, Skin> _repoSkin;
+        readonly IRepositories<int, Champion> _repoChamp;
 
         public AccountService(IRepositories<int, Account> repo,
             IRepositories<int, Rank> repoRank,
-             IRepositories<int, Skin> repoSkin)
+             IRepositories<int, Skin> repoSkin,
+             IRepositories<int, Champion> repoChamp)
         {
             _repoAccount = repo;
             _repoRank = repoRank;
             _repoSkin = repoSkin;
+            _repoChamp = repoChamp;
         }
 
-        public AccountDto Create(AccountDto entity)
+        public AccountDto Create(AccountDto entity, string champ, string skin)
         {
             var account = Mapper.Map<Account>(entity);
-             var result = _repoAccount.Create(account);
+
+            account.Champions = ChampionForCreation(champ);
+            account.Skins = SkinForCreation(skin);
+
+            var result = _repoAccount.Create(account);
             
             if (_repoAccount.SaveChanges() > 0)
             {
@@ -40,6 +47,41 @@ namespace ThoConShop.Business.Services
             }
 
             return null;
+        }
+
+        private IList<Champion> ChampionForCreation(string data)
+        {
+            var splitData = data.Split(new[] {'\r', '\n'}).Where(a => !string.IsNullOrEmpty(a));
+            List<Champion> champs = new List<Champion>();
+
+            foreach (var item in splitData)
+            {
+                champs.Add(_repoChamp.ReadOne(a => a.ChampionName == item));
+            }
+
+            return champs;
+        }
+
+        private IList<Skin> SkinForCreation(string data)
+        {
+            var splitData = data.Split(new[] { '\r', '\n' }).Where(a => !string.IsNullOrEmpty(a));
+            List<Skin> skins = new List<Skin>();
+
+            foreach (var item in splitData)
+            {
+
+                var firstIndex = item.IndexOf("_", StringComparison.Ordinal);
+                var end = item.LastIndexOf(".", StringComparison.Ordinal);
+                var stringData = item.Substring((firstIndex + 1), ((end - firstIndex) -1));
+                int key = 0;
+
+                if (int.TryParse(stringData, out key))
+                {
+                    skins.Add(_repoSkin.ReadOne(a => a.Id == key));
+                }
+            }
+
+            return skins;
         }
 
         public int Delete(int entityId)
@@ -55,6 +97,7 @@ namespace ThoConShop.Business.Services
                 var accountDto = Mapper.Map<AccountDto>(_repoAccount.Read(a => true)
                                                               .Include(a => a.Champions)
                                                               .Include(a => a.Skins)
+                                                              .Include(a => a.NumberOfPageGems)
                                                               .SingleOrDefault(a => a.Id == accountId));
                 return accountDto;
             }
@@ -199,10 +242,17 @@ namespace ThoConShop.Business.Services
             return result;
         }
 
-        public AccountDto Update(AccountDto entity)
+        public AccountDto Update(AccountDto entity, string champ, string skin)
         {
             var data = _repoAccount.ReadOne(a => a.Id == entity.Id);
             var result = Mapper.Map(entity, data);
+
+            data.Champions.Clear();
+            data.Skins.Clear();
+            
+            data.Champions = ChampionForCreation(champ);
+            data.Skins = SkinForCreation(skin);
+
             if (_repoAccount.SaveChanges() > 0)
             {
                 return entity;

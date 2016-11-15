@@ -62,8 +62,8 @@
                            {
                             <tr>
                                 <td>@item.Id</td>
-                                <td class="text-center"><a href="@Url.Action("UpdateSkinAccount", "Management", new { accountId = item.Id })">@item.NumberOfSkins</a></td>
-                                <td class="text-center"><a href="@Url.Action("UpdateChampAccount", "Management", new { accountId = item.Id })">@item.NumberOfChamps</a></td>
+                                <td class="text-center">@item.NumberOfSkins</td>
+                                <td class="text-center">@item.NumberOfChamps</td>
                                 <td class="text-center">@item.NumberOfPageGem</td>
                                 <td>@item.Price.VietNameseMoneyFormat()</td>
                                 <td>@item.CreatedDate.ToShortDateString()</td>
