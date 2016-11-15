@@ -359,10 +359,19 @@ namespace ThoConShop.Business.Services
 
             Dictionary<string, object> data = (Dictionary<string, object>)json_serializer.DeserializeObject(json);
 
-            var champData = JsonConvert.SerializeObject(data["data"]);
+            var champs = JsonConvert.SerializeObject(data["data"]);
 
-            var detailsInformation = JsonConvert.DeserializeObject<Dictionary<string, ChampUploadDto>>(champData);
+            var detailsInformation = JsonConvert.DeserializeObject<Dictionary<string, ChampUploadDto>>(champs);
             //TODO:
+            foreach (KeyValuePair<string, ChampUploadDto> champ in detailsInformation)
+            {
+                var champData = new Champion()
+                {
+                    ChampionName = champ.Value.name,
+                    CreatedDate = DateTime.Now,
+                    Id = champ.Value.key
+                };
+            }
 
             return -1;
         }

@@ -2098,13 +2098,10 @@
     <Content Include="Views\Management\TradingHistories.cshtml" />
     <Content Include="Views\Management\FeedManagement.cshtml" />
     <Content Include="Views\Management\CreateOrUpdateAccount.cshtml" />
-    <Content Include="Views\Management\UpdateSkinAccount.cshtml" />
-    <Content Include="Views\Management\UpdateChampAccount.cshtml" />
     <Content Include="Views\Home\LockNoticeView.cshtml" />
     <Content Include="Views\Management\CreateRankView.cshtml" />
     <Content Include="Views\Management\ChampManagement.cshtml" />
     <Content Include="Views\Management\SkinManagement.cshtml" />
-    <Content Include="Views\Management\CreateSkin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -44,6 +44,8 @@ namespace ThoConShop.DAL.Entities
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Champion>().Property(a => a.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+            modelBuilder.Entity<Skin>().Property(a => a.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
             modelBuilder.Entity<Account>()
                 .Property(e => e.Password)
