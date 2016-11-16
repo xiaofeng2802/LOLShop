@@ -48,7 +48,7 @@ namespace ThoConShop.Web.Models
 
         public bool IsDelete { get; set; }
 
-        [Required(ErrorMessage = "Hình đại diện không được trống.")]
+        //[Required(ErrorMessage = "Hình đại diện không được trống.")]
         //[FileExtensions(ErrorMessage = "Your error message.", Extensions = "jpg,jpeg,png")]
         public HttpPostedFileBase Avatar { get; set; }
 

@@ -361,9 +361,7 @@ namespace ThoConShop.Business.Services
             var champs = JsonConvert.SerializeObject(data["data"]);
 
             var detailsInformation = JsonConvert.DeserializeObject<Dictionary<string, ChampUploadDto>>(champs);
-            //TODO:
          
-
             return ProccessingDataToDb(detailsInformation);
         }
 
@@ -374,6 +372,10 @@ namespace ThoConShop.Business.Services
             foreach (KeyValuePair<string, ChampUploadDto> champ in detailsInformation)
             {
                 Champion champData;
+                if (champ.Value.key == 266)
+                {
+                    
+                }
                 if (_champRepositories.Read(a => a.Id == champ.Value.key).Any())
                 {
                     champData = _champRepositories.ReadOne(a => a.Id == champ.Value.key);
@@ -425,10 +427,10 @@ namespace ThoConShop.Business.Services
                             Id = a.id
                         }).ToList()
                     };
+                    _champRepositories.Create(champData);
                 }
 
-
-                _champRepositories.Create(champData);
+               
             }
             return _champRepositories.SaveChanges();
         }

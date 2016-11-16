@@ -51,33 +51,43 @@ namespace ThoConShop.Business.Services
 
         private IList<Champion> ChampionForCreation(string data)
         {
-            var splitData = data.Split(new[] {'\r', '\n'}).Where(a => !string.IsNullOrEmpty(a));
             List<Champion> champs = new List<Champion>();
-
-            foreach (var item in splitData)
+            if (!string.IsNullOrEmpty(data))
             {
-                champs.Add(_repoChamp.ReadOne(a => a.ChampionName == item));
+                var splitData = data.Split(new[] { '\r', '\n' }).Where(a => !string.IsNullOrEmpty(a));
+
+
+                foreach (var item in splitData)
+                {
+                    champs.Add(_repoChamp.ReadOne(a => a.ChampionName == item));
+                }
             }
+           
 
             return champs;
         }
 
         private IList<Skin> SkinForCreation(string data)
         {
-            var splitData = data.Split(new[] { '\r', '\n' }).Where(a => !string.IsNullOrEmpty(a));
             List<Skin> skins = new List<Skin>();
 
-            foreach (var item in splitData)
+            if (!string.IsNullOrEmpty(data))
             {
+                var splitData = data.Split(new[] { '\r', '\n' }).Where(a => !string.IsNullOrEmpty(a));
 
-                var firstIndex = item.IndexOf("_", StringComparison.Ordinal);
-                var end = item.LastIndexOf(".", StringComparison.Ordinal);
-                var stringData = item.Substring((firstIndex + 1), ((end - firstIndex) -1));
-                int key = 0;
 
-                if (int.TryParse(stringData, out key))
+                foreach (var item in splitData)
                 {
-                    skins.Add(_repoSkin.ReadOne(a => a.Id == key));
+
+                    var firstIndex = item.IndexOf("_", StringComparison.Ordinal);
+                    var end = item.LastIndexOf(".", StringComparison.Ordinal);
+                    var stringData = item.Substring((firstIndex + 1), ((end - firstIndex) - 1));
+                    int key = 0;
+
+                    if (int.TryParse(stringData, out key))
+                    {
+                        skins.Add(_repoSkin.ReadOne(a => a.Id == key));
+                    }
                 }
             }
 
@@ -245,13 +255,27 @@ namespace ThoConShop.Business.Services
         public AccountDto Update(AccountDto entity, string champ, string skin)
         {
             var data = _repoAccount.ReadOne(a => a.Id == entity.Id);
-            var result = Mapper.Map(entity, data);
+            data.Description = entity.Description;
+            data.Password = entity.Password ?? data.Password;
+            data.UpdatedDate = DateTime.Now;
+            data.Price = entity.Price;
+            data.RankId = entity.RankId;
+            data.UserName = entity.UserName;
 
-            data.Champions.Clear();
-            data.Skins.Clear();
-            
-            data.Champions = ChampionForCreation(champ);
-            data.Skins = SkinForCreation(skin);
+
+            if (!string.IsNullOrEmpty(champ))
+            {
+                data.Champions = new List<Champion>();
+                _repoAccount.SaveChanges();
+                data.Champions = ChampionForCreation(champ);
+            }
+
+            if (!string.IsNullOrEmpty(skin))
+            {
+                data.Skins= new List<Skin>();
+                _repoAccount.SaveChanges();
+                data.Skins = SkinForCreation(skin);
+            }
 
             if (_repoAccount.SaveChanges() > 0)
             {
