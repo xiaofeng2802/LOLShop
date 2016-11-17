@@ -96,8 +96,20 @@ namespace ThoConShop.Business.Services
 
         public int Delete(int entityId)
         {
+            var avatar = _repoAccount.ReadOne(a => a.Id == entityId).Avatar;
+            var data = _repoAccount.ReadOne(a => a.Id == entityId).NumberOfPageGems.Select(a => a.ImageUrl).ToList();
             _repoAccount.Delete(a => a.Id == entityId);
-            return _repoAccount.SaveChanges();
+            var result = _repoAccount.SaveChanges();
+            if (result > 0)
+            {
+                FileUlti.DeleteFile(avatar);
+
+                foreach (var page in data)
+                {
+                    FileUlti.DeleteFile(page);
+                }
+            }
+            return result;
         }
 
         public AccountDto Edit(int accountId)

@@ -105,7 +105,7 @@ namespace ThoConShop.Web.Controllers
                     Description = data.Description,
                     Price = data.Price,
                     RankId = data.RankId,
-                    Avatar = FileUlti.SaveFile(data.Avatar, path),
+                    Avatar = ConfigurationManager.AppSettings["AvatarUrl"] + FileUlti.SaveFile(data.Avatar, path),
                     IsAvailable = true,
                     IsHot = true
                 };
@@ -114,14 +114,14 @@ namespace ThoConShop.Web.Controllers
             else
             {
                 var accountDto = _accountService.ReadOneById(data.AccounId);
-
+                var url = FileUlti.SaveFile(data.Avatar, path);
                 accountDto.Price = data.Price;
                 accountDto.Description = data.Description;
                 accountDto.Password = data.Password;
                 accountDto.UserName = data.UserName;
                 accountDto.RankId = data.RankId;
-                accountDto.Avatar = FileUlti.SaveFile(data.Avatar, path) ?? accountDto.Avatar;
-
+                accountDto.Avatar = (url == null ? accountDto.Avatar : ConfigurationManager.AppSettings["AvatarUrl"] + url);
+                
                 if (data.PageGem != null)
                 {
                     _accountRelationDataService.DeletePageGemByAccountId(data.AccounId);
@@ -141,7 +141,7 @@ namespace ThoConShop.Web.Controllers
                         {
                             AccountId = createOrpdateResult.Id,
                             CreatedDate = DateTime.Now,
-                            ImageUrl = FileUlti.SaveFile(item, pathPageGem)
+                            ImageUrl = ConfigurationManager.AppSettings["PageGemUrl"] + FileUlti.SaveFile(item, pathPageGem)
                         };
 
                         _accountRelationDataService.CreatePageGem(pageGem);
@@ -219,7 +219,7 @@ namespace ThoConShop.Web.Controllers
                 GroupId = data.GroupId == 0 ? null : data.GroupId,
                 CreatedDate = DateTime.Now,
                 RankName = data.RankName,
-                RankImage = FileUlti.SaveFile(data.RankImage, path)
+                RankImage = "../Images/" + FileUlti.SaveFile(data.RankImage, path)
             };
 
             _rankService.Create(rankdto);

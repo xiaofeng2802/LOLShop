@@ -52,7 +52,7 @@ namespace ThoConShop.DataSeedWork.Ulti
                 string fullPath = System.IO.Path.Combine(path, pic);
                 // file is uploaded
                 file.SaveAs(fullPath);
-                return fullPath;;
+                 return pic;
             }
             return null;
         }
