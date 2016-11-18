@@ -16,6 +16,7 @@ namespace ThoConShop.DAL.Entities
         {
             UserRechargeHistories = new HashSet<UserRechargeHistory>();
             UserTradingHistories = new HashSet<UserTradingHistory>();
+            LuckyWheelHistories = new HashSet<LuckyWheelHistory>();
         }
 
         public float Balance { get; set; } = 0;
@@ -33,5 +34,7 @@ namespace ThoConShop.DAL.Entities
         public virtual ICollection<UserTradingHistory> UserTradingHistories { get; set; }
 
         public virtual ApplicationUser GeneralUser { get; set; }
+
+        public virtual ICollection<LuckyWheelHistory> LuckyWheelHistories { get; set; }
     }
 }

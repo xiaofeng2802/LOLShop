@@ -29,6 +29,8 @@ namespace ThoConShop.DAL
             builder.RegisterType<Repositories.Repositories<int, Skin>>().As<IRepositories<int, Skin>>().InstancePerRequest();
             builder.RegisterType<Repositories.Repositories<int, UserRechargeHistory>>().As<IRepositories<int, UserRechargeHistory>>().InstancePerRequest();
             builder.RegisterType<Repositories.Repositories<int, UserTradingHistory>>().As<IRepositories<int, UserTradingHistory>>().InstancePerRequest();
+            builder.RegisterType<Repositories.Repositories<int, LuckyWheelItem>>().As<IRepositories<int, LuckyWheelItem>>().InstancePerRequest();
+            builder.RegisterType<Repositories.Repositories<int, LuckyWheelHistory>>().As<IRepositories<int, LuckyWheelHistory>>().InstancePerRequest();
 
             base.Load(builder);
         }

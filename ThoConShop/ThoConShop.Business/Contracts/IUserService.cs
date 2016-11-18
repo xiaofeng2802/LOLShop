@@ -26,5 +26,17 @@ namespace ThoConShop.Business.Contracts
         UserDto Edit(int accountId);
 
         UserDto ReadByGeneralUserId(string generalUserId);
+
+        IPagedList<LuckyWheelItemDto> ReadLuckyWheelItem(int currentIndex, int pageSize);
+
+        LuckyWheelItemDto CreateLuckyItem(LuckyWheelItemDto data);
+
+        int DeleteLuckyItem(int id);
+
+        IPagedList<LuckyWheelHistoryDto> ReadLuckyWheelHistory(int currentIndex, int pageSize);
+
+        LuckyWheelHistoryDto CreateLuckyHistory(LuckyWheelHistoryDto data);
+
+        int DeleteLuckyHistory(int id);
     }
 }

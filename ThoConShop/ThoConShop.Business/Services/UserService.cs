@@ -18,11 +18,18 @@ namespace ThoConShop.Business.Services
     {
         private readonly IRepositories<int, User> _userRepositories;
 
+        private readonly IRepositories<int, LuckyWheelItem> _luckyWheelItemRepositories;
+        private readonly IRepositories<int, LuckyWheelHistory> _luckyWheelHistoryRepositories;
+
         ShopThoCon db = new ShopThoCon();
 
-        public UserService(IRepositories<int, User> userRepositories)
+        public UserService(IRepositories<int, User> userRepositories,
+            IRepositories<int, LuckyWheelItem> luckyWheelItemRepositories,
+            IRepositories<int, LuckyWheelHistory> luckyWheelHistoryRepositories)
         {
             _userRepositories = userRepositories;
+            _luckyWheelItemRepositories = luckyWheelItemRepositories;
+            _luckyWheelHistoryRepositories = luckyWheelHistoryRepositories;
         }
 
         public UserDto Create(UserDto entity)
@@ -98,6 +105,82 @@ namespace ThoConShop.Business.Services
         {
             var result = Mapper.Map<UserDto>(_userRepositories.ReadOne(a => a.GeneralUserId == generalUserId));
             return result;
+        }
+
+        public IPagedList<LuckyWheelItemDto> ReadLuckyWheelItem(int currentIndex, int pageSize)
+        {
+            var result = _luckyWheelItemRepositories.Read(a => true)
+                .Select(a => new LuckyWheelItemDto()
+                {
+                    CreatedDate = a.CreatedDate,
+                    ImageUrl = a.ImageUrl,
+                    Id = a.Id,
+                    Description = a.Description,
+                    UpdatedDate = a.UpdatedDate,
+                    DisplayName = a.DisplayName
+                }).ToPagedList(currentIndex, pageSize);
+
+            return result;
+        }
+
+        public LuckyWheelItemDto CreateLuckyItem(LuckyWheelItemDto data)
+        {
+            var entity = Mapper.Map<LuckyWheelItem>(data);
+
+            var result = _luckyWheelItemRepositories.Create(entity);
+
+            if (_luckyWheelItemRepositories.SaveChanges() > 0)
+            {
+                return Mapper.Map<LuckyWheelItemDto>(result);
+            }
+
+            return null;
+        }
+
+        public int DeleteLuckyItem(int id)
+        {
+             _luckyWheelItemRepositories.Delete(a => a.Id == id);
+
+            return _luckyWheelItemRepositories.SaveChanges();
+        }
+
+        public IPagedList<LuckyWheelHistoryDto> ReadLuckyWheelHistory(int currentIndex, int pageSize)
+        {
+            var result = _luckyWheelHistoryRepositories.Read(a => true)
+                .Include(a => a.User)
+                .Include(a => a.User.GeneralUser)
+                .Select(a => new LuckyWheelHistoryDto()
+                {
+                  Id = a.Id,
+                  CreatedDate = a.CreatedDate,
+                  UpdatedDate = a.UpdatedDate,
+                  UserName = a.User.GeneralUser.UserName,
+                  Result = a.Result
+                }).ToPagedList(currentIndex, pageSize);
+
+            return result;
+        }
+
+        public LuckyWheelHistoryDto CreateLuckyHistory(LuckyWheelHistoryDto data)
+        {
+
+            var entity = Mapper.Map<LuckyWheelHistory>(data);
+
+            var result = _luckyWheelHistoryRepositories.Create(entity);
+
+            if (_luckyWheelHistoryRepositories.SaveChanges() > 0)
+            {
+                return Mapper.Map<LuckyWheelHistoryDto>(result);
+            }
+
+            return null;
+        }
+
+        public int DeleteLuckyHistory(int id)
+        {
+            _luckyWheelHistoryRepositories.Delete(a => a.Id == id);
+
+            return _luckyWheelHistoryRepositories.SaveChanges();
         }
     }
 }

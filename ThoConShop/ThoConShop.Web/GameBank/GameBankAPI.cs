@@ -14,12 +14,9 @@ namespace ThoConShop.Web.GameBank
     public class GameBankAPI
     {
 
-        //this is proxy setting 
-        private bool proxy_setting = false;//not connected with proxy server
 
         //this is your proxy username,password,ip
         private string proxy_ip = "http://27.0.0.1/";//your proxy server
-        private string port = "80"; //proxy password
         private string username = "root"; //proxy username
         private string password = "";  //proxy password 
 

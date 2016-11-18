@@ -132,7 +132,13 @@ namespace ThoConShop.DAL.Entities
                 .HasForeignKey(a => a.ChampionId)
                 .WillCascadeOnDelete(true);
 
+            modelBuilder.Entity<User>()
+                .HasMany(a => a.LuckyWheelHistories)
+                .WithRequired(a => a.User)
+                .HasForeignKey(a => a.UserId);
 
+            modelBuilder.Entity<LuckyWheelItem>()
+                .HasKey(a => a.Id);
         }
     }
 }

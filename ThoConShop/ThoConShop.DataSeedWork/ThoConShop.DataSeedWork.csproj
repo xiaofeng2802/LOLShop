@@ -61,6 +61,7 @@
     <Compile Include="Identity\ApplicationUserStore.cs" />
     <Compile Include="Identity\IdentityEntity.cs" />
     <Compile Include="Extensions\StringExtension.cs" />
+    <Compile Include="LuckyWheel\LuckyWheelUlti.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Ulti\FileUlti.cs" />
     <Compile Include="UserExternalService\UserExternalService.cs" />
