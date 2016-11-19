@@ -78,5 +78,11 @@ namespace ThoConShop.Web.Controllers
             }
             return result;
         }
+
+        [Authorize]
+        public ActionResult LuckyWheel()
+        {
+            return View();
+        }
     }
 }

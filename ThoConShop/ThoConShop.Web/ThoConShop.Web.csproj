@@ -1679,6 +1679,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\effect-hover-item\hover.css" />
+    <Content Include="Content\luckyWheel.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\typeahead.tagging.css" />
     <Content Include="favicon.ico" />
@@ -3026,6 +3027,7 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Custom\GlobalManagement.js" />
     <Content Include="Scripts\Custom\Index.js" />
+    <Content Include="Scripts\Custom\luckyWheel.js" />
     <Content Include="Scripts\Custom\_updateAccountChamp.js" />
     <Content Include="Scripts\Custom\_updateAccountSkin.js" />
     <Content Include="Scripts\effect-hover-item\production.js" />
@@ -3088,6 +3090,7 @@
     <Content Include="Views\Management\CreateRankView.cshtml" />
     <Content Include="Views\Management\ChampManagement.cshtml" />
     <Content Include="Views\Management\SkinManagement.cshtml" />
+    <Content Include="Views\Home\LuckyWheel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -25,6 +25,8 @@ namespace ThoConShop.Business
                 a.CreateMap<UserRechargeHistoryDto, UserRechargeHistory>().ReverseMap();
                 a.CreateMap<UserTradingHistory, UserTradingHistoryDto>().ReverseMap();
                 a.CreateMap<PageGem, PageGemDto>().ReverseMap();
+                a.CreateMap<LuckyWheelItem, LuckyWheelItemDto>().ReverseMap();
+                a.CreateMap<LuckyWheelHistory, LuckyWheelHistoryDto>().ReverseMap();
             }); 
         }
     }

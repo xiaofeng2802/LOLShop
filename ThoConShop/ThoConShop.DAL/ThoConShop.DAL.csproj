@@ -69,6 +69,8 @@
     <Compile Include="Entities\Account.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\Champion.cs" />
+    <Compile Include="Entities\LuckyWheelHistory.cs" />
+    <Compile Include="Entities\LuckyWheelItem.cs" />
     <Compile Include="Entities\Rank.cs" />
     <Compile Include="Entities\PageGem.cs" />
     <Compile Include="Entities\ShopThoCon.cs" />
