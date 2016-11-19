@@ -2729,7 +2729,6 @@
     <Content Include="Images\skins\championsskin_99004.jpg" />
     <Content Include="Images\skins\championsskin_99005.jpg" />
     <Content Include="Images\skins\championsskin_99006.jpg" />
-    <Content Include="Images\skins\SinhVienIT.Net---Stellar Phoenix Windows Data Recovery 6.0.0.1 Technical Edition.txt" />
     <Content Include="Images\tick1.png" />
     <Content Include="Images\wishlist.png" />
     <Content Include="Images\yasou.jpg" />
@@ -3023,7 +3022,6 @@
     <Content Include="Content\assets\less\shared\themes\theme-5.less" />
     <Content Include="Content\assets\less\shared\themes\theme-default.less" />
     <Content Include="Content\assets\less\shared\variables.less" />
-    <Content Include="Images\skins\Thumbs.db" />
     <None Include="Properties\PublishProfiles\Thuan.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Custom\GlobalManagement.js" />

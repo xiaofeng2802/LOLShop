@@ -13,7 +13,6 @@ namespace ThoConShop.DAL.Entities
         public Rank()
         {
             Accounts = new HashSet<Account>();
-            Children = new HashSet<Rank>();
         }
 
         [StringLength(50)]
@@ -22,13 +21,9 @@ namespace ThoConShop.DAL.Entities
         [StringLength(500)]
         public string RankImage { get; set; }
 
-        public int? GroupId { get; set; }
-
         public virtual Rank Parent { get; set; }
 
         public bool IsDeleted { get; set; }
-
-        public virtual ICollection<Rank> Children { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Account> Accounts { get; set; }

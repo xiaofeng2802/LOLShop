@@ -193,19 +193,9 @@ namespace ThoConShop.Web.Controllers
         {
             CreateRankViewModel vm = new CreateRankViewModel()
             {
-                DataSourceRank = _rankService.Read(null).Select(a => new SelectListItem()
-                {
-                    Text = a.RankName,
-                    Value = a.Id.ToString()
-                }).ToList()
+               
             };
 
-            vm.DataSourceRank.Add(new SelectListItem()
-            {
-                Text = "",
-                Value = "0",
-                Selected = true
-            });
             return View(vm);
         }
 
@@ -216,7 +206,6 @@ namespace ThoConShop.Web.Controllers
             var path = Server.MapPath("~/Images");
             var rankdto = new RankDto()
             {
-                GroupId = data.GroupId == 0 ? null : data.GroupId,
                 CreatedDate = DateTime.Now,
                 RankName = data.RankName,
                 RankImage = "../Images/" + FileUlti.SaveFile(data.RankImage, path)

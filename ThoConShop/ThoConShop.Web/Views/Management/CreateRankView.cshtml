@@ -29,21 +29,6 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">Nhóm Rank</label>
-                            <div class="col-sm-10">
-                                <div class="form-group floating-label">
-                                    @Html.DropDownListFor(a => a.GroupId, Model.DataSourceRank, new {@class = "form-control", @id = "select2"})
-                                    @Html.ValidationMessageFor(a => a.GroupId, "", new {@class = "text-danger"})
-                                </div>
-                                <div class="form-control-line"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
                             <label class="col-sm-2 control-label">Tài Khoản</label>
                             <div class="col-sm-10">
                                 @*<input type="text" class="form-control" id="Username5">*@
@@ -54,6 +39,7 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div><!--end .card-body -->
             <div class="card-actionbar">

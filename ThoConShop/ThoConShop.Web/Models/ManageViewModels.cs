@@ -50,10 +50,6 @@ namespace ThoConShop.Web.Models
 
         [Required(ErrorMessage = "Hình rank không được trống.")]
         public HttpPostedFileBase RankImage { get; set; }
-
-        public int? GroupId { get; set; }
-
-        public List<SelectListItem> DataSourceRank { get; set; }
     }
 
     public class UserRechargeViewModel

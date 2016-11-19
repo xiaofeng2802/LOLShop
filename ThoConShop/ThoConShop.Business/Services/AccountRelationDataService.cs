@@ -220,7 +220,7 @@ namespace ThoConShop.Business.Services
 
         public IList<RankDto> ReadRankForFilter()
         {
-            return Mapper.Map<IList<RankDto>>(_repoGank.Read(a => a.GroupId == null && !a.IsDeleted));
+            return Mapper.Map<IList<RankDto>>(_repoGank.Read(a => !a.IsDeleted));
         }
 
         public IList<SkinDto> ReadSkinForFilter()

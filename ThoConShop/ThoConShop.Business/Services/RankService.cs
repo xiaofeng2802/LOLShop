@@ -68,17 +68,6 @@ namespace ThoConShop.Business.Services
         public IList<RankDto> Read(bool? isParentOnly = false)
         {
             var result = _repoRank.Read(a => !a.IsDeleted);
-            if (isParentOnly != null)
-            {
-                if ((bool)isParentOnly)
-                {
-                    result = result.Where(a => a.GroupId == null);
-                }
-                else
-                {
-                    result = result.Where(a => a.GroupId != null);
-                }
-            }
           
             return Mapper.Map<IList<RankDto>>(result.OrderBy(a => a.RankName));
         }

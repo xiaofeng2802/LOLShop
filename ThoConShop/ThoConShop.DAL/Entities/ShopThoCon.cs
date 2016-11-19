@@ -113,11 +113,6 @@ namespace ThoConShop.DAL.Entities
                 .WithOptional(a => a.Parent)
                 .HasForeignKey(a => a.GroupId);
 
-            modelBuilder.Entity<Rank>()
-              .HasMany(a => a.Children)
-              .WithOptional(a => a.Parent)
-              .HasForeignKey(a => a.GroupId);
-
             modelBuilder.Entity<User>()
                 .HasRequired(a => a.GeneralUser);
 

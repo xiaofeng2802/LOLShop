@@ -12,11 +12,9 @@
                 <a href="@Url.Action("Edit", new { accountId = item.Id })">
                     <div class="caption">
                         <h4>Acc trắng thông tin</h4>
-                        <h4>Rank: Bạch Kim 5</h4>
-                        <h4>Khung: Bạch Kim</h4>
-                        <h4>Tướng: 120</h4>
-                        <h4>Skin: 20</h4>
-                        <h4>IP: 70000</h4>
+                        <h4>Rank: @item.RankName</h4>
+                        <h4>Tướng: @item.NumberOfChamps</h4>
+                        <h4>Skin: @item.NumberOfSkins</h4>
                     </div>
                     <span class="header-item">@item.Title</span>
                     <div class="body-item" align="center">
@@ -28,8 +26,8 @@
                 <div class="col-xs-5 col-md-6 no_padding">
                     <ul>
                         <li>Rank: @item.RankName</li>
-                        <li>Tướng: 120</li>
-                        <li>Skin: 17</li>
+                        <li>Tướng: @item.NumberOfChamps</li>
+                        <li>Skin: @item.NumberOfSkins</li>
                     </ul>
                 </div>
                 <div class="col-xs-7 col-md-6 stay_right footer-item-right">

@@ -161,11 +161,7 @@ namespace ThoConShop.Business.Services
 
             if (gankFilter != null && gankFilter > 0)
             {
-                var idList = _repoRank.ReadOne(a => a.Id == gankFilter && !a.IsDeleted).Children.Select(a => a.Id).ToList();
-              
-                idList.Add(gankFilter ?? 0);
-                
-                result = result.Where(a => idList.Any(b => b == a.RankId));
+                result = result.Where(a => a.RankId == gankFilter);
             }
 
             if (!string.IsNullOrEmpty(priceFilter))
