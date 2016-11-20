@@ -3,25 +3,40 @@
     ViewBag.Title = "LuckyWheel";
     Layout = "~/Views/Shared/_DetailsLayout.cshtml";
 }
+
+<div class="ov-top masthead">
+    <div class="container text-center">
+        <h1 class="c-hero__title u-text-gradient"></h1>
+       
+
+        <div id="venues">
+            <h1>
+                Venues
+                <input type="checkbox" class="checkAll" checked />
+            </h1>
+            <div id="name">
+
+            </div>
+            <h2>
+                Types
+                <input type="checkbox" class="checkAll" checked />
+            </h2>
+            <div id="types">
+
+            </div>
+        </div>
+        <div id="filterToggle">
+            . . .
+        </div>
+        <div id="wheel">
+            <canvas id="canvas" width="1000" height="600"></canvas>
+        </div>
+        <div id="counter"></div>
+
+       
+    </div>
+    <div class="clearfix"></div>
+</div>
 <link href="~/Content/luckyWheel.css" rel="stylesheet" />
-<div id="venues">
-    <h1>Venues
-        <input type="checkbox" class="checkAll" checked/>
-    </h1>
-    <div id="name">
 
-    </div>
-    <h2>Types
-        <input type="checkbox" class="checkAll" checked/>
-    </h2>
-    <div id="types">
-
-    </div>
-</div>
-<div id="filterToggle">. . .
-</div>
-<div id="wheel">
-    <canvas id="canvas" width="1000" height="600"></canvas>
-</div>
-<div id="counter"></div>
 <script src="~/Scripts/Custom/luckyWheel.js"></script>

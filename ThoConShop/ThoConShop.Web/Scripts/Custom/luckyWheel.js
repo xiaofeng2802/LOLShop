@@ -49,7 +49,7 @@
         maxSpeed: Math.PI / 16,
 
         upTime: 1000, // How long to spin up for (in ms)
-        downTime: 5000, // How long to slow down for (in ms)
+        downTime: 10000, // How long to slow down for (in ms)
 
         spinStart: 0,
 
@@ -60,11 +60,11 @@
 
         spin: function () {
             // Start the wheel only if it's not already spinning
-            if (wheel.timerHandle == 0) {
+            if (wheel.timerHandle === 0) {
                 wheel.spinStart = new Date().getTime();
                 wheel.maxSpeed = Math.PI / (16 + Math.random()); // Randomly vary how hard the spin is
                 wheel.frames = 0;
-                wheel.sound.play();
+                //wheel.sound.play();
 
                 wheel.timerHandle = setInterval(wheel.onTimerTick, wheel.timerDelay);
             }
@@ -114,7 +114,7 @@
         init: function (optionList) {
             try {
                 wheel.initWheel();
-                wheel.initAudio();
+                //wheel.initAudio();
                 wheel.initCanvas();
                 wheel.draw();
 
@@ -347,7 +347,7 @@
                         type: 'checkbox',
                         checked: true
                     })
-                    .change(function() {
+                    .change(function () {
                         var $this = $(this), i;
                         for (i = 0; i < venues.length; i++) {
                             if (venues[i].type === $this.val()) {
@@ -388,5 +388,6 @@
         $('.checkAll').on("click", function () {
             $(this).parent().next('div').find('input').prop('checked', $(this).prop('checked')).trigger("change");
         });
+
     });
 }(jQuery));
