@@ -110,6 +110,8 @@ namespace ThoConShop.Business.Services
         public IPagedList<LuckyWheelItemDto> ReadLuckyWheelItem(int currentIndex, int pageSize)
         {
             var result = _luckyWheelItemRepositories.Read(a => true)
+                .OrderByDescending(a => a.CreatedDate)
+                .ThenByDescending(a => a.DisplayName)
                 .Select(a => new LuckyWheelItemDto()
                 {
                     CreatedDate = a.CreatedDate,
@@ -123,9 +125,17 @@ namespace ThoConShop.Business.Services
             return result;
         }
 
+        public IList<LuckyWheelItemDto> ReadAllLuckyWheelItem()
+        {
+            var result = _luckyWheelItemRepositories.Read(a => true);
+
+            return Mapper.Map<IList<LuckyWheelItemDto>>(result);
+        }
+
         public LuckyWheelItemDto CreateLuckyItem(LuckyWheelItemDto data)
         {
             var entity = Mapper.Map<LuckyWheelItem>(data);
+            entity.CreatedDate = DateTime.Now;
 
             var result = _luckyWheelItemRepositories.Create(entity);
 
@@ -147,6 +157,7 @@ namespace ThoConShop.Business.Services
         public IPagedList<LuckyWheelHistoryDto> ReadLuckyWheelHistory(int currentIndex, int pageSize)
         {
             var result = _luckyWheelHistoryRepositories.Read(a => true)
+                .OrderByDescending(a => a.CreatedDate)
                 .Include(a => a.User)
                 .Include(a => a.User.GeneralUser)
                 .Select(a => new LuckyWheelHistoryDto()
@@ -165,6 +176,7 @@ namespace ThoConShop.Business.Services
         {
 
             var entity = Mapper.Map<LuckyWheelHistory>(data);
+            entity.CreatedDate = DateTime.Now;
 
             var result = _luckyWheelHistoryRepositories.Create(entity);
 

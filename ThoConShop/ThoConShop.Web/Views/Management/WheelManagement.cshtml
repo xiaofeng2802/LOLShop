@@ -1,0 +1,66 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<ThoConShop.Business.Dtos.LuckyWheelItemDto>
+@{
+    ViewBag.Title = "WheelManagement";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+
+    <!-- BEGIN SEARCH HEADER -->
+    <div class="card-head style-primary">
+        <div class="tools pull-left" style="width: 85%;">
+            <header>Quản Lý Vòng Quay</header>
+        </div>
+
+        <div class="tools">
+            <a class="btn btn-floating-action btn-default-light" href="@Url.Action("CreateWheelItem", "Management")"><i class="fa fa-plus"></i></a>
+        </div>
+    </div><!--end .card-head -->
+    <!-- END SEARCH HEADER -->
+    <!-- BEGIN SEARCH RESULTS -->
+    <div class="card-body">
+        <!-- BEGIN SEARCH NAV -->
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Tên</th>
+                            <th class="text-center">Hình Ảnh</th>
+                            <th class="text-center">Chú Thích</th>
+                            <th class="text-center">Số lần lập</th>
+                            <th class="text-right">#</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.DisplayName</td>
+                                <td class="text-center"><img src="@item.ImageUrl"/></td>
+                                <td class="text-center">@item.Description</td>
+                                <td class="text-center">@item.DuplicationTime</td>
+                              
+                                <td class="text-right">
+                                    @*<a href="@Url.Action("CreateWheelItem", "Management", new { accountId = item.Id })" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Sửa thông tin"><i class="fa fa-pencil"></i></a>*@
+                                    <a id="deleteButton" href="@Url.Action("DeleteWheelItem", "Management", new { id = item.Id })" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Xóa"><i class="fa fa-trash-o"></i></a>
+                                    @*<a class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Thêm Tướng/Trang Phục"><i class="md md-visibility"></i></a>*@
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div><!--end .col -->
+        <!-- END SEARCH NAV -->
+        <div class="row">
+            <div class="col-md-12 body-pagging">
+                @Html.PagedListPager(Model, page => Url.Action("AccountManagement", "Management", new { page }))
+            </div>
+        </div>
+    </div><!--end .row -->
+
+</div><!--end .card-body -->
+<!-- END SEARCH RESULTS -->
+

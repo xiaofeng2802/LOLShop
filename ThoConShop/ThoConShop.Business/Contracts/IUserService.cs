@@ -29,6 +29,8 @@ namespace ThoConShop.Business.Contracts
 
         IPagedList<LuckyWheelItemDto> ReadLuckyWheelItem(int currentIndex, int pageSize);
 
+        IList<LuckyWheelItemDto> ReadAllLuckyWheelItem();
+
         LuckyWheelItemDto CreateLuckyItem(LuckyWheelItemDto data);
 
         int DeleteLuckyItem(int id);

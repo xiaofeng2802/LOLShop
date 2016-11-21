@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace ThoConShop.Business.Dtos
 {
@@ -13,6 +14,10 @@ namespace ThoConShop.Business.Dtos
         public string Description { get; set; }
 
         public string ImageUrl { get; set; }
+
+        public int DuplicationTime { get; set; }
+
+        public HttpPostedFileBase FileImage { get; set; }
     }
 
     public class LuckyWheelHistoryDto : BaseDto<int>

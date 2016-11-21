@@ -13,5 +13,7 @@ namespace ThoConShop.DAL.Entities
         public string Description { get; set; }
 
         public string ImageUrl { get; set; }
+
+        public int DuplicationTime { get; set; }
     }
 }

@@ -1,0 +1,83 @@
+﻿@model ThoConShop.Business.Dtos.LuckyWheelItemDto
+@{
+    ViewBag.Title = "CreateWheelItem";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="col-lg-12">
+
+    @using (Html.BeginForm("CreateWheelItem", "Management", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="card">
+            <div class="card-head style-primary">
+              
+                    <header>Tạo Thông Tin Con Quay</header>
+
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Tên Hiển Thị</label>
+                            <div class="col-sm-10">
+                                <div class="form-group floating-label">
+                                    @Html.TextBoxFor(a => a.DisplayName, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(a => a.DisplayName, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-control-line"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Số Lần Lập</label>
+                            <div class="col-sm-10">
+                                @*<input type="number" class="form-control" id="Lastname5">*@
+                                @Html.TextBoxFor(a => a.DuplicationTime, new { @class = "form-control", type = "number", value = 1 })
+                                <div class="form-control-line"></div>
+                                @Html.ValidationMessageFor(a => a.DuplicationTime, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Chú Thích</label>
+                            <div class="col-sm-10">
+                                @*<input type="text" class="form-control" id="Username5">*@
+                                @Html.TextAreaFor(a => a.Description, new { @class = "form-control", rows = "3", placeholder = ""})
+                                <div class="form-control-line"></div>
+                                @Html.ValidationMessageFor(a => a.Description, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Hình Ảnh</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(a => a.FileImage, new { type = "file" })
+                                <div class="form-control-line"></div>
+                                @Html.ValidationMessageFor(a => a.FileImage, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!--end .card-body -->
+            <div class="card-actionbar">
+                <div class="card-actionbar-row">
+
+                        <button type="submit" class="btn btn-flat btn-primary ink-reaction">Tạo</button>
+                
+                </div>
+            </div>
+        </div><!--end .card -->
+
+    }
+</div>
+
+@Scripts.Render("~/bundles/jqueryval")
+

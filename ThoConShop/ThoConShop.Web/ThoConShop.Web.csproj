@@ -1680,6 +1680,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\effect-hover-item\hover.css" />
     <Content Include="Content\luckyWheel.css" />
+    <Content Include="Content\main.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\typeahead.tagging.css" />
     <Content Include="favicon.ico" />
@@ -3028,8 +3029,6 @@
     <Content Include="Scripts\Custom\GlobalManagement.js" />
     <Content Include="Scripts\Custom\Index.js" />
     <Content Include="Scripts\Custom\luckyWheel.js" />
-    <Content Include="Scripts\Custom\_updateAccountChamp.js" />
-    <Content Include="Scripts\Custom\_updateAccountSkin.js" />
     <Content Include="Scripts\effect-hover-item\production.js" />
     <Content Include="Scripts\effect-hover-item\rbootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -3044,6 +3043,7 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\typeahead.bundle.min.js" />
     <Content Include="Scripts\typeahead.tagging.js" />
+    <Content Include="Scripts\Winwheel.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -3091,6 +3091,8 @@
     <Content Include="Views\Management\ChampManagement.cshtml" />
     <Content Include="Views\Management\SkinManagement.cshtml" />
     <Content Include="Views\Home\LuckyWheel.cshtml" />
+    <Content Include="Views\Management\WheelManagement.cshtml" />
+    <Content Include="Views\Management\CreateWheelItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

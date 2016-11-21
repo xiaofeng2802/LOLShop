@@ -319,5 +319,45 @@ namespace ThoConShop.Web.Controllers
             }
             return Json(null, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult WheelManagement(int? page)
+        {
+            var result = _userService.ReadLuckyWheelItem(page ?? 1, _pageSize);
+
+            return View(result);
+        }
+
+        [HttpPost]
+        public ActionResult CreateWheelItem(LuckyWheelItemDto data)
+        {
+            var result = _userService.CreateLuckyItem(data);
+            return RedirectToAction("WheelManagement");
+        }
+
+        public ActionResult CreateWheelItem()
+        {
+            LuckyWheelItemDto vm = new LuckyWheelItemDto()
+            {
+                DuplicationTime = 1
+            };
+            return View(vm);
+        }
+
+        public ActionResult DeleteWheelItem(int id = 0)
+        {
+            var result = _userService.DeleteLuckyItem(id);
+            return RedirectToAction("WheelManagement");
+        }
+
+        public JsonResult ReadAllWheelItem()
+        {
+            var result = _userService.ReadAllLuckyWheelItem().Select(a => new
+            {
+                text = a.DisplayName,
+                fillStyle = "#eae56f",
+                id = a.Id
+            });
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
     }
 }
