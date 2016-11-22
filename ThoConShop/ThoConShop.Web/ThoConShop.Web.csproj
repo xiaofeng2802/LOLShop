@@ -1679,6 +1679,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\effect-hover-item\hover.css" />
+    <Content Include="Content\jquery-ui-slider-pips.min.css" />
+    <Content Include="Content\jqueryui.min.css" />
     <Content Include="Content\luckyWheel.css" />
     <Content Include="Content\main.css" />
     <Content Include="Content\PagedList.css" />
@@ -2732,6 +2734,7 @@
     <Content Include="Images\skins\championsskin_99005.jpg" />
     <Content Include="Images\skins\championsskin_99006.jpg" />
     <Content Include="Images\tick1.png" />
+    <Content Include="Images\wheel.png" />
     <Content Include="Images\wishlist.png" />
     <Content Include="Images\yasou.jpg" />
     <Content Include="Scripts\AppScripts\easyResponsiveTabs.js" />
@@ -3034,6 +3037,7 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui-slider-pips.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
