@@ -9,6 +9,8 @@ using PagedList;
 using ThoConShop.Business.Contracts;
 using ThoConShop.Business.Dtos;
 using ThoConShop.DataSeedWork.Identity;
+using ThoConShop.DataSeedWork.LuckyWheel;
+using ThoConShop.DataSeedWork.Ulti;
 using ThoConShop.DAL.Contracts;
 using ThoConShop.DAL.Entities;
 
@@ -119,7 +121,8 @@ namespace ThoConShop.Business.Services
                     Id = a.Id,
                     Description = a.Description,
                     UpdatedDate = a.UpdatedDate,
-                    DisplayName = a.DisplayName
+                    DisplayName = a.DisplayName,
+                    WinningPercent = a.WinningPercent
                 }).ToPagedList(currentIndex, pageSize);
 
             return result;
@@ -127,7 +130,8 @@ namespace ThoConShop.Business.Services
 
         public IList<LuckyWheelItemDto> ReadAllLuckyWheelItem()
         {
-            var result = _luckyWheelItemRepositories.Read(a => true);
+            var result = _luckyWheelItemRepositories.Read(a => true)
+                .OrderBy(a => a.DisplayName);
 
             return Mapper.Map<IList<LuckyWheelItemDto>>(result);
         }
@@ -136,6 +140,7 @@ namespace ThoConShop.Business.Services
         {
             var entity = Mapper.Map<LuckyWheelItem>(data);
             entity.CreatedDate = DateTime.Now;
+            entity.ImageUrl = "../Images/LuckyItem/" + FileUlti.SaveFile(data.FileImage, data.ImageUrl);
 
             var result = _luckyWheelItemRepositories.Create(entity);
 
@@ -149,9 +154,16 @@ namespace ThoConShop.Business.Services
 
         public int DeleteLuckyItem(int id)
         {
-             _luckyWheelItemRepositories.Delete(a => a.Id == id);
+            var img = _luckyWheelItemRepositories.ReadOne(a => a.Id == id).ImageUrl;
+            if (!string.IsNullOrEmpty(img))
+            {
+                FileUlti.DeleteFile(img);
+            }
 
-            return _luckyWheelItemRepositories.SaveChanges();
+            _luckyWheelItemRepositories.Delete(a => a.Id == id);
+            var result = _luckyWheelItemRepositories.SaveChanges();
+          
+            return result;
         }
 
         public IPagedList<LuckyWheelHistoryDto> ReadLuckyWheelHistory(int currentIndex, int pageSize)
@@ -193,6 +205,20 @@ namespace ThoConShop.Business.Services
             _luckyWheelHistoryRepositories.Delete(a => a.Id == id);
 
             return _luckyWheelHistoryRepositories.SaveChanges();
+        }
+
+        public int RandomWheelItem()
+        {
+            var wheelItems = _luckyWheelItemRepositories.Read(a => true).OrderBy(a => a.DisplayName);
+            IList<ProportionValue<LuckyWheelItem>> listRandom = new List<ProportionValue<LuckyWheelItem>>();
+
+            foreach (var item in wheelItems)
+            {
+                listRandom.Add(ProportionValue.Create((item.WinningPercent / 100) , item));
+            }
+            var result = listRandom.ChooseByRandom();
+
+            return result;
         }
     }
 }

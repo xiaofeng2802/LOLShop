@@ -40,5 +40,7 @@ namespace ThoConShop.Business.Contracts
         LuckyWheelHistoryDto CreateLuckyHistory(LuckyWheelHistoryDto data);
 
         int DeleteLuckyHistory(int id);
+
+        int RandomWheelItem();
     }
 }

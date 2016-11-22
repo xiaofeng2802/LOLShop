@@ -20,15 +20,17 @@ namespace ThoConShop.DataSeedWork.LuckyWheel
         }
 
         static Random random = new Random();
-        public static T ChooseByRandom<T>(
+        public static int ChooseByRandom<T>(
             this IEnumerable<ProportionValue<T>> collection)
         {
+            int index = 1;
             var rnd = random.NextDouble();
             foreach (var item in collection)
             {
                 if (rnd < item.Proportion)
-                    return item.Value;
+                    return index;
                 rnd -= item.Proportion;
+                index++;
             }
             throw new InvalidOperationException(
                 "The proportions in the collection do not add up to 1.");

@@ -370,6 +370,13 @@ namespace ThoConShop.Web.Controllers
             return View();
         }
 
+
+        public JsonResult GetRandomWheelItem()
+        {
+            var result = _userService.RandomWheelItem();
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

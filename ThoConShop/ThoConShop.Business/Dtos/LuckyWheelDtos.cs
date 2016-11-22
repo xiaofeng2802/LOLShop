@@ -18,6 +18,8 @@ namespace ThoConShop.Business.Dtos
         public int DuplicationTime { get; set; }
 
         public HttpPostedFileBase FileImage { get; set; }
+
+        public float WinningPercent { get; set; }
     }
 
     public class LuckyWheelHistoryDto : BaseDto<int>

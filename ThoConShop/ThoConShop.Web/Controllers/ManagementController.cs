@@ -330,6 +330,7 @@ namespace ThoConShop.Web.Controllers
         [HttpPost]
         public ActionResult CreateWheelItem(LuckyWheelItemDto data)
         {
+            data.ImageUrl = Server.MapPath("../Images/LuckyItem/");
             var result = _userService.CreateLuckyItem(data);
             return RedirectToAction("WheelManagement");
         }
@@ -355,7 +356,9 @@ namespace ThoConShop.Web.Controllers
             {
                 text = a.DisplayName,
                 fillStyle = "#eae56f",
-                id = a.Id
+                id = a.Id,
+                image = a.ImageUrl,
+                strokeStyle = "#0D56A6",
             });
             return Json(result, JsonRequestBehavior.AllowGet);
         }

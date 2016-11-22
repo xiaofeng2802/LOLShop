@@ -30,6 +30,7 @@
                             <th class="text-center">Hình Ảnh</th>
                             <th class="text-center">Chú Thích</th>
                             <th class="text-center">Số lần lập</th>
+                            <th class="text-center">% Thắng</th>
                             <th class="text-right">#</th>
                         </tr>
                     </thead>
@@ -41,7 +42,7 @@
                                 <td class="text-center"><img src="@item.ImageUrl"/></td>
                                 <td class="text-center">@item.Description</td>
                                 <td class="text-center">@item.DuplicationTime</td>
-                              
+                                <td class="text-center">@item.WinningPercent <span>%</span></td>
                                 <td class="text-right">
                                     @*<a href="@Url.Action("CreateWheelItem", "Management", new { accountId = item.Id })" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Sửa thông tin"><i class="fa fa-pencil"></i></a>*@
                                     <a id="deleteButton" href="@Url.Action("DeleteWheelItem", "Management", new { id = item.Id })" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Xóa"><i class="fa fa-trash-o"></i></a>
@@ -56,7 +57,7 @@
         <!-- END SEARCH NAV -->
         <div class="row">
             <div class="col-md-12 body-pagging">
-                @Html.PagedListPager(Model, page => Url.Action("AccountManagement", "Management", new { page }))
+                @Html.PagedListPager(Model, page => Url.Action("WheelManagement", "Management", new { page }))
             </div>
         </div>
     </div><!--end .row -->
