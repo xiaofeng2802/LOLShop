@@ -7,6 +7,13 @@ using System.Web;
 
 namespace ThoConShop.Business.Dtos
 {
+    public class LatestUsingWheel
+    {
+        public string UserName { get; set; }
+
+        public string Result { get; set; }
+    }
+
     public class LuckyWheelItemDto : BaseDto<int>
     {
         public string DisplayName { get; set; }

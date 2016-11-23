@@ -56,7 +56,7 @@ namespace ThoConShop.DataSeedWork.UserExternalService
         public static IList<TEntity> TopChargingOfMonth<TEntity>() where TEntity : class
         {
             string query = string.Format("SELECT TOP 5 au.UserName, SUM(urh.ParValue) AS SumOfMonth "
-                                         +"FROM[dbo].[User] u INNER JOIN dbo.ApplicationUsers au ON au.Id = u.GeneralUserId "
+                                         +"FROM [dbo].[User] u INNER JOIN dbo.ApplicationUsers au ON au.Id = u.GeneralUserId "
                                          + "INNER JOIN dbo.UserRechargeHistory urh ON urh.UserId = u.Id "
                                          + "WHERE MONTH(urh.CreatedDate) = MONTH(GETDATE()) "
                                          + "AND YEAR(urh.CreatedDate) = YEAR(GETDATE()) "
@@ -75,6 +75,25 @@ namespace ThoConShop.DataSeedWork.UserExternalService
 
             }
             return null;
-        } 
+        }
+
+        public static IList<TEntity> LatestUsingWheel<TEntity>() where TEntity : class
+        {
+            string query = string.Format("SELECT TOP 5 au.UserName, lwh.Result FROM dbo.LuckyWheelHistories lwh "
+                  + "INNER JOIN [dbo].[User] u ON lwh.UserId = u.Id INNER JOIN dbo.ApplicationUsers au ON au.Id = u.GeneralUserId "
+                + "ORDER BY lwh.CreatedDate DESC");
+
+            try
+            {
+                var result = db.Query<TEntity>(query).ToList();
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return null;
+        }
     }
 }

@@ -1861,6 +1861,7 @@
     <Content Include="Images\no-medal.png" />
     <Content Include="Images\overview-page-top.jpg" />
     <Content Include="Images\platinum-medal.png" />
+    <Content Include="Images\qt-arow.png" />
     <Content Include="Images\search.png" />
     <Content Include="Images\silver-medal.png" />
     <Content Include="Images\skins\championsskin_10001.jpg" />
@@ -2742,6 +2743,7 @@
     <Content Include="Images\tick1.png" />
     <Content Include="Images\wishlist.png" />
     <Content Include="Images\yasou.jpg" />
+    <Content Include="Images\zed-banner.jpg" />
     <Content Include="Scripts\404\404.js" />
     <Content Include="Scripts\404\base.js" />
     <Content Include="Scripts\404\modernizr.custom.js" />

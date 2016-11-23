@@ -2681,3 +2681,76 @@ p.cart {
     clear: both;
     overflow: auto;
 }
+
+table.simple.gamelist caption {
+    background: #1f1f1f;
+    font-family: "Open Sans",Tahoma,sans-serif;
+    padding: 6px 10px;
+    text-transform: none;
+        font-size: 12px;
+    color: #f4f4f4;
+}
+
+table.simple.gamelist td {
+    border-color: #000;
+    /*padding: 0 4px 0 0;*/
+    vertical-align: middle;
+    height: 24px;
+}
+
+table.simple {
+    border: 1px solid #1f1f1f;
+    background: linear-gradient(135deg,rgba(58,58,58,1) 0,rgba(27,27,27,1) 25%,rgba(27,27,27,1) 100%);
+}
+
+table.simple.gamelist.tiny {
+    min-width: 300px;
+}
+
+table.simple.gamelist .ranking {
+    color: #777;
+    font-family: Arial,sans-serif;
+    font-weight: bold;
+    font-size: 12px;
+    padding: 1px 1px 0 0;
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+    width: 20px;
+}
+
+table.simple.gamelist td h3 span.main-custom, 
+table.simple.gamelist td span.main-custom, 
+table.simple.gamelist td h3 a.main-custom, 
+table.simple.gamelist td a.main-custom {
+    text-transform: none;
+    font-family: "Open Sans",Tahoma,sans-serif;
+    color: #ccc;
+    height: 16px;
+    display: inline-block;
+    /*padding: 4px 0;*/
+    vertical-align: middle;
+    /*padding-left: 31px;*/
+    font-size: 11px;
+    line-height: 13px;
+}
+
+
+table.simple.gamelist td.numbers {
+    text-align: right;
+    padding-right: 8px;
+    color: #777;
+    font-family: "Open Sans",Tahoma,sans-serif;
+    font-size: 12px;
+    vertical-align: middle;
+}
+
+table caption span {
+    color: #aaa;
+    cursor: pointer;
+    -webkit-transition: color 300ms ease;
+    -moz-transition: color 300ms ease;
+    -ms-transition: color 300ms ease;
+    -o-transition: color 300ms ease;
+    transition: color 300ms ease;
+}

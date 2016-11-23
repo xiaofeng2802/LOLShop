@@ -172,47 +172,64 @@
         </header>
         <div class="title_top text-center row no-margin">
             <div class="col-lg-12" align="center">
-                <div class="col-lg-1 col-centered" style="min-height: 100px">
-                </div>
-                @if (topOfMonth != null)
-                {
-                    <div class="col-lg-4 col-centered">
-                        <div class="divContainer">
-                            <div class="divHeader">
-                                Top Nạp Thẻ Tháng 11
-                            </div>
-                            <div class="divContent">
-                                <ol id="topnapthe">
-                                   @foreach (var item in topOfMonth)
-                                   {
-                                       <li>
-                                           <label class="glyphicon glyphicon-user"></label>
-                                           <span data-toggle="tooltip" >@item.UserName</span>  
-                                           <label style="font-size: 14px;" class="label label-danger pull-right"> @item.SumOfMonth.VietNameseMoneyFormat() vnđ </label>
-                                       </li>
-                                   }
-                                </ol>
-                            </div>
-                        </div>
-                        @*<table>
-                            <thead>
-                                <tr>
-                                    <td colspan="2">Top Nạp Thẻ Tháng @DateTime.Now.Month</td>
-                                    <td></td>
-                                </tr>
-                            </thead>
-                            @for (int i = 0; i < topOfMonth.Count; i++)
-                            {
-                                <tbody>
-                                    <tr>
-                                        <td>@topOfMonth[i].UserName.Truncate(20)</td>
-                                        <td>@topOfMonth[i].SumOfMonth</td>
-                                    </tr>
+                <div class="row">
+                    @if (topOfMonth != null && topOfMonth.Count > 0)
+                    {
+                        <div class="col-lg-6 col-sm-12 align-right">
+                            <table class="simple gamelist tiny">
+                                <caption><span><i class="fa fa-users fa-fw" title="Comments"></i> Lịch Sử Quay Số Ngày Hôm Nay</span></caption>
+                                <tbody style="display: table-row-group;">
+                                    @for (int i = 0; i < topOfMonth.Count; i++)
+                                    {
+                                        <tr class="ranking-link" data-type="team" data-id="9032">
+                                            <td class="rank" style="width: 20px;">
+
+                                                <div class="ranking top-1">@(i + 1)</div>
+                                            </td>
+                                            <td>
+                                                <h4 style="margin: 0px;">
+                                                    <span class="main-custom no-game">
+                                                        <span>@topOfMonth[i].UserName</span>
+                                                    </span>
+                                                </h4>
+                                            </td>
+                                            <td style="width: 80px;" class="numbers">@topOfMonth[i].SumOfMonth.VietNameseMoneyFormat() đ</td>
+                                        </tr>
+                                    }
+
                                 </tbody>
-                            }
-                        </table>*@
-                    </div>
-                }
+                            </table>
+                        </div>
+                    }
+                    @if (topOfMonth != null && topOfMonth.Count > 0)
+                    {
+                        <div class="col-lg-6 col-sm-12">
+                            <table class="simple gamelist tiny">
+                                <caption><span><i class="fa fa-users fa-fw" title="Comments"></i> Top Nạp Thẻ Tháng @DateTime.Now.Month</span></caption>
+                                <tbody style="display: table-row-group;">
+                                    @for (int i = 0; i < topOfMonth.Count; i++)
+                                    {
+                                        <tr class="ranking-link" data-type="team" data-id="9032">
+                                            <td class="rank" style="width: 20px;">
+
+                                                <div class="ranking top-1">@(i + 1)</div>
+                                            </td>
+                                            <td>
+                                                <h4 style="margin: 0px;">
+                                                    <span class="main-custom no-game">
+                                                        <span>@topOfMonth[i].UserName</span>
+                                                    </span>
+                                                </h4>
+                                            </td>
+                                            <td style="width: 80px;" class="numbers">@topOfMonth[i].SumOfMonth.VietNameseMoneyFormat() đ</td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                </div>
             </div>
         </div>
         <div class="hr"></div>

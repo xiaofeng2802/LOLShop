@@ -2,7 +2,7 @@
 
 #canvasContainer {
     position: relative;
-    background: url(../Images/wheel.png) top center no-repeat;
+    /*background: url(../Images/wheel.png) top center no-repeat;*/
     -ms-background-size: 450px 450px;
     background-size: 450px 450px;
 }
