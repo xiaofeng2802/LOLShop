@@ -1,15 +1,30 @@
 ﻿
 @{
     ViewBag.Title = "LuckyWheel";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_DetailsLayout.cshtml";
 }
 <link href="~/Content/main.css" rel="stylesheet" />
 <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
 <script src="~/Scripts/Winwheel.js"></script>
+<link href="~/Content/luckyWheel.css" rel="stylesheet" />
+<link href="~/Content/jquery-ui-slider-pips.min.css" rel="stylesheet" />
+<link href="~/Content/jqueryui.min.css" rel="stylesheet" />
 
-<canvas id="canvas" width="434" height="434">
-  
-</canvas>
+<div class="ov-top masthead">
+    <div class="container text-center">
+        <h1 class="c-hero__title u-text-gradient"></h1>
+        <div id="canvasContainer" align="center">
+            <canvas id="canvas" width="434" height="434"></canvas>
+            <img id="prizePointer" src="~/Images/platinum-medal.png" />
+            <div class="slider"></div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+
+</div>
+
+
 
 <button id="quay">Quay</button>
-<script src="~/Scripts/Custom/luckyWheel.js"></script>  
+<script src="~/Scripts/Custom/luckyWheel.js"></script> 
+<script src="~/Scripts/jquery-ui-slider-pips.js"></script>

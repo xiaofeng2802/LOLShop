@@ -1,5 +1,8 @@
 ﻿(function ($) {
 
+
+
+
     function initWheel(data) {
 
         $('#quay').click(function () {
@@ -158,6 +161,19 @@
         $.get('/Management/ReadAllWheelItem', function (data) {
             initWheel(data);
         });
+
+        $(".slider")
+
+     .slider({
+         min: 0,
+         max: 3,
+         orientation: "vertical"
+     })
+
+     .slider("pips", {
+         rest: "label",
+         step: "3"
+     });
     });
 
 }(jQuery));

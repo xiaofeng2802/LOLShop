@@ -1,12 +1,26 @@
 ﻿
-body { background: #fff; font-family: sans-serif; color:#666; }
-h1, h2 { font-weight: 700; line-height:2; }
-input[type='checkbox'] + label { padding-left:.5em; }
-label,
-#filterToggle { display:inline-block; }
-#venues,
-#filterToggle { background: #fefefe; box-shadow: 0 1px 2px #efefef; }
-#venues { padding: .5em; overflow:hidden; }
-#venues ul, #venues h2 {clear:both;}
-#venues li { float:left; width:25%; line-height: 1.5; vertical-align:middle; }
-#filterToggle { border-radius: 0 0 3px 3px; cursor: pointer; margin-left: .5em; margin-top:-1px; padding:.5em; }
+
+#canvasContainer {
+    position: relative;
+    background: url(../Images/wheel.png) top center no-repeat;
+    -ms-background-size: 450px 450px;
+    background-size: 450px 450px;
+}
+
+#canvas {
+    z-index: 1;
+}
+#vertical-slider {
+    height: 150px;
+    margin-left: 30px;
+}
+ 
+#prizePointer {
+    position: absolute;
+    left: 47.7%;
+    top: -27px;
+    z-index: 999;
+    height: 50px;
+    width: 50px;
+    border: none;
+}
