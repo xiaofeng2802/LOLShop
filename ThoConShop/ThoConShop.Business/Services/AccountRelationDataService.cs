@@ -240,28 +240,34 @@ namespace ThoConShop.Business.Services
             };
         }
 
-        public IList<AccountDto> ReadAccountByPriceRange(float from, float to)
+        public IList<AccountDto> ReadAccountByPriceRange(float from, float to, IList<int> ignoreId = null)
         {
-            var result = _repoAccount.Read(a => a.IsAvailable && (a.Price >= from && a.Price <= to))
-                                       .Select(a => new AccountDto()
-                                       {
-                                           CreatedDate = a.CreatedDate,
-                                           RankId = a.RankId,
-                                           RankName = a.Rank.RankName,
-                                           UserName = a.UserName,
-                                           Avatar = a.Avatar,
-                                           IsAvailable = a.IsAvailable,
-                                           Description = a.Description,
-                                           Id = a.Id,
-                                           IsHot = a.IsHot,
-                                           Password = a.Password,
-                                           Price = a.Price,
-                                           Title = a.Title,
-                                           UpdatedDate = a.UpdatedDate
-                                       })
-                                     .OrderBy(a => a.IsHot)
-                                     .ThenByDescending(a => a.CreatedDate)
-                                     .Take(4).ToList();
+            var query = _repoAccount.Read(a => a.IsAvailable && (a.Price >= from && a.Price <= to));
+
+            if (ignoreId != null)
+            {
+                query = query.Where(a => !ignoreId.Contains(a.Id));
+            }
+
+            var result = query.Select(a => new AccountDto()
+            {
+                CreatedDate = a.CreatedDate,
+                RankId = a.RankId,
+                RankName = a.Rank.RankName,
+                UserName = a.UserName,
+                Avatar = a.Avatar,
+                IsAvailable = a.IsAvailable,
+                Description = a.Description,
+                Id = a.Id,
+                IsHot = a.IsHot,
+                Password = a.Password,
+                Price = a.Price,
+                Title = a.Title,
+                UpdatedDate = a.UpdatedDate
+            })
+                .OrderBy(a => a.IsHot)
+                .ThenByDescending(a => a.CreatedDate)
+                .Take(4).ToList();
 
             return result;
         }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ThoConShop.Business.Dtos
 {
+
     public class AccountDto : BaseDto<int>
     {
 

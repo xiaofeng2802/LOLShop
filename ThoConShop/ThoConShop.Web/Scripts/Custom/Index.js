@@ -4,7 +4,5 @@
         if (!result) {
             event.preventDefault();
         }
-        
     });
-
 });

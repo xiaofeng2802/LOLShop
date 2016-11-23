@@ -815,9 +815,11 @@ ol li {
 
 .title_top {
     background: url(../../Images/banner1.png) no-repeat;
-    /*height: 226px;*/
+    min-height: 300px;
+    height: auto;
     padding-top: 5px;
     background-size: cover;
+    margin-right: 0px !important;
 }
 
     .nav-header {

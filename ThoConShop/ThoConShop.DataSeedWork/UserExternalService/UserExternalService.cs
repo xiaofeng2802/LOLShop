@@ -52,5 +52,29 @@ namespace ThoConShop.DataSeedWork.UserExternalService
             }
             return null;
         }
+
+        public static IList<TEntity> TopChargingOfMonth<TEntity>() where TEntity : class
+        {
+            string query = string.Format("SELECT TOP 5 au.UserName, SUM(urh.ParValue) AS SumOfMonth "
+                                         +"FROM[dbo].[User] u INNER JOIN dbo.ApplicationUsers au ON au.Id = u.GeneralUserId "
+                                         + "INNER JOIN dbo.UserRechargeHistory urh ON urh.UserId = u.Id "
+                                         + "WHERE MONTH(urh.CreatedDate) = MONTH(GETDATE()) "
+                                         + "AND YEAR(urh.CreatedDate) = YEAR(GETDATE()) "
+                                         + "AND u.IsActive = 1 "
+                                         + "GROUP BY au.UserName "
+                                         + "ORDER BY SumOfMonth DESC");
+
+            try
+            {
+                var result = db.Query<TEntity>(query).ToList();
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return null;
+        } 
     }
 }

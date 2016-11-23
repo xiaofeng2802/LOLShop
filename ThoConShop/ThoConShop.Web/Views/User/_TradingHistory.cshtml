@@ -11,7 +11,7 @@
 
 <div class="row details-footer">
     <div class="col-md-12 col-xs-12 col-lg-12" align="center">
-        <table class="table">
+        <table class="table table-responsive">
             <thead>
                 <tr>
                     <th class="recharge-table-border-bottom">
@@ -63,7 +63,8 @@
                                 @item.UserName
                             </td>
                             <td>
-                                @item.Password
+                                <span data-fake-pass="1" id="@("fake" + @item.Id)">*********</span>
+                                <span data-pass="1" style="display: none" id="@("real" + @item.Id)">@item.Password</span>
                             </td>
                             <td>
                                 @item.PriceOfAccount.ToString("#,###", cul.NumberFormat)<sup>đ</sup>

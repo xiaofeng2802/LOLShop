@@ -1,5 +1,6 @@
 ﻿@using System.Globalization
 @using Microsoft.AspNet.Identity
+@using ThoConShop.Business.Dtos
 @using ThoConShop.DataSeedWork.Extensions
 @using ThoConShop.DataSeedWork.UserExternalService
 @{
@@ -7,6 +8,8 @@
     WebResponse response = null;
     WebRequest request = WebRequest.Create(string.Format("https://graph.facebook.com/{0}/picture", User.Identity.GetUserId()));
     response = request.GetResponse();
+
+    var topOfMonth = UserExternalService.TopChargingOfMonth<UserTopCharging>();
 }
 <!DOCTYPE HTML>
 <html>
@@ -34,7 +37,7 @@
     <script src="~/Scripts/AppScripts/jquery.scrolltop.js"></script>
 </head>
 <body>
-    <div class="header">
+    <div class="header" >
         <header id="top" role="banner">
             <div class="nav-header">
                 <div class="nav-content">
@@ -169,11 +172,47 @@
         </header>
         <div class="title_top text-center row no-margin">
             <div class="col-lg-12" align="center">
-                <div class="col-lg-4 col-centered" style="min-height: 300px">
+                <div class="col-lg-1 col-centered" style="min-height: 100px">
                 </div>
-                <div class="col-lg-4 col-centered">
-
-                </div>
+                @if (topOfMonth != null)
+                {
+                    <div class="col-lg-4 col-centered">
+                        <div class="divContainer">
+                            <div class="divHeader">
+                                Top Nạp Thẻ Tháng 11
+                            </div>
+                            <div class="divContent">
+                                <ol id="topnapthe">
+                                   @foreach (var item in topOfMonth)
+                                   {
+                                       <li>
+                                           <label class="glyphicon glyphicon-user"></label>
+                                           <span data-toggle="tooltip" >@item.UserName</span>  
+                                           <label style="font-size: 14px;" class="label label-danger pull-right"> @item.SumOfMonth.VietNameseMoneyFormat() vnđ </label>
+                                       </li>
+                                   }
+                                </ol>
+                            </div>
+                        </div>
+                        @*<table>
+                            <thead>
+                                <tr>
+                                    <td colspan="2">Top Nạp Thẻ Tháng @DateTime.Now.Month</td>
+                                    <td></td>
+                                </tr>
+                            </thead>
+                            @for (int i = 0; i < topOfMonth.Count; i++)
+                            {
+                                <tbody>
+                                    <tr>
+                                        <td>@topOfMonth[i].UserName.Truncate(20)</td>
+                                        <td>@topOfMonth[i].SumOfMonth</td>
+                                    </tr>
+                                </tbody>
+                            }
+                        </table>*@
+                    </div>
+                }
             </div>
         </div>
         <div class="hr"></div>
@@ -184,8 +223,40 @@
                 @RenderBody()
                 <div class="row">
                     <div class="footer img-responsive">
-                        <div class="container">
+                        <div class="sa-footer">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-6">
+                                        <div class="sa-ftadd">
+                                            <p>Địa chỉ: Phường Bình Thạnh, thị xã Tân Phước Khánh, Tân Uyên, Bình Dương</p>
+                                            <p>© 2016, Copyright by Bán Acc Liên Minh Huyền Thoại Giá Rẻ - Uy Tín.</p>
+                                        </div>
+                                        <div class="sa-fthotline">
+                                            <div class="sa-ftarow clearfix">
+                                                <div class="sa-ftacol sa-fthnum">
+                                                    <p><a href="tel:0888390107" title="">Hotline 1: 0888.39.0107</a></p>
+                                                    <p><a href="tel:0888390107" title="">Hotline 2: 0186.835.8351</a></p>
+                                                </div>
+                                                <div class="sa-ftacol sa-fthwork">
+                                                    Thời gian làm việc: <strong>8h-23h</strong> các ngày trong tuần
+                                                </div>
+                                            </div>
+                                        </div>
 
+                                    </div>
+                                    <div class="col-sm-12 col-md-4">
+                                        <p class="sa-lshare">
+                                            <span>Liên kết chia sẻ:</span>
+                                            <a class="sa-ic sa-lsfb" href="" title=""></a>
+                                            <a class="sa-ic sa-lstw" href="" title=""></a>
+                                            <a class="sa-ic sa-lsgg" href="" title=""></a>
+                                            <a class="sa-ic sa-lsyou" href="" title=""></a>
+                                            <a class="sa-ic sa-lssky" href="" title=""></a>
+                                        </p>
+
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -200,6 +271,8 @@
     $(document).ready(function () {
         $('[data-toggle="tooltip"]').tooltip();
     });
+
     </script>
+    <script src="~/Scripts/Custom/globalFunction.js"></script>
 </body>
 </html>		

@@ -12,7 +12,7 @@
 <div class="ov-top masthead">
     <div class="container text-center">
         <h1 class="c-hero__title u-text-gradient">@Model.CurrentAccount.Title</h1>
-        <h5>Mã số <span>@Model.CurrentAccount.Id</span> giá <span>@Model.CurrentAccount.Price.ToString("#,###", cul.NumberFormat)</span>đ</h5>
+        <h5>Acc <span>#@Model.CurrentAccount.Id</span> giá <span>@Model.CurrentAccount.Price.ToString("#,###", cul.NumberFormat)</span>đ</h5>
 
         @if (Model.CurrentAccount.IsAvailable)
         {

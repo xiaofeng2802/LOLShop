@@ -6,6 +6,13 @@ using System.Threading.Tasks;
 
 namespace ThoConShop.Business.Dtos
 {
+
+    public class UserTopCharging
+    {
+        public string UserName { get; set; }
+
+        public float SumOfMonth { get; set; }
+    }
     public class UserDto : BaseDto<int>
     {
         public string UserName { get; set; }

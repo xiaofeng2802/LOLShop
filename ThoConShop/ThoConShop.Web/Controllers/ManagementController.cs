@@ -67,6 +67,12 @@ namespace ThoConShop.Web.Controllers
             else
             {
                 var accountDto = _accountService.ReadOneById(accountId ?? 0);
+
+                if (accountDto == null)
+                {
+                    return HttpNotFound("");
+                }
+
                 vm = new CreateOrUpdateAccountViewModel()
                 {
                     RankList = _rankService.Read().Select(a => new SelectListItem()

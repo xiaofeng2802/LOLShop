@@ -16,7 +16,13 @@
                         <h4>Tướng: @item.NumberOfChamps</h4>
                         <h4>Skin: @item.NumberOfSkins</h4>
                     </div>
-                    <span class="header-item">@item.Title</span>
+                    <span class="header-item">Acc #@item.Id</span>
+                    @if (item.CreatedDate.Month == DateTime.Now.Month 
+                        && item.CreatedDate.Year == DateTime.Now.Year
+                        && (DateTime.Now.Day - item.CreatedDate.Day) <= 5)
+                    {
+                        <span class="header-item-right">Mới</span>
+                    }
                     <div class="body-item" align="center">
                         <img src="@item.Avatar" alt="..." class="img-responsive">
                     </div>

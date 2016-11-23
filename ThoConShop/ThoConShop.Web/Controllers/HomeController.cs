@@ -52,17 +52,22 @@ namespace ThoConShop.Web.Controllers
         public ActionResult Edit(int accountId = 0)
         {
             var result = _accountService.Edit(accountId);
-            float fromValue = (result.Price - 300000)
-                    , toValue = (result.Price + 300000);
-            fromValue = fromValue < 0 ? 0 : fromValue;
-
-            AccountEditViewModel vm = new AccountEditViewModel
+            if (result != null)
             {
-                CurrentAccount = result,
-                SuggestionAccounts = _accountRelationDataService.ReadAccountByPriceRange(fromValue, toValue)
-            };
+                float fromValue = (result.Price - 300000)
+                   , toValue = (result.Price + 300000);
+                fromValue = fromValue < 0 ? 0 : fromValue;
 
-            return View(vm);
+                AccountEditViewModel vm = new AccountEditViewModel
+                {
+                    CurrentAccount = result,
+                    SuggestionAccounts = _accountRelationDataService.ReadAccountByPriceRange(fromValue, toValue, new List<int>() { accountId })
+                };
+
+                return View(vm);
+            }
+
+            return HttpNotFound("Account could not be found.");
         }
 
         private IPagedList<AccountDto> Filter(int pageIndex, int? currentRankFilter, string currentPriceFilter, int? currentSkinFilter)
@@ -81,6 +86,11 @@ namespace ThoConShop.Web.Controllers
 
         [Authorize]
         public ActionResult LuckyWheel()
+        {
+            return View();
+        }
+
+        public ActionResult NotFound()
         {
             return View();
         }
