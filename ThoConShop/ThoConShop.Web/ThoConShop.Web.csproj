@@ -3118,7 +3118,6 @@
     <Folder Include="Images\Avatar\" />
     <Folder Include="Images\LuckyItem\" />
     <Folder Include="Images\PageGem\" />
-    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

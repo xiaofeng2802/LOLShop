@@ -7,24 +7,24 @@
 <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
 <script src="~/Scripts/Winwheel.js"></script>
 <link href="~/Content/luckyWheel.css" rel="stylesheet" />
-<link href="~/Content/jquery-ui-slider-pips.min.css" rel="stylesheet" />
-<link href="~/Content/jqueryui.min.css" rel="stylesheet" />
 
-<div class="ov-top masthead">
+<div class="ov-top masthead" style="padding-top: 0px">
     <div class="container text-center">
         <h1 class="c-hero__title u-text-gradient"></h1>
-        <div id="canvasContainer" align="center">
-            <canvas id="canvas" width="434" height="434"></canvas>
-            <img id="prizePointer" src="~/Images/qt-arow.png" />
-            <div class="slider"></div>
+        <div class="row">
+            <div class="col-lg-12 col-sm-12">
+                <div id="canvasContainer" align="center">
+                    <canvas id="canvas" width="600" height="600">
+                    </canvas>
+                  
+                    <a href="#" id="prizePointer">
+                        <img class="img-responsive" src="~/Images/btn-wheel.png" />
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
     <div class="clearfix"></div>
 
 </div>
-
-
-
-<button id="quay">Quay</button>
 <script src="~/Scripts/Custom/luckyWheel.js"></script> 
-<script src="~/Scripts/jquery-ui-slider-pips.js"></script>

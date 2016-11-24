@@ -4,8 +4,29 @@
 
 
     function initWheel(data) {
+        resizeWheel();
 
-        $('#quay').click(function () {
+        function resizeWheel() {
+            var initw = $('body').width() / 2;
+           if (initw < 300) {
+               $('#canvas').width(300);
+               $('#canvas').height(300);
+               //$('#canvasContainer').width(300);
+               //$('#canvasContainer').height(300);
+           } else {
+               $('#canvas').width(initw);
+               $('#canvas').height(initw);
+               //$('#canvasContainer').width(initw);
+               //$('#canvasContainer').height(initw);
+           }
+       }
+        $(window).resize(function() {
+            resizeWheel();
+
+        });
+
+        $('#prizePointer').click(function () {
+         
             $.get('/User/GetRandomWheelItem', function(data) {
                 startSpin(data);
             });
@@ -16,24 +37,15 @@
 
         // Create new wheel object specifying the parameters at creation time.
         var theWheel = new Winwheel({
+            'clearTheCanvas': false,
             'drawText': true,
             'canvasId': 'canvas',
             'numSegments': data.length,     // Specify number of segments.
-            'outerRadius': 212,   // Set outer radius so wheel fits inside the background.
-            'textFontSize': 28,    // Set font size as desired.
+            'outerRadius': 212,
+            'innerRadius': 50,   // Set outer radius so wheel fits inside the background.  // Set font size as desired.
             //'drawMode': 'segmentImage',
             //'imageDirection': 'S',
             'segments': data, // Define segments including colour and text.
-            //[
-            //   { 'image': '../Images/LuckyItem/d9d68421-cc8c-4339-8a90-9b74f491d40c.jpg', 'text': 'Prize 1' },
-            //   { 'image': '../Images/LuckyItem/d9d68421-cc8c-4339-8a90-9b74f491d40c.jpg', 'text': 'Prize 2' },
-            //   { 'image': '../Images/LuckyItem/d9d68421-cc8c-4339-8a90-9b74f491d40c.jpg', 'text': 'Prize 3' },
-            //   { 'image': '../Images/LuckyItem/d9d68421-cc8c-4339-8a90-9b74f491d40c.jpg', 'text': 'Prize 4' },
-            //   { 'image': '../Images/LuckyItem/d9d68421-cc8c-4339-8a90-9b74f491d40c.jpg', 'text': 'Prize 5' },
-            //   { 'image': '../Images/LuckyItem/d9d68421-cc8c-4339-8a90-9b74f491d40c.jpg', 'text': 'Prize 6' },
-            //   { 'image': '../Images/LuckyItem/d9d68421-cc8c-4339-8a90-9b74f491d40c.jpg', 'text': 'Prize 7' },
-            //   { 'image': '../Images/LuckyItem/d9d68421-cc8c-4339-8a90-9b74f491d40c.jpg', 'text': 'Prize 8' }
-            //],
             'animation':           // Specify the animation to use.
             {
                 'type': 'spinToStop',
@@ -56,7 +68,25 @@
         });
 
         // Vars used by the code in this page to do power controls.
+        // Create image in memory.
+        var handImage = new Image();
+        var handCanvas = document.getElementById('canvas');
+        var ctx = handCanvas.getContext('2d');
 
+        // Set onload of the image to anonymous function to draw on the canvas once the image has loaded.
+        handImage.onload = function () {
+           
+            if (ctx) {
+                ctx.save();
+                ctx.translate(200, 150);
+                ctx.translate(-200, -150);
+                ctx.drawImage(handImage, 275, 60);   // Draw the image at the specified x and y.
+                ctx.restore();
+            }
+        };
+
+        // Set source of the image. Once loaded the onload callback above will be triggered.
+        handImage.src = '../Images/qt-arow.png';
 
         // -------------------------------------------------------
         // Function to handle the onClick on the power buttons.
