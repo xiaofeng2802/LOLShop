@@ -34,6 +34,10 @@
 
         var wheelPower = 3;
         var wheelSpinning = false;
+        // Create image in memory.
+        var handImage = new Image();
+        var handCanvas = document.getElementById('canvas');
+        var ctx = handCanvas.getContext('2d');
 
         // Create new wheel object specifying the parameters at creation time.
         var theWheel = new Winwheel({
@@ -57,7 +61,13 @@
 
                     // Do basic alert of the segment text. You would probably want to do something more interesting with this information.
                     alert("You have won " + winningSegment.text);
-
+                    if (ctx) {
+                        ctx.save();
+                        ctx.translate(200, 150);
+                        ctx.translate(-200, -150);
+                        ctx.drawImage(handImage, 275, 60);   // Draw the image at the specified x and y.
+                        ctx.restore();
+                    }
                     theWheel.stopAnimation(false);  // Stop the animation, false as param so does not call callback function.
                     theWheel.rotationAngle = 0;     // Re-set the wheel angle to 0 degrees.
                     theWheel.draw();
@@ -68,10 +78,7 @@
         });
 
         // Vars used by the code in this page to do power controls.
-        // Create image in memory.
-        var handImage = new Image();
-        var handCanvas = document.getElementById('canvas');
-        var ctx = handCanvas.getContext('2d');
+
 
         // Set onload of the image to anonymous function to draw on the canvas once the image has loaded.
         handImage.onload = function () {
@@ -91,35 +98,6 @@
         // -------------------------------------------------------
         // Function to handle the onClick on the power buttons.
         // -------------------------------------------------------
-        function powerSelected(powerLevel) {
-            // Ensure that power can't be changed while wheel is spinning.
-            if (wheelSpinning === false) {
-                // Reset all to grey incase this is not the first time the user has selected the power.
-                document.getElementById('pw1').className = "";
-                document.getElementById('pw2').className = "";
-                document.getElementById('pw3').className = "";
-
-                // Now light up all cells below-and-including the one selected by changing the class.
-                if (powerLevel >= 1) {
-                    document.getElementById('pw1').className = "pw1";
-                }
-
-                if (powerLevel >= 2) {
-                    document.getElementById('pw2').className = "pw2";
-                }
-
-                if (powerLevel >= 3) {
-                    document.getElementById('pw3').className = "pw3";
-                }
-
-                // Set wheelPower var used when spin button is clicked.
-                wheelPower = powerLevel;
-
-                // Light up the spin button by changing it's source image and adding a clickable class to it.
-                //document.getElementById('spin_button').src = "spin_on.png";
-                document.getElementById('spin_button').className = "clickable";
-            }
-        }
 
         // -------------------------------------------------------
         // Click handler for spin button.
@@ -161,18 +139,7 @@
         // -------------------------------------------------------
         // Function for reset button.
         // -------------------------------------------------------
-        function resetWheel() {
-            theWheel.stopAnimation(false);  // Stop the animation, false as param so does not call callback function.
-            theWheel.rotationAngle = 0;     // Re-set the wheel angle to 0 degrees.
-            theWheel.draw();                // Call draw to render changes to the wheel.
-
-            document.getElementById('pw1').className = "";  // Remove all colours from the power level indicators.
-            document.getElementById('pw2').className = "";
-            document.getElementById('pw3').className = "";
-
-            wheelSpinning = false;          // Reset to false to power buttons and spin can be clicked again.
-        }
-
+   
         // -------------------------------------------------------
         // Called when the spin animation has finished by the callback feature of the wheel because I specified callback in the parameters.
         // -------------------------------------------------------
