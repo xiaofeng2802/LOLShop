@@ -50,6 +50,7 @@
                                 </div>
                             </div>
                         </li>
+                        <li> <a href="https://www.facebook.com/ShopAccThoCon/?ref=ts&fref=ts">Liên Hệ</a></li>
                         <li>
                             @if (User.Identity.IsAuthenticated)
                             {
@@ -67,6 +68,13 @@
                             {
 
                                 <a href="@Url.Action("ViewHistoriesUser", "User")">Lịch Sử Nạp/Mua</a>
+                            }
+                        </li>
+                        <li>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+
+                                <a href="@Url.Action("LuckyWheel", "Home")">Vòng Quay</a>
                             }
                         </li>
                         <li>
@@ -116,6 +124,7 @@
                     <ul class="navbar-nav no-margin">
                         <li><a href="@Url.Action("Index", "Home")">Trang chủ</a></li>
                         <li> <a href="@Url.Action("ChargingView", "User")">Nạp Thẻ</a></li>
+                        <li> <a href="https://www.facebook.com/ShopAccThoCon/?ref=ts&fref=ts">Liên Hệ</a></li>
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li>
@@ -129,6 +138,10 @@
                             </li>
                             <li>
                                 <a href="@Url.Action("ViewHistoriesUser", "User")">Lịch Sử Nạp/Mua</a>
+                            </li>
+                            <li>
+
+                                    <a href="@Url.Action("LuckyWheel", "Home")">Vòng Quay</a>
                             </li>
                         }
 

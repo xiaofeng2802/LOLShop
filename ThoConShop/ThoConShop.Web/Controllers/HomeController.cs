@@ -17,11 +17,14 @@ namespace ThoConShop.Web.Controllers
 
         readonly IAccountService _accountService;
         private readonly IAccountRelationDataService _accountRelationDataService;
+        private readonly IUserService _userService;
 
-        public HomeController(IAccountService accountService, IAccountRelationDataService accountRelationDataService)
+        public HomeController(IAccountService accountService, IAccountRelationDataService accountRelationDataService,
+            IUserService userService)
         {
             _accountService = accountService;
             _accountRelationDataService = accountRelationDataService;
+            _userService = userService;
         }
 
         [AllowAnonymous]
@@ -85,9 +88,10 @@ namespace ThoConShop.Web.Controllers
         }
 
         [Authorize]
-        public ActionResult LuckyWheel()
+        public ActionResult LuckyWheel(int page = 1)
         {
-            return View();
+            var result = _userService.ReadLuckyWheelHistory(page, _pageSize);
+            return View(result);
         }
 
         public ActionResult NotFound()

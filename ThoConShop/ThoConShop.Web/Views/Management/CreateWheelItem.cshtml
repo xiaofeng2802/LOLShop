@@ -34,9 +34,9 @@
                             <label class="col-sm-2 control-label">Số Lần Lập</label>
                             <div class="col-sm-10">
                                 @*<input type="number" class="form-control" id="Lastname5">*@
-                                @Html.TextBoxFor(a => a.DuplicationTime, new { @class = "form-control", type = "number", value = 1 })
+                                @Html.CheckBoxFor(a => a.IsUnlucky, new { @class = "form-control"})
                                 <div class="form-control-line"></div>
-                                @Html.ValidationMessageFor(a => a.DuplicationTime, "", new { @class = "text-danger" })
+                                @Html.ValidationMessageFor(a => a.IsUnlucky, "", new { @class = "text-danger" })
 
                             </div>
                         </div>

@@ -26,5 +26,7 @@ namespace ThoConShop.Business.Dtos
         public string GeneralUserId { get; set; }
 
         public string NameDisplay { get; set; }
+
+        public int Point { get; set; }
     }
 }

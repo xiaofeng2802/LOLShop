@@ -345,7 +345,6 @@ namespace ThoConShop.Web.Controllers
         {
             LuckyWheelItemDto vm = new LuckyWheelItemDto()
             {
-                DuplicationTime = 1
             };
             return View(vm);
         }
@@ -360,11 +359,11 @@ namespace ThoConShop.Web.Controllers
         {
             var result = _userService.ReadAllLuckyWheelItem().Select(a => new
             {
-                text = a.DisplayName,
-                fillStyle = "#eae56f",
                 id = a.Id,
+                description = a.Description,
+                text= a.DisplayName,
                 image = a.ImageUrl,
-                strokeStyle = "#0D56A6",
+                fillStyle = "#7de6ef"
             });
             return Json(result, JsonRequestBehavior.AllowGet);
         }

@@ -20,15 +20,20 @@ namespace ThoConShop.DataSeedWork.LuckyWheel
         }
 
         static Random random = new Random();
-        public static int ChooseByRandom<T>(
-            this IEnumerable<ProportionValue<T>> collection)
+
+        public static T ChooseByRandom<T>(
+            this IEnumerable<ProportionValue<T>> collection, out int resultForWheel)
         {
             int index = 1;
             var rnd = random.NextDouble();
             foreach (var item in collection)
             {
                 if (rnd < item.Proportion)
-                    return index;
+                {
+                    resultForWheel = index;
+                    return item.Value;
+                }
+
                 rnd -= item.Proportion;
                 index++;
             }

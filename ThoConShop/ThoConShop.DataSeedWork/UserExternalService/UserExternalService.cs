@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Data.Entity.ModelConfiguration.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,75 @@ namespace ThoConShop.DataSeedWork.UserExternalService
         static IDbConnection db =
             new SqlConnection(ConfigurationManager.ConnectionStrings["ShopThoConDb"].ConnectionString);
 
+        public static bool IsEnoughPoint(string generalUserId)
+        {
+            var defaultPoint = int.Parse(ConfigurationManager.AppSettings["PointPerWheel"]);
+            string query = string.Format("select TOP 1 Point from [dbo].[User] where GeneralUserId = {0}",
+                generalUserId);
+
+            var result = db.QueryFirst<int>(query);
+
+            if (result >= defaultPoint)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public static bool IsUnluckyItem(int id)
+        {
+            string query = string.Format(
+                "select TOP 1 Id from [dbo].[LuckyWheelItems] where Id = {0} AND IsUnlucky = 1", id);
+
+            try
+            {
+                var result = db.QueryFirst<int>(query);
+                if (result > 0)
+                {
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
+           
+            return false;
+        }
+
+        public static int GetUserPoint(string generalUserId)
+        {
+
+            string query = string.Format("select TOP 1 Point from [dbo].[User] where GeneralUserId = {0}",
+               generalUserId);
+
+            var result = db.QueryFirst<int>(query);
+
+        
+            return result;
+        }
+
+        public static string GetDescriptonWheelItem(int id)
+        {
+            string query = string.Format("select TOP 1 Description from [dbo].[LuckyWheelItems] where Id = {0}",id);
+
+            var result = db.QueryFirst<string>(query);
+            return result;
+        }
+
+        public static int UpdatePointAfterUseWheel(string generalUserId)
+        {
+            var defaultPoint = int.Parse(ConfigurationManager.AppSettings["PointPerWheel"]);
+            string query = string.Format("Update [dbo].[User] SET Point = Point - ({0}) WHERE GeneralUserId = {1}",
+                defaultPoint, generalUserId);
+
+            var result = db.Execute(query);
+
+            return result;
+        }
+
         public static float GetUserBalance(string generalUserId)
         {
             string query = string.Format("select TOP 1 Balance from [dbo].[User] where GeneralUserId = {0}",
@@ -27,8 +97,8 @@ namespace ThoConShop.DataSeedWork.UserExternalService
         public static double SetUserBalance(string generalUserId, float price)
         {
 
-            string query = string.Format("Update [dbo].[User] SET Balance = Balance + ({0}) where GeneralUserId = {1}",
-                price, generalUserId);
+            string query = string.Format("Update [dbo].[User] SET Balance = Balance + ({0}), Point = Point + ({1}) WHERE GeneralUserId = {2}",
+                price, (price/1000),generalUserId);
 
             var result = db.Execute(query);
 

@@ -29,7 +29,7 @@
                             <th>Tên</th>
                             <th class="text-center">Hình Ảnh</th>
                             <th class="text-center">Chú Thích</th>
-                            <th class="text-center">Số lần lập</th>
+                            <th class="text-center">Không Trúng Thưởng</th>
                             <th class="text-center">% Thắng</th>
                             <th class="text-right">#</th>
                         </tr>
@@ -41,7 +41,7 @@
                                 <td>@item.DisplayName</td>
                                 <td class="text-center"><img src="@item.ImageUrl"/></td>
                                 <td class="text-center">@item.Description</td>
-                                <td class="text-center">@item.DuplicationTime</td>
+                                <td class="text-center">@item.IsUnlucky.ToString()</td>
                                 <td class="text-center">@item.WinningPercent <span>%</span></td>
                                 <td class="text-right">
                                     @*<a href="@Url.Action("CreateWheelItem", "Management", new { accountId = item.Id })" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Sửa thông tin"><i class="fa fa-pencil"></i></a>*@

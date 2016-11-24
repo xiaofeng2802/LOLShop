@@ -10,6 +10,7 @@
     response = request.GetResponse();
 
     var topOfMonth = UserExternalService.TopChargingOfMonth<UserTopCharging>();
+    var recentWheel = UserExternalService.LatestUsingWheel<LuckyWheelHistoryDto>();
 }
 <!DOCTYPE HTML>
 <html>
@@ -52,6 +53,7 @@
                                 </div>
                             </div>
                         </li>
+                        <li> <a href="https://www.facebook.com/ShopAccThoCon/?ref=ts&fref=ts">Liên Hệ</a></li>
                         <li>
                             @if (User.Identity.IsAuthenticated)
                             {
@@ -69,6 +71,13 @@
                             {
 
                                 <a href="@Url.Action("ViewHistoriesUser", "User")">Lịch Sử Nạp/Mua</a>
+                            }
+                        </li>
+                        <li>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+
+                                <a href="@Url.Action("LuckyWheel", "Home")">Vòng Quay</a>
                             }
                         </li>
                         <li>
@@ -117,6 +126,7 @@
                     <ul class="navbar-nav no-margin">
                         <li><a href="@Url.Action("Index", "Home")">Trang chủ</a></li>
                         <li> <a href="@Url.Action("ChargingView", "User")">Nạp Thẻ</a></li>
+                        <li> <a href="https://www.facebook.com/ShopAccThoCon/?ref=ts&fref=ts">Liên Hệ</a></li>
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li>
@@ -129,7 +139,10 @@
 
                             </li>
                             <li>
-                                 <a href="@Url.Action("ViewHistoriesUser", "User")">Lịch Sử Nạp/Mua</a>
+                                <a href="@Url.Action("ViewHistoriesUser", "User")">Lịch Sử Nạp/Mua</a>
+                            </li>
+                            <li>
+                                    <a href="@Url.Action("LuckyWheel", "Home")">Vòng Quay</a>
                             </li>
                         }
                        
@@ -175,9 +188,9 @@
                 <div class="row">
                     @if (topOfMonth != null && topOfMonth.Count > 0)
                     {
-                        <div class="col-lg-6 col-sm-12 align-right">
+                        <div class="col-lg-4 col-sm-12 align-right">
                             <table class="simple gamelist tiny">
-                                <caption><span><i class="fa fa-users fa-fw" title="Comments"></i> Lịch Sử Quay Số Ngày Hôm Nay</span></caption>
+                                <caption><span><i class="fa fa-users fa-fw" title="Comments"></i>Top Nạp Thẻ Tháng @DateTime.Now.Month</span></caption>
                                 <tbody style="display: table-row-group;">
                                     @for (int i = 0; i < topOfMonth.Count; i++)
                                     {
@@ -201,13 +214,17 @@
                             </table>
                         </div>
                     }
-                    @if (topOfMonth != null && topOfMonth.Count > 0)
+                    
+                    <div class="col-lg-4 col-sm-12">
+                        
+                    </div>
+                    @if (recentWheel != null && recentWheel.Count > 0)
                     {
-                        <div class="col-lg-6 col-sm-12">
+                        <div class="col-lg-4 col-sm-12">
                             <table class="simple gamelist tiny">
-                                <caption><span><i class="fa fa-users fa-fw" title="Comments"></i> Top Nạp Thẻ Tháng @DateTime.Now.Month</span></caption>
+                                <caption><span><i class="fa fa-users fa-fw" title="Comments"></i>Lịch Sử Quay Số Ngày Hôm Nay </span></caption>
                                 <tbody style="display: table-row-group;">
-                                    @for (int i = 0; i < topOfMonth.Count; i++)
+                                    @for (int i = 0; i < recentWheel.Count; i++)
                                     {
                                         <tr class="ranking-link" data-type="team" data-id="9032">
                                             <td class="rank" style="width: 20px;">
@@ -217,11 +234,11 @@
                                             <td>
                                                 <h4 style="margin: 0px;">
                                                     <span class="main-custom no-game">
-                                                        <span>@topOfMonth[i].UserName</span>
+                                                        <span>@recentWheel[i].UserName</span>
                                                     </span>
                                                 </h4>
                                             </td>
-                                            <td style="width: 80px;" class="numbers">@topOfMonth[i].SumOfMonth.VietNameseMoneyFormat() đ</td>
+                                            <td style="width: 80px;" class="numbers">@recentWheel[i].Result</td>
                                         </tr>
                                     }
 

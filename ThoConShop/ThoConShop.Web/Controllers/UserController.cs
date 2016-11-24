@@ -93,9 +93,11 @@ namespace ThoConShop.Web.Controllers
             GameBankAPI api = new GameBankAPI();
             int price;
             string result = api.VerifiedCard(vm.SerialNumber, vm.PinNumber, vm.CardType, "Nap Tien Game Lien Minh", out price);
+
             if (string.IsNullOrEmpty(result))
             {
                 UserExternalService.SetUserBalance(userId, price);
+
                 _rechargeHistoryService.Create(new UserRechargeHistoryDto()
                 {
                     CreatedDate = DateTime.Now,
@@ -370,11 +372,46 @@ namespace ThoConShop.Web.Controllers
             return View();
         }
 
-
         public JsonResult GetRandomWheelItem()
         {
-            var result = _userService.RandomWheelItem();
-            return Json(result, JsonRequestBehavior.AllowGet);
+            if (UserExternalService.IsEnoughPoint(User.Identity.GetUserId()))
+            {
+                int resultForWheel;
+                var result = _userService.RandomWheelItem(out resultForWheel);
+                Session["CurrentPrice"] = result.Id;
+                return Json(resultForWheel, JsonRequestBehavior.AllowGet);
+            }
+            return Json(new { success = false, message = "Bạn không đủ số Point để quay, xin vui lòng nạp thêm thẻ. Cám ơn!" });
+        }
+
+        public JsonResult SaveWheelHistory(int priceId = -1)
+        {
+            int serverValidatorPrice = (int?) Session["CurrentPrice"] ?? -1;
+            if (priceId == serverValidatorPrice)
+            {
+                if (UserExternalService.IsUnluckyItem(priceId))
+                {
+                    UserExternalService.UpdatePointAfterUseWheel(User.Identity.GetUserId());
+                    return Json("Chúc bạn may mắn lần sau !", JsonRequestBehavior.AllowGet);
+                }
+                var desc = UserExternalService.GetDescriptonWheelItem(priceId);
+              
+                LuckyWheelHistoryDto h = new LuckyWheelHistoryDto()
+                {
+                    CreatedDate = DateTime.Now,
+                    UserName = User.Identity.GetUserName(),
+                    Result = desc
+                };
+
+                var result = _userService.CreateLuckyHistory(h);
+                if (result != null)
+                {
+                    UserExternalService.UpdatePointAfterUseWheel(User.Identity.GetUserId());
+                }
+                return Json("Chúc mừng bạn đã trúng " + desc, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(new { status = "error", message = "Xảy ra lỗi khi cập nhật thông tin, vui lòng quay số lại." });
         }
 
         protected override void Dispose(bool disposing)

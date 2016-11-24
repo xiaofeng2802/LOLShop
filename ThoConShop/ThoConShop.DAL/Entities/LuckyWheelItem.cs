@@ -14,7 +14,7 @@ namespace ThoConShop.DAL.Entities
 
         public string ImageUrl { get; set; }
 
-        public int DuplicationTime { get; set; }
+        public bool IsUnlucky { get; set; }
 
         public float WinningPercent { get; set; }
     }

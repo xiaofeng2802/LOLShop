@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using PagedList;
 using ThoConShop.Business.Dtos;
 using ThoConShop.DataSeedWork.Identity;
+using ThoConShop.DAL.Entities;
 
 namespace ThoConShop.Business.Contracts
 {
@@ -41,6 +42,6 @@ namespace ThoConShop.Business.Contracts
 
         int DeleteLuckyHistory(int id);
 
-        int RandomWheelItem();
+        LuckyWheelItemDto RandomWheelItem(out int resultForWheel);
     }
 }

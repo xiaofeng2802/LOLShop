@@ -1,4 +1,8 @@
-﻿
+﻿@using Microsoft.AspNet.Identity
+@using PagedList.Mvc
+@using ThoConShop.DataSeedWork.UserExternalService
+@model PagedList.IPagedList<ThoConShop.Business.Dtos.LuckyWheelHistoryDto>
+
 @{
     ViewBag.Title = "LuckyWheel";
     Layout = "~/Views/Shared/_DetailsLayout.cshtml";
@@ -16,15 +20,82 @@
                 <div id="canvasContainer" align="center">
                     <canvas id="canvas" width="600" height="600">
                     </canvas>
-                  
-                    <a href="#" id="prizePointer">
-                        <img class="img-responsive" src="~/Images/btn-wheel.png" />
-                    </a>
+
+                    <img id="prizePointer2" src="~/Images/qt-arow.png" />
+                        <img id="prizePointer" class="img-responsive" src="~/Images/btn-wheel.png" />
+                    <div style="margin-bottom: 20px;font-size: 30px;">
+                        Tổng số Point bạn hiện có là <span>@UserExternalService.GetUserPoint(User.Identity.GetUserId()) Point.</span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="clearfix"></div>
+</div>
+<div class="hr"></div>
+<div class="container assembly_view">
+    <div class="col-md-12">
+        <h2 class="c-hero__title u-text-gradient">Lịch Sử Quay Số</h2>
+        <div class="row">
+            <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12" align="center">
+                <table class="table table-responsive">
+                    <thead>
+                    <tr>
+                        <th class="recharge-table-border-bottom">
+                            Mã Số
+                        </th>
+                        <th class="recharge-table-border-bottom">
+                            Tài Khoản
+                        </th>
+                        <th class="recharge-table-border-bottom">
+                            Phần Thưởng
+                        </th>
+                        <th class="recharge-table-border-bottom">
+                            Ngày Quay
+                        </th>
+                    </tr>
+                    </thead>
+                    @if (Model.Count == 0)
+                    {
+                        <tbody>
+                        <tr>
+                            <td colspan="6" class="text-center">
+                                <p>Bạn Chưa Có Người Quay Nào</p>
+                            </td>
+                        </tr>
+                        </tbody>
+                    }
+                    else
+                    {
+                        <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr class="recharge-table-border-top">
+                                <td>
+                                    @item.Id
+                                </td>
+                                <td>
+                                    @item.UserName
+                                </td>
+                                <td>
+                                    @item.Result
+                                </td>
+                                <td>
+                                    @item.CreatedDate
+                                </td>
+                            </tr>
+                        }
+                        </tbody>
+                    }
 
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 body-pagging">
+                @Html.PagedListPager(Model, page => Url.Action("LuckyWheel", new { page }))
+            </div>
+        </div>
+    </div>
 </div>
 <script src="~/Scripts/Custom/luckyWheel.js"></script> 

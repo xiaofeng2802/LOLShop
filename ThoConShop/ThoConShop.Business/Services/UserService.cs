@@ -122,7 +122,8 @@ namespace ThoConShop.Business.Services
                     Description = a.Description,
                     UpdatedDate = a.UpdatedDate,
                     DisplayName = a.DisplayName,
-                    WinningPercent = a.WinningPercent
+                    WinningPercent = a.WinningPercent,
+                    IsUnlucky = a.IsUnlucky
                 }).ToPagedList(currentIndex, pageSize);
 
             return result;
@@ -186,9 +187,10 @@ namespace ThoConShop.Business.Services
 
         public LuckyWheelHistoryDto CreateLuckyHistory(LuckyWheelHistoryDto data)
         {
-
+            var userId = _userRepositories.ReadOne(a => a.GeneralUser.UserName == data.UserName).Id;
             var entity = Mapper.Map<LuckyWheelHistory>(data);
             entity.CreatedDate = DateTime.Now;
+            entity.UserId = userId;
 
             var result = _luckyWheelHistoryRepositories.Create(entity);
 
@@ -207,7 +209,7 @@ namespace ThoConShop.Business.Services
             return _luckyWheelHistoryRepositories.SaveChanges();
         }
 
-        public int RandomWheelItem()
+        public LuckyWheelItemDto RandomWheelItem(out int resultForWheel)
         {
             var wheelItems = _luckyWheelItemRepositories.Read(a => true).OrderBy(a => a.DisplayName);
             IList<ProportionValue<LuckyWheelItem>> listRandom = new List<ProportionValue<LuckyWheelItem>>();
@@ -216,9 +218,10 @@ namespace ThoConShop.Business.Services
             {
                 listRandom.Add(ProportionValue.Create((item.WinningPercent / 100) , item));
             }
-            var result = listRandom.ChooseByRandom();
 
-            return result;
+            var result = listRandom.ChooseByRandom(out resultForWheel);
+
+            return Mapper.Map<LuckyWheelItemDto>(result);
         }
     }
 }

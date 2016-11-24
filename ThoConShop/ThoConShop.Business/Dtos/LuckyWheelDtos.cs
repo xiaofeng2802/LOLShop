@@ -22,7 +22,7 @@ namespace ThoConShop.Business.Dtos
 
         public string ImageUrl { get; set; }
 
-        public int DuplicationTime { get; set; }
+        public bool IsUnlucky { get; set; }
 
         public HttpPostedFileBase FileImage { get; set; }
 

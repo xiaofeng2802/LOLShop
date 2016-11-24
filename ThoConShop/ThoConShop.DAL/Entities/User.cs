@@ -21,6 +21,8 @@ namespace ThoConShop.DAL.Entities
 
         public float Balance { get; set; } = 0;
 
+        public int Point { get; set; }
+
         public string NameDisplay { get; set; }
 
         public bool IsActive { get; set; } = true;
