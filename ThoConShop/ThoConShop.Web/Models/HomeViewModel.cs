@@ -12,15 +12,15 @@ namespace ThoConShop.Web.Models
 
         public IList<RankDto> RanksFilter { get; set; }
 
-        public IList<SkinDto> SkinsFilter { get; set; }
-
         public IList<string> PriceFilter { get; set; }
 
         public int? CurrentRankFilter { get; set; }
 
-        public int? CurrentSkinFilter { get; set; }
+        public string CurrentSkinFilter { get; set; }
 
         public string CurrentPriceFilter { get; set; }
+
+        public string News { get; set; }
     }
 
     public class AccountEditViewModel

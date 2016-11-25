@@ -1,5 +1,6 @@
 ﻿@using PagedList.Mvc
 @using ThoConShop.Business.Dtos
+@using ThoConShop.DataSeedWork.NewsService
 @model ThoConShop.Web.Models.AccountIndexViewModel
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{ 
@@ -9,6 +10,29 @@
 @Html.HiddenFor(a => Model.CurrentRankFilter)
 @Html.HiddenFor(a => Model.CurrentPriceFilter)
 @Html.HiddenFor(a => Model.CurrentSkinFilter)
+   <!-- The Modal -->
+<!-- The Modal -->
+@if (!string.IsNullOrEmpty(Model.News))
+{
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Thông báo</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        @Html.Raw(Model.News)
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+}
 
 <div class="row filter">
     <div class="col-md-12 filter-back-ground">
@@ -36,39 +60,51 @@
             <button type="button" class="btn btn-default dropdown-toggle filter-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 @if (string.IsNullOrEmpty(Model.CurrentPriceFilter))
                 {
-                    <span>Tìm Theo Giá</span> <span class="caret"></span>
+                    <span>Tìm Theo Giá</span>
+                    <span class="caret"></span>
                 }
                 else
                 {
-                    <span>@Model.CurrentPriceFilter</span> <span class="caret"></span>
+                    <span>@Model.CurrentPriceFilter</span>
+                    <span class="caret"></span>
                 }
             </button>
             <ul class="dropdown-menu">
                 @foreach (var price in Model.PriceFilter)
                 {
 
-                    <li>@Html.ActionLink(price, "Index", new { CurrentPriceFilter = price, CurrentRankFilter = Model.CurrentRankFilter, CurrentSkinFilter = Model.CurrentSkinFilter })</li>
+                    <li>@Html.ActionLink(price, "Index", new {CurrentPriceFilter = price, CurrentRankFilter = Model.CurrentRankFilter, CurrentSkinFilter = Model.CurrentSkinFilter})</li>
                 }
             </ul>
         </div>
-        <div class="btn-group">
-            <button type="button" class="btn btn-default dropdown-toggle filter-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                @if (Model.CurrentSkinFilter == null)
-                {
-                    <span> Tìm Theo Trang Phục</span> <span class="caret"></span>
-                }
-                else
-                {
-                    <span>@Model.SkinsFilter.SingleOrDefault(a => a.Id == Model.CurrentSkinFilter).SkinName</span> <span class="caret"></span>
-                }
-            </button>
-            <ul class="dropdown-menu">
-                @foreach (var skin in Model.SkinsFilter)
-                {
-                    <li>@Html.ActionLink(skin.SkinName, "Index", new { CurrentSkinFilter = skin.Id, CurrentRankFilter = Model.CurrentRankFilter, CurrentPriceFilter = Model.CurrentPriceFilter })</li>
-                }
-            </ul>
-        </div>
+        @using (Html.BeginForm("Index", "Home", FormMethod.Get, new { style = "display: inline-block;" }))
+        {
+            <div class="btn-group">
+                @Html.Hidden("CurrentRankFilter", Model.CurrentRankFilter)
+                @Html.Hidden("CurrentPriceFilter", Model.CurrentPriceFilter)
+                <script src="~/Scripts/bootstrap3-typeahead.min.js"></script>
+                <div class="card">
+                    <!-- BEGIN SEARCH RESULTS -->
+                    <div class="card-body">
+                        <!-- BEGIN SEARCH NAV -->
+                        <div class="col-sm-12 col-md-12 col-lg-12">
+                            @*<input id="skin" class="tags-input" name="skins" value="@Model.CurrentSkinFilter">*@
+                            <input type="text" name="currentSkinFilter" class="typeahead form-control" data-provide="typeahead" autocomplete="off" value="@Model.CurrentSkinFilter">
+                        </div><!--end .col -->
+                        <!-- END SEARCH NAV -->
+
+                    </div><!--end .row -->
+                </div><!--end .card-body -->
+                <!-- END SEARCH RESULTS -->
+                <script src="~/Scripts/Custom/_accountSkin.js"></script>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-default filter-button" type="submit">
+                    Tìm theo trang phục
+                </button>
+            </div>
+        }
+      
         <div class="btn-group">
             <a class="btn btn-default filter-button" href="@Url.Action("Index")">
                 Xóa Lọc

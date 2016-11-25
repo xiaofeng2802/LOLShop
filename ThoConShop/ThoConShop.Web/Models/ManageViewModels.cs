@@ -11,6 +11,11 @@ using ThoConShop.Business.Dtos;
 namespace ThoConShop.Web.Models
 {
 
+    public class Feed
+    {
+        public string Text { get; set; }
+    }
+
     public class ChampCreationViewModel
     {
         [Required(ErrorMessage = "Tên Tướng không được trống.")]

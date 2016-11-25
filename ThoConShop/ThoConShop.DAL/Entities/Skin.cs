@@ -13,7 +13,6 @@ namespace ThoConShop.DAL.Entities
         public Skin()
         {
             Accounts = new HashSet<Account>();
-            Children = new HashSet<Skin>();
         }
 
         [StringLength(100)]
@@ -21,21 +20,15 @@ namespace ThoConShop.DAL.Entities
 
         public bool IsSpecial { get; set; } = false;
 
-        public int? GroupId { get; set; }
-
         public Skin Parent { get; set; }
 
         public string Avatar { get; set; }
 
         public bool IsDeleted { get; set; }
 
-        public bool IsOnFilter { get; set; }
-
         public int? ChampionId { get; set; }
 
         public virtual Champion Champion { get; set; }
-
-        public virtual ICollection<Skin> Children { get; set; }
 
         public virtual ICollection<Account> Accounts { get; set; }
     }

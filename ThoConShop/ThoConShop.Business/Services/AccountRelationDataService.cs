@@ -128,13 +128,12 @@ namespace ThoConShop.Business.Services
                 query = query.Where(a => a.SkinName.Contains(searchString));
             }
             var result = query
-                .OrderByDescending(a => a.IsOnFilter)
+                .OrderByDescending(a => a.SkinName)
                 .ThenBy(a => a.SkinName)
                 .Select(a => new SkinDto()
                 {
                     CreatedDate = a.CreatedDate,
                     Id = a.Id,
-                    IsOnFilter = a.IsOnFilter,
                     IsDeleted = a.IsDeleted,
                     SkinName = a.SkinName,
                     Avatar = a.Avatar,
@@ -147,13 +146,7 @@ namespace ThoConShop.Business.Services
         public IList<SkinDto> ReadSkin(string searchString = "", bool isParentOnly = false)
         {
             IQueryable<Skin> result;
-            if (isParentOnly)
-            {
-                result = _skinRepositories.Read(a => !a.IsDeleted && a.GroupId == null && a.IsOnFilter);
-
-                return Mapper.Map<IList<SkinDto>>(result);
-            }
-            result = _skinRepositories.Read(a => !a.IsDeleted && !a.IsOnFilter);
+            result = _skinRepositories.Read(a => !a.IsDeleted);
 
             return Mapper.Map<IList<SkinDto>>(result);
         }
@@ -225,7 +218,7 @@ namespace ThoConShop.Business.Services
 
         public IList<SkinDto> ReadSkinForFilter()
         {
-            return Mapper.Map<IList<SkinDto>>(_repoSkin.Read(a => a.IsOnFilter && !a.IsDeleted));
+            return Mapper.Map<IList<SkinDto>>(_repoSkin.Read(a => !a.IsDeleted));
         }
 
         public IList<string> ReadPriceRangeForFilter()

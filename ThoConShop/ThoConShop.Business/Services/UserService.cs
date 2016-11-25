@@ -59,7 +59,8 @@ namespace ThoConShop.Business.Services
                 CreatedDate = a.CreatedDate,
                 GeneralUserId = a.GeneralUserId,
                 IsActive = a.IsActive,
-                UserName = a.GeneralUser.UserName
+                UserName = a.GeneralUser.UserName,
+                Point = a.Point
             }).OrderByDescending(a => a.CreatedDate)
             .ToPagedList(currentIndex, pageSize);
 

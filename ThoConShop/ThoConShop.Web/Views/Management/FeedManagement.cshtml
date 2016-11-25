@@ -1,4 +1,4 @@
-﻿
+﻿@model ThoConShop.Web.Models.Feed
 @{
     ViewBag.Title = "FeedManagement";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -8,29 +8,31 @@
 
     <!-- BEGIN SEARCH HEADER -->
     <div class="card-head style-primary">
-        <div class="tools pull-left">
-            <form class="navbar-search" role="search">
-                <div class="form-group">
-                    <input type="text" class="form-control" name="contactSearch" placeholder="Enter your keyword">
-                </div>
-                <button type="submit" class="btn btn-icon-toggle ink-reaction"><i class="fa fa-search"></i></button>
-            </form>
-        </div>
-        <div class="tools">
-            <a class="btn btn-floating-action btn-default-light" href="../../../html/pages/contacts/add.html"><i class="fa fa-plus"></i></a>
-        </div>
+        <header>Tạo Bảng Tin</header>
     </div><!--end .card-head -->
     <!-- END SEARCH HEADER -->
     <!-- BEGIN SEARCH RESULTS -->
     <div class="card-body">
-        <div class="row">
+        @using (Html.BeginForm("SaveFeed", "Management", FormMethod.Post))
+        {
+            <div class="row">
 
-            <!-- BEGIN SEARCH NAV -->
-            <div class="col-sm-4 col-md-3 col-lg-2">
-
-            </div><!--end .col -->
-            <!-- END SEARCH NAV -->
-        </div><!--end .row -->
+                <!-- BEGIN SEARCH NAV -->
+                <label class="col-sm-2 control-label">Nội Dung</label>
+                <div class="col-sm-4 col-md-3 col-lg-2">
+                    @Html.TextAreaFor(a => a.Text, new { @class = "form-control", rows = "10", style="min-width: 600px;", placeholder = "" })
+                    <div class="form-control-line"></div>
+                    @Html.ValidationMessageFor(a => a.Text, "", new { @class = "text-danger" })
+                </div><!--end .col -->
+                <!-- END SEARCH NAV -->
+            </div><!--end .row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <button type="submit" class="btn ink-reaction btn-lg btn-primary">Cập Nhật</button>
+                </div>
+            </div>
+        }
+      
     </div><!--end .card-body -->
     <!-- END SEARCH RESULTS -->
 

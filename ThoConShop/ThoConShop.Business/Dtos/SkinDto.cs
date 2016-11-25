@@ -14,11 +14,8 @@ namespace ThoConShop.Business.Dtos
 
         public string Avatar { get; set; }
 
-        public int? GroupId { get; set; }
-
         public bool IsDeleted { get; set; }
 
-        public bool IsOnFilter { get; set; }
     }
 
     public class SkinDetailUploadDto

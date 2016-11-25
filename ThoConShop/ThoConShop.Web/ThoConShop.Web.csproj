@@ -1859,6 +1859,7 @@
     <Content Include="Images\LCU_AlphaWebsite_Nav_Button_BarBG.png" />
     <Content Include="Images\LCU_AlphaWebsite_Overview_Image1.png" />
     <Content Include="Images\magic-page-top-short.jpg" />
+    <Content Include="Images\mary.png" />
     <Content Include="Images\no-medal.png" />
     <Content Include="Images\overview-page-top.jpg" />
     <Content Include="Images\platinum-medal.png" />
@@ -2745,6 +2746,7 @@
     <Content Include="Images\wishlist.png" />
     <Content Include="Images\yasou.jpg" />
     <Content Include="Images\zed-banner.jpg" />
+    <Content Include="New.txt" />
     <Content Include="Scripts\404\404.js" />
     <Content Include="Scripts\404\base.js" />
     <Content Include="Scripts\404\modernizr.custom.js" />
@@ -3041,10 +3043,12 @@
     <Content Include="Content\assets\less\shared\variables.less" />
     <None Include="Properties\PublishProfiles\Thuan.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\bootstrap3-typeahead.min.js" />
     <Content Include="Scripts\Custom\globalFunction.js" />
     <Content Include="Scripts\Custom\GlobalManagement.js" />
     <Content Include="Scripts\Custom\Index.js" />
     <Content Include="Scripts\Custom\luckyWheel.js" />
+    <Content Include="Scripts\Custom\_accountSkin.js" />
     <Content Include="Scripts\effect-hover-item\production.js" />
     <Content Include="Scripts\effect-hover-item\rbootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

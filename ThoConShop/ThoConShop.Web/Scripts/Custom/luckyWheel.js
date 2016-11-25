@@ -44,8 +44,7 @@
 
         // Create new wheel object specifying the parameters at creation time.
         var theWheel = new Winwheel({
-            'drawText': true,
-            //'drawMode': 'segmentImage',
+            'drawMode': 'segmentImage',
             'canvasId': 'canvas',
             'numSegments': data.length,     // Specify number of segments.
             'outerRadius': 212,

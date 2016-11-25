@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using PagedList;
 using ThoConShop.Business.Contracts;
 using ThoConShop.Business.Dtos;
+using ThoConShop.DataSeedWork.NewsService;
 using ThoConShop.Web.Models;
 
 namespace ThoConShop.Web.Controllers
@@ -33,7 +34,7 @@ namespace ThoConShop.Web.Controllers
             return View("LockNoticeView", (object)userName);
         }
 
-        public ActionResult Index(int? page, int? currentRankFilter, string currentPriceFilter, int? currentSkinFilter)
+        public ActionResult Index(int? page, int? currentRankFilter, string currentPriceFilter, string currentSkinFilter ="")
         {
             int pageIndex = page ?? 1;
 
@@ -41,12 +42,18 @@ namespace ThoConShop.Web.Controllers
             {
                 DataSource = Filter(pageIndex, currentRankFilter, currentPriceFilter, currentSkinFilter),
                 RanksFilter = _accountRelationDataService.ReadRankForFilter(),
-                SkinsFilter = _accountRelationDataService.ReadSkinForFilter(),
                 PriceFilter = _accountRelationDataService.ReadPriceRangeForFilter(),
                 CurrentRankFilter = currentRankFilter,
                 CurrentPriceFilter = currentPriceFilter,
                 CurrentSkinFilter = currentSkinFilter
             };
+
+            if (Session["NewsLoaded"] == null)
+            {
+                var path = Server.MapPath("~/New.txt");
+                viewModel.News = NewExternalService.ReadNew(path);
+                Session["NewsLoaded"] = true;
+            }
 
             return View(viewModel);
         }
@@ -73,7 +80,7 @@ namespace ThoConShop.Web.Controllers
             return HttpNotFound("Account could not be found.");
         }
 
-        private IPagedList<AccountDto> Filter(int pageIndex, int? currentRankFilter, string currentPriceFilter, int? currentSkinFilter)
+        private IPagedList<AccountDto> Filter(int pageIndex, int? currentRankFilter, string currentPriceFilter, string currentSkinFilter)
         {
             IPagedList<AccountDto> result;
             if (currentRankFilter == null && string.IsNullOrEmpty(currentPriceFilter) && currentSkinFilter == null)

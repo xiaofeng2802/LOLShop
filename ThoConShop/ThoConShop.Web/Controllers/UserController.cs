@@ -205,9 +205,17 @@ namespace ThoConShop.Web.Controllers
             {
                 case SignInStatus.Success:
                     returnUrl = returnUrl ?? Url.Action("Index", "Home");
-                    if (returnUrl != null && returnUrl.Contains("ChargingView"))
+                    if (returnUrl.Contains("ChargingView"))
                     {
                         returnUrl = Url.Action("ChargingView", "User");
+                    }
+                    else if (returnUrl.ToLower().Contains("luckywheel"))
+                    {
+                        returnUrl = Url.Action("LuckyWheel", "Home");
+                    }
+                    else if (returnUrl.ToLower().Contains("management"))
+                    {
+                        returnUrl = Url.Action("AccountManagement", "Management");
                     }
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
@@ -221,11 +229,20 @@ namespace ThoConShop.Web.Controllers
                     //    return RedirectToAction("ExternalLoginConfirmationFacebook", new { email = "", returnUrl="" });
                     //}
                     // If the user does not have an account, then prompt the user to create an account
-
+                    
                     returnUrl = returnUrl ?? Url.Action("Index", "Home");
-                    if (returnUrl != null && returnUrl.Contains("ChargingView"))
+
+                    if (returnUrl.Contains("ChargingView"))
                     {
                         returnUrl = Url.Action("ChargingView", "User");
+                    }
+                    else if(returnUrl.ToLower().Contains("luckywheel"))
+                    {
+                        returnUrl = Url.Action("LuckyWheel", "Home");
+                    }
+                    else if (returnUrl.ToLower().Contains("management"))
+                    {
+                        returnUrl = Url.Action("AccountManagement", "Management");
                     }
                     return await ExternalLoginConfirmation(returnUrl);
             }
@@ -286,10 +303,6 @@ namespace ThoConShop.Web.Controllers
         // POST: /Account/ExternalLoginConfirmation
         public async Task<ActionResult> ExternalLoginConfirmation(string returnUrl)
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("Index", "Manage");
-            }
 
             if (ModelState.IsValid)
             {

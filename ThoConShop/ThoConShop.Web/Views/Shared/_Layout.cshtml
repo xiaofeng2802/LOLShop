@@ -2,6 +2,7 @@
 @using Microsoft.AspNet.Identity
 @using ThoConShop.Business.Dtos
 @using ThoConShop.DataSeedWork.Extensions
+@using ThoConShop.DataSeedWork.NewsService
 @using ThoConShop.DataSeedWork.UserExternalService
 @{
     CultureInfo cul = CultureInfo.GetCultureInfo("vi-VN");
@@ -38,257 +39,261 @@
     <script src="~/Scripts/AppScripts/jquery.scrolltop.js"></script>
 </head>
 <body>
-    <div class="header" >
-        <header id="top" role="banner">
-            <div class="nav-header">
-                <div class="nav-content">
-                    <div class="nav-join-button">
-                        <a href="@Url.Action("Index", "Home")">ThoConShop.VN</a>
+
+<div class="header">
+<header id="top" role="banner">
+    <div class="nav-header">
+        <div class="nav-content">
+            <div class="nav-join-button">
+                <a href="@Url.Action("Index", "Home")">ThoConShop.VN</a>
+            </div>
+            <ul class="nav-left">
+                <li>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <a href="@Url.Action("ChargingView", "User")">Nạp thẻ</a>
+                        </div>
                     </div>
-                    <ul class="nav-left">
-                        <li>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <a href="@Url.Action("ChargingView", "User")">Nạp thẻ</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li> <a href="https://www.facebook.com/ShopAccThoCon/?ref=ts&fref=ts">Liên Hệ</a></li>
-                        <li>
-                            @if (User.Identity.IsAuthenticated)
-                            {
-                                <a>
-                                    <span>Chào </span>
-                                    <img style="height: 30px;" src="@response.ResponseUri.ToString()" />
-                                    <span>[<span>@UserExternalService.GetUserBalance(User.Identity.GetUserId()).VietNameseMoneyFormat()</span> VND]</span>
-                                </a>
-                            }
-                        </li>
-                    </ul>
-                    <ul class="nav-right">
-                        <li>
-                            @if (User.Identity.IsAuthenticated)
-                            {
-
-                                <a href="@Url.Action("ViewHistoriesUser", "User")">Lịch Sử Nạp/Mua</a>
-                            }
-                        </li>
-                        <li>
-                            @if (User.Identity.IsAuthenticated)
-                            {
-
-                                <a href="@Url.Action("LuckyWheel", "Home")">Vòng Quay</a>
-                            }
-                        </li>
-                        <li>
-                           @if (User.Identity.IsAuthenticated)
-                           {
-
-                               using (Html.BeginForm("LogOff", "User"))
-                               {
-                                @Html.AntiForgeryToken()
-                                <div id="socialLoginList">
-                                    <p>
-                                        <a>
-                                            <button type="submit" class="button-to-link" id="" name="provider" value="Facebook">Đăng Xuất</button>
-                                        </a>
-                                       
-                                    </p>
-                                </div>
-                               }
-                           }
-                           else
-                           {
-                               using (Html.BeginForm("ExternalLogin", "User", new { ReturnUrl = Url.Action("Index", "Home") }))
-                               {
-                                    @Html.AntiForgeryToken()
-                                    <div id="socialLoginList">
-                                        <p>
-                                            <a>
-                                                <button type="submit" class="button-to-link" id="" name="provider" value="Facebook">Đăng Nhập Bằng FB</button>
-                                            </a>
-                                           
-                                        </p>
-                                    </div>
-                                }
-                           }
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="mobile_nav">
-                <div class="navbar-header">
-                    <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="false">
-                        <span class="sr-only">Toggle navigation</span> <span class="glyphicon glyphicon-th-list"></span>
-                    </button>
-                </div>
-                <nav id="bs-navbar" class="collapse navbar-collapse">
-                    <ul class="navbar-nav no-margin">
-                        <li><a href="@Url.Action("Index", "Home")">Trang chủ</a></li>
-                        <li> <a href="@Url.Action("ChargingView", "User")">Nạp Thẻ</a></li>
-                        <li> <a href="https://www.facebook.com/ShopAccThoCon/?ref=ts&fref=ts">Liên Hệ</a></li>
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            <li>
-
-                                <a>
-                                    <span>Chào </span>
-                                    <img style="height: 30px;" src="@response.ResponseUri.ToString()"/>
-                                    <span>[<span>@UserExternalService.GetUserBalance(User.Identity.GetUserId()).VietNameseMoneyFormat()</span> VND]</span>
-                                </a>
-
-                            </li>
-                            <li>
-                                <a href="@Url.Action("ViewHistoriesUser", "User")">Lịch Sử Nạp/Mua</a>
-                            </li>
-                            <li>
-                                    <a href="@Url.Action("LuckyWheel", "Home")">Vòng Quay</a>
-                            </li>
-                        }
-                       
-                        <li>
-                            @if (User.Identity.IsAuthenticated)
-                            {
-
-                                using (Html.BeginForm("LogOff", "User"))
-                                {
-                                    @Html.AntiForgeryToken()
-                                    <div id="socialLoginList">
-                                        <p>
-                                            <a>
-                                                <button type="submit" class="button-to-link" id="" name="provider" value="Facebook">Đăng Xuất</button>
-                                            </a>
-
-                                        </p>
-                                    </div>
-                                }
-                            }
-                            else
-                            {
-                                using (Html.BeginForm("ExternalLogin", "User", new { ReturnUrl = Url.Action("Index", "Home") }))
-                                {
-                                    @Html.AntiForgeryToken()
-                                    <div id="socialLoginList">
-                                        <p>
-                                            <a>
-                                                <button type="submit" class="button-to-link" id="" name="provider" value="Facebook">Đăng Nhập Bằng FB</button>
-                                            </a>
-
-                                        </p>
-                                    </div>
-                                }
-                            }
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </header>
-        <div class="title_top text-center row no-margin">
-            <div class="col-lg-12" align="center">
-                <div class="row">
-                    @if (topOfMonth != null && topOfMonth.Count > 0)
+                </li>
+                <li> <a href="https://www.facebook.com/ShopAccThoCon/?ref=ts&fref=ts">Liên Hệ</a></li>
+                <li>
+                    @if (User.Identity.IsAuthenticated)
                     {
-                        <div class="col-lg-4 col-sm-12 align-right">
-                            <table class="simple gamelist tiny">
-                                <caption><span><i class="fa fa-users fa-fw" title="Comments"></i>Top Nạp Thẻ Tháng @DateTime.Now.Month</span></caption>
-                                <tbody style="display: table-row-group;">
-                                    @for (int i = 0; i < topOfMonth.Count; i++)
-                                    {
-                                        <tr class="ranking-link" data-type="team" data-id="9032">
-                                            <td class="rank" style="width: 20px;">
+                        <a>
+                            <span>Chào </span>
+                            <img style="height: 30px;" src="@response.ResponseUri.ToString()"/>
+                            <span>[<span>@UserExternalService.GetUserBalance(User.Identity.GetUserId()).VietNameseMoneyFormat()</span> VND]</span>
+                        </a>
+                    }
+                </li>
+            </ul>
+            <ul class="nav-right">
+                <li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
 
-                                                <div class="ranking top-1">@(i + 1)</div>
-                                            </td>
-                                            <td>
-                                                <h4 style="margin: 0px;">
-                                                    <span class="main-custom no-game">
+                        <a href="@Url.Action("ViewHistoriesUser", "User")">Lịch Sử Nạp/Mua</a>
+                    }
+                </li>
+                <li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+
+                        <a href="@Url.Action("LuckyWheel", "Home")">Vòng Quay</a>
+                    }
+                </li>
+                <li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+
+                        using (Html.BeginForm("LogOff", "User"))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div id="socialLoginList">
+                                <p>
+                                    <a>
+                                        <button type="submit" class="button-to-link" id="" name="provider" value="Facebook">Đăng Xuất</button>
+                                    </a>
+
+                                </p>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        using (Html.BeginForm("ExternalLogin", "User", new {ReturnUrl = Url.Action("Index", "Home")}))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div id="socialLoginList">
+                                <p>
+                                    <a>
+                                        <button type="submit" class="button-to-link" id="" name="provider" value="Facebook">Đăng Nhập Bằng FB</button>
+                                    </a>
+
+                                </p>
+                            </div>
+                        }
+                    }
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="mobile_nav">
+        <div class="navbar-header">
+            <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span> <span class="glyphicon glyphicon-th-list"></span>
+            </button>
+        </div>
+        <nav id="bs-navbar" class="collapse navbar-collapse">
+            <ul class="navbar-nav no-margin">
+                <li><a href="@Url.Action("Index", "Home")">Trang chủ</a></li>
+                <li> <a href="@Url.Action("ChargingView", "User")">Nạp Thẻ</a></li>
+                <li> <a href="https://www.facebook.com/ShopAccThoCon/?ref=ts&fref=ts">Liên Hệ</a></li>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li>
+
+                        <a>
+                            <span>Chào </span>
+                            <img style="height: 30px;" src="@response.ResponseUri.ToString()"/>
+                            <span>[<span>@UserExternalService.GetUserBalance(User.Identity.GetUserId()).VietNameseMoneyFormat()</span> VND]</span>
+                        </a>
+
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ViewHistoriesUser", "User")">Lịch Sử Nạp/Mua</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("LuckyWheel", "Home")">Vòng Quay</a>
+                    </li>
+                }
+
+                <li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+
+                        using (Html.BeginForm("LogOff", "User"))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div id="socialLoginList">
+                                <p>
+                                    <a>
+                                        <button type="submit" class="button-to-link" id="" name="provider" value="Facebook">Đăng Xuất</button>
+                                    </a>
+
+                                </p>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        using (Html.BeginForm("ExternalLogin", "User", new {ReturnUrl = Url.Action("Index", "Home")}))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div id="socialLoginList">
+                                <p>
+                                    <a>
+                                        <button type="submit" class="button-to-link" id="" name="provider" value="Facebook">Đăng Nhập Bằng FB</button>
+                                    </a>
+
+                                </p>
+                            </div>
+                        }
+                    }
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<div class="title_top text-center row no-margin">
+    <div class="col-lg-12" align="center">
+        <div class="row">
+            @if (topOfMonth != null && topOfMonth.Count > 0)
+            {
+                <div class="col-lg-4 col-sm-12 align-right">
+                    <table class="simple gamelist tiny">
+                        <caption><span><i class="fa fa-users fa-fw" title="Comments"></i>Top Nạp Thẻ Tháng @DateTime.Now.Month</span></caption>
+                        <tbody style="display: table-row-group;">
+                        @for (int i = 0; i < topOfMonth.Count; i++)
+                        {
+                            <tr class="ranking-link" data-type="team" data-id="9032">
+                                <td class="rank" style="width: 20px;">
+
+                                    <div class="ranking top-1">@(i + 1)</div>
+                                </td>
+                                <td>
+                                    <h4 style="margin: 0px;">
+                                        <span class="main-custom no-game">
                                                         <span>@topOfMonth[i].UserName</span>
                                                     </span>
-                                                </h4>
-                                            </td>
-                                            <td style="width: 80px;" class="numbers">@topOfMonth[i].SumOfMonth.VietNameseMoneyFormat() đ</td>
-                                        </tr>
-                                    }
+                                    </h4>
+                                </td>
+                                <td style="width: 80px;" class="numbers">@topOfMonth[i].SumOfMonth.VietNameseMoneyFormat() đ</td>
+                            </tr>
+                        }
 
-                                </tbody>
-                            </table>
-                        </div>
-                    }
-                    
-                    <div class="col-lg-4 col-sm-12">
-                        
-                    </div>
-                    @if (recentWheel != null && recentWheel.Count > 0)
-                    {
-                        <div class="col-lg-4 col-sm-12">
-                            <table class="simple gamelist tiny">
-                                <caption><span><i class="fa fa-users fa-fw" title="Comments"></i>Lịch Sử Quay Số Ngày Hôm Nay </span></caption>
-                                <tbody style="display: table-row-group;">
-                                    @for (int i = 0; i < recentWheel.Count; i++)
-                                    {
-                                        <tr class="ranking-link" data-type="team" data-id="9032">
-                                            <td class="rank" style="width: 20px;">
+                        </tbody>
+                    </table>
+                </div>
+            }
 
-                                                <div class="ranking top-1">@(i + 1)</div>
-                                            </td>
-                                            <td>
-                                                <h4 style="margin: 0px;">
-                                                    <span class="main-custom no-game">
+            <div class="col-lg-4 col-sm-12">
+
+            </div>
+            @if (recentWheel != null && recentWheel.Count > 0)
+            {
+                <div class="col-lg-4 col-sm-12">
+                    <table class="simple gamelist tiny">
+                        <caption><span><i class="fa fa-users fa-fw" title="Comments"></i>Lịch Sử Quay Số Ngày Hôm Nay </span></caption>
+                        <tbody style="display: table-row-group;">
+                        @for (int i = 0; i < recentWheel.Count; i++)
+                        {
+                            <tr class="ranking-link" data-type="team" data-id="9032">
+                                <td class="rank" style="width: 20px;">
+
+                                    <div class="ranking top-1">@(i + 1)</div>
+                                </td>
+                                <td>
+                                    <h4 style="margin: 0px;">
+                                        <span class="main-custom no-game">
                                                         <span>@recentWheel[i].UserName</span>
                                                     </span>
-                                                </h4>
-                                            </td>
-                                            <td style="width: 80px;" class="numbers">@recentWheel[i].Result</td>
-                                        </tr>
-                                    }
+                                    </h4>
+                                </td>
+                                <td style="width: 80px;" class="numbers">@recentWheel[i].Result</td>
+                            </tr>
+                        }
 
-                                </tbody>
-                            </table>
-                        </div>
-                    }
+                        </tbody>
+                    </table>
                 </div>
-            </div>
+            }
         </div>
-        <div class="hr"></div>
     </div>
-    <div class="main">
-        <div class="content_top">
-            <div class="container back-ground-color-container">
-                @RenderBody()
-                <div class="row">
-                    <div class="footer img-responsive">
-                        <div class="sa-footer">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-sm-12 col-md-6">
-                                        <div class="sa-ftadd">
-                                            <p>Địa chỉ: Phường Bình Thạnh, thị xã Tân Phước Khánh, Tân Uyên, Bình Dương</p>
-                                            <p>© 2016, Copyright by Bán Acc Liên Minh Huyền Thoại Giá Rẻ - Uy Tín.</p>
-                                        </div>
-                                        <div class="sa-fthotline">
-                                            <div class="sa-ftarow clearfix">
-                                                <div class="sa-ftacol sa-fthnum">
-                                                    <p><a href="tel:0888390107" title="">Hotline 1: 0888.39.0107</a></p>
-                                                    <p><a href="tel:0888390107" title="">Hotline 2: 0186.835.8351</a></p>
-                                                </div>
-                                                <div class="sa-ftacol sa-fthwork">
-                                                    Thời gian làm việc: <strong>8h-23h</strong> các ngày trong tuần
-                                                </div>
+</div>
+<div class="hr"></div>
+</div>
+<div class="main">
+    <div class="content_top">
+        <div class="container back-ground-color-container">
+            @RenderBody()
+
+
+            <div class="row">
+                <div class="footer img-responsive">
+                    <div class="sa-footer">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="sa-ftadd">
+                                        <p>Địa chỉ: Phường Bình Thạnh, thị xã Tân Phước Khánh, Tân Uyên, Bình Dương</p>
+                                        <p>© 2016, Copyright by Bán Acc Liên Minh Huyền Thoại Giá Rẻ - Uy Tín.</p>
+                                    </div>
+                                    <div class="sa-fthotline">
+                                        <div class="sa-ftarow clearfix">
+                                            <div class="sa-ftacol sa-fthnum">
+                                                <p><a href="tel:0888390107" title="">Hotline 1: 0888.39.0107</a>
+                                                </p>
+                                                <p><a href="tel:0888390107" title="">Hotline 2: 0186.835.8351</a>
+                                                </p>
+                                            </div>
+                                            <div class="sa-ftacol sa-fthwork">
+                                                Thời gian làm việc: <strong>8h-23h</strong> các ngày trong tuần
                                             </div>
                                         </div>
-
                                     </div>
-                                    <div class="col-sm-12 col-md-4">
-                                        <p class="sa-lshare">
-                                            <span>Liên kết chia sẻ:</span>
-                                            <a class="sa-ic sa-lsfb" href="" title=""></a>
-                                            <a class="sa-ic sa-lstw" href="" title=""></a>
-                                            <a class="sa-ic sa-lsgg" href="" title=""></a>
-                                            <a class="sa-ic sa-lsyou" href="" title=""></a>
-                                            <a class="sa-ic sa-lssky" href="" title=""></a>
-                                        </p>
 
-                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-4">
+                                    <p class="sa-lshare">
+                                        <span>Liên kết chia sẻ:</span>
+                                        <a class="sa-ic sa-lsfb" href="" title=""></a>
+                                        <a class="sa-ic sa-lstw" href="" title=""></a>
+                                        <a class="sa-ic sa-lsgg" href="" title=""></a>
+                                        <a class="sa-ic sa-lsyou" href="" title=""></a>
+                                        <a class="sa-ic sa-lssky" href="" title=""></a>
+                                    </p>
+
                                 </div>
                             </div>
                         </div>
@@ -297,16 +302,20 @@
             </div>
         </div>
     </div>
-    <a href="#" class="scrolltop custom-scrolltop"><i class="fa fa-chevron-up"></i></a>
-    <script>
+</div>
+<a href="#" class="scrolltop custom-scrolltop"><i class="fa fa-chevron-up"></i></a>
+<script>
     $(document).ready(function() {
         $.scrolltop();
     });
-    $(document).ready(function () {
+    $(document).ready(function() {
         $('[data-toggle="tooltip"]').tooltip();
     });
 
-    </script>
-    <script src="~/Scripts/Custom/globalFunction.js"></script>
+</script>
+<script src="~/Scripts/Custom/globalFunction.js"></script>
+
+
 </body>
+
 </html>		

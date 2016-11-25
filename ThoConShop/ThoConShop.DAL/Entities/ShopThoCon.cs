@@ -108,10 +108,6 @@ namespace ThoConShop.DAL.Entities
             modelBuilder.Entity<UserTradingHistory>()
                 .Ignore(a => a.Id);
 
-            modelBuilder.Entity<Skin>()
-                .HasMany(a => a.Children)
-                .WithOptional(a => a.Parent)
-                .HasForeignKey(a => a.GroupId);
 
             modelBuilder.Entity<User>()
                 .HasRequired(a => a.GeneralUser);

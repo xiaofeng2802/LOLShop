@@ -16,6 +16,22 @@ namespace ThoConShop.DataSeedWork.UserExternalService
         static IDbConnection db =
             new SqlConnection(ConfigurationManager.ConnectionStrings["ShopThoConDb"].ConnectionString);
 
+        public static void UpdatePointUser(string generalUserId, int point)
+        {
+            string query = string.Format("Update [dbo].[User] SET Point = {0} WHERE GeneralUserId = {1}",
+                point, generalUserId);
+
+            db.Execute(query);
+        }
+
+        public static void UpdateBalanceUser(string generalUserId, float balance)
+        {
+            string query = string.Format("Update [dbo].[User] SET Balance = {0} WHERE GeneralUserId = {1}",
+               balance, generalUserId);
+
+            db.Execute(query);
+        }
+
         public static bool IsEnoughPoint(string generalUserId)
         {
             var defaultPoint = int.Parse(ConfigurationManager.AppSettings["PointPerWheel"]);

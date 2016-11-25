@@ -52,6 +52,8 @@ ul.tagging_ul li.tagging_new input.tagging_new_input {
   padding-bottom: 0;
   padding-top: 0;
   max-width: inherit;
+    background-color: white !important;
+    color: black;
 }
 .tt-dropdown-menu {
   background-color: #ffffff;

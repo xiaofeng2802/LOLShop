@@ -37,7 +37,7 @@ margin-right:auto;
     z-index: 999;
     border: none;
     cursor: pointer;
-    top: 9%;
+    top: 17%;
     width: 7%;
 }
 
@@ -53,6 +53,19 @@ margin-right:auto;
      border: none;
 }
     #prizePointer {
-        top: 35%;
+        top: 39%;
+    }
+}
+
+@media (max-width: 400px) {
+    #prizePointer2 {
+    left: 17px;
+    top: 14%;
+    }
+
+    #prizePointer {
+        top: 32%;
+    /* padding-left: 1px; */
+    margin-left: 44%;
     }
 }

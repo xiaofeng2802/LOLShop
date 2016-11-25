@@ -155,13 +155,13 @@ namespace ThoConShop.Business.Services
             return (double) result.Price;
         }
 
-        public IPagedList<AccountDto> FilterByRankPriceSkin(int currentIndex, int pageSize, int? gankFilter, string priceFilter, int? skinFilter)
+        public IPagedList<AccountDto> FilterByRankPriceSkin(int currentIndex, int pageSize, int? rankFilter, string priceFilter, string skinFilter)
         {
             var result = _repoAccount.Read(a => a.IsAvailable);
 
-            if (gankFilter != null && gankFilter > 0)
+            if (rankFilter != null && rankFilter > 0)
             {
-                result = result.Where(a => a.RankId == gankFilter);
+                result = result.Where(a => a.RankId == rankFilter);
             }
 
             if (!string.IsNullOrEmpty(priceFilter))
@@ -189,16 +189,18 @@ namespace ThoConShop.Business.Services
                 }
             }
 
-            if (skinFilter != null && skinFilter > 0)
+            if (!string.IsNullOrEmpty(skinFilter))
             {
-                var idList = _repoSkin.ReadOne(a => a.Id == skinFilter).Children.Select(a => a.Id).ToList();
+                var id = _repoSkin.ReadOne(a => skinFilter == a.SkinName).Id;
 
-                idList.Add(skinFilter ?? 0);
-
-                result = result.Include(a => a.Skins).Where(a => a.Skins.Any(b => idList.Contains(b.Id)));
+                result = result.Include(a => a.Skins).Where(a => a.Skins.Any(b => b.Id == id));
             }
 
-            return result.Include(a => a.Rank).Where(a => a.IsAvailable).Select(a => new AccountDto()
+            return result.Include(a => a.Rank)
+                        .Include(a => a.NumberOfPageGems)
+                        .Include(a => a.Champions)
+                        .Include(a => a.Skins)
+                        .Where(a => a.IsAvailable).Select(a => new AccountDto()
             {
                 CreatedDate = a.CreatedDate,
                 RankId = a.RankId,
@@ -212,7 +214,10 @@ namespace ThoConShop.Business.Services
                 Password = a.Password,
                 Price = a.Price,
                 Title = a.Title,
-                UpdatedDate = a.UpdatedDate
+                UpdatedDate = a.UpdatedDate,
+                NumberOfPageGem = a.NumberOfPageGems.Count,
+                NumberOfChamps = a.Champions.Count,
+                NumberOfSkins = a.Skins.Count
             }).OrderByDescending(a => a.IsHot)
                 .ThenByDescending(a => a.CreatedDate)
                 .ToPagedList(currentIndex, pageSize);

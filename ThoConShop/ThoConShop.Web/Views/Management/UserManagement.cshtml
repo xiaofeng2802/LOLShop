@@ -40,6 +40,7 @@
                             <th>Email/Tên Tài Khoản</th>
                             <th>Khóa Đến Ngày</th>
                             <th>Số Dư</th>
+                            <th>Số Point</th>
                             <th>Ngày Tham Gia</th>
                             <th class="text-right"></th>
                         </tr>
@@ -59,7 +60,39 @@
                                         <span>Không bi khóa</span>
                                     }
                                 </td>
-                                <td>@item.Balance.VietNameseMoneyFormat() vnđ</td>
+                                <td>
+                                    @using (Html.BeginForm("UpdateBalanceUser", "Management", FormMethod.Post))
+                                    {
+                                        <div class="col-lg-8">
+                                            @Html.TextBox("Balance", item.Balance, new
+                                       {
+                                           @class = "form-control",
+                                           type = "number"
+                                       })
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <button type="submit" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Cập Nhật Số Dư"><i class="fa fa-pencil"></i></button>
+                                        </div>
+                                    }
+                                  
+                                    
+                                </td>
+                                <td>
+                                    @using (Html.BeginForm("UpdatePointUser", "Management", FormMethod.Post))
+                                    {
+                                        <div class="col-lg-8">
+                                            @Html.TextBox("Point", item.Point, new
+                                       {
+                                           @class = "form-control",
+                                           type = "number"
+                                       })
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <button type="submit" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Cập Nhật Số Dư"><i class="fa fa-pencil"></i></button>
+                                        </div>
+                                    }
+                                   
+                                </td>
                                 <td>@item.CreatedDate.ToShortDateString()</td>
                                 <td class="text-right">
                                     @if (item.IsActive)

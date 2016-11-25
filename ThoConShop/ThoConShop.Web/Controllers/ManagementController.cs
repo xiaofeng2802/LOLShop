@@ -8,15 +8,19 @@ using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using Newtonsoft.Json;
 using AutoMapper;
+using Microsoft.AspNet.Identity;
 using Newtonsoft.Json.Linq;
 using ThoConShop.Business.Contracts;
 using ThoConShop.Business.Dtos;
 using ThoConShop.DataSeedWork.Extensions;
+using ThoConShop.DataSeedWork.NewsService;
 using ThoConShop.DataSeedWork.Ulti;
+using ThoConShop.DataSeedWork.UserExternalService;
 using ThoConShop.Web.Models;
 
 namespace ThoConShop.Web.Controllers
 {
+    [Authorize(Users = "tuntiton030100@gmail.com,jhklshad@yahoo.com,ngocthuan1704@yahoo.com.vn")]
     public class ManagementController : Controller
     {
         readonly int _pageSize = int.Parse(ConfigurationManager.AppSettings["PageSize"]);
@@ -126,9 +130,9 @@ namespace ThoConShop.Web.Controllers
                 accountDto.Password = data.Password;
                 accountDto.UserName = data.UserName;
                 accountDto.RankId = data.RankId;
-                accountDto.Avatar = (url == null ? accountDto.Avatar : ConfigurationManager.AppSettings["AvatarUrl"] + url);
+                accountDto.Avatar = (!string.IsNullOrEmpty(url) ? accountDto.Avatar : ConfigurationManager.AppSettings["AvatarUrl"] + url);
                 
-                if (data.PageGem != null)
+                if (data.PageGem != null && data.PageGem.All(a => a != null))
                 {
                     _accountRelationDataService.DeletePageGemByAccountId(data.AccounId);
                 }
@@ -256,7 +260,12 @@ namespace ThoConShop.Web.Controllers
 
         public ActionResult FeedManagement()
         {
-            return View();
+            var path = Server.MapPath("~/New.txt");
+            Feed vm = new Feed()
+            {
+                Text = NewExternalService.ReadNew(path)
+            };
+            return View(vm);
         }
 
         public ActionResult ChampManagement(int page = 1)
@@ -315,15 +324,12 @@ namespace ThoConShop.Web.Controllers
             return Json(null, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult SkinDataSource(int accountId = 0)
+        [AllowAnonymous]
+        public JsonResult SkinDataSource()
         {
-            if (accountId > 0)
-            {
-                var result = _accountRelationDataService.ReadSkin(isParentOnly: false).Select(a => a.SkinName);
+            var result = _accountRelationDataService.ReadSkin().Select(a => a.SkinName);
 
-                return Json(result, JsonRequestBehavior.AllowGet);
-            }
-            return Json(null, JsonRequestBehavior.AllowGet);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult WheelManagement(int? page)
@@ -362,10 +368,39 @@ namespace ThoConShop.Web.Controllers
                 id = a.Id,
                 description = a.Description,
                 text= a.DisplayName,
-                image = a.ImageUrl,
-                fillStyle = "#7de6ef"
+                image = a.ImageUrl
             });
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult UpdateBalanceUser(float? balance)
+        {
+            if (balance.HasValue)
+            {
+                UserExternalService.UpdateBalanceUser(User.Identity.GetUserId(), balance ?? 0);
+            }
+           
+            return RedirectToAction("UserManagement");
+        }
+
+        [HttpPost]
+        public ActionResult UpdatePointUser(int? point)
+        {
+            if (point.HasValue)
+            {
+                UserExternalService.UpdatePointUser(User.Identity.GetUserId(), point ?? 0);
+            }
+            return RedirectToAction("UserManagement");
+        }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult SaveFeed(Feed data)
+        {
+            var path = Server.MapPath("~/New.txt");
+            NewExternalService.SaveNew(path, data.Text);
+            return RedirectToAction("FeedManagement");
         }
     }
 }
