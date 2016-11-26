@@ -9,7 +9,7 @@ namespace ThoConShop.Business.Dtos
 
     public class UserTopCharging
     {
-        public string UserName { get; set; }
+        public string NameDisplay { get; set; }
 
         public float SumOfMonth { get; set; }
     }

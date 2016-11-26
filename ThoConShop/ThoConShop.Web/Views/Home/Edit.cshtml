@@ -51,19 +51,7 @@
             </div>*@
     </div>
 </div>
-<div class="hr"></div>
-<div class="container assembly_view">
-    <div class="col-md-12">
-        <h2 class="c-hero__title u-text-gradient">Chi Tiết Trang Ngọc</h2>
-        @if (Model.CurrentAccount.NumberOfPageGems != null)
-        {
-            foreach (var gem in Model.CurrentAccount.NumberOfPageGems)
-            {
-                <img src="@gem.ImageUrl" class="img-responsive" style="margin-bottom: 10px;"/>
-            }
-        }
-    </div>
-</div>
+
 <div class="hr"></div>
 <div class="container assembly_view">
     <div class="col-md-12">
@@ -96,6 +84,19 @@
             }
         }
 
+    </div>
+</div>
+<div class="hr"></div>
+<div class="container assembly_view">
+    <div class="col-md-12">
+        <h2 class="c-hero__title u-text-gradient">Chi Tiết Trang Ngọc</h2>
+        @if (Model.CurrentAccount.NumberOfPageGems != null)
+        {
+            foreach (var gem in Model.CurrentAccount.NumberOfPageGems)
+            {
+                <img src="@gem.ImageUrl" class="img-responsive" style="margin-bottom: 10px;" />
+            }
+        }
     </div>
 </div>
 <div class="hr"></div>

@@ -225,11 +225,13 @@ namespace ThoConShop.Business.Services
         {
             return new List<string>()
             {
-                "> 1000k",
-                "500k - 1000k",
-                "200k - 500k",
-                "100k - 200k",
-                "< 100k"
+                "10k",
+                "20k",
+                "30k",
+                "40k",
+                "50k",
+                "50k - 500k",
+                "VIP"
             };
         }
 
@@ -323,7 +325,9 @@ namespace ThoConShop.Business.Services
                    Message = a.Message,
                    ParValue = a.ParValue,
                    PinNumber = a.PinNumber,
-                   UpdatedDate = a.UpdatedDate
+                   UpdatedDate = a.UpdatedDate,
+                   Email = a.User.GeneralUser.UserName,
+                   CardType = a.CardType
                })
                .ToPagedList(currentIndex, pageSize);
 

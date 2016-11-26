@@ -179,7 +179,7 @@ namespace ThoConShop.Business.Services
                   Id = a.Id,
                   CreatedDate = a.CreatedDate,
                   UpdatedDate = a.UpdatedDate,
-                  UserName = a.User.GeneralUser.UserName,
+                  NameDisplay = a.User.NameDisplay,
                   Result = a.Result
                 }).ToPagedList(currentIndex, pageSize);
 
@@ -188,10 +188,9 @@ namespace ThoConShop.Business.Services
 
         public LuckyWheelHistoryDto CreateLuckyHistory(LuckyWheelHistoryDto data)
         {
-            var userId = _userRepositories.ReadOne(a => a.GeneralUser.UserName == data.UserName).Id;
             var entity = Mapper.Map<LuckyWheelHistory>(data);
             entity.CreatedDate = DateTime.Now;
-            entity.UserId = userId;
+            entity.UserId = data.UserId;
 
             var result = _luckyWheelHistoryRepositories.Create(entity);
 

@@ -13,8 +13,7 @@
     <!-- BEGIN SEARCH HEADER -->
     <div class="card-head style-primary">
         <div class="tools pull-left" style="width: 85%;">
-            <header>Quản Lý Tài Khoản LMHT</header>
-            @* @using (Html.BeginForm("UserManagement", "Management", FormMethod.Get, new
+             @using (Html.BeginForm("AccountManagement", "Management", FormMethod.Get, new
     {
         role = "search"
     }))
@@ -22,16 +21,13 @@
 
         <div class="col-lg-3 no-padding">
             <div class="form-group">
-                <input type="text" style="background-color: white;" class="form-control" name="searchString" value="@ViewBag.SearchString" placeholder="Nhập Email Cần Tìm">
+                <input type="text" style="background-color: white;" class="form-control" name="searchString" value="@ViewBag.SearchString" placeholder="Nhập mã số tài khoản cần tìm">
             </div>
-        </div>
-        <div class="col-lg-3 no-padding">
-
         </div>
         <div class="col-lg-1 no-padding">
             <button type="submit" class="btn ink-reaction btn-primary"><i class="fa fa-search"></i></button>
         </div>
-    }*@
+    }
         </div>
      
         <div class="tools">
@@ -54,6 +50,7 @@
                                 <th>Giá</th>
                                 <th>Ngày Cập Nhật</th>
                                 <th>Rank</th>
+                                <th>Trạng Thái</th>
                                 <th class="text-right"></th>
                             </tr>
                         </thead>
@@ -68,6 +65,7 @@
                                 <td>@item.Price.VietNameseMoneyFormat()</td>
                                 <td>@item.CreatedDate.ToShortDateString()</td>
                                 <td>@item.RankName</td>
+                                <td>@(item.IsAvailable ? "Chưa Bán" : "Đã Bán")</td>
                                 <td class="text-right">
                                     <a href="@Url.Action("CreateOrUpdateAccount", "Management", new { accountId = item.Id })" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Sửa thông tin"><i class="fa fa-pencil"></i></a>
                                     <a id="deleteButton" href="@Url.Action("DeleteAccount", "Management", new { accountId = item.Id })" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Xóa"><i class="fa fa-trash-o"></i></a>
@@ -82,7 +80,7 @@
         <!-- END SEARCH NAV -->
         <div class="row">
             <div class="col-md-12 body-pagging">
-                @Html.PagedListPager(Model, page => Url.Action("AccountManagement", "Management", new { page }))
+                @Html.PagedListPager(Model, page => Url.Action("AccountManagement", "Management", new { page, searchString = ViewBag.SearchString }))
             </div>
         </div>
     </div><!--end .row -->

@@ -3,13 +3,11 @@
 @using ThoConShop.DataSeedWork.NewsService
 @model ThoConShop.Web.Models.AccountIndexViewModel
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+<script src="~/Scripts/bootstrap3-typeahead.min.js"></script>
 @{ 
 
 }
 
-@Html.HiddenFor(a => Model.CurrentRankFilter)
-@Html.HiddenFor(a => Model.CurrentPriceFilter)
-@Html.HiddenFor(a => Model.CurrentSkinFilter)
    <!-- The Modal -->
 <!-- The Modal -->
 @if (!string.IsNullOrEmpty(Model.News))
@@ -19,9 +17,9 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Thông báo</h4>
+                    <h3 class="modal-title">Thông báo</h3>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" align="center">
                     <p>
                         @Html.Raw(Model.News)
                     </p>
@@ -52,7 +50,7 @@
             <ul class="dropdown-menu">
                 @foreach (var rankFilter in Model.RanksFilter)
                 {
-                    <li>@Html.ActionLink(rankFilter.RankName, "Index", new { CurrentRankFilter = rankFilter.Id, CurrentPriceFilter = Model.CurrentPriceFilter, CurrentSkinFilter = Model.CurrentSkinFilter })</li>
+                    <li>@Html.ActionLink(rankFilter.RankName, "Index", new { CurrentRankFilter = rankFilter.Id, CurrentPriceFilter = Model.CurrentPriceFilter, CurrentSkinFilter = Model.CurrentSkinFilter, CurrentChampFilter = Model.CurrentChampFilter })</li>
                 }
             </ul>
         </div>
@@ -73,7 +71,7 @@
                 @foreach (var price in Model.PriceFilter)
                 {
 
-                    <li>@Html.ActionLink(price, "Index", new {CurrentPriceFilter = price, CurrentRankFilter = Model.CurrentRankFilter, CurrentSkinFilter = Model.CurrentSkinFilter})</li>
+                    <li>@Html.ActionLink(price, "Index", new {CurrentPriceFilter = price, CurrentRankFilter = Model.CurrentRankFilter, CurrentSkinFilter = Model.CurrentSkinFilter, CurrentChampFilter = Model.CurrentChampFilter })</li>
                 }
             </ul>
         </div>
@@ -82,27 +80,73 @@
             <div class="btn-group">
                 @Html.Hidden("CurrentRankFilter", Model.CurrentRankFilter)
                 @Html.Hidden("CurrentPriceFilter", Model.CurrentPriceFilter)
-                <script src="~/Scripts/bootstrap3-typeahead.min.js"></script>
-                <div class="card">
-                    <!-- BEGIN SEARCH RESULTS -->
-                    <div class="card-body">
-                        <!-- BEGIN SEARCH NAV -->
-                        <div class="col-sm-12 col-md-12 col-lg-12">
-                            @*<input id="skin" class="tags-input" name="skins" value="@Model.CurrentSkinFilter">*@
-                            <input type="text" name="currentSkinFilter" class="typeahead form-control" data-provide="typeahead" autocomplete="off" value="@Model.CurrentSkinFilter">
-                        </div><!--end .col -->
-                        <!-- END SEARCH NAV -->
+                @Html.Hidden("CurrentChampFilter", Model.CurrentChampFilter)
+                
+                <button type="button" style="border-radius: 4px;" class="btn btn-default dropdown-toggle filter-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    @if (string.IsNullOrEmpty(Model.CurrentSkinFilter))
+                {
+                        <span>Tìm Theo Trang Phục</span>
+                        <span class="caret"></span>
+                    }
+                    else
+                    {
+                        <span>@Model.CurrentSkinFilter</span>
+                        <span class="caret"></span>
+                    }
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="#" class="small" data-value="option1" tabIndex="-1">
+                            <input type="text" id="skinFilter" placeholder="Nhập trang phục..." name="currentSkinFilter" class="typeahead form-control" data-provide="typeahead" autocomplete="off" value="@Model.CurrentSkinFilter">
+                        </a>
+                       
+                    </li>
 
-                    </div><!--end .row -->
-                </div><!--end .card-body -->
+                </ul>
+               
+              
+                <!-- END SEARCH RESULTS -->
+               
+            </div>
+           
+        }
+        
+        @using (Html.BeginForm("Index", "Home", FormMethod.Get, new { style = "display: inline-block;" }))
+        {
+            <div class="btn-group">
+                @Html.Hidden("CurrentRankFilter", Model.CurrentRankFilter)
+                @Html.Hidden("CurrentPriceFilter", Model.CurrentPriceFilter)
+                @Html.Hidden("CurrentSkinFilter", Model.CurrentSkinFilter)
+
+                <button type="button" style="border-radius: 4px;" class="btn btn-default dropdown-toggle filter-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    @if (string.IsNullOrEmpty(Model.CurrentChampFilter))
+                {
+                        <span>Tìm Theo Tướng</span>
+                        <span class="caret"></span>
+                    }
+                    else
+                    {
+                        <span>@Model.CurrentChampFilter</span>
+                        <span class="caret"></span>
+                    }
+                </button>
+                <ul class="dropdown-menu">
+
+
+                    <li>
+                        <a href="#" class="small" data-value="option1" tabIndex="-1">
+                            <input type="text" id="champFilter" placeholder="Nhập tên tướng..." name="currentChampFilter" class="typeahead form-control" data-provide="typeahead" autocomplete="off" value="@Model.CurrentChampFilter">
+                        </a>
+
+                    </li>
+
+                </ul>
+                <script src="~/Scripts/bootstrap3-typeahead.min.js"></script>
+
                 <!-- END SEARCH RESULTS -->
                 <script src="~/Scripts/Custom/_accountSkin.js"></script>
             </div>
-            <div class="btn-group">
-                <button class="btn btn-default filter-button" type="submit">
-                    Tìm theo trang phục
-                </button>
-            </div>
+
         }
       
         <div class="btn-group">
@@ -117,6 +161,7 @@
 
 <div class="row">
     <div class="col-md-12 body-pagging">
-        @Html.PagedListPager(Model.DataSource, page => Url.Action("Index", new { page, CurrentRankFilter = Model.CurrentRankFilter, CurrentPriceFilter = Model.CurrentPriceFilter, CurrentSkinFilter = Model.CurrentSkinFilter }))
+        @Html.PagedListPager(Model.DataSource, page => Url.Action("Index", new { page, CurrentRankFilter = Model.CurrentRankFilter, CurrentPriceFilter = Model.CurrentPriceFilter, CurrentSkinFilter = Model.CurrentSkinFilter, CurrentChampFilter = Model.CurrentChampFilter }))
     </div>
 </div>
+<script src="~/Scripts/Custom/_accountSkin.js"></script>

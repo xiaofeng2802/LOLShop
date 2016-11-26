@@ -13,7 +13,7 @@ namespace ThoConShop.Business.Contracts
 
         AccountDto Create(AccountDto entity, string champ, string skin);
 
-        IPagedList<AccountDto> Read(int currentIndex, int pageSize, bool isAvailableOnly = true);
+        IPagedList<AccountDto> Read(int currentIndex, int pageSize, bool isAvailableOnly = true, string searchString = "");
 
         IList<AccountDto> Read();
 
@@ -21,7 +21,7 @@ namespace ThoConShop.Business.Contracts
 
         int Delete(int entityId);
 
-        IPagedList<AccountDto> FilterByRankPriceSkin(int currentIndex, int pageSize, int? gankFilter, string priceFilter, string skinFilter);
+        IPagedList<AccountDto> FilterByRankPriceSkin(int currentIndex, int pageSize, int? gankFilter, string priceFilter, string skinFilter, string champFilter);
 
         AccountDto Edit(int accountId);
 

@@ -2745,7 +2745,7 @@
     <Content Include="Images\tick1.png" />
     <Content Include="Images\wishlist.png" />
     <Content Include="Images\yasou.jpg" />
-    <Content Include="Images\zed-banner.jpg" />
+    <Content Include="Images\banner.jpg" />
     <Content Include="New.txt" />
     <Content Include="Scripts\404\404.js" />
     <Content Include="Scripts\404\base.js" />
@@ -3066,7 +3066,9 @@
     <Content Include="Scripts\typeahead.tagging.js" />
     <Content Include="Scripts\Winwheel.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -3116,6 +3118,7 @@
     <Content Include="Views\Management\CreateWheelItem.cshtml" />
     <Content Include="Views\Shared\_NotFound.cshtml" />
     <Content Include="Views\Home\NotFound.cshtml" />
+    <Content Include="Views\Home\NotReady.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

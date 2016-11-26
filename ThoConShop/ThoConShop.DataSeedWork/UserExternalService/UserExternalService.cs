@@ -27,7 +27,7 @@ namespace ThoConShop.DataSeedWork.UserExternalService
         public static void UpdateBalanceUser(string generalUserId, float balance)
         {
             string query = string.Format("Update [dbo].[User] SET Balance = {0} WHERE GeneralUserId = {1}",
-               balance, generalUserId);
+                balance, generalUserId);
 
             db.Execute(query);
         }
@@ -66,7 +66,7 @@ namespace ThoConShop.DataSeedWork.UserExternalService
 
                 return false;
             }
-           
+
             return false;
         }
 
@@ -74,17 +74,17 @@ namespace ThoConShop.DataSeedWork.UserExternalService
         {
 
             string query = string.Format("select TOP 1 Point from [dbo].[User] where GeneralUserId = {0}",
-               generalUserId);
+                generalUserId);
 
             var result = db.QueryFirst<int>(query);
 
-        
+
             return result;
         }
 
         public static string GetDescriptonWheelItem(int id)
         {
-            string query = string.Format("select TOP 1 Description from [dbo].[LuckyWheelItems] where Id = {0}",id);
+            string query = string.Format("select TOP 1 Description from [dbo].[LuckyWheelItems] where Id = {0}", id);
 
             var result = db.QueryFirst<string>(query);
             return result;
@@ -106,8 +106,15 @@ namespace ThoConShop.DataSeedWork.UserExternalService
             string query = string.Format("select TOP 1 Balance from [dbo].[User] where GeneralUserId = {0}",
                 generalUserId);
 
-            var result = db.QueryFirst<float>(query);
-            return result;
+            try
+            {
+                var result = db.QueryFirst<float>(query);
+                return result;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
         }
 
         public static double SetUserBalance(string generalUserId, float price)
@@ -141,13 +148,13 @@ namespace ThoConShop.DataSeedWork.UserExternalService
 
         public static IList<TEntity> TopChargingOfMonth<TEntity>() where TEntity : class
         {
-            string query = string.Format("SELECT TOP 5 au.UserName, SUM(urh.ParValue) AS SumOfMonth "
-                                         +"FROM [dbo].[User] u INNER JOIN dbo.ApplicationUsers au ON au.Id = u.GeneralUserId "
+            string query = string.Format("SELECT TOP 5 u.NameDisplay, SUM(urh.ParValue) AS SumOfMonth "
+                                         + "FROM [dbo].[User] u INNER JOIN dbo.ApplicationUsers au ON au.Id = u.GeneralUserId "
                                          + "INNER JOIN dbo.UserRechargeHistory urh ON urh.UserId = u.Id "
                                          + "WHERE MONTH(urh.CreatedDate) = MONTH(GETDATE()) "
                                          + "AND YEAR(urh.CreatedDate) = YEAR(GETDATE()) "
                                          + "AND u.IsActive = 1 "
-                                         + "GROUP BY au.UserName "
+                                         + "GROUP BY u.NameDisplay "
                                          + "ORDER BY SumOfMonth DESC");
 
             try
@@ -165,7 +172,7 @@ namespace ThoConShop.DataSeedWork.UserExternalService
 
         public static IList<TEntity> LatestUsingWheel<TEntity>() where TEntity : class
         {
-            string query = string.Format("SELECT TOP 5 au.UserName, lwh.Result FROM dbo.LuckyWheelHistories lwh "
+            string query = string.Format("SELECT TOP 5 u.NameDisplay, lwh.Result FROM dbo.LuckyWheelHistories lwh "
                   + "INNER JOIN [dbo].[User] u ON lwh.UserId = u.Id INNER JOIN dbo.ApplicationUsers au ON au.Id = u.GeneralUserId "
                 + "ORDER BY lwh.CreatedDate DESC");
 

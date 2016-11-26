@@ -12,11 +12,15 @@ namespace ThoConShop.DataSeedWork.NewsService
 
         public static void SaveNew(string path, string data)
         {
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
             using (FileStream stream = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write))
             {
+               
                 TextWriter writer = new StreamWriter(stream);
-
-                writer.Write(data.Remove(data.Length - 3));
+                writer.Write(data);
                 writer.Close();
             }
         }

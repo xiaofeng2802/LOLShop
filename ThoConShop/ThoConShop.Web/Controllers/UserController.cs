@@ -92,7 +92,7 @@ namespace ThoConShop.Web.Controllers
             UserDto user = _userService.ReadByGeneralUserId(userId);
             GameBankAPI api = new GameBankAPI();
             int price;
-            string result = api.VerifiedCard(vm.SerialNumber, vm.PinNumber, vm.CardType, "Nap Tien Game Lien Minh", out price);
+            string result = api.VerifiedCard(vm.SerialNumber, vm.PinNumber, vm.CardType, "Nạp thẻ thành công", out price);
 
             if (string.IsNullOrEmpty(result))
             {
@@ -326,14 +326,14 @@ namespace ThoConShop.Web.Controllers
                     var result = await UserManager.CreateAsync(user);
                     if (result.Succeeded)
                     {
-                        var firstName = info.ExternalIdentity.Claims.First(c => c.Type == "urn:facebook:first_name").Value;
+                        //var firstName = info.ExternalIdentity.Claims.First(c => c.Type == "urn:facebook:first_name").Value;
                         _userService.Create(new UserDto()
                         {
                             Balance = 0,
                             CreatedDate = DateTime.Now,
                             GeneralUserId = user.Id,
                             IsActive = true,
-                            NameDisplay = firstName
+                            NameDisplay = info.DefaultUserName
                         });
                         var data = await UserManager.GetLoginsAsync(user.Id);
                         if (data == null)
@@ -408,11 +408,12 @@ namespace ThoConShop.Web.Controllers
                     return Json("Chúc bạn may mắn lần sau !", JsonRequestBehavior.AllowGet);
                 }
                 var desc = UserExternalService.GetDescriptonWheelItem(priceId);
-              
+                var user = _userService.ReadByGeneralUserId(User.Identity.GetUserId());
                 LuckyWheelHistoryDto h = new LuckyWheelHistoryDto()
                 {
                     CreatedDate = DateTime.Now,
-                    UserName = User.Identity.GetUserName(),
+                    NameDisplay = user.NameDisplay,
+                    UserId = user.Id,
                     Result = desc
                 };
 

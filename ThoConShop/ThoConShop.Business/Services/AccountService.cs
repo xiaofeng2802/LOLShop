@@ -155,7 +155,7 @@ namespace ThoConShop.Business.Services
             return (double) result.Price;
         }
 
-        public IPagedList<AccountDto> FilterByRankPriceSkin(int currentIndex, int pageSize, int? rankFilter, string priceFilter, string skinFilter)
+        public IPagedList<AccountDto> FilterByRankPriceSkin(int currentIndex, int pageSize, int? rankFilter, string priceFilter, string skinFilter, string champFilter)
         {
             var result = _repoAccount.Read(a => a.IsAvailable);
 
@@ -166,7 +166,7 @@ namespace ThoConShop.Business.Services
 
             if (!string.IsNullOrEmpty(priceFilter))
             {
-                bool isSmaller = priceFilter.Contains("<");
+                //bool isSmaller = priceFilter.Contains("<");
                 char[] separators = new char[] { ' ','<', '>' };
 
                 priceFilter = priceFilter.Replace(separators, string.Empty);
@@ -178,9 +178,7 @@ namespace ThoConShop.Business.Services
                 {
                     case 1:
                         int price = prices[0];
-                        result = isSmaller
-                            ? result.Where(a => a.Price < price)
-                            : result.Where(a => a.Price > price);
+                        result = result.Where(a => a.Price == price);
                         break;
                     case 2:
                         int price1 = prices[0], price2 = prices[1];
@@ -194,6 +192,12 @@ namespace ThoConShop.Business.Services
                 var id = _repoSkin.ReadOne(a => skinFilter == a.SkinName).Id;
 
                 result = result.Include(a => a.Skins).Where(a => a.Skins.Any(b => b.Id == id));
+            }
+
+            if (!string.IsNullOrEmpty(champFilter))
+            {
+                var id = _repoChamp.ReadOne(a => a.ChampionName == champFilter).Id;
+                result = result.Include(a => a.Champions).Where(a => a.Champions.Any(b => b.Id == id));
             }
 
             return result.Include(a => a.Rank)
@@ -228,7 +232,7 @@ namespace ThoConShop.Business.Services
             return Mapper.Map<IList<AccountDto>>(_repoAccount.Read(a => a.IsAvailable).ToList());
         }
 
-        public IPagedList<AccountDto> Read(int currentIndex, int pageSize, bool isAvailableOnly = true)
+        public IPagedList<AccountDto> Read(int currentIndex, int pageSize, bool isAvailableOnly = true, string searchString = "")
         {
             var query = _repoAccount.Read(a => true);
 
@@ -236,33 +240,40 @@ namespace ThoConShop.Business.Services
             {
                 query = query.Where(a => a.IsAvailable == isAvailableOnly);
             }
-            var result = query.Include(a => a.Rank)
-                              .Include(a => a.NumberOfPageGems)
-                              .Include(a => a.Champions)
-                              .Include(a => a.Skins)
-                              .Select(a =>  new AccountDto()
-                                {
-                                    CreatedDate = a.CreatedDate,
-                                    RankId = a.RankId,
-                                    RankName = a.Rank.RankName,
-                                    UserName = a.UserName,
-                                    Avatar = a.Avatar,
-                                    IsAvailable = a.IsAvailable,
-                                    Description = a.Description,
-                                    Id = a.Id,
-                                    IsHot = a.IsHot,
-                                    Password = a.Password,
-                                    Price = a.Price,
-                                    Title = a.Title,
-                                    UpdatedDate = a.UpdatedDate,
-                                    NumberOfPageGem = a.NumberOfPageGems.Count,
-                                    NumberOfChamps = a.Champions.Count,
-                                    NumberOfSkins = a.Skins.Count
-                                })
-                              .OrderByDescending(a => a.CreatedDate)
-                              .ToPagedList(currentIndex, pageSize);
 
-            return result;
+
+            var result = query.Include(a => a.Rank)
+                .Include(a => a.NumberOfPageGems)
+                .Include(a => a.Champions)
+                .Include(a => a.Skins)
+                .Select(a => new AccountDto()
+                {
+                    CreatedDate = a.CreatedDate,
+                    RankId = a.RankId,
+                    RankName = a.Rank.RankName,
+                    UserName = a.UserName,
+                    Avatar = a.Avatar,
+                    IsAvailable = a.IsAvailable,
+                    Description = a.Description,
+                    Id = a.Id,
+                    IsHot = a.IsHot,
+                    Password = a.Password,
+                    Price = a.Price,
+                    Title = a.Title,
+                    UpdatedDate = a.UpdatedDate,
+                    NumberOfPageGem = a.NumberOfPageGems.Count,
+                    NumberOfChamps = a.Champions.Count,
+                    NumberOfSkins = a.Skins.Count
+                });
+                             
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                return result.Where(a => a.Id.ToString().Contains(searchString)).ToList().OrderByDescending(a => a.CreatedDate)
+                              .ToPagedList(currentIndex, pageSize);
+            }
+
+            return result.OrderByDescending(a => a.CreatedDate)
+                              .ToPagedList(currentIndex, pageSize);
         }
 
         public AccountDto Update(AccountDto entity, string champ, string skin)

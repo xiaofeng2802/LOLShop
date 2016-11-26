@@ -34,18 +34,19 @@ namespace ThoConShop.Web.Controllers
             return View("LockNoticeView", (object)userName);
         }
 
-        public ActionResult Index(int? page, int? currentRankFilter, string currentPriceFilter, string currentSkinFilter ="")
+        public ActionResult Index(int? page, int? currentRankFilter, string currentPriceFilter, string currentSkinFilter, string currentChampFilter)
         {
             int pageIndex = page ?? 1;
 
             AccountIndexViewModel viewModel = new AccountIndexViewModel()
             {
-                DataSource = Filter(pageIndex, currentRankFilter, currentPriceFilter, currentSkinFilter),
+                DataSource = Filter(pageIndex, currentRankFilter, currentPriceFilter, currentSkinFilter, currentChampFilter),
                 RanksFilter = _accountRelationDataService.ReadRankForFilter(),
                 PriceFilter = _accountRelationDataService.ReadPriceRangeForFilter(),
                 CurrentRankFilter = currentRankFilter,
                 CurrentPriceFilter = currentPriceFilter,
-                CurrentSkinFilter = currentSkinFilter
+                CurrentSkinFilter = currentSkinFilter,
+                CurrentChampFilter = currentChampFilter
             };
 
             if (Session["NewsLoaded"] == null)
@@ -80,16 +81,16 @@ namespace ThoConShop.Web.Controllers
             return HttpNotFound("Account could not be found.");
         }
 
-        private IPagedList<AccountDto> Filter(int pageIndex, int? currentRankFilter, string currentPriceFilter, string currentSkinFilter)
+        private IPagedList<AccountDto> Filter(int pageIndex, int? currentRankFilter, string currentPriceFilter, string currentSkinFilter, string currentChampFilter)
         {
             IPagedList<AccountDto> result;
-            if (currentRankFilter == null && string.IsNullOrEmpty(currentPriceFilter) && currentSkinFilter == null)
+            if (currentRankFilter == null && string.IsNullOrEmpty(currentPriceFilter) && currentSkinFilter == null && string.IsNullOrEmpty(currentChampFilter))
             {
                 result = _accountService.Read(pageIndex, _pageSize);
             }
             else
             {
-                result = _accountService.FilterByRankPriceSkin(pageIndex, _pageSize, currentRankFilter, currentPriceFilter, currentSkinFilter);
+                result = _accountService.FilterByRankPriceSkin(pageIndex, _pageSize, currentRankFilter, currentPriceFilter, currentSkinFilter, currentChampFilter);
             }
             return result;
         }
@@ -97,11 +98,21 @@ namespace ThoConShop.Web.Controllers
         [Authorize]
         public ActionResult LuckyWheel(int page = 1)
         {
-            var result = _userService.ReadLuckyWheelHistory(page, _pageSize);
-            return View(result);
+            if (ConfigurationManager.AppSettings["IsWheelOpen"] != null 
+                || ConfigurationManager.AppSettings["IsWheelOpen"] == "1")
+            {
+                var result = _userService.ReadLuckyWheelHistory(page, _pageSize);
+                return View(result);
+            }
+            return RedirectToAction("NotReady");
         }
 
         public ActionResult NotFound()
+        {
+            return View();
+        }
+
+        public ActionResult NotReady()
         {
             return View();
         }

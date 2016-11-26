@@ -45,10 +45,10 @@ namespace ThoConShop.Web.Controllers
 
 
         // GET: Management
-        public ActionResult AccountManagement(int? page)
+        public ActionResult AccountManagement(int? page, string searchString)
         {
-            var result = _accountService.Read(page ?? 1, _pageSize, false);
-
+            var result = _accountService.Read(page ?? 1, _pageSize, false, searchString);
+            ViewBag.SearchString = searchString;
             return View(result);
         }
 
@@ -313,21 +313,18 @@ namespace ThoConShop.Web.Controllers
             return RedirectToAction("SkinManagement");
         }
 
-        public JsonResult ChampDataSource(int accountId = 0)
-        {
-            if (accountId > 0)
-            {
-                var result = _accountRelationDataService.ReadChamp().Select(a => a.ChampionName);
-
-                return Json(result, JsonRequestBehavior.AllowGet);
-            }
-            return Json(null, JsonRequestBehavior.AllowGet);
-        }
-
         [AllowAnonymous]
         public JsonResult SkinDataSource()
         {
             var result = _accountRelationDataService.ReadSkin().Select(a => a.SkinName);
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [AllowAnonymous]
+        public JsonResult ChampDataSource()
+        {
+            var result = _accountRelationDataService.ReadChamp().Select(a => a.ChampionName);
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }

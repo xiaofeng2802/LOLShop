@@ -9,7 +9,7 @@ namespace ThoConShop.Business.Dtos
 {
     public class LatestUsingWheel
     {
-        public string UserName { get; set; }
+        public string NameDisplay { get; set; }
 
         public string Result { get; set; }
     }
@@ -31,7 +31,8 @@ namespace ThoConShop.Business.Dtos
 
     public class LuckyWheelHistoryDto : BaseDto<int>
     {
-        public string UserName { get; set; }
+        public int UserId { get; set; }
+        public string NameDisplay { get; set; }
 
         public string Result { get; set; }
     }

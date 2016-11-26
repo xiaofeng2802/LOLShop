@@ -20,6 +20,8 @@ namespace ThoConShop.Web.Models
 
         public string CurrentPriceFilter { get; set; }
 
+        public string CurrentChampFilter { get; set; }
+
         public string News { get; set; }
     }
 

@@ -55,7 +55,7 @@
                         </div>
                     </div>
                 </li>
-                <li> <a href="https://www.facebook.com/ShopAccThoCon/?ref=ts&fref=ts">Liên Hệ</a></li>
+                <li> <a target="_blank" href="https://www.facebook.com/ShopAccThoCon/?ref=ts&fref=ts">Liên Hệ</a></li>
                 <li>
                     @if (User.Identity.IsAuthenticated)
                     {
@@ -72,14 +72,14 @@
                     @if (User.Identity.IsAuthenticated)
                     {
 
-                        <a href="@Url.Action("ViewHistoriesUser", "User")">Lịch Sử Nạp/Mua</a>
+                        <a target="_blank" href="@Url.Action("ViewHistoriesUser", "User")">Lịch Sử Nạp/Mua</a>
                     }
                 </li>
                 <li>
                     @if (User.Identity.IsAuthenticated)
                     {
 
-                        <a href="@Url.Action("LuckyWheel", "Home")">Vòng Quay</a>
+                        <a target="_blank" href="@Url.Action("LuckyWheel", "Home")">Vòng Quay</a>
                     }
                 </li>
                 <li>
@@ -128,7 +128,7 @@
             <ul class="navbar-nav no-margin">
                 <li><a href="@Url.Action("Index", "Home")">Trang chủ</a></li>
                 <li> <a href="@Url.Action("ChargingView", "User")">Nạp Thẻ</a></li>
-                <li> <a href="https://www.facebook.com/ShopAccThoCon/?ref=ts&fref=ts">Liên Hệ</a></li>
+                <li> <a target="_blank" href="https://www.facebook.com/ShopAccThoCon/?ref=ts&fref=ts">Liên Hệ</a></li>
                 @if (User.Identity.IsAuthenticated)
                 {
                     <li>
@@ -141,10 +141,10 @@
 
                     </li>
                     <li>
-                        <a href="@Url.Action("ViewHistoriesUser", "User")">Lịch Sử Nạp/Mua</a>
+                        <a target="_blank" href="@Url.Action("ViewHistoriesUser", "User")">Lịch Sử Nạp/Mua</a>
                     </li>
                     <li>
-                        <a href="@Url.Action("LuckyWheel", "Home")">Vòng Quay</a>
+                        <a target="_blank" href="@Url.Action("LuckyWheel", "Home")">Vòng Quay</a>
                     </li>
                 }
 
@@ -188,9 +188,10 @@
 <div class="title_top text-center row no-margin">
     <div class="col-lg-12" align="center">
         <div class="row">
-            @if (topOfMonth != null && topOfMonth.Count > 0)
-            {
-                <div class="col-lg-4 col-sm-12 align-right">
+          
+            <div class="col-lg-5 col-sm-12 align-right">
+                @if (topOfMonth != null && topOfMonth.Count > 0)
+                {
                     <table class="simple gamelist tiny">
                         <caption><span><i class="fa fa-users fa-fw" title="Comments"></i>Top Nạp Thẻ Tháng @DateTime.Now.Month</span></caption>
                         <tbody style="display: table-row-group;">
@@ -204,28 +205,30 @@
                                 <td>
                                     <h4 style="margin: 0px;">
                                         <span class="main-custom no-game">
-                                                        <span>@topOfMonth[i].UserName</span>
+                                                        <span style="vertical-align: middle;    font-weight: bold;">@topOfMonth[i].NameDisplay</span>
                                                     </span>
                                     </h4>
                                 </td>
-                                <td style="width: 80px;" class="numbers">@topOfMonth[i].SumOfMonth.VietNameseMoneyFormat() đ</td>
+                                <td class="numbers">@topOfMonth[i].SumOfMonth.VietNameseMoneyFormat() đ</td>
                             </tr>
                         }
 
                         </tbody>
                     </table>
-                </div>
-            }
+                }
+            </div>
+            
 
-            <div class="col-lg-4 col-sm-12">
+            <div class="col-lg-2 col-sm-12">
 
             </div>
-            @if (recentWheel != null && recentWheel.Count > 0)
-            {
-                <div class="col-lg-4 col-sm-12">
+          
+            <div class="col-lg-5 col-sm-12">
+                @if (recentWheel != null && recentWheel.Count > 0)
+                {
                     <table class="simple gamelist tiny">
                         <caption><span><i class="fa fa-users fa-fw" title="Comments"></i>Lịch Sử Quay Số Ngày Hôm Nay </span></caption>
-                        <tbody style="display: table-row-group;">
+                        <tbody style="display: table-row-group;" class="tbody-top">
                         @for (int i = 0; i < recentWheel.Count; i++)
                         {
                             <tr class="ranking-link" data-type="team" data-id="9032">
@@ -236,18 +239,19 @@
                                 <td>
                                     <h4 style="margin: 0px;">
                                         <span class="main-custom no-game">
-                                                        <span>@recentWheel[i].UserName</span>
+                                                        <span style="vertical-align: middle;    font-weight: bold;">@recentWheel[i].NameDisplay</span>
                                                     </span>
                                     </h4>
                                 </td>
-                                <td style="width: 80px;" class="numbers">@recentWheel[i].Result</td>
+                                <td style="" class="numbers">@recentWheel[i].Result</td>
                             </tr>
                         }
 
                         </tbody>
                     </table>
-                </div>
-            }
+                }
+            </div>
+            
         </div>
     </div>
 </div>
