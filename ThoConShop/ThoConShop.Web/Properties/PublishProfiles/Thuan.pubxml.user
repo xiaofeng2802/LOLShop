@@ -154,7 +154,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/28/2016 20:44:18</publishTime>
     </File>
     <File Include="bin/ThoConShop.Web.dll">
-      <publishTime>11/28/2016 20:44:23</publishTime>
+      <publishTime>11/28/2016 22:22:56</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>10/18/2016 22:12:56</publishTime>
@@ -8761,7 +8761,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/12/2016 23:57:49</publishTime>
     </File>
     <File Include="Scripts/Custom/Index.js">
-      <publishTime>11/23/2016 21:52:49</publishTime>
+      <publishTime>11/28/2016 22:09:47</publishTime>
     </File>
     <File Include="Scripts/Custom/luckyWheel.js">
       <publishTime>11/25/2016 21:04:40</publishTime>
@@ -8833,7 +8833,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/28/2016 20:18:50</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>11/27/2016 19:03:56</publishTime>
+      <publishTime>11/28/2016 21:35:53</publishTime>
     </File>
     <File Include="Views/Home/LockNoticeView.cshtml">
       <publishTime>11/12/2016 00:30:35</publishTime>
@@ -8848,7 +8848,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/27/2016 00:05:44</publishTime>
     </File>
     <File Include="Views/Home/_bodyIndex.cshtml">
-      <publishTime>11/28/2016 20:18:50</publishTime>
+      <publishTime>11/28/2016 22:21:31</publishTime>
     </File>
     <File Include="Views/Management/AccountManagement.cshtml">
       <publishTime>11/28/2016 20:18:50</publishTime>
@@ -8908,10 +8908,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/27/2016 18:14:55</publishTime>
     </File>
     <File Include="Views/Shared/_DetailsLayout.cshtml">
-      <publishTime>11/27/2016 18:47:45</publishTime>
+      <publishTime>11/28/2016 21:35:53</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>11/28/2016 20:52:37</publishTime>
+      <publishTime>11/28/2016 21:35:53</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
       <publishTime>10/27/2016 22:30:25</publishTime>

@@ -26,6 +26,12 @@ namespace ThoConShop.Web
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/index").Include(
+                      "~/Scripts/Custom/Index.js",
+                      "~/Scripts/respond.js"));
+
+            BundleTable.EnableOptimizations = true;
         }
     }
 }
