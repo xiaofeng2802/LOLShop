@@ -124,7 +124,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/18/2016 22:12:54</publishTime>
     </File>
     <File Include="bin/ShopThoCon.DataSeedWork.dll">
-      <publishTime>11/26/2016 15:04:27</publishTime>
+      <publishTime>11/27/2016 20:12:08</publishTime>
     </File>
     <File Include="bin/System.Web.Helpers.dll">
       <publishTime>10/18/2016 22:12:43</publishTime>
@@ -148,13 +148,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/18/2016 22:12:43</publishTime>
     </File>
     <File Include="bin/ThoConShop.Business.dll">
-      <publishTime>11/27/2016 00:27:26</publishTime>
+      <publishTime>11/27/2016 20:12:09</publishTime>
     </File>
     <File Include="bin/ThoConShop.DAL.dll">
-      <publishTime>11/26/2016 15:04:28</publishTime>
+      <publishTime>11/27/2016 20:12:08</publishTime>
     </File>
     <File Include="bin/ThoConShop.Web.dll">
-      <publishTime>11/27/2016 00:27:31</publishTime>
+      <publishTime>11/27/2016 20:53:07</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>10/18/2016 22:12:56</publishTime>
@@ -181,7 +181,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/26/2016 21:26:57</publishTime>
     </File>
     <File Include="Content/AppCss/style.css">
-      <publishTime>11/26/2016 23:44:41</publishTime>
+      <publishTime>11/27/2016 17:50:26</publishTime>
     </File>
     <File Include="Content/assets/css/fonts/fontawesome-webfont.eot">
       <publishTime>11/08/2016 19:19:08</publishTime>
@@ -5413,7 +5413,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/25/2016 21:04:40</publishTime>
     </File>
     <File Include="favicon.ico">
-      <publishTime>10/27/2016 22:30:14</publishTime>
+      <publishTime>11/27/2016 18:24:43</publishTime>
     </File>
     <File Include="fonts/colabthi-webfont.eot">
       <publishTime>10/26/2016 21:26:58</publishTime>
@@ -5488,7 +5488,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/26/2016 21:26:57</publishTime>
     </File>
     <File Include="Images/banner.jpg">
-      <publishTime>11/26/2016 22:28:34</publishTime>
+      <publishTime>11/27/2016 17:48:53</publishTime>
     </File>
     <File Include="Images/banner.png">
       <publishTime>10/26/2016 21:26:57</publishTime>
@@ -5981,6 +5981,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Images/mary.png">
       <publishTime>11/25/2016 21:04:40</publishTime>
+    </File>
+    <File Include="Images/metaImageIndex.jpg">
+      <publishTime>11/27/2016 18:36:18</publishTime>
     </File>
     <File Include="Images/no-medal.png">
       <publishTime>10/26/2016 21:26:57</publishTime>
@@ -8704,7 +8707,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/26/2016 15:04:08</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>11/04/2016 14:11:48</publishTime>
+      <publishTime>11/27/2016 20:11:03</publishTime>
     </File>
     <File Include="Scripts/404/404.js">
       <publishTime>11/23/2016 21:52:48</publishTime>
@@ -8827,10 +8830,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/25/2016 22:36:03</publishTime>
     </File>
     <File Include="Views/Home/Edit.cshtml">
-      <publishTime>11/26/2016 13:44:14</publishTime>
+      <publishTime>11/27/2016 18:44:13</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>11/27/2016 00:27:10</publishTime>
+      <publishTime>11/27/2016 19:03:56</publishTime>
     </File>
     <File Include="Views/Home/LockNoticeView.cshtml">
       <publishTime>11/12/2016 00:30:35</publishTime>
@@ -8890,7 +8893,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/13/2016 00:29:31</publishTime>
     </File>
     <File Include="Views/Management/UserManagement.cshtml">
-      <publishTime>11/25/2016 21:04:40</publishTime>
+      <publishTime>11/27/2016 20:51:57</publishTime>
     </File>
     <File Include="Views/Management/WheelManagement.cshtml">
       <publishTime>11/24/2016 22:37:48</publishTime>
@@ -8902,13 +8905,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/27/2016 22:30:25</publishTime>
     </File>
     <File Include="Views/Shared/_AdminLayout.cshtml">
-      <publishTime>11/25/2016 21:04:40</publishTime>
+      <publishTime>11/27/2016 18:14:55</publishTime>
     </File>
     <File Include="Views/Shared/_DetailsLayout.cshtml">
-      <publishTime>11/26/2016 23:58:52</publishTime>
+      <publishTime>11/27/2016 18:47:45</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>11/26/2016 23:57:14</publishTime>
+      <publishTime>11/27/2016 18:52:54</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
       <publishTime>10/27/2016 22:30:25</publishTime>
@@ -8977,7 +8980,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/26/2016 21:26:58</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>11/27/2016 00:27:34</publishTime>
+      <publishTime>11/27/2016 20:12:22</publishTime>
     </File>
   </ItemGroup>
 </Project>

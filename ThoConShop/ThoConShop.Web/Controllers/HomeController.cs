@@ -34,6 +34,7 @@ namespace ThoConShop.Web.Controllers
             return View("LockNoticeView", (object)userName);
         }
 
+        [Route("/trangchu/{}")]
         public ActionResult Index(int? page, int? currentRankFilter, string currentPriceFilter, string currentSkinFilter, string currentChampFilter)
         {
             int pageIndex = page ?? 1;
@@ -99,7 +100,7 @@ namespace ThoConShop.Web.Controllers
         public ActionResult LuckyWheel(int page = 1)
         {
             if (ConfigurationManager.AppSettings["IsWheelOpen"] != null 
-                || ConfigurationManager.AppSettings["IsWheelOpen"] == "1")
+                && ConfigurationManager.AppSettings["IsWheelOpen"] == "1")
             {
                 var result = _userService.ReadLuckyWheelHistory(page, _pageSize);
                 return View(result);

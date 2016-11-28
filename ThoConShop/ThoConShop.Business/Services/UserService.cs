@@ -34,6 +34,26 @@ namespace ThoConShop.Business.Services
             _luckyWheelHistoryRepositories = luckyWheelHistoryRepositories;
         }
 
+        public void UpdateBalanceUser(string generealUserId, float balance)
+        {
+            var user = _userRepositories.ReadOne(a => a.GeneralUserId == generealUserId);
+            if (user != null)
+            {
+                user.Balance = balance;
+                _userRepositories.SaveChanges();
+            }
+        }
+
+        public void UpdatePointUser(string generealUserId, int point)
+        {
+            var user = _userRepositories.ReadOne(a => a.GeneralUserId == generealUserId);
+            if (user != null)
+            {
+                user.Point = point;
+                _userRepositories.SaveChanges();
+            }
+        }
+
         public UserDto Create(UserDto entity)
         {
             var user = Mapper.Map<User>(entity);

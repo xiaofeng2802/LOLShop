@@ -43,14 +43,21 @@ namespace ThoConShop.Web.Controllers
             }
 
             _accountService.SoldAccount(accountId);
-            UserExternalService.SetUserBalance(user.GeneralUserId, (account.Price * -1));
-
-            _historyService.Create(new UserTradingHistoryDto()
+            if (user != null)
             {
-                AccountId = account.Id,
-                UserId = user.Id,
-                CreatedDate = DateTime.Now
-            });
+                var sumOfBalance = user.Balance - account.Price;
+                _userService.UpdateBalanceUser(User.Identity.GetUserId(), sumOfBalance);
+
+                _historyService.Create(new UserTradingHistoryDto()
+                {
+                    AccountId = account.Id,
+                    UserId = user.Id,
+                    CreatedDate = DateTime.Now
+                });
+            }
+           
+
+          
 
             AccountSoldViewModel vm = new AccountSoldViewModel()
             {
