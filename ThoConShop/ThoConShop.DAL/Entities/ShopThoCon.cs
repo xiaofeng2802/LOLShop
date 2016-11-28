@@ -99,14 +99,14 @@ namespace ThoConShop.DAL.Entities
                 .Property(e => e.PinNumber)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<UserTradingHistory>()
+                .Ignore(a => a.Id);
+
             modelBuilder.Entity<Account>()
                 .HasMany(a => a.NumberOfPageGems)
                 .WithRequired(a => a.Account)
                 .HasForeignKey(a => a.AccountId)
                 .WillCascadeOnDelete(true);
-
-            modelBuilder.Entity<UserTradingHistory>()
-                .Ignore(a => a.Id);
 
 
             modelBuilder.Entity<User>()

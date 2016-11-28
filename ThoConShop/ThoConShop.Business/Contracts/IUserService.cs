@@ -12,6 +12,11 @@ namespace ThoConShop.Business.Contracts
 {
     public interface IUserService
     {
+
+        void UpdateBalanceUser(string generalUserId, float? balance);
+
+        void UpdatePointUser(string generalUserId, int? point);
+
         UserDto Create(UserDto entity);
 
         IPagedList<UserDto> Read(int currentIndex, int pageSize, string searchString = "");

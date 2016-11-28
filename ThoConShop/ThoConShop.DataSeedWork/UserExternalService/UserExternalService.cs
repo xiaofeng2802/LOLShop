@@ -16,26 +16,10 @@ namespace ThoConShop.DataSeedWork.UserExternalService
         static IDbConnection db =
             new SqlConnection(ConfigurationManager.ConnectionStrings["ShopThoConDb"].ConnectionString);
 
-        public static void UpdatePointUser(string generalUserId, int point)
-        {
-            string query = string.Format("Update [dbo].[User] SET Point = {0} WHERE GeneralUserId = {1}",
-                point, generalUserId);
-
-            db.Execute(query);
-        }
-
-        public static void UpdateBalanceUser(string generalUserId, float balance)
-        {
-            string query = string.Format("Update [dbo].[User] SET Balance = {0} WHERE GeneralUserId = {1}",
-                balance, generalUserId);
-
-            db.Execute(query);
-        }
-
         public static bool IsEnoughPoint(string generalUserId)
         {
             var defaultPoint = int.Parse(ConfigurationManager.AppSettings["PointPerWheel"]);
-            string query = string.Format("select TOP 1 Point from [dbo].[User] where GeneralUserId = {0}",
+            string query = string.Format("select TOP 1 Point from [dbo].[User] where GeneralUserId = '{0}'",
                 generalUserId);
 
             var result = db.QueryFirst<int>(query);
@@ -73,7 +57,7 @@ namespace ThoConShop.DataSeedWork.UserExternalService
         public static int GetUserPoint(string generalUserId)
         {
 
-            string query = string.Format("select TOP 1 Point from [dbo].[User] where GeneralUserId = {0}",
+            string query = string.Format("select TOP 1 Point from [dbo].[User] where GeneralUserId = '{0}'",
                 generalUserId);
 
             var result = db.QueryFirst<int>(query);
@@ -90,47 +74,49 @@ namespace ThoConShop.DataSeedWork.UserExternalService
             return result;
         }
 
-        public static int UpdatePointAfterUseWheel(string generalUserId)
-        {
-            var defaultPoint = int.Parse(ConfigurationManager.AppSettings["PointPerWheel"]);
-            string query = string.Format("Update [dbo].[User] SET Point = Point - ({0}) WHERE GeneralUserId = {1}",
-                defaultPoint, generalUserId);
+        //public static int UpdatePointAfterUseWheel(string generalUserId)
+        //{
+        //    var defaultPoint = int.Parse(ConfigurationManager.AppSettings["PointPerWheel"]);
+        //    string query = string.Format("Update [dbo].[User] SET Point = Point - ({0}) WHERE GeneralUserId = {1}",
+        //        defaultPoint, generalUserId);
 
-            var result = db.Execute(query);
+        //    var result = db.Execute(query);
 
-            return result;
-        }
+        //    return result;
+        //}
 
         public static float GetUserBalance(string generalUserId)
         {
-            string query = string.Format("select TOP 1 Balance from [dbo].[User] where GeneralUserId = {0}",
+            
+            string query = string.Format("select TOP 1 Balance from [dbo].[User] where GeneralUserId = '{0}'",
                 generalUserId);
 
             try
             {
-                var result = db.QueryFirst<float>(query);
-                return result;
+                var result = db.Query<float>(query).ToList();
+                return result[0];
             }
             catch (Exception)
             {
+                throw;
                 return 0;
             }
         }
 
-        public static double SetUserBalance(string generalUserId, float price)
-        {
+        //public static double SetUserBalance(string generalUserId, float price)
+        //{
 
-            string query = string.Format("Update [dbo].[User] SET Balance = Balance + ({0}), Point = Point + ({1}) WHERE GeneralUserId = {2}",
-                price, (price/1000),generalUserId);
+        //    string query = string.Format("Update [dbo].[User] SET Balance = Balance + ({0}), Point = Point + ({1}) WHERE GeneralUserId = {2}",
+        //        price, (price/1000),generalUserId);
 
-            var result = db.Execute(query);
+        //    var result = db.Execute(query);
 
-            return result;
-        }
+        //    return result;
+        //}
 
         public static bool? GetUserStatus(string generalUserId)
         {
-            string query = string.Format("Select TOP 1 IsActive From [dbo].[User] WHERE GeneralUserId = {0}",
+            string query = string.Format("Select TOP 1 IsActive From [dbo].[User] WHERE GeneralUserId = '{0}'",
                 generalUserId);
 
             try
@@ -141,7 +127,7 @@ namespace ThoConShop.DataSeedWork.UserExternalService
             }
             catch (Exception)
             {
-                
+                // ignored
             }
             return null;
         }

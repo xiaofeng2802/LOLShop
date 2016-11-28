@@ -63,6 +63,7 @@
                                 <td>
                                     @using (Html.BeginForm("UpdateBalanceUser", "Management", FormMethod.Post))
                                     {
+                                        @Html.Hidden("generalUserId", item.GeneralUserId)
                                         <div class="col-lg-8">
                                             @Html.TextBox("Balance", item.Balance, new
                                        {
@@ -80,6 +81,7 @@
                                 <td>
                                     @using (Html.BeginForm("UpdatePointUser", "Management", FormMethod.Post))
                                     {
+                                        @Html.Hidden("generalUserId", item.GeneralUserId)
                                         <div class="col-lg-8">
                                             @Html.TextBox("Point", item.Point, new
                                        {

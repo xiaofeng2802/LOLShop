@@ -49,7 +49,7 @@ namespace ThoConShop.Business.Contracts
 
         IList<string> ReadPriceRangeForFilter();
 
-        IList<AccountDto> ReadAccountByPriceRange(float from, float to, IList<int> ignoreId = null);
+        IList<AccountDto> ReadAccountBySamePrice(float price, IList<int> ignoreId = null);
 
         IPagedList<UserRechargeHistoryDto> ReadRechargeHistories(string generalUserId, int currentIndex, int pageSize);
 

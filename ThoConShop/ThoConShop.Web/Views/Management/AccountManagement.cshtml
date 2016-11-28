@@ -50,6 +50,7 @@
                                 <th>Giá</th>
                                 <th>Ngày Cập Nhật</th>
                                 <th>Rank</th>
+                                <th>Bảng Ngọc</th>
                                 <th>Trạng Thái</th>
                                 <th class="text-right"></th>
                             </tr>
@@ -65,6 +66,7 @@
                                 <td>@item.Price.VietNameseMoneyFormat()</td>
                                 <td>@item.CreatedDate.ToShortDateString()</td>
                                 <td>@item.RankName</td>
+                                <td>@item.NumberOfPageGem</td>
                                 <td>@(item.IsAvailable ? "Chưa Bán" : "Đã Bán")</td>
                                 <td class="text-right">
                                     <a href="@Url.Action("CreateOrUpdateAccount", "Management", new { accountId = item.Id })" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Sửa thông tin"><i class="fa fa-pencil"></i></a>

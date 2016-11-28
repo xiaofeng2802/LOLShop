@@ -96,7 +96,8 @@ namespace ThoConShop.Web.Controllers
 
             if (string.IsNullOrEmpty(result))
             {
-                UserExternalService.SetUserBalance(userId, price);
+                var sumOfBalance = user.Balance + price;
+                _userService.UpdateBalanceUser(userId, sumOfBalance);
 
                 _rechargeHistoryService.Create(new UserRechargeHistoryDto()
                 {
@@ -400,15 +401,18 @@ namespace ThoConShop.Web.Controllers
         public JsonResult SaveWheelHistory(int priceId = -1)
         {
             int serverValidatorPrice = (int?) Session["CurrentPrice"] ?? -1;
+            int defaultPoint = int.Parse(ConfigurationManager.AppSettings["PointPerWheel"]);
             if (priceId == serverValidatorPrice)
             {
+                var user = _userService.ReadByGeneralUserId(User.Identity.GetUserId());
+                var sumOfPoint = user.Point - defaultPoint;
                 if (UserExternalService.IsUnluckyItem(priceId))
                 {
-                    UserExternalService.UpdatePointAfterUseWheel(User.Identity.GetUserId());
+                    _userService.UpdatePointUser(user.GeneralUserId, sumOfPoint);
                     return Json("Chúc bạn may mắn lần sau !", JsonRequestBehavior.AllowGet);
                 }
                 var desc = UserExternalService.GetDescriptonWheelItem(priceId);
-                var user = _userService.ReadByGeneralUserId(User.Identity.GetUserId());
+               
                 LuckyWheelHistoryDto h = new LuckyWheelHistoryDto()
                 {
                     CreatedDate = DateTime.Now,
@@ -420,7 +424,7 @@ namespace ThoConShop.Web.Controllers
                 var result = _userService.CreateLuckyHistory(h);
                 if (result != null)
                 {
-                    UserExternalService.UpdatePointAfterUseWheel(User.Identity.GetUserId());
+                    _userService.UpdatePointUser(user.GeneralUserId, sumOfPoint);
                 }
                 return Json("Chúc mừng bạn đã trúng " + desc, JsonRequestBehavior.AllowGet);
             }

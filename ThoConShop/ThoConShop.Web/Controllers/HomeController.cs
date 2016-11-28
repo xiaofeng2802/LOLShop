@@ -65,14 +65,10 @@ namespace ThoConShop.Web.Controllers
             var result = _accountService.Edit(accountId);
             if (result != null)
             {
-                float fromValue = (result.Price - 300000)
-                   , toValue = (result.Price + 300000);
-                fromValue = fromValue < 0 ? 0 : fromValue;
-
                 AccountEditViewModel vm = new AccountEditViewModel
                 {
                     CurrentAccount = result,
-                    SuggestionAccounts = _accountRelationDataService.ReadAccountByPriceRange(fromValue, toValue, new List<int>() { accountId })
+                    SuggestionAccounts = _accountRelationDataService.ReadAccountBySamePrice(result.Price, new List<int>() { accountId })
                 };
 
                 return View(vm);
@@ -99,7 +95,7 @@ namespace ThoConShop.Web.Controllers
         public ActionResult LuckyWheel(int page = 1)
         {
             if (ConfigurationManager.AppSettings["IsWheelOpen"] != null 
-                || ConfigurationManager.AppSettings["IsWheelOpen"] == "1")
+                && ConfigurationManager.AppSettings["IsWheelOpen"] == "1")
             {
                 var result = _userService.ReadLuckyWheelHistory(page, _pageSize);
                 return View(result);
