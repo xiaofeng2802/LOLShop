@@ -34,22 +34,22 @@ namespace ThoConShop.Business.Services
             _luckyWheelHistoryRepositories = luckyWheelHistoryRepositories;
         }
 
-        public void UpdateBalanceUser(string generealUserId, float balance)
+        public void UpdateBalanceUser(string generalUserId, float? balance)
         {
-            var user = _userRepositories.ReadOne(a => a.GeneralUserId == generealUserId);
-            if (user != null)
+            var user = _userRepositories.ReadOne(a => a.GeneralUserId == generalUserId);
+            if (user != null && balance != null)
             {
-                user.Balance = balance;
+                user.Balance = balance ?? 0;
                 _userRepositories.SaveChanges();
             }
         }
 
-        public void UpdatePointUser(string generealUserId, int point)
+        public void UpdatePointUser(string generalUserId, int? point)
         {
-            var user = _userRepositories.ReadOne(a => a.GeneralUserId == generealUserId);
-            if (user != null)
+            var user = _userRepositories.ReadOne(a => a.GeneralUserId == generalUserId);
+            if (user != null && point != null)
             {
-                user.Point = point;
+                user.Point = point ?? 0;
                 _userRepositories.SaveChanges();
             }
         }

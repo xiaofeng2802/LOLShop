@@ -46,7 +46,7 @@ namespace ThoConShop.Web.Controllers
             if (user != null)
             {
                 var sumOfBalance = user.Balance - account.Price;
-                _userService.UpdateBalanceUser(User.Identity.GetUserId(), sumOfBalance);
+                _userService.UpdateBalanceUser(user.GeneralUserId, sumOfBalance);
 
                 _historyService.Create(new UserTradingHistoryDto()
                 {
@@ -55,9 +55,8 @@ namespace ThoConShop.Web.Controllers
                     CreatedDate = DateTime.Now
                 });
             }
-           
 
-          
+           
 
             AccountSoldViewModel vm = new AccountSoldViewModel()
             {
@@ -69,3 +68,4 @@ namespace ThoConShop.Web.Controllers
         }
     }
 }
+

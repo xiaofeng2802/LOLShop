@@ -166,24 +166,30 @@ namespace ThoConShop.Business.Services
 
             if (!string.IsNullOrEmpty(priceFilter))
             {
-                //bool isSmaller = priceFilter.Contains("<");
-                char[] separators = new char[] { ' ','<', '>' };
-
-                priceFilter = priceFilter.Replace(separators, string.Empty);
-                priceFilter = priceFilter.Replace("k", "000");
-
-                var prices = priceFilter.Split('-').Select(int.Parse).ToList();
-
-                switch (prices.Count)
+                if (priceFilter == "VIP")
                 {
-                    case 1:
-                        int price = prices[0];
-                        result = result.Where(a => a.Price == price);
-                        break;
-                    case 2:
-                        int price1 = prices[0], price2 = prices[1];
-                        result = result.Where(a => a.Price >= price1 && a.Price <= price2);
-                        break;
+                    result = result.Where(a => a.Price >= 500000 && a.Price <= 1000000);
+                }
+                else
+                {
+                    char[] separators = new char[] { ' ', '<', '>' };
+
+                    priceFilter = priceFilter.Replace(separators, string.Empty);
+                    priceFilter = priceFilter.Replace("k", "000");
+
+                    var prices = priceFilter.Split('-').Select(int.Parse).ToList();
+
+                    switch (prices.Count)
+                    {
+                        case 1:
+                            int price = prices[0];
+                            result = result.Where(a => a.Price == price);
+                            break;
+                        case 2:
+                            int price1 = prices[0], price2 = prices[1];
+                            result = result.Where(a => a.Price >= price1 && a.Price <= price2);
+                            break;
+                    }
                 }
             }
 
@@ -289,16 +295,18 @@ namespace ThoConShop.Business.Services
 
             if (!string.IsNullOrEmpty(champ))
             {
-                data.Champions = new List<Champion>();
+                data.Champions.Clear();
                 _repoAccount.SaveChanges();
                 data.Champions = ChampionForCreation(champ);
+                _repoAccount.SaveChanges();
             }
 
             if (!string.IsNullOrEmpty(skin))
             {
-                data.Skins= new List<Skin>();
+                data.Skins.Clear();
                 _repoAccount.SaveChanges();
                 data.Skins = SkinForCreation(skin);
+                _repoAccount.SaveChanges();
             }
 
             if (_repoAccount.SaveChanges() > 0)

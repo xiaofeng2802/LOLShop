@@ -17,10 +17,11 @@
 <html>
 <head>
 
-    @RenderSection("meta", false)
-    <title>SHOP THỎ CON - BÁN ACC LIÊN MINH GIÁ RẺ - UY TÍN</title>
-    <link rel="shortcut icon" type="image/x-icon" href="~/favicon.ico" />
+   @RenderSection("meta", false)
+<title>SHOP THỎ CON - BÁN ACC LIÊN MINH GIÁ RẺ - UY TÍN</title>
+<link rel="shortcut icon" type="image/x-icon" href="~/favicon.ico" />
 
+   
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <!-- Custom Theme files -->
     <link href="~/Content/AppCss/reset.css" rel="stylesheet" />
@@ -193,7 +194,7 @@
                 {
                     <table class="simple gamelist tiny">
                         <caption><span><i class="fa fa-users fa-fw" title="Comments"></i>Top Nạp Thẻ Tháng @DateTime.Now.Month</span></caption>
-                        <tbody style="display: table-row-group;">
+                        <tbody style="display: table-row-group;" class="tbody-top">
                         @for (int i = 0; i < topOfMonth.Count; i++)
                         {
                             <tr class="ranking-link" data-type="team" data-id="9032">

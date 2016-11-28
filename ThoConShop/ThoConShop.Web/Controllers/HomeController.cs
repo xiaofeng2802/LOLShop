@@ -66,14 +66,10 @@ namespace ThoConShop.Web.Controllers
             var result = _accountService.Edit(accountId);
             if (result != null)
             {
-                float fromValue = (result.Price - 300000)
-                   , toValue = (result.Price + 300000);
-                fromValue = fromValue < 0 ? 0 : fromValue;
-
                 AccountEditViewModel vm = new AccountEditViewModel
                 {
                     CurrentAccount = result,
-                    SuggestionAccounts = _accountRelationDataService.ReadAccountByPriceRange(fromValue, toValue, new List<int>() { accountId })
+                    SuggestionAccounts = _accountRelationDataService.ReadAccountBySamePrice(result.Price, new List<int>() { accountId })
                 };
 
                 return View(vm);

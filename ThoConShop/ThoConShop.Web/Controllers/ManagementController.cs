@@ -371,11 +371,12 @@ namespace ThoConShop.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult UpdateBalanceUser(float? balance, string generalUserId)
+        public ActionResult UpdateBalanceUser(int? balance, string generalUserId)
         {
             if (balance.HasValue && !string.IsNullOrEmpty(generalUserId))
             {
-                _userService.UpdateBalanceUser(generalUserId, balance ?? 0);
+                _userService.UpdateBalanceUser(generalUserId, balance);
+         
             }
            
             return RedirectToAction("UserManagement");
@@ -386,7 +387,7 @@ namespace ThoConShop.Web.Controllers
         {
             if (point.HasValue && !string.IsNullOrEmpty(generalUserId))
             {
-                _userService.UpdatePointUser(generalUserId, point ?? 0);
+                _userService.UpdatePointUser(generalUserId, point);
             }
             return RedirectToAction("UserManagement");
         }

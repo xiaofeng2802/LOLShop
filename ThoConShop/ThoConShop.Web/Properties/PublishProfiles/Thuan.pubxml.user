@@ -124,7 +124,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/18/2016 22:12:54</publishTime>
     </File>
     <File Include="bin/ShopThoCon.DataSeedWork.dll">
-      <publishTime>11/27/2016 20:12:08</publishTime>
+      <publishTime>11/28/2016 20:44:18</publishTime>
     </File>
     <File Include="bin/System.Web.Helpers.dll">
       <publishTime>10/18/2016 22:12:43</publishTime>
@@ -148,13 +148,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/18/2016 22:12:43</publishTime>
     </File>
     <File Include="bin/ThoConShop.Business.dll">
-      <publishTime>11/27/2016 20:12:09</publishTime>
+      <publishTime>11/28/2016 20:44:19</publishTime>
     </File>
     <File Include="bin/ThoConShop.DAL.dll">
-      <publishTime>11/27/2016 20:12:08</publishTime>
+      <publishTime>11/28/2016 20:44:18</publishTime>
     </File>
     <File Include="bin/ThoConShop.Web.dll">
-      <publishTime>11/27/2016 20:53:07</publishTime>
+      <publishTime>11/28/2016 20:44:23</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>10/18/2016 22:12:56</publishTime>
@@ -169,7 +169,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/26/2016 21:26:57</publishTime>
     </File>
     <File Include="Content/AppCss/custom.css">
-      <publishTime>11/26/2016 23:56:04</publishTime>
+      <publishTime>11/28/2016 20:18:50</publishTime>
     </File>
     <File Include="Content/AppCss/etalage.css">
       <publishTime>10/26/2016 21:26:57</publishTime>
@@ -181,7 +181,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/26/2016 21:26:57</publishTime>
     </File>
     <File Include="Content/AppCss/style.css">
-      <publishTime>11/27/2016 17:50:26</publishTime>
+      <publishTime>11/28/2016 21:15:10</publishTime>
     </File>
     <File Include="Content/assets/css/fonts/fontawesome-webfont.eot">
       <publishTime>11/08/2016 19:19:08</publishTime>
@@ -8830,7 +8830,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/25/2016 22:36:03</publishTime>
     </File>
     <File Include="Views/Home/Edit.cshtml">
-      <publishTime>11/27/2016 18:44:13</publishTime>
+      <publishTime>11/28/2016 20:18:50</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
       <publishTime>11/27/2016 19:03:56</publishTime>
@@ -8848,10 +8848,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/27/2016 00:05:44</publishTime>
     </File>
     <File Include="Views/Home/_bodyIndex.cshtml">
-      <publishTime>11/26/2016 23:37:41</publishTime>
+      <publishTime>11/28/2016 20:18:50</publishTime>
     </File>
     <File Include="Views/Management/AccountManagement.cshtml">
-      <publishTime>11/26/2016 14:33:05</publishTime>
+      <publishTime>11/28/2016 20:18:50</publishTime>
     </File>
     <File Include="Views/Management/ChampManagement.cshtml">
       <publishTime>11/15/2016 21:54:10</publishTime>
@@ -8884,7 +8884,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/15/2016 20:22:27</publishTime>
     </File>
     <File Include="Views/Management/TradingHistories.cshtml">
-      <publishTime>11/12/2016 18:37:52</publishTime>
+      <publishTime>11/28/2016 20:18:50</publishTime>
     </File>
     <File Include="Views/Management/UpdateChampAccount.cshtml">
       <publishTime>11/12/2016 23:58:08</publishTime>
@@ -8911,7 +8911,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/27/2016 18:47:45</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>11/27/2016 18:52:54</publishTime>
+      <publishTime>11/28/2016 20:52:37</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
       <publishTime>10/27/2016 22:30:25</publishTime>
@@ -8980,7 +8980,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/26/2016 21:26:58</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>11/27/2016 20:12:22</publishTime>
+      <publishTime>11/28/2016 21:15:44</publishTime>
     </File>
   </ItemGroup>
 </Project>

@@ -12,9 +12,10 @@ namespace ThoConShop.Business.Contracts
 {
     public interface IUserService
     {
-        void UpdateBalanceUser(string generealUserId, float balance);
 
-        void UpdatePointUser(string generealUserId, int point);
+        void UpdateBalanceUser(string generalUserId, float? balance);
+
+        void UpdatePointUser(string generalUserId, int? point);
 
         UserDto Create(UserDto entity);
 

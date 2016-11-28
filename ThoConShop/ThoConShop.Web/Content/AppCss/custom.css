@@ -692,6 +692,17 @@ ol li {
     width: 82%
 }
 
+.new-champs {
+   
+    text-align: center;
+    color: #FFF !important;
+    background: rgba(0,0,0,0.48);
+    font-weight: bold;
+    margin-right: 1px;
+    margin-left: 1px;
+    width: 82%;
+}
+
 .assembly_install, .assembly_detail {
     background: rgba(0,0,0,0.48);
     padding: 0;

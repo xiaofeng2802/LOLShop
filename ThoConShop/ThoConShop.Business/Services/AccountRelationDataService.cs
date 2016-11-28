@@ -231,20 +231,25 @@ namespace ThoConShop.Business.Services
                 "40k",
                 "50k",
                 "50k - 500k",
+                "0k - 10k",
                 "VIP"
             };
         }
 
-        public IList<AccountDto> ReadAccountByPriceRange(float from, float to, IList<int> ignoreId = null)
+        public IList<AccountDto> ReadAccountBySamePrice(float price, IList<int> ignoreId = null)
         {
-            var query = _repoAccount.Read(a => a.IsAvailable && (a.Price >= from && a.Price <= to));
+            var query = _repoAccount.Read(a => a.IsAvailable && (a.Price == price));
 
             if (ignoreId != null)
             {
                 query = query.Where(a => !ignoreId.Contains(a.Id));
             }
 
-            var result = query.Select(a => new AccountDto()
+            var result = query
+                .Include(a => a.NumberOfPageGems)
+                .Include(a => a.Skins)
+                .Include(a => a.Champions)
+                .Select(a => new AccountDto()
             {
                 CreatedDate = a.CreatedDate,
                 RankId = a.RankId,
@@ -258,7 +263,10 @@ namespace ThoConShop.Business.Services
                 Password = a.Password,
                 Price = a.Price,
                 Title = a.Title,
-                UpdatedDate = a.UpdatedDate
+                UpdatedDate = a.UpdatedDate,
+                NumberOfPageGem = a.NumberOfPageGems.Count,
+                NumberOfChamps = a.Champions.Count,
+                NumberOfSkins = a.Skins.Count
             })
                 .OrderBy(a => a.IsHot)
                 .ThenByDescending(a => a.CreatedDate)
@@ -375,10 +383,6 @@ namespace ThoConShop.Business.Services
             foreach (KeyValuePair<string, ChampUploadDto> champ in detailsInformation)
             {
                 Champion champData;
-                if (champ.Value.key == 266)
-                {
-                    
-                }
                 if (_champRepositories.Read(a => a.Id == champ.Value.key).Any())
                 {
                     champData = _champRepositories.ReadOne(a => a.Id == champ.Value.key);
