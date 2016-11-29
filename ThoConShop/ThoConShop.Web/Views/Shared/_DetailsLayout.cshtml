@@ -50,7 +50,13 @@
                                 </div>
                             </div>
                         </li>
-                        <li> <a target="_blank" href="https://www.facebook.com/ShopAccThoCon/?ref=ts&fref=ts">Liên Hệ</a></li>
+                        <li>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+
+                                <a target="_blank" href="@Url.Action("LuckyWheel", "Home")">Vòng Quay</a>
+                            }
+                        </li>
                         <li>
                             @if (User.Identity.IsAuthenticated)
                             {
@@ -70,13 +76,7 @@
                                 <a target="_blank" href="@Url.Action("ViewHistoriesUser", "User")">Lịch Sử Nạp/Mua</a>
                             }
                         </li>
-                        <li>
-                            @if (User.Identity.IsAuthenticated)
-                            {
-
-                                <a target="_blank" href="@Url.Action("LuckyWheel", "Home")">Vòng Quay</a>
-                            }
-                        </li>
+                        <li> <a target="_blank" href="https://www.facebook.com/ShopAccThoCon/?ref=ts&fref=ts">Liên Hệ</a></li>
                         <li>
                             @if (User.Identity.IsAuthenticated)
                             {
