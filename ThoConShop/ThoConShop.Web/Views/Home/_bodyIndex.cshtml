@@ -44,7 +44,7 @@
                         </ul>
                     </div>
                     <div class="col-xs-7 col-md-6 stay_right footer-item-right">
-                        <p class="">
+                        <p class="" style="font-weight: bold;">
                             @item.Price.ToString("#,###", cul.NumberFormat)<sup>đ</sup>
                         </p>
                         @using (Html.BeginForm("SellAccount", "Account", FormMethod.Post, new { id = "formSell" }))
