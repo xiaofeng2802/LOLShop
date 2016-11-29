@@ -63,8 +63,7 @@
                                 @item.AccountName
                             </td>
                             <td>
-                                <span data-fake-pass="1" id="@("fake" + @item.Id)">*********</span>
-                                <span data-pass="1" style="display: none" id="@("real" + @item.Id)">@item.Password</span>
+                                <span>@item.Password</span>
                             </td>
                             <td>
                                 @item.PriceOfAccount.ToString("#,###", cul.NumberFormat)<sup>đ</sup>
