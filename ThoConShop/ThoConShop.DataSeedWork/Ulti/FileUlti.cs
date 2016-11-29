@@ -11,6 +11,8 @@ namespace ThoConShop.DataSeedWork.Ulti
 {
     public class FileUlti
     {
+
+
         public static string ReadFromTextFile(HttpPostedFileBase file)
         {
             if (file != null && file.ContentType.Contains("text"))

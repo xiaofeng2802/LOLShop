@@ -155,20 +155,20 @@ namespace ThoConShop.Business.Services
             return (double) result.Price;
         }
 
-        public IPagedList<AccountDto> FilterByRankPriceSkin(int currentIndex, int pageSize, int? rankFilter, string priceFilter, string skinFilter, string champFilter)
+        public IPagedList<AccountDto> FilterByRankPriceSkin(int currentIndex, int pageSize, int? rankFilter, string priceFilter, string skinFilter, string champFilter, string orderBy)
         {
-            var result = _repoAccount.Read(a => a.IsAvailable);
+            var query = _repoAccount.Read(a => a.IsAvailable);
 
             if (rankFilter != null && rankFilter > 0)
             {
-                result = result.Where(a => a.RankId == rankFilter);
+                query = query.Where(a => a.RankId == rankFilter);
             }
 
             if (!string.IsNullOrEmpty(priceFilter))
             {
                 if (priceFilter == "VIP")
                 {
-                    result = result.Where(a => a.Price >= 500000 && a.Price <= 1000000);
+                    query = query.Where(a => a.Price >= 500000 && a.Price <= 1000000);
                 }
                 else
                 {
@@ -183,11 +183,11 @@ namespace ThoConShop.Business.Services
                     {
                         case 1:
                             int price = prices[0];
-                            result = result.Where(a => a.Price == price);
+                            query = query.Where(a => a.Price == price);
                             break;
                         case 2:
                             int price1 = prices[0], price2 = prices[1];
-                            result = result.Where(a => a.Price >= price1 && a.Price <= price2);
+                            query = query.Where(a => a.Price >= price1 && a.Price <= price2);
                             break;
                     }
                 }
@@ -197,20 +197,33 @@ namespace ThoConShop.Business.Services
             {
                 var id = _repoSkin.ReadOne(a => skinFilter == a.SkinName).Id;
 
-                result = result.Include(a => a.Skins).Where(a => a.Skins.Any(b => b.Id == id));
+                query = query.Include(a => a.Skins).Where(a => a.Skins.Any(b => b.Id == id));
             }
 
             if (!string.IsNullOrEmpty(champFilter))
             {
                 var id = _repoChamp.ReadOne(a => a.ChampionName == champFilter).Id;
-                result = result.Include(a => a.Champions).Where(a => a.Champions.Any(b => b.Id == id));
+                query = query.Include(a => a.Champions).Where(a => a.Champions.Any(b => b.Id == id));
             }
+            query = query.Include(a => a.Rank)
+                .Include(a => a.NumberOfPageGems)
+                .Include(a => a.Champions)
+                .Include(a => a.Skins)
+                .Where(a => a.IsAvailable);
 
-            return result.Include(a => a.Rank)
-                        .Include(a => a.NumberOfPageGems)
-                        .Include(a => a.Champions)
-                        .Include(a => a.Skins)
-                        .Where(a => a.IsAvailable).Select(a => new AccountDto()
+            if (orderBy == "ChampOrder")
+            {
+                query = query.OrderByDescending(a => a.Champions.Count).ThenByDescending(a => a.CreatedDate);
+            }
+            else if(orderBy == "SkinOrder")
+            {
+                query = query.OrderByDescending(a => a.Skins.Count).ThenByDescending(a => a.CreatedDate);
+            }
+            else
+            {
+                query = query.OrderByDescending(a => a.CreatedDate);
+            }
+            var result = query.Select(a => new AccountDto()
             {
                 CreatedDate = a.CreatedDate,
                 RankId = a.RankId,
@@ -228,9 +241,8 @@ namespace ThoConShop.Business.Services
                 NumberOfPageGem = a.NumberOfPageGems.Count,
                 NumberOfChamps = a.Champions.Count,
                 NumberOfSkins = a.Skins.Count
-            }).OrderByDescending(a => a.IsHot)
-                .ThenByDescending(a => a.CreatedDate)
-                .ToPagedList(currentIndex, pageSize);
+            });
+            return result.ToPagedList(currentIndex, pageSize);
         }
 
         public IList<AccountDto> Read()

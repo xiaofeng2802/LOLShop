@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -35,19 +36,20 @@ namespace ThoConShop.Web.Controllers
         }
 
         [Route("/trangchu/{}")]
-        public ActionResult Index(int? page, int? currentRankFilter, string currentPriceFilter, string currentSkinFilter, string currentChampFilter)
+        public ActionResult Index(int? page, int? currentRankFilter, string currentPriceFilter, string currentSkinFilter, string currentChampFilter, string currentOrderBy)
         {
             int pageIndex = page ?? 1;
 
             AccountIndexViewModel viewModel = new AccountIndexViewModel()
             {
-                DataSource = Filter(pageIndex, currentRankFilter, currentPriceFilter, currentSkinFilter, currentChampFilter),
+                DataSource = Filter(pageIndex, currentRankFilter, currentPriceFilter, currentSkinFilter, currentChampFilter, currentOrderBy),
                 RanksFilter = _accountRelationDataService.ReadRankForFilter(),
                 PriceFilter = _accountRelationDataService.ReadPriceRangeForFilter(),
                 CurrentRankFilter = currentRankFilter,
                 CurrentPriceFilter = currentPriceFilter,
                 CurrentSkinFilter = currentSkinFilter,
-                CurrentChampFilter = currentChampFilter
+                CurrentChampFilter = currentChampFilter,
+                CurrentOrderBy = currentOrderBy
             };
 
             if (Session["NewsLoaded"] == null)
@@ -56,6 +58,9 @@ namespace ThoConShop.Web.Controllers
                 viewModel.News = NewExternalService.ReadNew(path);
                 Session["NewsLoaded"] = true;
             }
+
+            var pathRandom = Server.MapPath("~/Images/RandomImage");
+            SetRandomImage(pathRandom, viewModel.DataSource);
 
             return View(viewModel);
         }
@@ -78,16 +83,16 @@ namespace ThoConShop.Web.Controllers
             return HttpNotFound("Account could not be found.");
         }
 
-        private IPagedList<AccountDto> Filter(int pageIndex, int? currentRankFilter, string currentPriceFilter, string currentSkinFilter, string currentChampFilter)
+        private IPagedList<AccountDto> Filter(int pageIndex, int? currentRankFilter, string currentPriceFilter, string currentSkinFilter, string currentChampFilter, string currentOrderBy)
         {
             IPagedList<AccountDto> result;
-            if (currentRankFilter == null && string.IsNullOrEmpty(currentPriceFilter) && currentSkinFilter == null && string.IsNullOrEmpty(currentChampFilter))
+            if (currentRankFilter == null && string.IsNullOrEmpty(currentPriceFilter) && currentSkinFilter == null && string.IsNullOrEmpty(currentChampFilter) && string.IsNullOrEmpty(currentOrderBy))
             {
                 result = _accountService.Read(pageIndex, _pageSize);
             }
             else
             {
-                result = _accountService.FilterByRankPriceSkin(pageIndex, _pageSize, currentRankFilter, currentPriceFilter, currentSkinFilter, currentChampFilter);
+                result = _accountService.FilterByRankPriceSkin(pageIndex, _pageSize, currentRankFilter, currentPriceFilter, currentSkinFilter, currentChampFilter, currentOrderBy);
             }
             return result;
         }
@@ -112,6 +117,22 @@ namespace ThoConShop.Web.Controllers
         public ActionResult NotReady()
         {
             return View();
+        }
+
+        private void SetRandomImage(string path, IPagedList<AccountDto>  source)
+        {
+            if (!string.IsNullOrEmpty(path) && source != null)
+            {
+                var randomImageList = Directory.GetFiles(path, "*.jpg").Select(a => a.Substring(a.LastIndexOf("\\", StringComparison.Ordinal) + 1)).ToList();
+                Random r = new Random();
+
+                foreach (var item in source)
+                {
+
+                    item.Avatar = "../Images/RandomImage/" +
+                                  randomImageList[r.Next(0, randomImageList.Count - 1)];
+                }
+            }
         }
     }
 }

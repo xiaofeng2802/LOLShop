@@ -14,6 +14,17 @@ namespace ThoConShop.Web.Models
 
         public IList<string> PriceFilter { get; set; }
 
+        public Dictionary<string, string> OrderByList
+        {
+            get
+            {
+                Dictionary<string, string> result = new Dictionary<string, string>();
+                result.Add("ChampOrder", "Tướng Nhiều Nhất");
+                result.Add("SkinOrder", "Trang Phục Nhiều Nhất");
+                return result;
+            }
+        }
+
         public int? CurrentRankFilter { get; set; }
 
         public string CurrentSkinFilter { get; set; }
@@ -21,6 +32,8 @@ namespace ThoConShop.Web.Models
         public string CurrentPriceFilter { get; set; }
 
         public string CurrentChampFilter { get; set; }
+
+        public string CurrentOrderBy { get; set; }
 
         public string News { get; set; }
     }

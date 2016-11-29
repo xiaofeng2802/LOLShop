@@ -2778,6 +2778,10 @@ table caption span {
     -o-transition: color 300ms ease;
     transition: color 300ms ease;
 }
+
+.sa-lpbbtn:hover {
+   color: #000000;
+}
 .sa-lpbbtn {
     font-size: 15px;
     font-weight: bold;
@@ -2797,8 +2801,4 @@ table caption span {
     background: -webkit-linear-gradient(bottom, #35b61d 0%, #9aff2e 100%);
     border: 1px solid #000000;
     color: #000000;
-}
-
-.sa-lpbbtn:hover {
-    color: #d3c7a9;
 }
