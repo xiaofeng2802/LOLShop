@@ -96,8 +96,11 @@ namespace ThoConShop.Web.Controllers
 
             if (string.IsNullOrEmpty(result))
             {
-                var sumOfBalance = user.Balance + price;
-                _userService.UpdateBalanceUser(userId, sumOfBalance);
+                if (user != null)
+                {
+                    var sumOfBalance = user.Balance + price;
+                    _userService.UpdateBalanceUser(User.Identity.GetUserId(), sumOfBalance);
+                }
 
                 _rechargeHistoryService.Create(new UserRechargeHistoryDto()
                 {
@@ -426,7 +429,7 @@ namespace ThoConShop.Web.Controllers
                 {
                     _userService.UpdatePointUser(user.GeneralUserId, sumOfPoint);
                 }
-                return Json("Chúc mừng bạn đã trúng " + desc, JsonRequestBehavior.AllowGet);
+                return Json("Chúc mừng bạn đã trúng " + desc, JsonRequestBehavior.AllowGet + "/nXin vui lòng liên hệ fanpage để nhận quà, Cám ơn bạn.");
             }
 
             return Json(new { status = "error", message = "Xảy ra lỗi khi cập nhật thông tin, vui lòng quay số lại." });

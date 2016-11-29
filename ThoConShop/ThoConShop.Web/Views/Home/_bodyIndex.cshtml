@@ -47,7 +47,7 @@
                         <p class="" style="font-weight: bold;">
                             @item.Price.ToString("#,###", cul.NumberFormat)<sup>đ</sup>
                         </p>
-                        @using (Html.BeginForm("SellAccount", "Account", FormMethod.Post, new { id = "formSell" }))
+                        @using (Html.BeginForm("SellAccount", "Account", FormMethod.Post, new { @class = "formSell" }))
                         {
                             @Html.AntiForgeryToken()
                             @Html.Hidden("AccountId", item.Id)
@@ -61,5 +61,4 @@
     }
    
 </div>
-
-<script src="~/Scripts/Custom/Index.js"></script>
+@Scripts.Render("~/bundles/index")

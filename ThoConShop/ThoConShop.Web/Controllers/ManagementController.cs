@@ -373,7 +373,7 @@ namespace ThoConShop.Web.Controllers
         [HttpPost]
         public ActionResult UpdateBalanceUser(int? balance, string generalUserId)
         {
-            if (balance.HasValue)
+            if (balance.HasValue && !string.IsNullOrEmpty(generalUserId))
             {
                 _userService.UpdateBalanceUser(generalUserId, balance);
          
@@ -385,7 +385,7 @@ namespace ThoConShop.Web.Controllers
         [HttpPost]
         public ActionResult UpdatePointUser(int? point, string generalUserId)
         {
-            if (point.HasValue)
+            if (point.HasValue && !string.IsNullOrEmpty(generalUserId))
             {
                 _userService.UpdatePointUser(generalUserId, point);
             }

@@ -2580,7 +2580,9 @@ p.cart {
 }
 
 .footer-item .footer-item-right p {
-    font-size: 17px;
+    font-size: 18px;
+    font-weight: bolder;
+    color: #ff502e !important;
     font-weight: bold;
 }
 
@@ -2788,13 +2790,13 @@ table caption span {
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
-    background: linear-gradient(to top, #B63E1D 0%, #FF502E 100%);
-    background: -moz-linear-gradient(to top, #B63E1D 0%, #FF502E 100%);
-    background: -o-linear-gradient(to top, #B63E1D 0%, #FF502E 100%);
-    background: -ms-linear-gradient(to top, #B63E1D 0%, #FF502E 100%);
-    background: -webkit-linear-gradient(bottom, #B63E1D 0%, #FF502E 100%);
-    border: 1px solid #B63E1D;
-    color: white;
+    background: linear-gradient(to top, #35b61d 0%, #9aff2e 100%);
+    background: -moz-linear-gradient(to top, #35b61d 0%, #9aff2e 100%);
+    background: -o-linear-gradient(to top, #35b61d 0%, #9aff2e 100%);
+    background: -ms-linear-gradient(to top, #35b61d 0%, #9aff2e 100%);
+    background: -webkit-linear-gradient(bottom, #35b61d 0%, #9aff2e 100%);
+    border: 1px solid #000000;
+    color: #000000;
 }
 
 .sa-lpbbtn:hover {

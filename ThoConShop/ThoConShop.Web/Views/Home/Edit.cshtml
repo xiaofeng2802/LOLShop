@@ -9,6 +9,21 @@
 @{
     CultureInfo cul = CultureInfo.GetCultureInfo("vi-VN");   // try with "en-US"
 }
+
+@section meta
+{
+    <meta property="fb:app_id" content="1668227693490054" />
+    <meta property="og:url" content="@Request.Url.ToString()" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="@Model.CurrentAccount.Title" />
+    <meta property="og:description" content="Acc Liên Minh Số #@Model.CurrentAccount.Id.ToString() Truất'sss, Tại ShopThoCon.VN" />
+    <meta property="og:image" content="@Model.CurrentAccount.Avatar" />
+    <meta property="og:image:width" content="600">
+    <meta property="og:image:height" content="315">
+    <meta property="og:site_name" content="@Request.Url.ToString()" />
+    <title>Acc số #@Model.CurrentAccount.Id</title>
+}
+
 <div class="ov-top masthead">
     <div class="container text-center">
         <h1 class="c-hero__title u-text-gradient">@Model.CurrentAccount.Title</h1>

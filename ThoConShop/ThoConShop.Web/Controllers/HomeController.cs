@@ -34,6 +34,7 @@ namespace ThoConShop.Web.Controllers
             return View("LockNoticeView", (object)userName);
         }
 
+        [Route("/trangchu/{}")]
         public ActionResult Index(int? page, int? currentRankFilter, string currentPriceFilter, string currentSkinFilter, string currentChampFilter)
         {
             int pageIndex = page ?? 1;
