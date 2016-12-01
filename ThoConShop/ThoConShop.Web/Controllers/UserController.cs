@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data.Entity.Validation;
 using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -12,6 +16,7 @@ using System.Web.Security;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using Newtonsoft.Json;
 using ThoConShop.Business.Contracts;
 using ThoConShop.Business.Dtos;
 using ThoConShop.Business.Identity;
@@ -81,6 +86,7 @@ namespace ThoConShop.Web.Controllers
         public ActionResult ChargingView(string message)
         {
             ViewBag.Message = message;
+           
             return View();    
         }
 

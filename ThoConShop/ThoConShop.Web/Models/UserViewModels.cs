@@ -23,7 +23,10 @@ namespace ThoConShop.Web.Models
         public string PinNumber { get; set; }
 
         public TypeCard CardType { get; set; }
+
+        public Dictionary<string, int> SourceTypeCard { get; set; }
     }
+
     public class DetailsUserViewModel
     {
         public DetailsUserViewModel()

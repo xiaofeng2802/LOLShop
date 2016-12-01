@@ -51,7 +51,7 @@
                 <li>
                     <div class="row">
                         <div class="col-md-12">
-                            <a href="@Url.Action("ChargingView", "User")">Nạp thẻ</a>
+                            <a target="_blank" href="@Url.Action("ChargingView", "User")">Nạp thẻ</a>
                         </div>
                     </div>
                 </li>
@@ -128,7 +128,7 @@
         <nav id="bs-navbar" class="collapse navbar-collapse">
             <ul class="navbar-nav no-margin">
                 <li><a href="@Url.Action("Index", "Home")">Trang chủ</a></li>
-                <li> <a href="@Url.Action("ChargingView", "User")">Nạp Thẻ</a></li>
+                <li> <a target="_blank" href="@Url.Action("ChargingView", "User")">Nạp Thẻ</a></li>
                 <li> <a target="_blank" href="https://www.facebook.com/ShopAccThoCon/?ref=ts&fref=ts">Liên Hệ</a></li>
                 @if (User.Identity.IsAuthenticated)
                 {

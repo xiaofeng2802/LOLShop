@@ -126,12 +126,16 @@ namespace ThoConShop.Web.Controllers
                 var randomImageList = Directory.GetFiles(path, "*.jpg").Select(a => a.Substring(a.LastIndexOf("\\", StringComparison.Ordinal) + 1)).ToList();
                 Random r = new Random();
 
-                foreach (var item in source)
+                if (randomImageList.Count > 0)
                 {
+                    foreach (var item in source)
+                    {
 
-                    item.Avatar = "../Images/RandomImage/" +
-                                  randomImageList[r.Next(0, randomImageList.Count - 1)];
+                        item.Avatar = "../Images/RandomImage/" +
+                                      randomImageList[r.Next(0, randomImageList.Count - 1)];
+                    }
                 }
+               
             }
         }
     }
