@@ -138,6 +138,10 @@ namespace ThoConShop.Web.Controllers
                 }
                 createOrpdateResult = _accountService.Update(accountDto, FileUlti.ReadFromTextFile(data.Champs), FileUlti.ReadFromTextFile(data.Skins));
 
+                if (data.PageGem == null || data.PageGem.Length == 1)
+                {
+                    return RedirectToAction("AccountManagement");
+                }
             }
 
             if (createOrpdateResult != null)
