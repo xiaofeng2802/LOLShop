@@ -182,7 +182,8 @@ namespace ThoConShop.Web.Controllers
 
 
         [AllowAnonymous]
-        public ActionResult ExternalLogin(string returnUrl, string provider = "Facebook")
+        public ActionResult 
+            ExternalLogin(string returnUrl, string provider = "Facebook")
         {
             // Request a redirect to the external login provider
             return new ChallengeResult(provider,

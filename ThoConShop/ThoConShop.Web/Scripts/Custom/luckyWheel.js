@@ -40,7 +40,7 @@
         var wheelPower = 3;
         var wheelSpinning = false;
         // Create image in memory.
-
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
 
         // Create new wheel object specifying the parameters at creation time.
         var theWheel = new Winwheel({
