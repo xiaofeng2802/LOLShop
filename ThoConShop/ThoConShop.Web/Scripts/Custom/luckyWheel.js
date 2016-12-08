@@ -28,11 +28,11 @@
                 url: '/User/GetRandomWheelItem',
                 async: false,
                 type: 'GET',
-                success: function(data) {
+                success: function (data) {
                     startSpin(data);
                 },
-                error: function(data) {
-                    alert("Bạn không đủ số Point để quay, xin vui lòng nạp thêm thẻ. Cám ơn!");
+                error: function (error) {
+                    alert("Đã xảy ra lỗi với vòng quay hoặc bạn không đủ số Point(15 points/ lần), bạn hãy liên hệ Admin page để tìm hiểu thêm.");
                 }
             });
         });
