@@ -188,9 +188,9 @@ namespace ThoConShop.Business.Services
             return result;
         }
 
-        public IPagedList<LuckyWheelHistoryDto> ReadLuckyWheelHistory(int currentIndex, int pageSize)
+        public IPagedList<LuckyWheelHistoryDto> ReadLuckyWheelHistory(int currentIndex, int pageSize, string generalUserId)
         {
-            var result = _luckyWheelHistoryRepositories.Read(a => true)
+            var result = _luckyWheelHistoryRepositories.Read(a => a.User.GeneralUserId == generalUserId)
                 .OrderByDescending(a => a.CreatedDate)
                 .Include(a => a.User)
                 .Include(a => a.User.GeneralUser)

@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using PagedList;
 using ThoConShop.Business.Contracts;
 using ThoConShop.Business.Dtos;
@@ -97,13 +98,13 @@ namespace ThoConShop.Web.Controllers
             return result;
         }
 
-        [Authorize(Users = "tuntiton030100@gmail.com,jhklshad@yahoo.com,ngocthuan1704@yahoo.com.vn")]
+        [Authorize(Users = "tuntiton030100@gmail.com,jhklshad@yahoo.com,ngocthuan1704@yahoo.com.vn,daovanson90@yahoo.com")]
         public ActionResult LuckyWheel(int page = 1)
         {
             if (ConfigurationManager.AppSettings["IsWheelOpen"] != null 
                 && ConfigurationManager.AppSettings["IsWheelOpen"] == "1")
             {
-                var result = _userService.ReadLuckyWheelHistory(page, _pageSize);
+                var result = _userService.ReadLuckyWheelHistory(page, _pageSize, User.Identity.GetUserId());
                 return View(result);
             }
             return RedirectToAction("NotReady");

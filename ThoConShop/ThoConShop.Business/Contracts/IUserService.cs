@@ -41,7 +41,7 @@ namespace ThoConShop.Business.Contracts
 
         int DeleteLuckyItem(int id);
 
-        IPagedList<LuckyWheelHistoryDto> ReadLuckyWheelHistory(int currentIndex, int pageSize);
+        IPagedList<LuckyWheelHistoryDto> ReadLuckyWheelHistory(int currentIndex, int pageSize, string generalUserId);
 
         LuckyWheelHistoryDto CreateLuckyHistory(LuckyWheelHistoryDto data);
 

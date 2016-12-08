@@ -47,8 +47,7 @@
             'drawMode': 'segmentImage',
             'canvasId': 'canvas',
             'numSegments': data.length,     // Specify number of segments.
-            'outerRadius': 212,
-            'innerRadius': 50,   // Set outer radius so wheel fits inside the background.  // Set font size as desired.
+            'innerRadius': 90,   // Set outer radius so wheel fits inside the background.  // Set font size as desired.
             //'drawMode': 'segmentImage',
             //'imageDirection': 'S',
             'segments': data, // Define segments including colour and text.
@@ -89,8 +88,26 @@
         });
 
         // Vars used by the code in this page to do power controls.
+        // Create image in memory.
+        var handImage = new Image();
 
-     
+        // Set onload of the image to anonymous function to draw on the canvas once the image has loaded.
+        handImage.onload = function () {
+            var handCanvas = document.getElementById('canvas');
+            var ctx = handCanvas.getContext('2d');
+            
+
+            if (ctx) {
+                ctx.save();
+                ctx.translate(200, 150);
+                ctx.rotate(theWheel.degToRad(-40));  // Here I just rotate the image a bit.
+                ctx.translate(-200, -150);
+                ctx.drawImage(handImage, 300, 300);   // Draw the image at the specified x and y.
+                ctx.restore();
+            }
+        };
+
+        handImage.src = '/Images/btn-wheel.png';
         // -------------------------------------------------------
         // Function to handle the onClick on the power buttons.
         // -------------------------------------------------------

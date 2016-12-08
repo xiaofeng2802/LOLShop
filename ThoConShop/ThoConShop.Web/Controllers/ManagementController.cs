@@ -20,7 +20,7 @@ using ThoConShop.Web.Models;
 
 namespace ThoConShop.Web.Controllers
 {
-    [Authorize(Users = "tuntiton030100@gmail.com,jhklshad@yahoo.com,ngocthuan1704@yahoo.com.vn")]
+    [Authorize(Users = "tuntiton030100@gmail.com,jhklshad@yahoo.com,ngocthuan1704@yahoo.com.vn, daovanson90@yahoo.com")]
     public class ManagementController : Controller
     {
         readonly int _pageSize = int.Parse(ConfigurationManager.AppSettings["PageSize"]);

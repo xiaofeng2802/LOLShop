@@ -404,8 +404,9 @@ namespace ThoConShop.Web.Controllers
                 Session["CurrentPrice"] = result.Id;
                 return Json(resultForWheel, JsonRequestBehavior.AllowGet);
             }
-            return Json(new { success = false, message = "Bạn không đủ số Point để quay, xin vui lòng nạp thêm thẻ. Cám ơn!" });
+            return Json(new { success = false, message = "Bạn không đủ số Point để quay, xin vui lòng nạp thêm thẻ. Cám ơn!" }, JsonRequestBehavior.AllowGet);
         }
+
 
         public JsonResult SaveWheelHistory(int priceId = -1)
         {
@@ -435,10 +436,10 @@ namespace ThoConShop.Web.Controllers
                 {
                     _userService.UpdatePointUser(user.GeneralUserId, sumOfPoint);
                 }
-                return Json("Chúc mừng bạn đã trúng " + desc, JsonRequestBehavior.AllowGet + "/nXin vui lòng liên hệ fanpage để nhận quà, Cám ơn bạn.");
+                return Json("Chúc mừng bạn đã trúng " + desc + ". Xin vui lòng liên hệ fanpage để nhận quà, Cám ơn bạn.", JsonRequestBehavior.AllowGet);
             }
 
-            return Json(new { status = "error", message = "Xảy ra lỗi khi cập nhật thông tin, vui lòng quay số lại." });
+            return Json(new { status = "error", message = "Xảy ra lỗi khi cập nhật thông tin, vui lòng quay số lại." }, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)
