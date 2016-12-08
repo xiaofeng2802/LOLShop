@@ -74,6 +74,6 @@
 </div>
 <div class="row">
     <div class="col-md-12 body-pagging">
-        @Html.PagedListPager(Model, pageRechar => Url.Action("Index", new { pageRechar }))
+        @Html.PagedListPager(Model, pageRechar => Url.Action("ViewHistoriesUser", new { pageRechar }))
     </div>
 </div>

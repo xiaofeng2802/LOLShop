@@ -78,6 +78,6 @@
 </div>
 <div class="row">
     <div class="col-md-12 body-pagging">
-        @Html.PagedListPager(Model, pageTrading => Url.Action("Index", new { pageTrading }))
+        @Html.PagedListPager(Model, pageTrading => Url.Action("ViewHistoriesUser", new { pageTrading }))
     </div>
 </div>
