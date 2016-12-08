@@ -1,6 +1,6 @@
 ﻿@model PagedList.IPagedList<ThoConShop.Business.Dtos.UserTradingHistoryDto>
-@using ThoConShop.DataSeedWork.Extensions
 @using System.Globalization
+@using PagedList.Mvc
 @{ 
     CultureInfo cul = CultureInfo.GetCultureInfo("vi-VN");
 }
@@ -74,5 +74,10 @@
             }
 
         </table>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 body-pagging">
+        @Html.PagedListPager(Model, pageTrading => Url.Action("Index", new { pageTrading }))
     </div>
 </div>

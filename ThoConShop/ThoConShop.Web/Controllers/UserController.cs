@@ -71,12 +71,12 @@ namespace ThoConShop.Web.Controllers
             private set { _userManager = value; }
         }
 
-        public ActionResult ViewHistoriesUser()
+        public ActionResult ViewHistoriesUser(int pageTrading = 1, int pageRechar = 1)
         {
 
             var result = new HistoryViewModel() {
-                RechargeHistories = _accountRelationDataService.ReadRechargeHistories(User.Identity.GetUserId(), 1, _pageSize),
-                TradingHistories = _accountRelationDataService.ReadTradingHistories(User.Identity.GetUserId(), 1, _pageSize)
+                RechargeHistories = _accountRelationDataService.ReadRechargeHistories(User.Identity.GetUserId(), pageRechar, _pageSize),
+                TradingHistories = _accountRelationDataService.ReadTradingHistories(User.Identity.GetUserId(), pageTrading, _pageSize)
             };
 
             return View(result);

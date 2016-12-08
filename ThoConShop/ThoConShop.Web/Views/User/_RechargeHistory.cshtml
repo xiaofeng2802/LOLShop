@@ -1,6 +1,6 @@
 ﻿@model PagedList.IPagedList<ThoConShop.Business.Dtos.UserRechargeHistoryDto>
 @using ThoConShop.DataSeedWork.Extensions
-
+@using PagedList.Mvc
 @using System.Globalization
 @{
     CultureInfo cul = CultureInfo.GetCultureInfo("vi-VN");
@@ -70,5 +70,10 @@
             }
 
         </table>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 body-pagging">
+        @Html.PagedListPager(Model, pageRechar => Url.Action("Index", new { pageRechar }))
     </div>
 </div>
