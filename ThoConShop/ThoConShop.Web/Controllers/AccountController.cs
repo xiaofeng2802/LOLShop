@@ -41,20 +41,41 @@ namespace ThoConShop.Web.Controllers
                 return RedirectToAction("ChargingView", "User",
                     new {Message = "Tài khoản quý khách không đủ tiền, xin vui lòng nạp thêm. Cám ơn !"});
             }
-
-            _accountService.SoldAccount(accountId);
-            if (user != null)
+            try
             {
+                _accountService.SoldAccount(accountId);
+
                 var sumOfBalance = user.Balance - account.Price;
                 _userService.UpdateBalanceUser(user.GeneralUserId, sumOfBalance);
-
-                _historyService.Create(new UserTradingHistoryDto()
-                {
-                    AccountId = account.Id,
-                    UserId = user.Id,
-                    CreatedDate = DateTime.Now
-                });
             }
+            catch (Exception)
+            {
+
+            }
+
+            try
+            {
+                if (user != null)
+                {
+
+                    _historyService.Create(new UserTradingHistoryDto()
+                    {
+                        AccountId = account.Id,
+                        UserId = user.Id,
+                        CreatedDate = DateTime.Now
+                    });
+
+                  
+
+                  
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+         
 
            
 

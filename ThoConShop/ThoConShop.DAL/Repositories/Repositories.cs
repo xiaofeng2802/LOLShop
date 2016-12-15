@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using ThoConShop.DAL.Contracts;
@@ -13,7 +14,7 @@ namespace ThoConShop.DAL.Repositories
     public class Repositories<TKey, TEntity> : 
                 IRepositories<TKey, TEntity> where TEntity : BaseEntity<TKey> where TKey : struct
     {
-        private readonly IShopConThoDbContext _dbContext; 
+        private IShopConThoDbContext _dbContext; 
 
         public Repositories(IShopConThoDbContext dbContext)
         {
@@ -51,7 +52,7 @@ namespace ThoConShop.DAL.Repositories
                 return null;
             }
             _dbContext.Entry<TKey, TEntity>(entity).State = EntityState.Modified;
-
+            _dbContext.SaveChanges();
             return entity;
         }
 

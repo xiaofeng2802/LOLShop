@@ -22,6 +22,7 @@ namespace ThoConShop.DataSeedWork.UserExternalService
             string query = string.Format("select TOP 1 Point from [dbo].[User] where GeneralUserId = '{0}'",
                 generalUserId);
 
+            CheckConnectionState();
             var result = db.QueryFirst<int>(query);
 
             if (result >= defaultPoint)
@@ -39,6 +40,7 @@ namespace ThoConShop.DataSeedWork.UserExternalService
 
             try
             {
+                CheckConnectionState();
                 var result = db.QueryFirst<int>(query);
                 if (result > 0)
                 {
@@ -60,6 +62,7 @@ namespace ThoConShop.DataSeedWork.UserExternalService
             string query = string.Format("select TOP 1 Point from [dbo].[User] where GeneralUserId = '{0}'",
                 generalUserId);
 
+            CheckConnectionState();
             var result = db.QueryFirst<int>(query);
 
 
@@ -70,6 +73,7 @@ namespace ThoConShop.DataSeedWork.UserExternalService
         {
             string query = string.Format("select TOP 1 Description from [dbo].[LuckyWheelItems] where Id = {0}", id);
 
+            CheckConnectionState();
             var result = db.QueryFirst<string>(query);
             return result;
         }
@@ -93,6 +97,7 @@ namespace ThoConShop.DataSeedWork.UserExternalService
 
             try
             {
+                CheckConnectionState();
                 var result = db.Query<float>(query).ToList();
                 return result[0];
             }
@@ -121,6 +126,7 @@ namespace ThoConShop.DataSeedWork.UserExternalService
 
             try
             {
+                CheckConnectionState();
                 var result = db.QueryFirst<bool>(query);
 
                 return result;
@@ -145,6 +151,7 @@ namespace ThoConShop.DataSeedWork.UserExternalService
 
             try
             {
+                CheckConnectionState();
                 var result = db.Query<TEntity>(query).ToList();
 
                 return result;
@@ -164,6 +171,7 @@ namespace ThoConShop.DataSeedWork.UserExternalService
 
             try
             {
+                CheckConnectionState();
                 var result = db.Query<TEntity>(query).ToList();
 
                 return result;
@@ -173,6 +181,14 @@ namespace ThoConShop.DataSeedWork.UserExternalService
 
             }
             return null;
+        }
+
+        private static void CheckConnectionState()
+        {
+            if (db.State == ConnectionState.Open)
+            {
+                db.Close();
+            }
         }
     }
 }

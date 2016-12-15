@@ -36,13 +36,16 @@ namespace ThoConShop.Business.Services
         {
             var account = Mapper.Map<Account>(entity);
 
-            account.Champions = ChampionForCreation(champ);
-            account.Skins = SkinForCreation(skin);
-
             var result = _repoAccount.Create(account);
             
             if (_repoAccount.SaveChanges() > 0)
             {
+                var accountAdded = _repoAccount.ReadOne(a => a.Id == result.Id);
+
+                accountAdded.Champions = ChampionForCreation(champ);
+                accountAdded.Skins = SkinForCreation(skin);
+
+                _repoAccount.SaveChanges();
                 return Mapper.Map<AccountDto>(result);
             }
 
@@ -56,11 +59,12 @@ namespace ThoConShop.Business.Services
             {
                 var splitData = data.Split(new[] { '\r', '\n' }).Where(a => !string.IsNullOrEmpty(a));
 
-
                 foreach (var item in splitData)
                 {
                     champs.Add(_repoChamp.ReadOne(a => a.ChampionName == item));
                 }
+
+                _repoChamp.SaveChanges();
             }
            
 
@@ -137,15 +141,13 @@ namespace ThoConShop.Business.Services
         {
             var acc = _repoAccount.ReadOne(a => a.Id == accountId);
             acc.IsAvailable = false;
-             _repoAccount.Update(acc);
+            _repoAccount.Update(acc);
             FileUlti.DeleteFile(acc.Avatar);
 
             foreach (var page in acc.NumberOfPageGems)
             {
                 FileUlti.DeleteFile(page.ImageUrl);
             }
-
-            _repoAccount.SaveChanges();
 
         }
 

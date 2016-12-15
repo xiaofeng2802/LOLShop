@@ -40,7 +40,7 @@ namespace ThoConShop.Business.Services
             if (user != null && balance != null)
             {
                 user.Balance = balance ?? 0;
-                _userRepositories.SaveChanges();
+                _userRepositories.Update(user);
             }
         }
 

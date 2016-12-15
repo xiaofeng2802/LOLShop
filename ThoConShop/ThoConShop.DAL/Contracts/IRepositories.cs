@@ -9,7 +9,7 @@ using ThoConShop.DAL.Entities;
 
 namespace ThoConShop.DAL.Contracts
 {
-    public interface IRepositories<TKey, TEntity> 
+    public interface IRepositories<TKey, TEntity>
     {
         TEntity Create(TEntity entity);
 
