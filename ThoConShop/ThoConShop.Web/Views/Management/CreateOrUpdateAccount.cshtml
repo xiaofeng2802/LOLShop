@@ -124,6 +124,18 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Ghi Chú</label>
+                            <div class="col-sm-10">
+                                <div class="form-group floating-label">
+                                    @Html.DropDownListFor(a => a.EventPrice, Model.EventPricesSource, new { @class = "form-control", @id = "select2" })
+                                    @Html.ValidationMessageFor(a => a.EventPrice, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-control-line"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div><!--end .card-body -->
             <div class="card-actionbar">

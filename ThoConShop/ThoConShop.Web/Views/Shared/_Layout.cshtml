@@ -51,7 +51,7 @@
                 <li>
                     <div class="row">
                         <div class="col-md-12">
-                            <a target="_blank" href="@Url.Action("ChargingView", "User")">Nạp thẻ</a>
+                            <a href="@Url.Action("ChargingView", "User")">Nạp thẻ</a>
                         </div>
                     </div>
                 </li>
@@ -59,7 +59,7 @@
                     @if (User.Identity.IsAuthenticated)
                     {
 
-                        <a target="_blank" href="@Url.Action("LuckyWheel", "Home")">Vòng Quay</a>
+                        <a href="@Url.Action("LuckyWheel", "Home")">Vòng Quay</a>
                     }
                 </li>
                
@@ -79,10 +79,10 @@
                     @if (User.Identity.IsAuthenticated)
                     {
 
-                        <a target="_blank" href="@Url.Action("ViewHistoriesUser", "User")">Lịch Sử Nạp/Mua</a>
+                        <a href="@Url.Action("ViewHistoriesUser", "User")">Lịch Sử Nạp/Mua</a>
                     }
                 </li>
-                <li> <a target="_blank" href="https://www.facebook.com/ShopAccThoCon/?ref=ts&fref=ts">Liên Hệ</a></li>
+                <li> <a target="_blank" href="https://www.facebook.com/ShopAccThoCon/">Liên Hệ</a></li>
                 <li>
                     @if (User.Identity.IsAuthenticated)
                     {
@@ -191,6 +191,7 @@
         <div class="row">
           
             <div class="col-lg-5 col-sm-12 align-right">
+				<br>
                 @if (topOfMonth != null && topOfMonth.Count > 0)
                 {
                     <table class="simple gamelist tiny">
@@ -225,6 +226,7 @@
             </div>
           
             <div class="col-lg-5 col-sm-12">
+				<br>
                 @if (recentWheel != null && recentWheel.Count > 0)
                 {
                     <table class="simple gamelist tiny">
@@ -271,15 +273,15 @@
                             <div class="row">
                                 <div class="col-sm-12 col-md-6">
                                     <div class="sa-ftadd">
-                                        <p>Địa chỉ: Phường Bình Thạnh, thị xã Tân Phước Khánh, Tân Uyên, Bình Dương</p>
-                                        <p>© 2016, Copyright by Bán Acc Liên Minh Huyền Thoại Giá Rẻ - Uy Tín.</p>
+                                        <p>Địa chỉ: Khu Phố Bình Đức 1 - Bình Hòa - Thuận An - Bình Dương</p>
+                                        <p>© 2016 SHOP THỎ CON - BÁN ACC LIÊN MINH GIÁ RẺ - UY TÍN NHẤT</p>
                                     </div>
                                     <div class="sa-fthotline">
                                         <div class="sa-ftarow clearfix">
                                             <div class="sa-ftacol sa-fthnum">
-                                                <p><a href="tel:0888390107" style="font-weight: bold;" title="">Hotline 1: 0888.39.0107</a>
+                                                <p><a href="https://www.facebook.com/ShopAccThoCon" style="font-weight: bold;" title="">Hotline: 0915.306.074</a>
                                                 </p>
-                                                <p><a href="tel:0888390107" style="font-weight: bold;" title="">Hotline 2: 0186.835.8351</a>
+                                                <p><a href="https://www.facebook.com/ShopAccThoCon" style="font-weight: bold;" title="">Mình Tên Phúc</a>
                                                 </p>
                                             </div>
                                             <div class="sa-ftacol sa-fthwork">
@@ -292,11 +294,7 @@
                                 <div class="col-sm-12 col-md-4">
                                     <p class="sa-lshare">
                                         <span>Liên kết chia sẻ:</span>
-                                        <a class="sa-ic sa-lsfb" href="" title=""></a>
-                                        <a class="sa-ic sa-lstw" href="" title=""></a>
-                                        <a class="sa-ic sa-lsgg" href="" title=""></a>
-                                        <a class="sa-ic sa-lsyou" href="" title=""></a>
-                                        <a class="sa-ic sa-lssky" href="" title=""></a>
+                                        <a class="sa-ic sa-lsfb" href="https://www.facebook.com/Clone.r4z3nt" title=""></a>
                                     </p>
 
                                 </div>
@@ -319,7 +317,135 @@
 
 </script>
 <script src="~/Scripts/Custom/globalFunction.js"></script>
+<style type="text/css" media="screen">
+    #fb_chat_start {
+        position: absolute;
+        width: 248px;
+        height: 239px;
+        top: 70px;
+        left: 0;
+        background-color: #F9F9F9;
+        padding: 10px;
+        float: left;
+        display: none;
+        -moz-box-shadow: inset 0 0 10px 10px rgba(0, 0, 0, .1);
+        -webkit-box-shadow: inset 0 0 10px 10px rgba(0, 0, 0, .1);
+        box-shadow: inset 0 0 10px 10px rgba(0, 0, 0, .1)
+    }
+    #fb_chat_start em {
+        font-size: 11px;
+        color: gray
+    }
+    .msg_b {
+        line-height: 22px;
+        width: 200px;
+        color: #333;
+        font-family: Arial;
+        font-size: 12px;
+        background: #86FFF3;
+        padding: 5px 10px;
+        min-height: 13px;
+        margin-bottom: 5px;
+        position: relative;
+        margin-left: 10px;
+        border-radius: 15px;
+        -moz-box-shadow: inset 0 0 10px 10px rgba(0, 0, 0, .1);
+        -webkit-box-shadow: inset 0 0 10px 10px rgba(0, 0, 0, .1);
+        box-shadow: inset 0 0 10px 10px rgba(0, 0, 0, .1)
+    }
+    .msg_b:after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 0;
+        border: 7px solid;
+        border-color: transparent transparent transparent #79e7dc;
+        right: -13px;
+        top: 8px
+    }
+    .msg_b a {
+        text-decoration: underline;
+        color: #01509E
+    }
+    #f_bt_start_chat {
+        margin: auto;
+        background-color: #11A92D;
+        border-radius: 5px;
+        color: #fff;
+        font-family: Arial;
+        font-size: 17px;
+        padding: 10px 15px;
+        text-decoration: none
+    }
+    #f_bt_start_chat:hover {
+        color: #ff0;
+        text-decoration: none
+    }
+    #fb_chat_start p {
+        margin: 5px 0px;
+        font-size: 12px;
+        color: #888;
+        line-height: 18px;
+        width: 95%;
+    }
+    .fb_hide {
+        display: none
+    }
 
+    a.chat_fb {
+        background: #3a5795 url(http://s1.upanh123.com/2016/11/28/ic_arrow_up_whited211e.png) 225px 15px no-repeat;
+        float: left;
+        width: 250px;
+        height: 40px;
+        color: #fff;
+        text-decoration: none;
+        line-height: 40px;
+        text-shadow: 0 1px 0 rgba(0,0,0,0.1);
+        border: 0;
+        border-bottom: 1px solid #133783;
+        z-index: 9999999;
+        font-size: 13px;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    a.chat_fb img {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+    }
+
+    a.chat_fb:hover {
+        color: yellow;
+        text-decoration: none;
+    }
+</style>
+<script language='javascript'>
+    var f_chat_vs = "Version 2.1";
+    var f_chat_domain =  "http://shopthocon.vn";   
+    var f_chat_name = '<img src="http://s1.upanh123.com/2016/11/28/ic_commentce206.png"> Chat với chúng tôi';
+    var f_chat_star_1 = "Chào bạn!";
+    var f_chat_star_2 = "Bạn cần hỗ trợ hãy nhắn tin với chúng tôi!"
+    var f_chat_star_3 = "<a href='javascript:;' id='f_bt_start_chat' onclick='f_bt_start_chat()'>Bắt đầu Chat</a>";
+    var f_chat_star_4 = "Chú ý: Bạn phải đăng nhập <a href='http://facebook.com/' rel='nofollow' target='_blank'>Facebook</a> mới có thể trò chuyện.";
+    var f_chat_fanpage = "ShopAccThoCon"; /* Đây là địa chỉ Fanpage*/
+    var f_chat_background_title = "#1092da"; /* Lấy mã màu tại đây http://megapixelated.com/tags/ref_colorpicker.asp */
+    var f_chat_color_title = "#fff";
+    var f_chat_cr_vs = 21; /* Version ID */
+    var f_chat_vitri_manhinh = "right:0px;"; /* Right: 10px; hoặc left: 10px; hoặc căn giữa left:45% */   
+</script>
+<!-- $Chat Javascript (không được xóa) -->
+<script src='https://cdn.rawgit.com/tuan2308/js/master/chatbox.js'></script>
+<!-- $Chat HTML (không được xóa) -->
+<div id='fb-root'></div>
+<div class='chat_f_vt' id='b-c-facebook'>
+   <div class='chat-f-b' id='chat-f-b' onclick='$("#f-chat-conent").toggle(1000);'><i class='fa fa-comments title-f-chat-icon'></i>
+       <a class="chat_fb"><img src="http://s1.upanh123.com/2016/11/28/ic_commentce206.png"> Chat với Thỏ Con</a>
+   </div>
+   <div class='f-chat-conent' id='f-chat-conent'>
+      <script>document.write("<div class='fb-page' data-adapt-container-width='true' data-height='310' data-hide-cover='false' data-href='https://www.facebook.com/"+f_chat_fanpage+"' data-show-facepile='false' data-show-posts='true' data-small-header='true' data-tabs='messages' data-width='250'></div>");</script>
+   </div>
+</div>
 
 </body>
 

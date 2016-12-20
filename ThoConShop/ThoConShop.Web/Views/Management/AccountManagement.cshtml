@@ -12,14 +12,14 @@
 
     <!-- BEGIN SEARCH HEADER -->
     <div class="card-head style-primary">
-        <div class="tools pull-left" style="width: 85%;">
+        <div class="tools pull-left" style="width: 40%;">
              @using (Html.BeginForm("AccountManagement", "Management", FormMethod.Get, new
     {
         role = "search"
     }))
     {
 
-        <div class="col-lg-3 no-padding">
+        <div class="col-lg-11 no-padding">
             <div class="form-group">
                 <input type="text" style="background-color: white;" class="form-control" name="searchString" value="@ViewBag.SearchString" placeholder="Nhập mã số tài khoản cần tìm">
             </div>
@@ -29,7 +29,35 @@
         </div>
     }
         </div>
-     
+        <div class="tools pull-left" style="width: 40%;">
+            @using (Html.BeginForm("ApplyAllEventPrice", "Management", FormMethod.Post, new
+            {
+                role = "search"
+            }))
+            {
+
+                <div class="col-lg-11 no-padding">
+                    <div class="form-group">
+                       <select name="allEventPrice" style="background-color:white" class="form-control">
+                           <option value="0">0%</option>
+                           <option value="5">5%</option>
+                           <option value="10">10%</option>
+                           <option value="15">15%</option>
+                           <option value="20">20%</option>
+                           <option value="25">25%</option>
+                           <option value="30">30%</option>
+                           <option value="35">35%</option>
+                           <option value="40">40%</option>
+                           <option value="45">45%</option>
+                           <option value="50">50%</option>
+                       </select>
+                    </div>
+                </div>
+                <div class="col-lg-1 no-padding">
+                    <button type="submit" id="applyAll" class="btn ink-reaction btn-primary"><i class="md md-add-box"></i></button>
+                </div>
+            }
+        </div>
         <div class="tools">
             <a class="btn btn-floating-action btn-default-light" href="@Url.Action("CreateOrUpdateAccount", "Management")"><i class="fa fa-plus"></i></a>
         </div>

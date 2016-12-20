@@ -17,15 +17,14 @@
         <div class="row">
             <div class="col-lg-12 col-sm-12">
                 <div id="canvasContainer" align="center">
-                    <canvas id="canvas" width="700" height="700">
+                    <canvas id="canvas" width="600" height="600">
                     </canvas>
 
-                    <img id="prizePointer2" src="~/Images/qt-arow.png"/>
-                    @*<img id="prizePointer" class="img-responsive" src="~/Images/btn-wheel.png"/>*@
-
-                </div>
-                <div style="margin-bottom: 20px;font-size: 30px;">
-                    Tổng số Point bạn hiện có là <span>@UserExternalService.GetUserPoint(User.Identity.GetUserId()) Point.</span>
+                    <img id="prizePointer2" src="~/Images/qt-arow.png" />
+                        <img id="prizePointer" class="img-responsive" src="~/Images/btn-wheel.png" />
+                    <div style="margin-bottom: 20px;font-size: 30px;">
+                        Tổng số Point bạn hiện có là <span>@UserExternalService.GetUserPoint(User.Identity.GetUserId()) Point.</span>
+                    </div>
                 </div>
             </div>
         </div>

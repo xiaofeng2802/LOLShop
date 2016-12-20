@@ -21,17 +21,25 @@
     <meta property="og:image:width" content="600">
     <meta property="og:image:height" content="315">
     <meta property="og:site_name" content="@Request.Url.ToString()" />
-    <title>Acc số #@Model.CurrentAccount.Id</title>
+    <title>Tài Khoản Số #@Model.CurrentAccount.Id</title>
 }
 
 <div class="ov-top masthead">
     <div class="container text-center">
         <h1 class="c-hero__title u-text-gradient">@Model.CurrentAccount.Title</h1>
-        <h5>Acc <span>#@Model.CurrentAccount.Id</span> giá <span>@Model.CurrentAccount.Price.ToString("#,###", cul.NumberFormat)</span>đ</h5>
+       @if (Model.CurrentAccount.EventPrice != 0)
+       {
+           var realPrice = (Model.CurrentAccount.Price - ((Model.CurrentAccount.Price * Model.CurrentAccount.EventPrice) / 100));
+            <h5>Tài Khoản <span>#@Model.CurrentAccount.Id</span> giá <span>@realPrice.ToString("#,###", cul.NumberFormat)</span>vnđ</h5>
+       }
+       else
+       {
+        <h5>Tài Khoản <span>#@Model.CurrentAccount.Id</span> giá <span>@Model.CurrentAccount.Price.ToString("#,###", cul.NumberFormat)</span>vnđ</h5>
+       }
 
         @if (Model.CurrentAccount.IsAvailable)
         {
-            using (Html.BeginForm("SellAccount", "Account", FormMethod.Post, new { id = "formSell" }))
+            using (Html.BeginForm("SellAccount", "Account", FormMethod.Post, new { @class = "formSell" }))
             {
                 @Html.AntiForgeryToken()
                 @Html.Hidden("AccountId", Model.CurrentAccount.Id)
@@ -139,13 +147,13 @@
                 <div class="thumbnail">
                     <a href="#">
                         <div class="caption">
-                            <h4>Acc trắng thông tin</h4>
+                            <h4>ACC TRẮNG THÔNG TIN</h4>
                             <h4>Rank: @acc.RankName</h4>
                             <h4>Tướng: @acc.NumberOfChamps</h4>
-                            <h4>Skin: @acc.NumberOfSkins</h4>
+                            <h4>Trang Phục: @acc.NumberOfSkins</h4>
                             <h4>Bảng Ngọc: @acc.NumberOfPageGem</h4>
                         </div>
-                        <span class="header-item">Acc #@acc.Id</span>
+                        <span class="header-item">Tài Khoản #@acc.Id</span>
                         @if (acc.CreatedDate.Month == DateTime.Now.Month
          && acc.CreatedDate.Year == DateTime.Now.Year
          && (DateTime.Now.Day - acc.CreatedDate.Day) <= 5)
@@ -162,7 +170,7 @@
                         <ul>
                             <li>Rank: @acc.RankName</li>
                             <li>Tướng: @acc.NumberOfChamps</li>
-                            <li>Skin: @acc.NumberOfSkins</li>
+                            <li>Trang Phục: @acc.NumberOfSkins</li>
                         </ul>
                     </div>
                     <div class="col-xs-7 col-md-6 stay_right footer-item-right">

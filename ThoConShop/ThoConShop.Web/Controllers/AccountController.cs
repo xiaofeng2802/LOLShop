@@ -45,7 +45,7 @@ namespace ThoConShop.Web.Controllers
             {
                 _accountService.SoldAccount(accountId);
 
-                var sumOfBalance = user.Balance - account.Price;
+                var sumOfBalance = user.Balance - (account.Price - ((account.Price * account.EventPrice) / 100));
                 _userService.UpdateBalanceUser(user.GeneralUserId, sumOfBalance);
             }
             catch (Exception)

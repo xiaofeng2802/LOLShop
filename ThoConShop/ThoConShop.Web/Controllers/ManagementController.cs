@@ -5,14 +5,8 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Script.Serialization;
-using Newtonsoft.Json;
-using AutoMapper;
-using Microsoft.AspNet.Identity;
-using Newtonsoft.Json.Linq;
 using ThoConShop.Business.Contracts;
 using ThoConShop.Business.Dtos;
-using ThoConShop.DataSeedWork.Extensions;
 using ThoConShop.DataSeedWork.NewsService;
 using ThoConShop.DataSeedWork.Ulti;
 using ThoConShop.DataSeedWork.UserExternalService;
@@ -64,7 +58,22 @@ namespace ThoConShop.Web.Controllers
                     {
                         Value = a.Id.ToString(),
                         Text = a.RankName
-                    }).ToList()
+                    }).ToList(),
+                    EventPricesSource = new List<SelectListItem>()
+                    {
+                        new SelectListItem() { Value = "0", Text = "0%" },
+                        new SelectListItem() { Value = "5", Text = "5%" },
+                        new SelectListItem() { Value = "10", Text = "10%" },
+                        new SelectListItem() { Value = "15", Text = "15%" },
+                        new SelectListItem() { Value = "20", Text = "20%" },
+                        new SelectListItem() { Value = "25", Text = "25%" },
+                        new SelectListItem() { Value = "30", Text = "30%" },
+                        new SelectListItem() { Value = "35", Text = "35%" },
+                        new SelectListItem() { Value = "40", Text = "40%" },
+                        new SelectListItem() { Value = "45", Text = "45%" },
+                        new SelectListItem() { Value = "50", Text = "50%" }
+                    },
+                    EventPrice = 0
 
                 };
             }
@@ -90,8 +99,22 @@ namespace ThoConShop.Web.Controllers
                     UserName = accountDto.UserName,
                     Password = accountDto.Password,
                     RankId = accountDto.RankId,
-                    AccounId = accountDto.Id
-
+                    AccounId = accountDto.Id,
+                    EventPrice = accountDto.EventPrice,
+                    EventPricesSource = new List<SelectListItem>()
+                    {
+                        new SelectListItem() { Value = "0", Text = "0%", Selected = accountDto.EventPrice == 0},
+                        new SelectListItem() { Value = "5", Text = "5%", Selected = accountDto.EventPrice == 5 },
+                        new SelectListItem() { Value = "10", Text = "10%", Selected = accountDto.EventPrice == 10 },
+                        new SelectListItem() { Value = "15", Text = "15%", Selected = accountDto.EventPrice == 15 },
+                        new SelectListItem() { Value = "20", Text = "20%", Selected = accountDto.EventPrice == 20 },
+                        new SelectListItem() { Value = "25", Text = "25%", Selected = accountDto.EventPrice == 25 },
+                        new SelectListItem() { Value = "30", Text = "30%", Selected = accountDto.EventPrice == 30 },
+                        new SelectListItem() { Value = "35", Text = "35%", Selected = accountDto.EventPrice == 35 },
+                        new SelectListItem() { Value = "40", Text = "40%", Selected = accountDto.EventPrice == 40 },
+                        new SelectListItem() { Value = "45", Text = "45%", Selected = accountDto.EventPrice == 45 },
+                        new SelectListItem() { Value = "50", Text = "50%", Selected = accountDto.EventPrice == 50 }
+                    },
                 };
             }
 
@@ -117,7 +140,8 @@ namespace ThoConShop.Web.Controllers
                     RankId = data.RankId,
                     Avatar = ConfigurationManager.AppSettings["AvatarUrl"] + FileUlti.SaveFile(data.Avatar, path),
                     IsAvailable = true,
-                    IsHot = true
+                    IsHot = true,
+                    EventPrice = data.EventPrice
                 };
                 createOrpdateResult = _accountService.Create(result, FileUlti.ReadFromTextFile(data.Champs), FileUlti.ReadFromTextFile(data.Skins));
             }
@@ -130,6 +154,7 @@ namespace ThoConShop.Web.Controllers
                 accountDto.Password = data.Password;
                 accountDto.UserName = data.UserName;
                 accountDto.RankId = data.RankId;
+                accountDto.EventPrice = data.EventPrice;
                 accountDto.Avatar = (!string.IsNullOrEmpty(url) ? accountDto.Avatar : ConfigurationManager.AppSettings["AvatarUrl"] + url);
                 
                 if (data.PageGem != null && data.PageGem.All(a => a != null))
@@ -403,6 +428,13 @@ namespace ThoConShop.Web.Controllers
             var path = Server.MapPath("~/New.txt");
             NewExternalService.SaveNew(path, data.Text);
             return RedirectToAction("FeedManagement");
+        }
+
+        [HttpPost]
+        public ActionResult ApplyAllEventPrice(int allEventPrice = 0)
+        {
+            AccountExternalService.UpdateAllAccountEventPrice(allEventPrice);
+            return RedirectToAction("AccountManagement");
         }
     }
 }

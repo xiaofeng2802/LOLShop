@@ -242,7 +242,8 @@ namespace ThoConShop.Business.Services
                 UpdatedDate = a.UpdatedDate,
                 NumberOfPageGem = a.NumberOfPageGems.Count,
                 NumberOfChamps = a.Champions.Count,
-                NumberOfSkins = a.Skins.Count
+                NumberOfSkins = a.Skins.Count,
+                EventPrice = a.EventPrice
             });
             return result.ToPagedList(currentIndex, pageSize);
         }
@@ -283,7 +284,8 @@ namespace ThoConShop.Business.Services
                     UpdatedDate = a.UpdatedDate,
                     NumberOfPageGem = a.NumberOfPageGems.Count,
                     NumberOfChamps = a.Champions.Count,
-                    NumberOfSkins = a.Skins.Count
+                    NumberOfSkins = a.Skins.Count,
+                    EventPrice = a.EventPrice
                 });
                              
             if (!string.IsNullOrEmpty(searchString))
@@ -305,6 +307,7 @@ namespace ThoConShop.Business.Services
             data.Price = entity.Price;
             data.RankId = entity.RankId;
             data.UserName = entity.UserName;
+            data.EventPrice = entity.EventPrice;
 
 
             if (!string.IsNullOrEmpty(champ))

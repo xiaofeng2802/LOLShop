@@ -22,7 +22,7 @@ namespace ThoConShop.Web.Models
 
         public CreateOrUpdateAccountViewModel()
         {
-                RankList = new List<SelectListItem>();
+            RankList = new List<SelectListItem>();
         }
 
         public List<SelectListItem> RankList { get; set; }
@@ -49,6 +49,10 @@ namespace ThoConShop.Web.Models
         public bool IsHot { get; set; } = true;
 
         public bool IsDelete { get; set; }
+
+        public IList<SelectListItem> EventPricesSource { get; set; } 
+
+        public int EventPrice { get; set; }
 
         //[Required(ErrorMessage = "Hình đại diện không được trống.")]
         //[FileExtensions(ErrorMessage = "Your error message.", Extensions = "jpg,jpeg,png")]

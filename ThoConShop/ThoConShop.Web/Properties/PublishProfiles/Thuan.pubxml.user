@@ -124,7 +124,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/18/2016 22:12:54</publishTime>
     </File>
     <File Include="bin/ShopThoCon.DataSeedWork.dll">
-      <publishTime>12/15/2016 20:41:24</publishTime>
+      <publishTime>12/20/2016 22:55:22</publishTime>
     </File>
     <File Include="bin/System.Web.Helpers.dll">
       <publishTime>10/18/2016 22:12:43</publishTime>
@@ -148,13 +148,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/18/2016 22:12:43</publishTime>
     </File>
     <File Include="bin/ThoConShop.Business.dll">
-      <publishTime>12/15/2016 20:41:25</publishTime>
+      <publishTime>12/20/2016 22:55:23</publishTime>
     </File>
     <File Include="bin/ThoConShop.DAL.dll">
-      <publishTime>12/15/2016 20:41:25</publishTime>
+      <publishTime>12/20/2016 22:55:22</publishTime>
     </File>
     <File Include="bin/ThoConShop.Web.dll">
-      <publishTime>12/15/2016 20:41:30</publishTime>
+      <publishTime>12/20/2016 22:55:28</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>10/18/2016 22:12:56</publishTime>
@@ -9739,7 +9739,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/11/2016 14:45:13</publishTime>
     </File>
     <File Include="Scripts/Custom/GlobalManagement.js">
-      <publishTime>12/11/2016 14:45:13</publishTime>
+      <publishTime>12/20/2016 22:41:56</publishTime>
     </File>
     <File Include="Scripts/Custom/Index.js">
       <publishTime>12/11/2016 14:45:13</publishTime>
@@ -9811,28 +9811,28 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/11/2016 14:45:14</publishTime>
     </File>
     <File Include="Views/Home/Edit.cshtml">
-      <publishTime>12/11/2016 14:45:14</publishTime>
+      <publishTime>12/20/2016 22:20:44</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>12/11/2016 14:45:14</publishTime>
+      <publishTime>12/20/2016 21:53:42</publishTime>
     </File>
     <File Include="Views/Home/LockNoticeView.cshtml">
-      <publishTime>12/11/2016 14:45:14</publishTime>
+      <publishTime>12/20/2016 21:53:42</publishTime>
     </File>
     <File Include="Views/Home/LuckyWheel.cshtml">
-      <publishTime>12/11/2016 14:45:14</publishTime>
+      <publishTime>12/20/2016 21:53:42</publishTime>
     </File>
     <File Include="Views/Home/NotFound.cshtml">
-      <publishTime>12/11/2016 14:45:14</publishTime>
+      <publishTime>12/20/2016 21:53:42</publishTime>
     </File>
     <File Include="Views/Home/NotReady.cshtml">
-      <publishTime>12/11/2016 14:45:14</publishTime>
+      <publishTime>12/20/2016 21:53:42</publishTime>
     </File>
     <File Include="Views/Home/_bodyIndex.cshtml">
-      <publishTime>12/11/2016 14:45:14</publishTime>
+      <publishTime>12/20/2016 22:54:56</publishTime>
     </File>
     <File Include="Views/Management/AccountManagement.cshtml">
-      <publishTime>12/11/2016 14:45:14</publishTime>
+      <publishTime>12/20/2016 22:43:43</publishTime>
     </File>
     <File Include="Views/Management/ChampManagement.cshtml">
       <publishTime>12/11/2016 14:45:14</publishTime>
@@ -9844,7 +9844,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/12/2016 20:45:41</publishTime>
     </File>
     <File Include="Views/Management/CreateOrUpdateAccount.cshtml">
-      <publishTime>12/11/2016 14:45:14</publishTime>
+      <publishTime>12/20/2016 21:15:16</publishTime>
     </File>
     <File Include="Views/Management/CreateRankView.cshtml">
       <publishTime>12/11/2016 14:45:14</publishTime>
@@ -9880,25 +9880,25 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/11/2016 14:45:14</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
-      <publishTime>12/11/2016 14:45:14</publishTime>
+      <publishTime>12/20/2016 21:54:16</publishTime>
     </File>
     <File Include="Views/Shared/Lockout.cshtml">
-      <publishTime>12/11/2016 14:45:14</publishTime>
+      <publishTime>12/20/2016 21:54:16</publishTime>
     </File>
     <File Include="Views/Shared/_AdminLayout.cshtml">
-      <publishTime>12/11/2016 14:45:14</publishTime>
+      <publishTime>12/20/2016 21:54:16</publishTime>
     </File>
     <File Include="Views/Shared/_DetailsLayout.cshtml">
-      <publishTime>12/11/2016 14:45:14</publishTime>
+      <publishTime>12/20/2016 22:15:36</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>12/11/2016 14:45:14</publishTime>
+      <publishTime>12/20/2016 21:54:16</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
-      <publishTime>12/11/2016 14:45:14</publishTime>
+      <publishTime>12/20/2016 21:54:16</publishTime>
     </File>
     <File Include="Views/Shared/_NotFound.cshtml">
-      <publishTime>12/11/2016 14:45:14</publishTime>
+      <publishTime>12/20/2016 21:54:16</publishTime>
     </File>
     <File Include="Views/User/ChargingView.cshtml">
       <publishTime>12/11/2016 14:45:14</publishTime>
@@ -9961,7 +9961,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/11/2016 14:45:14</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>12/13/2016 13:49:38</publishTime>
+      <publishTime>12/20/2016 22:55:50</publishTime>
     </File>
   </ItemGroup>
 </Project>

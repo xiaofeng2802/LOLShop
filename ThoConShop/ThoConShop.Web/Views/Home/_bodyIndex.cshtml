@@ -7,7 +7,7 @@
 <div class="row">
     @if (Model == null || Model.Count == 0)
     {
-        <div align="center" class="col-md-12 col-centered"><h3 style="text-align: center;">Không Tìm Thấy Tài Khoản Nào Được Tìm Thấy.</h3></div>
+        <div align="center" class="col-md-12 col-centered"><h3 style="text-align: center;">Không Tìm Thấy Tài Khoản Nào Được Tìm Thấy</h3></div>
     }
     else
     {
@@ -17,18 +17,31 @@
                 <div class="thumbnail">
                     <a href="@Url.Action("Edit", new {accountId = item.Id})">
                         <div class="caption">
-                            <h4>Acc trắng thông tin</h4>
+                            <h4>ACC TRẮNG THÔNG TIN</h4>
                             <h4>Rank: @item.RankName</h4>
                             <h4>Tướng: @item.NumberOfChamps</h4>
-                            <h4>Skin: @item.NumberOfSkins</h4>
+                            <h4>Trang Phục: @item.NumberOfSkins</h4>
                             <h4>Bảng Ngọc: @item.NumberOfPageGem</h4>
                         </div>
-                        <span class="header-item">Acc #@item.Id</span>
+                        <span class="header-item">Tài Khoản #@item.Id</span>
                         @if (item.CreatedDate.Month == DateTime.Now.Month
-                     && item.CreatedDate.Year == DateTime.Now.Year
-                     && (DateTime.Now.Day - item.CreatedDate.Day) <= 5)
+             && item.CreatedDate.Year == DateTime.Now.Year
+             && (DateTime.Now.Day - item.CreatedDate.Day) <= 5)
                         {
-                            <span class="header-item-right">Mới</span>
+                            if (item.EventPrice != 0)
+                            {
+                                <span class="header-item-right">Giảm @item.EventPrice%</span>
+                            }
+                            else
+                            {
+                                <span class="header-item-right">Mới</span>
+                            }
+
+
+                        }
+                        @if (item.EventPrice != 0)
+                        {
+                        <span class="header-item-right">Giảm @item.EventPrice%</span>
                         }
                         <div class="body-item" align="center">
                             <img src="@item.Avatar" alt="..." class="img-responsive">
@@ -40,12 +53,25 @@
                         <ul>
                             <li>Rank: @item.RankName</li>
                             <li>Tướng: @item.NumberOfChamps</li>
-                            <li>Skin: @item.NumberOfSkins</li>
+                            <li>Trang Phục: @item.NumberOfSkins</li>
+							<li>Bảng Ngọc: @item.NumberOfPageGem</li>
                         </ul>
                     </div>
                     <div class="col-xs-7 col-md-6 stay_right footer-item-right">
                         <p class="" style="font-weight: bold;">
-                            @item.Price.ToString("#,###", cul.NumberFormat)<sup>đ</sup>
+                           @if (item.EventPrice != 0)
+                           {
+                               <strike style="color:white;">
+                                   @item.Price.ToString("#,###", cul.NumberFormat)
+                               </strike><sup style="color:white;"> đ</sup>
+                               <br />   
+                               var realPrice = (item.Price - ((item.Price * item.EventPrice) / 100));
+                               @realPrice.ToString("#,###", cul.NumberFormat)<sup> đ</sup>
+                           }
+                           else
+                           {
+                                @item.Price.ToString("#,###", cul.NumberFormat)<sup> đ</sup>
+                           }
                         </p>
                         @using (Html.BeginForm("SellAccount", "Account", FormMethod.Post, new { @class = "formSell" }))
                         {

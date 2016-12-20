@@ -39,6 +39,8 @@ namespace ThoConShop.DAL.Entities
 
         public string Avatar { get; set; }
 
+        public int EventPrice { get; set; }
+
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Skin> Skins { get; set; }

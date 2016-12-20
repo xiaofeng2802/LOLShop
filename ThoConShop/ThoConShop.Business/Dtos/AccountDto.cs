@@ -43,6 +43,8 @@ namespace ThoConShop.Business.Dtos
 
         public int NumberOfSkins { get; set; }
 
+        public int EventPrice { get; set; }
+
         public IList<SkinDto> Skins { get; set; }
 
         public IList<ChampionDto> Champions { get; set; }
