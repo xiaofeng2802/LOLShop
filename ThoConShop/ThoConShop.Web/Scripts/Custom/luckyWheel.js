@@ -1,8 +1,4 @@
 ﻿(function ($) {
-
-
-
-
     function initWheel(data) {
         resizeWheel();
 
@@ -23,20 +19,6 @@
 
         });
 
-        $('#prizePointer').click(function () {
-            $.ajax({
-                url: '/User/GetRandomWheelItem',
-                async: false,
-                type: 'GET',
-                success: function (data) {
-                    startSpin(data);
-                },
-                error: function (error) {
-                    alert("Đã xảy ra lỗi với vòng quay hoặc bạn không đủ số Point(15 points/ lần), bạn hãy liên hệ Admin page để tìm hiểu thêm.");
-                }
-            });
-        });
-
         var wheelPower = 3;
         var wheelSpinning = false;
         // Create image in memory.
@@ -47,15 +29,16 @@
             'drawMode': 'segmentImage',
             'canvasId': 'canvas',
             'numSegments': data.length,     // Specify number of segments.
-            'innerRadius': 90,   // Set outer radius so wheel fits inside the background.  // Set font size as desired.
+            'outerRadius': 110,   // Set outer radius so wheel fits inside the background.  // Set font size as desired.
             //'drawMode': 'segmentImage',
             //'imageDirection': 'S',
             'segments': data, // Define segments including colour and text.
             'animation':           // Specify the animation to use.
             {
                 'type': 'spinToStop',
-                'duration': 5,     // Duration in seconds.
+                'duration': 7,     // Duration in seconds.
                 'spins': 8,     // Number of complete spins.
+                'clearTheCanvas'   : false,
                 'callbackFinished': function () {
                     // Get the segment indicated by the pointer on the wheel background which is at 0 degrees.
                     var winningSegment = theWheel.getIndicatedSegment();
@@ -66,7 +49,10 @@
                         type: 'GET',
                         dataType: 'json',
                         success: function (data) {
-                            alert(data);
+                            alert(data.message);
+                            if (data.point) {
+                                $('#currentPoint').html(data.point + " Point.");
+                            }
                         },
                         error: function (data) {
                             alert("Bạn không đủ số Point để quay, xin vui lòng nạp thêm thẻ. Cám ơn!");
@@ -74,40 +60,46 @@
                     });
 
                     // Do basic alert of the segment text. You would probably want to do something more interesting with this information.
-                    
 
-               
+
+
 
                     theWheel.stopAnimation(false);  // Stop the animation, false as param so does not call callback function.
                     theWheel.rotationAngle = 0;     // Re-set the wheel angle to 0 degrees.
                     theWheel.draw();
                     wheelSpinning = false;
-                  
+                    $("#flat-slider").slider("enable");
+                    drawPointer();
+
                 }
             }
         });
 
         // Vars used by the code in this page to do power controls.
         // Create image in memory.
-        var handImage = new Image();
+        function drawPointer() {
+            var handImage = new Image();
 
-        // Set onload of the image to anonymous function to draw on the canvas once the image has loaded.
-        handImage.onload = function () {
-            var handCanvas = document.getElementById('canvas');
-            var ctx = handCanvas.getContext('2d');
-            
+            // Set onload of the image to anonymous function to draw on the canvas once the image has loaded.
+            handImage.onload = function () {
 
-            if (ctx) {
-                ctx.save();
-                ctx.translate(200, 150);
-                ctx.rotate(theWheel.degToRad(-40));  // Here I just rotate the image a bit.
-                ctx.translate(-200, -150);
-                ctx.drawImage(handImage, 300, 300);   // Draw the image at the specified x and y.
-                ctx.restore();
-            }
-        };
+                var handCanvas = document.getElementById('canvas');
+                var ctx = handCanvas.getContext('2d');
 
-        handImage.src = '/Images/btn-wheel.png';
+
+                if (ctx) {
+                    ctx.save();
+                    ctx.translate(200, 150);
+                    ctx.rotate(theWheel.degToRad(0));  // Here I just rotate the image a bit.
+                    ctx.translate(-200, -150);
+                    ctx.drawImage(handImage, 275, 69);   // Draw the image at the specified x and y.
+                    ctx.restore();
+                }
+            };
+
+            handImage.src = '/Images/qt-arow.png';
+        }
+        drawPointer();
         // -------------------------------------------------------
         // Function to handle the onClick on the power buttons.
         // -------------------------------------------------------
@@ -115,22 +107,14 @@
         // -------------------------------------------------------
         // Click handler for spin button.
         // -------------------------------------------------------
-        function startSpin(e) {
+        function startSpin(e, power) {
             // Ensure that spinning can't be clicked again while already running.
             
 
             if (wheelSpinning === false) {
                 // Based on the power level selected adjust the number of spins for the wheel, the more times is has
                 // to rotate with the duration of the animation the quicker the wheel spins.
-                if (wheelPower === 1) {
-                    theWheel.animation.spins = 3;
-                }
-                else if (wheelPower === 2) {
-                    theWheel.animation.spins = 8;
-                }
-                else if (wheelPower === 3) {
-                    theWheel.animation.spins = 15;
-                }
+                theWheel.animation.spins = power;
 
                 // Disable the spin button so can't click again while wheel is spinning.
                 //document.getElementById('spin_button').src = "spin_off.png";
@@ -158,28 +142,38 @@
         // -------------------------------------------------------
         // Called when the spin animation has finished by the callback feature of the wheel because I specified callback in the parameters.
         // -------------------------------------------------------
-     
+        $('#flat-slider').slider({
+            orientation: 'vertical',
+            range: false,
+            value: 19,
+            max: 20,
+            animate: "fast",
+            slide: function (event, ui) { },
+            stop: function (event, ui) {
+                $.ajax({
+                    url: '/User/GetRandomWheelItem',
+                    async: false,
+                    type: 'GET',
+                    success: function (data) {
+                        $("#flat-slider").slider("disable");
+                        startSpin(data, (20 - ui.value));
+                        $("#flat-slider").slider("value", 19);
+
+                    },
+                    error: function (error) {
+                        alert("Đã xảy ra lỗi với vòng quay hoặc bạn không đủ số Point(15 points/ lần), bạn hãy liên hệ Admin page để tìm hiểu thêm.");
+                    }
+                });
+            }
+        });
      
     }
 
     $(document).ready(function() {
         $.get('/Management/ReadAllWheelItem', function (data) {
             initWheel(data);
+
         });
-
-
-        $(".slider")
-
-     .slider({
-         min: 0,
-         max: 3,
-         orientation: "vertical"
-     })
-
-     .slider("pips", {
-         rest: "label",
-         step: "3"
-     });
     });
 
 }(jQuery));
