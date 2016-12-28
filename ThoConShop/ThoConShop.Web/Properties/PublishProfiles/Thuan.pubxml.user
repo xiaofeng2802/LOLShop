@@ -154,7 +154,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/26/2016 09:53:59</publishTime>
     </File>
     <File Include="bin/ThoConShop.Web.dll">
-      <publishTime>12/26/2016 09:54:03</publishTime>
+      <publishTime>12/26/2016 16:24:28</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>07/17/2013 17:03:52</publishTime>
@@ -9808,64 +9808,64 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/25/2016 10:44:42</publishTime>
     </File>
     <File Include="Views/Account/SellAccount.cshtml">
-      <publishTime>12/06/2016 14:48:44</publishTime>
+      <publishTime>12/26/2016 14:18:27</publishTime>
     </File>
     <File Include="Views/Home/Edit.cshtml">
-      <publishTime>12/26/2016 09:52:13</publishTime>
+      <publishTime>12/26/2016 14:18:27</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>12/26/2016 09:52:13</publishTime>
+      <publishTime>12/26/2016 14:18:27</publishTime>
     </File>
     <File Include="Views/Home/LockNoticeView.cshtml">
-      <publishTime>12/26/2016 09:52:13</publishTime>
+      <publishTime>12/26/2016 14:18:27</publishTime>
     </File>
     <File Include="Views/Home/LuckyWheel.cshtml">
-      <publishTime>12/26/2016 09:52:13</publishTime>
+      <publishTime>12/26/2016 14:18:27</publishTime>
     </File>
     <File Include="Views/Home/NotFound.cshtml">
-      <publishTime>11/23/2016 14:36:06</publishTime>
+      <publishTime>12/26/2016 14:18:28</publishTime>
     </File>
     <File Include="Views/Home/NotReady.cshtml">
-      <publishTime>11/28/2016 09:48:36</publishTime>
+      <publishTime>12/26/2016 14:18:27</publishTime>
     </File>
     <File Include="Views/Home/_bodyIndex.cshtml">
-      <publishTime>12/26/2016 09:52:13</publishTime>
+      <publishTime>12/26/2016 14:18:27</publishTime>
     </File>
     <File Include="Views/Management/AccountManagement.cshtml">
-      <publishTime>12/26/2016 09:52:13</publishTime>
+      <publishTime>12/26/2016 14:18:28</publishTime>
     </File>
     <File Include="Views/Management/ChampManagement.cshtml">
-      <publishTime>11/16/2016 13:51:57</publishTime>
+      <publishTime>12/26/2016 14:18:28</publishTime>
     </File>
     <File Include="Views/Management/ChargingHistories.cshtml">
-      <publishTime>11/28/2016 10:28:24</publishTime>
+      <publishTime>12/26/2016 14:18:28</publishTime>
     </File>
     <File Include="Views/Management/CreateChamp.cshtml">
       <publishTime>11/12/2016 20:45:41</publishTime>
     </File>
     <File Include="Views/Management/CreateOrUpdateAccount.cshtml">
-      <publishTime>12/26/2016 09:52:13</publishTime>
+      <publishTime>12/26/2016 14:18:28</publishTime>
     </File>
     <File Include="Views/Management/CreateRankView.cshtml">
-      <publishTime>11/22/2016 09:36:00</publishTime>
+      <publishTime>12/26/2016 14:18:28</publishTime>
     </File>
     <File Include="Views/Management/CreateSkin.cshtml">
       <publishTime>11/13/2016 01:01:56</publishTime>
     </File>
     <File Include="Views/Management/CreateWheelItem.cshtml">
-      <publishTime>11/28/2016 09:48:36</publishTime>
+      <publishTime>12/26/2016 14:18:28</publishTime>
     </File>
     <File Include="Views/Management/FeedManagement.cshtml">
-      <publishTime>11/25/2016 15:08:02</publishTime>
+      <publishTime>12/26/2016 14:18:28</publishTime>
     </File>
     <File Include="Views/Management/RankManagement.cshtml">
-      <publishTime>11/14/2016 11:22:39</publishTime>
+      <publishTime>12/26/2016 14:18:28</publishTime>
     </File>
     <File Include="Views/Management/SkinManagement.cshtml">
-      <publishTime>11/15/2016 16:35:15</publishTime>
+      <publishTime>12/26/2016 14:18:27</publishTime>
     </File>
     <File Include="Views/Management/TradingHistories.cshtml">
-      <publishTime>11/28/2016 13:00:20</publishTime>
+      <publishTime>12/26/2016 14:18:27</publishTime>
     </File>
     <File Include="Views/Management/UpdateChampAccount.cshtml">
       <publishTime>11/12/2016 23:58:08</publishTime>
@@ -9874,37 +9874,37 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/13/2016 00:29:31</publishTime>
     </File>
     <File Include="Views/Management/UserManagement.cshtml">
-      <publishTime>11/28/2016 10:17:49</publishTime>
+      <publishTime>12/26/2016 14:18:27</publishTime>
     </File>
     <File Include="Views/Management/WheelManagement.cshtml">
-      <publishTime>11/25/2016 09:38:47</publishTime>
+      <publishTime>12/26/2016 14:18:27</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
-      <publishTime>11/01/2016 09:55:54</publishTime>
+      <publishTime>12/26/2016 14:18:28</publishTime>
     </File>
     <File Include="Views/Shared/Lockout.cshtml">
-      <publishTime>11/01/2016 09:55:54</publishTime>
+      <publishTime>12/26/2016 14:18:28</publishTime>
     </File>
     <File Include="Views/Shared/_AdminLayout.cshtml">
-      <publishTime>11/29/2016 09:50:11</publishTime>
+      <publishTime>12/26/2016 14:18:28</publishTime>
     </File>
     <File Include="Views/Shared/_DetailsLayout.cshtml">
-      <publishTime>12/26/2016 09:52:13</publishTime>
+      <publishTime>12/26/2016 14:18:28</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>12/26/2016 09:52:13</publishTime>
+      <publishTime>12/26/2016 14:18:28</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
-      <publishTime>11/01/2016 09:55:54</publishTime>
+      <publishTime>12/26/2016 14:18:28</publishTime>
     </File>
     <File Include="Views/Shared/_NotFound.cshtml">
-      <publishTime>11/23/2016 17:38:29</publishTime>
+      <publishTime>12/26/2016 14:18:28</publishTime>
     </File>
     <File Include="Views/User/ChargingView.cshtml">
-      <publishTime>12/06/2016 12:53:29</publishTime>
+      <publishTime>12/26/2016 14:18:28</publishTime>
     </File>
     <File Include="Views/User/ConfirmEmail.cshtml">
-      <publishTime>11/08/2016 10:13:07</publishTime>
+      <publishTime>12/26/2016 14:18:28</publishTime>
     </File>
     <File Include="Views/User/ExternalLoginConfirmation.cshtml">
       <publishTime>11/06/2016 22:35:35</publishTime>
@@ -9913,52 +9913,52 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/06/2016 22:49:06</publishTime>
     </File>
     <File Include="Views/User/ExternalLoginFailure.cshtml">
-      <publishTime>11/08/2016 10:13:07</publishTime>
+      <publishTime>12/26/2016 14:18:28</publishTime>
     </File>
     <File Include="Views/User/ForgotPassword.cshtml">
-      <publishTime>11/08/2016 10:13:07</publishTime>
+      <publishTime>12/26/2016 14:18:28</publishTime>
     </File>
     <File Include="Views/User/ForgotPasswordConfirmation.cshtml">
-      <publishTime>11/08/2016 10:13:07</publishTime>
+      <publishTime>12/26/2016 14:18:28</publishTime>
     </File>
     <File Include="Views/User/Login.cshtml">
-      <publishTime>11/08/2016 10:13:07</publishTime>
+      <publishTime>12/26/2016 14:18:28</publishTime>
     </File>
     <File Include="Views/User/Register.cshtml">
-      <publishTime>11/08/2016 10:13:07</publishTime>
+      <publishTime>12/26/2016 14:18:28</publishTime>
     </File>
     <File Include="Views/User/ResetPassword.cshtml">
-      <publishTime>11/08/2016 10:13:07</publishTime>
+      <publishTime>12/26/2016 14:18:28</publishTime>
     </File>
     <File Include="Views/User/ResetPasswordConfirmation.cshtml">
-      <publishTime>11/08/2016 10:13:07</publishTime>
+      <publishTime>12/26/2016 14:18:28</publishTime>
     </File>
     <File Include="Views/User/SendCode.cshtml">
-      <publishTime>11/08/2016 10:13:07</publishTime>
+      <publishTime>12/26/2016 14:18:28</publishTime>
     </File>
     <File Include="Views/User/VerifyCode.cshtml">
-      <publishTime>11/08/2016 10:13:07</publishTime>
+      <publishTime>12/26/2016 14:18:28</publishTime>
     </File>
     <File Include="Views/User/ViewHistoriesUser.cshtml">
-      <publishTime>11/08/2016 12:03:21</publishTime>
+      <publishTime>12/26/2016 14:18:28</publishTime>
     </File>
     <File Include="Views/User/ViewRechargeHistoriesUser.cshtml">
       <publishTime>11/06/2016 16:27:48</publishTime>
     </File>
     <File Include="Views/User/_ExternalLoginsListPartial.cshtml">
-      <publishTime>11/08/2016 10:13:07</publishTime>
+      <publishTime>12/26/2016 14:18:28</publishTime>
     </File>
     <File Include="Views/User/_RechargeHistory.cshtml">
-      <publishTime>12/15/2016 12:44:07</publishTime>
+      <publishTime>12/26/2016 14:18:28</publishTime>
     </File>
     <File Include="Views/User/_TradingHistory.cshtml">
-      <publishTime>12/15/2016 12:44:07</publishTime>
+      <publishTime>12/26/2016 14:18:28</publishTime>
     </File>
     <File Include="Views/Web.config">
-      <publishTime>11/01/2016 09:55:54</publishTime>
+      <publishTime>12/26/2016 14:18:27</publishTime>
     </File>
     <File Include="Views/_ViewStart.cshtml">
-      <publishTime>11/01/2016 09:55:54</publishTime>
+      <publishTime>12/26/2016 14:18:27</publishTime>
     </File>
     <File Include="Web.config">
       <publishTime>12/26/2016 09:54:18</publishTime>

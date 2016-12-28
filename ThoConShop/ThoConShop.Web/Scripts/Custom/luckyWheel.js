@@ -1,9 +1,7 @@
 ﻿(function ($) {
     function initWheel(data) {
-        resizeWheel();
-
         function resizeWheel() {
-            var initw = ($('body').width() / 2) + 100;
+            var initw = ($('body').width() / 2) + 200;
            if (initw < 300) {
                $('#canvas').width(300);
                $('#canvas').height(300);
@@ -19,7 +17,6 @@
 
         });
 
-        var wheelPower = 3;
         var wheelSpinning = false;
         // Create image in memory.
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
