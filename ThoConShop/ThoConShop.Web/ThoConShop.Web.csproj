@@ -1706,6 +1706,7 @@
     <Content Include="Images\banner1.png" />
     <Content Include="Images\bg-red.jpg" />
     <Content Include="Images\bg.jpg" />
+    <Content Include="Images\btn-spin.png" />
     <Content Include="Images\btn-wheel.png" />
     <Content Include="Images\challenger-medal.png" />
     <Content Include="Images\compare.png" />

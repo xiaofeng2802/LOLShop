@@ -8,6 +8,7 @@ using ThoConShop.Business.Contracts;
 using ThoConShop.DataSeedWork.UserExternalService;
 using ThoConShop.Web.Models;
 using ThoConShop.Business.Dtos;
+using ThoConShop.DataSeedWork.Ulti;
 
 namespace ThoConShop.Web.Controllers
 {
@@ -44,6 +45,14 @@ namespace ThoConShop.Web.Controllers
             try
             {
                 _accountService.SoldAccount(accountId);
+
+                //delete image
+                FileUlti.DeleteFile(Request.MapPath(account.Avatar));
+
+                foreach (var page in account.NumberOfPageGems)
+                {
+                    FileUlti.DeleteFile(Request.MapPath(page.ImageUrl));
+                }
 
                 var sumOfBalance = user.Balance - (account.Price - ((account.Price * account.EventPrice) / 100));
                 _userService.UpdateBalanceUser(user.GeneralUserId, sumOfBalance);

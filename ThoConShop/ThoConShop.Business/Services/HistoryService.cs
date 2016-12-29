@@ -26,7 +26,12 @@ namespace ThoConShop.Business.Services
         public UserTradingHistoryDto Create(UserTradingHistoryDto tradingHistory)
         {
             var data = Mapper.Map<UserTradingHistory>(tradingHistory);
-
+            var existed = _tradingHistory.Read(a => a.AccountId == data.AccountId).Any();
+            if (existed)
+            {
+                _tradingHistory.Delete(a => a.AccountId == data.AccountId);
+            }
+            
             var result = _tradingHistory.Create(data);
 
             if (_tradingHistory.SaveChanges() > 0)
