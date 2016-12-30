@@ -13,15 +13,16 @@
            }
         }
 
-        function resize() {
-            $("#canvas").outerHeight($(window).height() - $("#canvas").offset().top - Math.abs($("#canvas").outerHeight(true) - $("#canvas").outerHeight()));
-        }
-        $(document).ready(function () {
-            resize();
-            $(window).on("resize", function () {
-                resize();
-            });
-        });
+        //function resize() {
+        //    $("#canvas").outerHeight($(window).height() - $("#canvas").offset().top - Math.abs($("#canvas").outerHeight(true) - $("#canvas").outerHeight()));
+        //}
+
+        //$(document).ready(function () {
+        //    resize();
+        //    $(window).on("resize", function () {
+        //        resize();
+        //    });
+        //});
 
         var wheelSpinning = false;
         // Create image in memory.
@@ -29,11 +30,11 @@
 
         // Create new wheel object specifying the parameters at creation time.
         var theWheel = new Winwheel({
-            'drawMode': 'segmentImage',
+            //'drawMode': 'segmentImage',
             'canvasId': 'canvas',
             'numSegments': data.length,     // Specify number of segments.
-            'outerRadius': 110,   // Set outer radius so wheel fits inside the background.  // Set font size as desired.
-            //'drawMode': 'segmentImage',
+            'outerRadius': 200,   // Set outer radius so wheel fits inside the background.  // Set font size as desired.
+            'drawMode': 'segmentImage',
             //'imageDirection': 'S',
             'segments': data, // Define segments including colour and text.
             'animation':           // Specify the animation to use.
@@ -171,12 +172,12 @@
         });
      
     }
+    $.get('/Management/ReadAllWheelItem', function (data) {
+        initWheel(data);
 
-    $(document).ready(function() {
-        $.get('/Management/ReadAllWheelItem', function (data) {
-            initWheel(data);
-
-        });
     });
+    //$(document).ready(function() {
+       
+    //});
 
 }(jQuery));

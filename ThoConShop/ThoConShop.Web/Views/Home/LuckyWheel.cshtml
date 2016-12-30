@@ -13,13 +13,13 @@
 <link href="~/Content/luckyWheel.css" rel="stylesheet" />
 
 <div class="ov-top masthead" style="padding-top: 0px">
-    <div class="container text-center" style="margin-left:0px; margin-right:0px;">
+    <div class="container text-center" style="">
         <div class="row">
             <div class="col-lg-12 col-sm-12">
                 <div id="canvasContainer" align="center">
                    <div class="row">
                        <div class="col-lg-11">
-                           <canvas id="canvas" style="width: 100%;"></canvas>
+                           <canvas id="canvas" width="800" height="800"></canvas>
                            <div style="margin-bottom: 20px;font-size: 30px;">
                                Tổng số Point bạn hiện có là <span id="currentPoint">@UserExternalService.GetUserPoint(User.Identity.GetUserId()) Point.</span>
                            </div>
