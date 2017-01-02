@@ -436,5 +436,26 @@ namespace ThoConShop.Web.Controllers
             AccountExternalService.UpdateAllAccountEventPrice(allEventPrice);
             return RedirectToAction("AccountManagement");
         }
+
+        public ActionResult ClearImage()
+        {
+
+            var data = _accountService.Read();
+
+            foreach (var item in data)
+            {
+                if (!item.IsAvailable)
+                {
+                    FileUlti.DeleteFile(Request.MapPath(item.Avatar));
+
+                    foreach (var page in item.NumberOfPageGems)
+                    {
+                        FileUlti.DeleteFile(Request.MapPath(page.ImageUrl));
+                    }
+                }
+            }
+
+            return RedirectToAction("Index");
+        }
     }
 }

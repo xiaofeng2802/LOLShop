@@ -323,7 +323,8 @@ namespace ThoConShop.Business.Services
             var result =
                _rechargeRepositories.Read(a => a.CreatedDate.Month == month)
                .Include(a => a.User)
-               .OrderByDescending(a => a.CreatedDate)
+               .OrderByDescending(a => a.ParValue)
+               .ThenBy(a => a.UserId)
                .Select(a => new UserRechargeHistoryDto()
                {
                    Id = a.Id,
