@@ -13,8 +13,6 @@ namespace ThoConShop.DataSeedWork.UserExternalService
 {
     public class UserExternalService
     {
-        static IDbConnection db =
-            new SqlConnection(ConfigurationManager.ConnectionStrings["ShopThoConDb"].ConnectionString);
 
         public static bool IsEnoughPoint(string generalUserId)
         {
@@ -22,13 +20,18 @@ namespace ThoConShop.DataSeedWork.UserExternalService
             string query = string.Format("select TOP 1 Point from [dbo].[User] where GeneralUserId = '{0}'",
                 generalUserId);
 
-            CheckConnectionState();
-            var result = db.QueryFirst<int>(query);
-
-            if (result >= defaultPoint)
+            using (IDbConnection db =
+            new SqlConnection(ConfigurationManager.ConnectionStrings["ShopThoConDb"].ConnectionString))
             {
-                return true;
+                var result = db.QueryFirst<int>(query);
+
+                if (result >= defaultPoint)
+                {
+                    return true;
+                }
             }
+
+         
 
             return false;
         }
@@ -38,20 +41,25 @@ namespace ThoConShop.DataSeedWork.UserExternalService
             string query = string.Format(
                 "select TOP 1 Id from [dbo].[LuckyWheelItems] where Id = {0} AND IsUnlucky = 1", id);
 
-            try
+            using (IDbConnection db =
+              new SqlConnection(ConfigurationManager.ConnectionStrings["ShopThoConDb"].ConnectionString))
             {
-                CheckConnectionState();
-                var result = db.QueryFirst<int>(query);
-                if (result > 0)
+                try
                 {
-                    return true;
+
+                    var result = db.QueryFirst<int>(query);
+                    if (result > 0)
+                    {
+                        return true;
+                    }
+                }
+                catch (Exception)
+                {
+
+                    return false;
                 }
             }
-            catch (Exception)
-            {
-
-                return false;
-            }
+        
 
             return false;
         }
@@ -62,20 +70,28 @@ namespace ThoConShop.DataSeedWork.UserExternalService
             string query = string.Format("select TOP 1 Point from [dbo].[User] where GeneralUserId = '{0}'",
                 generalUserId);
 
-            CheckConnectionState();
-            var result = db.QueryFirst<int>(query);
+            using (IDbConnection db =
+          new SqlConnection(ConfigurationManager.ConnectionStrings["ShopThoConDb"].ConnectionString))
+            {
+                var result = db.QueryFirst<int>(query);
 
 
-            return result;
+                return result;
+            }
+          
         }
 
         public static string GetDescriptonWheelItem(int id)
         {
             string query = string.Format("select TOP 1 Description from [dbo].[LuckyWheelItems] where Id = {0}", id);
 
-            CheckConnectionState();
-            var result = db.QueryFirst<string>(query);
-            return result;
+            using (IDbConnection db =
+         new SqlConnection(ConfigurationManager.ConnectionStrings["ShopThoConDb"].ConnectionString))
+            {
+                var result = db.QueryFirst<string>(query);
+                return result;
+            }
+         
         }
 
         //public static int UpdatePointAfterUseWheel(string generalUserId)
@@ -95,16 +111,20 @@ namespace ThoConShop.DataSeedWork.UserExternalService
             string query = string.Format("select TOP 1 Balance from [dbo].[User] where GeneralUserId = '{0}'",
                 generalUserId);
 
-            try
+            using (IDbConnection db =
+       new SqlConnection(ConfigurationManager.ConnectionStrings["ShopThoConDb"].ConnectionString))
             {
-                CheckConnectionState();
-                var result = db.Query<float>(query).ToList();
-                return result[0];
-            }
-            catch (Exception)
-            {
-                throw;
-                return 0;
+                try
+                {
+                    var result = db.Query<float>(query).ToList();
+                    return result[0];
+
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+             
             }
         }
 
@@ -124,17 +144,23 @@ namespace ThoConShop.DataSeedWork.UserExternalService
             string query = string.Format("Select TOP 1 IsActive From [dbo].[User] WHERE GeneralUserId = '{0}'",
                 generalUserId);
 
-            try
+            using (IDbConnection db =
+      new SqlConnection(ConfigurationManager.ConnectionStrings["ShopThoConDb"].ConnectionString))
             {
-                CheckConnectionState();
-                var result = db.QueryFirst<bool>(query);
+                try
+                {
+                    var result = db.QueryFirst<bool>(query);
 
-                return result;
+                    return result;
+
+                }
+                catch (Exception)
+                {
+                    // ignored
+                }
+            
             }
-            catch (Exception)
-            {
-                // ignored
-            }
+       
             return null;
         }
 
@@ -149,17 +175,23 @@ namespace ThoConShop.DataSeedWork.UserExternalService
                                          + "GROUP BY u.NameDisplay "
                                          + "ORDER BY SumOfMonth DESC");
 
-            try
+            using (IDbConnection db =
+ new SqlConnection(ConfigurationManager.ConnectionStrings["ShopThoConDb"].ConnectionString))
             {
-                CheckConnectionState();
-                var result = db.Query<TEntity>(query).ToList();
+                try
+                {
+                    var result = db.Query<TEntity>(query).ToList();
 
-                return result;
-            }
-            catch (Exception ex)
-            {
+                    return result;
 
+                }
+                catch (Exception ex)
+                {
+
+                }
+           
             }
+       
             return null;
         }
 
@@ -169,26 +201,25 @@ namespace ThoConShop.DataSeedWork.UserExternalService
                   + "INNER JOIN [dbo].[User] u ON lwh.UserId = u.Id INNER JOIN dbo.ApplicationUsers au ON au.Id = u.GeneralUserId "
                 + "ORDER BY lwh.CreatedDate DESC");
 
-            try
+            using (IDbConnection db =
+     new SqlConnection(ConfigurationManager.ConnectionStrings["ShopThoConDb"].ConnectionString))
             {
-                CheckConnectionState();
-                var result = db.Query<TEntity>(query).ToList();
+                try
+                {
+                    var result = db.Query<TEntity>(query).ToList();
 
-                return result;
-            }
-            catch (Exception ex)
-            {
+                    return result;
 
+                }
+                catch (Exception ex)
+                {
+
+                }
+          
             }
+
+        
             return null;
-        }
-
-        private static void CheckConnectionState()
-        {
-            if (db.State == ConnectionState.Open)
-            {
-                db.Close();
-            }
         }
     }
 }

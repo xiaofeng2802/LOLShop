@@ -47,11 +47,17 @@ namespace ThoConShop.Web.Controllers
                 _accountService.SoldAccount(accountId);
 
                 //delete image
-                FileUlti.DeleteFile(Request.MapPath(account.Avatar));
+                if (System.IO.File.Exists(Request.MapPath(account.Avatar)))
+                {
+                    System.IO.File.Delete(Request.MapPath(account.Avatar));
+                }
 
                 foreach (var page in account.NumberOfPageGems)
                 {
-                    FileUlti.DeleteFile(Request.MapPath(page.ImageUrl));
+                    if (System.IO.File.Exists(Request.MapPath(page.ImageUrl)))
+                    {
+                        System.IO.File.Delete(Request.MapPath(page.ImageUrl));
+                    }
                 }
 
                 var sumOfBalance = user.Balance - (account.Price - ((account.Price * account.EventPrice) / 100));
