@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -47,17 +48,11 @@ namespace ThoConShop.Web.Controllers
                 _accountService.SoldAccount(accountId);
 
                 //delete image
-                if (System.IO.File.Exists(Request.MapPath(account.Avatar)))
-                {
-                    System.IO.File.Delete(Request.MapPath(account.Avatar));
-                }
+                FileUlti.DeleteFile(Server.MapPath("~") + account.Avatar.Substring(2));
 
                 foreach (var page in account.NumberOfPageGems)
                 {
-                    if (System.IO.File.Exists(Request.MapPath(page.ImageUrl)))
-                    {
-                        System.IO.File.Delete(Request.MapPath(page.ImageUrl));
-                    }
+                   FileUlti.DeleteFile(Server.MapPath("~") + page.ImageUrl.Substring(2));
                 }
 
                 var sumOfBalance = user.Balance - (account.Price - ((account.Price * account.EventPrice) / 100));

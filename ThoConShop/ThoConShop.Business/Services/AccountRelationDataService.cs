@@ -320,27 +320,45 @@ namespace ThoConShop.Business.Services
 
         public IPagedList<UserRechargeHistoryDto> ReadRechargeHistories(int currentIndex, int pageSize, int month)
         {
-            var result =
-               _rechargeRepositories.Read(a => a.CreatedDate.Month == month)
-               .Include(a => a.User)
-               .OrderByDescending(a => a.ParValue)
-               .ThenBy(a => a.UserId)
-               .Select(a => new UserRechargeHistoryDto()
-               {
-                   Id = a.Id,
-                   UserId = a.UserId,
-                   CreatedDate = a.CreatedDate,
-                   SerialNumber = a.SerialNumber,
-                   Message = a.Message,
-                   ParValue = a.ParValue,
-                   PinNumber = a.PinNumber,
-                   UpdatedDate = a.UpdatedDate,
-                   Email = a.User.GeneralUser.UserName,
-                   CardType = a.CardType
-               })
-               .ToPagedList(currentIndex, pageSize);
+            if (month == 0)
+            {
+                var result =
+                    _rechargeRepositories.Read(a => a.CreatedDate.Month == month && a.CreatedDate.Year == DateTime.Now.Year)
+                        .Include(a => a.User)
+                        .OrderByDescending(a => a.ParValue)
+                        .ThenBy(a => a.UserId)
+                        .Select(a => new UserRechargeHistoryDto()
+                        {
+                            Id = a.Id,
+                            UserId = a.UserId,
+                            CreatedDate = a.CreatedDate,
+                            SerialNumber = a.SerialNumber,
+                            Message = a.Message,
+                            ParValue = a.ParValue,
+                            PinNumber = a.PinNumber,
+                            UpdatedDate = a.UpdatedDate,
+                            Email = a.User.GeneralUser.UserName,
+                            CardType = a.CardType
+                        })
+                        .ToPagedList(currentIndex, pageSize);
 
-            return result;
+                return result;
+            }
+
+            var resultRp = _repoUser.Read(a => a.IsActive && a.UserRechargeHistories.Any(b => b.CreatedDate.Month == month && b.CreatedDate.Year == DateTime.Now.Year))
+                                    .Include(a => a.UserRechargeHistories)
+                                    .OrderByDescending(a => a.UserRechargeHistories.Where(b => b.CreatedDate.Month == month && b.CreatedDate.Year == DateTime.Now.Year)
+                                                                                    .Sum(b => b.ParValue))
+                                    .Select(a => new UserRechargeHistoryDto()
+                                    {
+                                        UserId = a.Id,
+                                        ParValue = a.UserRechargeHistories.Where(b => b.CreatedDate.Month == month && b.CreatedDate.Year == DateTime.Now.Year).Sum(b => b.ParValue) ,
+                                        Email = a.GeneralUser.Email,
+                                        CreatedDate = a.UserRechargeHistories.OrderByDescending(b => b.CreatedDate).FirstOrDefault().CreatedDate
+                                    })
+                                    .ToPagedList(currentIndex, pageSize);
+
+            return resultRp;
         }
 
         public IPagedList<UserTradingHistoryDto> ReadTradingHistories(int currentIndex, int pageSize)

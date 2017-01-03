@@ -65,9 +65,6 @@
 
                     // Do basic alert of the segment text. You would probably want to do something more interesting with this information.
 
-
-
-
                     theWheel.stopAnimation(false);  // Stop the animation, false as param so does not call callback function.
                     theWheel.rotationAngle = 0;     // Re-set the wheel angle to 0 degrees.
                     theWheel.draw();
@@ -96,7 +93,7 @@
                     ctx.translate(200, 150);
                     ctx.rotate(theWheel.degToRad(0));  // Here I just rotate the image a bit.
                     ctx.translate(-200, -150);
-                    ctx.drawImage(handImage, 275, 69);   // Draw the image at the specified x and y.
+                    ctx.drawImage(handImage, 375, 5);   // Draw the image at the specified x and y.
                     ctx.restore();
                 }
             };

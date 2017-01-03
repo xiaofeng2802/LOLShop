@@ -22,4 +22,11 @@ namespace ThoConShop.Business.Dtos
 
         public string Message { get; set; }
     }
+
+    public class UserRechargeHistoryManagementDto
+    {
+        public string Email { get; set; }
+
+        public double SumOfValue { get; set; }
+    }
 }

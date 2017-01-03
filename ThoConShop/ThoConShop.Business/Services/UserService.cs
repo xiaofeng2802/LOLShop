@@ -174,18 +174,14 @@ namespace ThoConShop.Business.Services
             return null;
         }
 
-        public int DeleteLuckyItem(int id)
+        public string DeleteLuckyItem(int id)
         {
             var img = _luckyWheelItemRepositories.ReadOne(a => a.Id == id).ImageUrl;
-            if (!string.IsNullOrEmpty(img))
-            {
-                FileUlti.DeleteFile(img);
-            }
 
             _luckyWheelItemRepositories.Delete(a => a.Id == id);
-            var result = _luckyWheelItemRepositories.SaveChanges();
+            _luckyWheelItemRepositories.SaveChanges();
           
-            return result;
+            return img;
         }
 
         public IPagedList<LuckyWheelHistoryDto> ReadLuckyWheelHistory(int currentIndex, int pageSize, string generalUserId)
