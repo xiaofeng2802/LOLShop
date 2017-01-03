@@ -2116,6 +2116,7 @@
     <Folder Include="Content\assets\js\core\cache\" />
     <Folder Include="Images\Avatar\" />
     <Folder Include="Images\champion\" />
+    <Folder Include="Images\LuckyItem\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

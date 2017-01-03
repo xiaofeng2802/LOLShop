@@ -68,13 +68,22 @@ namespace ThoConShop.Web.Models
             get
             {
                 var data =
-                    new List<SelectListItem>();
+                    new List<SelectListItem>
+                    {
+                        new SelectListItem()
+                        {
+                            Value = "0",
+                            Text = "Hiện Tất Cả",
+                            Selected = true
+                        }
+                    };
+
 
                 for (int i = 1; i <= 12; i++)
                 {
                     data.Add(new SelectListItem()
                     {
-                        Selected = (i == ReportMonth),
+                        Selected = false,
                         Text = "Tháng " + i,
                         Value = i.ToString()
                     });

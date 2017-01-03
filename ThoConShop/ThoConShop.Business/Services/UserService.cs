@@ -152,8 +152,7 @@ namespace ThoConShop.Business.Services
 
         public IList<LuckyWheelItemDto> ReadAllLuckyWheelItem()
         {
-            var result = _luckyWheelItemRepositories.Read(a => true)
-                .OrderBy(a => a.DisplayName);
+            var result = _luckyWheelItemRepositories.Read(a => true);
 
             return Mapper.Map<IList<LuckyWheelItemDto>>(result);
         }
@@ -174,18 +173,14 @@ namespace ThoConShop.Business.Services
             return null;
         }
 
-        public int DeleteLuckyItem(int id)
+        public string DeleteLuckyItem(int id)
         {
             var img = _luckyWheelItemRepositories.ReadOne(a => a.Id == id).ImageUrl;
-            if (!string.IsNullOrEmpty(img))
-            {
-                FileUlti.DeleteFile(img);
-            }
 
             _luckyWheelItemRepositories.Delete(a => a.Id == id);
-            var result = _luckyWheelItemRepositories.SaveChanges();
+            _luckyWheelItemRepositories.SaveChanges();
           
-            return result;
+            return img;
         }
 
         public IPagedList<LuckyWheelHistoryDto> ReadLuckyWheelHistory(int currentIndex, int pageSize, string generalUserId)
@@ -231,7 +226,7 @@ namespace ThoConShop.Business.Services
 
         public LuckyWheelItemDto RandomWheelItem(out int resultForWheel)
         {
-            var wheelItems = _luckyWheelItemRepositories.Read(a => true).OrderBy(a => a.DisplayName);
+            var wheelItems = _luckyWheelItemRepositories.Read(a => true);
             IList<ProportionValue<LuckyWheelItem>> listRandom = new List<ProportionValue<LuckyWheelItem>>();
 
             foreach (var item in wheelItems)

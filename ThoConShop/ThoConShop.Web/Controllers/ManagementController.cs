@@ -4,6 +4,7 @@ using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Caching;
 using System.Web.Mvc;
 using ThoConShop.Business.Contracts;
 using ThoConShop.Business.Dtos;
@@ -270,7 +271,6 @@ namespace ThoConShop.Web.Controllers
 
         public ActionResult ChargingHistories(UserRechargeViewModel data, int page = 1)
         {
-            data.ReportMonth = data.ReportMonth == 0 ? DateTime.Now.Month : data.ReportMonth;
             var result = _accountRelationDataService.ReadRechargeHistories(page, _pageSize, data.ReportMonth);
 
             UserRechargeViewModel vm = new UserRechargeViewModel
@@ -278,6 +278,7 @@ namespace ThoConShop.Web.Controllers
                 DataSource = result,
                 ReportMonth = data.ReportMonth
             };
+
             return View(vm);
         }
 
@@ -384,6 +385,12 @@ namespace ThoConShop.Web.Controllers
         public ActionResult DeleteWheelItem(int id = 0)
         {
             var result = _userService.DeleteLuckyItem(id);
+
+            if (!string.IsNullOrEmpty(result))
+            {
+                FileUlti.DeleteFile(Server.MapPath("~") + result.Substring(2));
+            }
+
             return RedirectToAction("WheelManagement");
         }
 
@@ -394,7 +401,7 @@ namespace ThoConShop.Web.Controllers
                 id = a.Id,
                 description = a.Description,
                 text= a.DisplayName,
-                image = a.ImageUrl
+                image = ImageUlti.ImageToBase64(Server.MapPath("~") + a.ImageUrl.Substring(2))
             });
             return Json(result, JsonRequestBehavior.AllowGet);
         }
@@ -446,11 +453,11 @@ namespace ThoConShop.Web.Controllers
             {
                 if (!item.IsAvailable)
                 {
-                    FileUlti.DeleteFile(Request.MapPath(item.Avatar));
+                    FileUlti.DeleteFile(Server.MapPath("~") + item.Avatar.Substring(2));
 
                     foreach (var page in item.NumberOfPageGems)
                     {
-                        FileUlti.DeleteFile(Request.MapPath(page.ImageUrl));
+                        FileUlti.DeleteFile(Server.MapPath("~") + page.ImageUrl.Substring(2));
                     }
                 }
             }

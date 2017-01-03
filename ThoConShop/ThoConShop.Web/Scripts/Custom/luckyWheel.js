@@ -42,7 +42,7 @@
                 'type': 'spinToStop',
                 'duration': 7,     // Duration in seconds.
                 'spins': 8,     // Number of complete spins.
-                'clearTheCanvas'   : false,
+                'clearTheCanvas': false,
                 'callbackFinished': function () {
                     // Get the segment indicated by the pointer on the wheel background which is at 0 degrees.
                     var winningSegment = theWheel.getIndicatedSegment();
@@ -57,6 +57,10 @@
                             if (data.point) {
                                 $('#currentPoint').html(data.point + " Point.");
                             }
+                            if (!data.unLucky) {
+                                window.location.href = "https://www.facebook.com/ShopAccThoCon/?ref=ts&fref=ts";
+                            }
+
                         },
                         error: function (data) {
                             alert("Bạn không đủ số Point để quay, xin vui lòng nạp thêm thẻ. Cám ơn!");
@@ -65,15 +69,11 @@
 
                     // Do basic alert of the segment text. You would probably want to do something more interesting with this information.
 
-
-
-
                     theWheel.stopAnimation(false);  // Stop the animation, false as param so does not call callback function.
                     theWheel.rotationAngle = 0;     // Re-set the wheel angle to 0 degrees.
                     theWheel.draw();
                     wheelSpinning = false;
                     $("#flat-slider").slider("enable");
-                    drawPointer();
 
                 }
             }
@@ -81,29 +81,8 @@
 
         // Vars used by the code in this page to do power controls.
         // Create image in memory.
-        function drawPointer() {
-            var handImage = new Image();
-
-            // Set onload of the image to anonymous function to draw on the canvas once the image has loaded.
-            handImage.onload = function () {
-
-                var handCanvas = document.getElementById('canvas');
-                var ctx = handCanvas.getContext('2d');
 
 
-                if (ctx) {
-                    ctx.save();
-                    ctx.translate(200, 150);
-                    ctx.rotate(theWheel.degToRad(0));  // Here I just rotate the image a bit.
-                    ctx.translate(-200, -150);
-                    ctx.drawImage(handImage, 275, 69);   // Draw the image at the specified x and y.
-                    ctx.restore();
-                }
-            };
-
-            handImage.src = '/Images/qt-arow.png';
-        }
-        drawPointer();
         // -------------------------------------------------------
         // Function to handle the onClick on the power buttons.
         // -------------------------------------------------------
@@ -173,11 +152,13 @@
      
     }
     $.get('/Management/ReadAllWheelItem', function (data) {
-        initWheel(data);
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            alert("Vòng quay may mắn hiện tại chỉ hỗ trợ trên máy tính. Cám ơn bạn.");
+            window.location.href = "http://shopthocon.vn/";
 
+        } else {
+            initWheel(data);
+        }
     });
-    //$(document).ready(function() {
-       
-    //});
 
 }(jQuery));

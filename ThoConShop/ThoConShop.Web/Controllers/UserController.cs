@@ -420,7 +420,7 @@ namespace ThoConShop.Web.Controllers
                 if (UserExternalService.IsUnluckyItem(priceId))
                 {
                     _userService.UpdatePointUser(user.GeneralUserId, sumOfPoint);
-                    return Json(new { message = "Chúc bạn may mắn lần sau !" , point = sumOfPoint }, JsonRequestBehavior.AllowGet);
+                    return Json(new { message = "Chúc bạn may mắn lần sau !" , point = sumOfPoint, unLucky = true }, JsonRequestBehavior.AllowGet);
                 }
                 var desc = UserExternalService.GetDescriptonWheelItem(priceId);
                
@@ -437,7 +437,7 @@ namespace ThoConShop.Web.Controllers
                 {
                     _userService.UpdatePointUser(user.GeneralUserId, sumOfPoint);
                 }
-                return Json(new { message = "Chúc mừng bạn đã trúng " + desc + ". Xin vui lòng liên hệ fanpage để nhận quà, Cám ơn bạn.", point = sumOfPoint }, JsonRequestBehavior.AllowGet);
+                return Json(new { message = "Chúc mừng bạn đã trúng " + desc + ". Vui lòng inbox fanpage, Cám ơn bạn.", point = sumOfPoint }, JsonRequestBehavior.AllowGet);
             }
 
             return Json(new { status = "error", message = "Xảy ra lỗi khi cập nhật thông tin, vui lòng quay số lại." }, JsonRequestBehavior.AllowGet);

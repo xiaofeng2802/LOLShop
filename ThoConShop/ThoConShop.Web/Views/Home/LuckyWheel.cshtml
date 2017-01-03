@@ -11,15 +11,30 @@
 <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
 <script src="~/Scripts/Winwheel.js"></script>
 <link href="~/Content/luckyWheel.css" rel="stylesheet" />
-
+<style>
+ 
+#canvas {
+    z-index: 1;
+}
+ 
+#prizePointer {
+    position: absolute;
+    left: 125px;
+    top: 10px;
+    z-index: 999;
+        width: 35px;
+    left: 91px;
+}
+</style>
 <div class="ov-top masthead" style="padding-top: 0px">
     <div class="container text-center" style="">
         <div class="row">
             <div class="col-lg-12 col-sm-12">
                 <div id="canvasContainer" align="center">
                    <div class="row">
-                       <div class="col-lg-11">
-                           <canvas id="canvas" width="800" height="800"></canvas>
+                       <div class="col-lg-11 canvasContainer" style="    margin-top: 50px;">
+                           <canvas id="canvas" width="700" height="700" style="padding-left: 90px; margin-bottom: 30px;"></canvas>
+                           <img id="prizePointer" src="~/Images/qt-arow.png" />
                            <div style="margin-bottom: 20px;font-size: 30px;">
                                Tổng số Point bạn hiện có là <span id="currentPoint">@UserExternalService.GetUserPoint(User.Identity.GetUserId()) Point.</span>
                            </div>
