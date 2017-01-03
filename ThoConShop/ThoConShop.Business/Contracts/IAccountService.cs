@@ -15,7 +15,7 @@ namespace ThoConShop.Business.Contracts
 
         IPagedList<AccountDto> Read(int currentIndex, int pageSize, bool isAvailableOnly = true, string searchString = "");
 
-        IList<AccountDto> Read();
+        IList<AccountDto> Read(bool isAvaliable = true);
 
         AccountDto Update(AccountDto entity, string champ, string skin);
 

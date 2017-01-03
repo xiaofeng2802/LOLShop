@@ -440,7 +440,7 @@ namespace ThoConShop.Web.Controllers
         public ActionResult ClearImage()
         {
 
-            var data = _accountService.Read();
+            var data = _accountService.Read(false);
 
             foreach (var item in data)
             {

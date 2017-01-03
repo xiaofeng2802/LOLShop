@@ -242,9 +242,9 @@ namespace ThoConShop.Business.Services
             return result.ToPagedList(currentIndex, pageSize);
         }
 
-        public IList<AccountDto> Read()
+        public IList<AccountDto> Read(bool isAvaliable = true)
         {
-            return Mapper.Map<IList<AccountDto>>(_repoAccount.Read(a => a.IsAvailable).ToList());
+            return Mapper.Map<IList<AccountDto>>(_repoAccount.Read(a => a.IsAvailable == isAvaliable).ToList());
         }
 
         public IPagedList<AccountDto> Read(int currentIndex, int pageSize, bool isAvailableOnly = true, string searchString = "")
