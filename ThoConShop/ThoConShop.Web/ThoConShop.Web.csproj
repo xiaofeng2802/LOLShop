@@ -2110,6 +2110,7 @@
     <Content Include="Views\Shared\_NotFound.cshtml" />
     <Content Include="Views\Home\NotFound.cshtml" />
     <Content Include="Views\Home\NotReady.cshtml" />
+    <Content Include="Views\Management\ShowLuckyWheelHistory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

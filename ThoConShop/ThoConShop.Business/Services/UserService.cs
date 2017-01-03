@@ -238,5 +238,23 @@ namespace ThoConShop.Business.Services
 
             return Mapper.Map<LuckyWheelItemDto>(result);
         }
+
+        public IPagedList<LuckyWheelHistoryDto> ReadLuckyWheelHistory(int currentIndex, int pageSize)
+        {
+            var result = _luckyWheelHistoryRepositories.Read(a => true)
+              .OrderByDescending(a => a.CreatedDate)
+              .Include(a => a.User)
+              .Include(a => a.User.GeneralUser)
+              .Select(a => new LuckyWheelHistoryDto()
+              {
+                  Id = a.Id,
+                  CreatedDate = a.CreatedDate,
+                  UpdatedDate = a.UpdatedDate,
+                  NameDisplay = a.User.GeneralUser.UserName,
+                  Result = a.Result
+              }).ToPagedList(currentIndex, pageSize);
+
+            return result;
+        }
     }
 }

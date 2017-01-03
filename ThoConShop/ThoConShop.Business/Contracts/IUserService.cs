@@ -48,5 +48,7 @@ namespace ThoConShop.Business.Contracts
         int DeleteLuckyHistory(int id);
 
         LuckyWheelItemDto RandomWheelItem(out int resultForWheel);
+
+        IPagedList<LuckyWheelHistoryDto> ReadLuckyWheelHistory(int currentIndex, int pageSize);
     }
 }

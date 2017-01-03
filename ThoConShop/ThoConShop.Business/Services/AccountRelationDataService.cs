@@ -323,9 +323,9 @@ namespace ThoConShop.Business.Services
             if (month == 0)
             {
                 var result =
-                    _rechargeRepositories.Read(a => a.CreatedDate.Month == month && a.CreatedDate.Year == DateTime.Now.Year)
+                    _rechargeRepositories.Read(a => true)
                         .Include(a => a.User)
-                        .OrderByDescending(a => a.ParValue)
+                        .OrderByDescending(a => a.CreatedDate)
                         .ThenBy(a => a.UserId)
                         .Select(a => new UserRechargeHistoryDto()
                         {
@@ -353,7 +353,7 @@ namespace ThoConShop.Business.Services
                                     {
                                         UserId = a.Id,
                                         ParValue = a.UserRechargeHistories.Where(b => b.CreatedDate.Month == month && b.CreatedDate.Year == DateTime.Now.Year).Sum(b => b.ParValue) ,
-                                        Email = a.GeneralUser.Email,
+                                        Email = a.GeneralUser.UserName,
                                         CreatedDate = a.UserRechargeHistories.OrderByDescending(b => b.CreatedDate).FirstOrDefault().CreatedDate
                                     })
                                     .ToPagedList(currentIndex, pageSize);

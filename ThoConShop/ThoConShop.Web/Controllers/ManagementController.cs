@@ -401,7 +401,7 @@ namespace ThoConShop.Web.Controllers
                 id = a.Id,
                 description = a.Description,
                 text= a.DisplayName,
-                image = ImageUlti.ImageToBase64(Server.MapPath("~") + a.ImageUrl.Substring(2))
+                image = a.ImageUrl
             });
             return Json(result, JsonRequestBehavior.AllowGet);
         }
@@ -442,6 +442,12 @@ namespace ThoConShop.Web.Controllers
         {
             AccountExternalService.UpdateAllAccountEventPrice(allEventPrice);
             return RedirectToAction("AccountManagement");
+        }
+
+        public ActionResult ShowLuckyWheelHistory(int page = 1)
+        {
+            var result = _userService.ReadLuckyWheelHistory(page, _pageSize);
+            return View(result);
         }
 
         public ActionResult ClearImage()
