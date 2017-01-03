@@ -152,8 +152,7 @@ namespace ThoConShop.Business.Services
 
         public IList<LuckyWheelItemDto> ReadAllLuckyWheelItem()
         {
-            var result = _luckyWheelItemRepositories.Read(a => true)
-                .OrderBy(a => a.DisplayName);
+            var result = _luckyWheelItemRepositories.Read(a => true);
 
             return Mapper.Map<IList<LuckyWheelItemDto>>(result);
         }
@@ -227,7 +226,7 @@ namespace ThoConShop.Business.Services
 
         public LuckyWheelItemDto RandomWheelItem(out int resultForWheel)
         {
-            var wheelItems = _luckyWheelItemRepositories.Read(a => true).OrderBy(a => a.DisplayName);
+            var wheelItems = _luckyWheelItemRepositories.Read(a => true);
             IList<ProportionValue<LuckyWheelItem>> listRandom = new List<ProportionValue<LuckyWheelItem>>();
 
             foreach (var item in wheelItems)

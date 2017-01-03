@@ -4,6 +4,7 @@ using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Caching;
 using System.Web.Mvc;
 using ThoConShop.Business.Contracts;
 using ThoConShop.Business.Dtos;
@@ -400,7 +401,7 @@ namespace ThoConShop.Web.Controllers
                 id = a.Id,
                 description = a.Description,
                 text= a.DisplayName,
-                image = a.ImageUrl
+                image = ImageUlti.ImageToBase64(Server.MapPath("~") + a.ImageUrl.Substring(2))
             });
             return Json(result, JsonRequestBehavior.AllowGet);
         }
