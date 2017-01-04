@@ -4,13 +4,14 @@
 @model PagedList.IPagedList<ThoConShop.Business.Dtos.LuckyWheelHistoryDto>
 
 @{
-    ViewBag.Title = "LuckyWheel";
+    ViewBag.Title = "Vòng Quay Không Trúng";
     Layout = "~/Views/Shared/_DetailsLayout.cshtml";
 }
 <link href="~/Content/main.css" rel="stylesheet" />
 <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
 <script src="~/Scripts/Winwheel.js"></script>
-<link href="~/Content/luckyWheel.css" rel="stylesheet" />
+<link href="~/Content/luckyWheel.css" rel="stylesheet"/>
+<title>@ViewBag.Title</title>
 <style>
  
 #canvas {
