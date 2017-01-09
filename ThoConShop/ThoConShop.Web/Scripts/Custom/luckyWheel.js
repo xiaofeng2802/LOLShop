@@ -57,6 +57,7 @@
                             if (data.point) {
                                 $('#currentPoint').html(data.point + " Point.");
                             }
+
                             if (!data.unLucky) {
                                 window.location.href = "https://www.facebook.com/ShopAccThoCon/?ref=ts&fref=ts";
                             }

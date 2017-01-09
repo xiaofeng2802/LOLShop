@@ -98,7 +98,6 @@ namespace ThoConShop.Web.Controllers
             return result;
         }
 
-        [Authorize(Users = "tuntiton030100@gmail.com,jhklshad@yahoo.com,ngocthuan1704@yahoo.com.vn,daovanson90@yahoo.com")]
         public ActionResult LuckyWheel(int page = 1)
         {
             if (ConfigurationManager.AppSettings["IsWheelOpen"] != null 

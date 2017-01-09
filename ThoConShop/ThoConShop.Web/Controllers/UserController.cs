@@ -106,6 +106,8 @@ namespace ThoConShop.Web.Controllers
                 {
                     var sumOfBalance = user.Balance + price;
                     _userService.UpdateBalanceUser(User.Identity.GetUserId(), sumOfBalance);
+                    var dividePoint = int.Parse(ConfigurationManager.AppSettings["PointDivide"]);
+                    _userService.UpdatePointUser(User.Identity.GetUserId(), user.Point + (price / dividePoint));
                 }
 
                 _rechargeHistoryService.Create(new UserRechargeHistoryDto()
