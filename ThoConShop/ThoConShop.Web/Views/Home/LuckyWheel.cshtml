@@ -6,6 +6,7 @@
 @{
     ViewBag.Title = "Vòng Quay May Mắn";
     Layout = "~/Views/Shared/_DetailsLayout.cshtml";
+    var point = @UserExternalService.GetUserPoint(User.Identity.GetUserId());
 }
 <link href="~/Content/main.css" rel="stylesheet" />
 <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
@@ -36,9 +37,18 @@
                        <div class="col-lg-11 canvasContainer" style="    margin-top: 50px;">
                            <canvas id="canvas" width="700" height="700" style="padding-left: 90px; margin-bottom: 30px;"></canvas>
                            <img id="prizePointer" src="~/Images/qt-arow.png" />
-                           <div style="margin-bottom: 20px;font-size: 30px;">
-                               Tổng số Point bạn hiện có là <span id="currentPoint">@UserExternalService.GetUserPoint(User.Identity.GetUserId()) Point.</span>
-                           </div>
+                          @if (point > 0)
+                          {
+                            <div style="margin-bottom: 20px;font-size: 30px;">
+                                Tổng số Point bạn hiện có là <span id="currentPoint"> @point Point.</span>
+                            </div>
+                          }
+                          else
+                          {
+                            <div style="margin-bottom: 20px;font-size: 30px;">
+                                Vui Lòng Nạp Thẻ
+                            </div>
+                          }
                        </div>
                        <div class="col-lg-1" style="margin-top:30%">
                            <div class="flat-slider" id="flat-slider">

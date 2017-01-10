@@ -410,7 +410,6 @@ namespace ThoConShop.Web.Controllers
             return Json(new { success = false, message = "Bạn không đủ số Point để quay, xin vui lòng nạp thêm thẻ. Cám ơn!" }, JsonRequestBehavior.AllowGet);
         }
 
-
         public JsonResult SaveWheelHistory(int priceId = -1)
         {
             int serverValidatorPrice = (int?) Session["CurrentPrice"] ?? -1;

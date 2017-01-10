@@ -394,6 +394,7 @@ namespace ThoConShop.Web.Controllers
             return RedirectToAction("WheelManagement");
         }
 
+        [AllowAnonymous]
         public JsonResult ReadAllWheelItem()
         {
             var result = _userService.ReadAllLuckyWheelItem().Select(a => new
