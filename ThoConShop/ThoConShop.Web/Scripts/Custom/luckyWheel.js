@@ -117,7 +117,7 @@
                     type: 'GET',
                     success: function (data) {
                         $("#flat-slider").slider("disable");
-                        if (data.success && data.success === true) {
+                        if (typeof data === 'number') {
                             startSpin(data, (20 - ui.value));
                         }
 
