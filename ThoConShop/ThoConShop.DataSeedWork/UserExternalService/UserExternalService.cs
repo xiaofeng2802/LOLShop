@@ -17,8 +17,7 @@ namespace ThoConShop.DataSeedWork.UserExternalService
         public static bool IsEnoughPoint(string generalUserId)
         {
             var defaultPoint = int.Parse(ConfigurationManager.AppSettings["PointPerWheel"]);
-            string query = string.Format("select TOP 1 Point from [dbo].[User] where GeneralUserId = '{0}'",
-                generalUserId);
+            string query = $"select TOP 1 Point from [dbo].[User] where GeneralUserId = '{generalUserId}'";
 
             using (IDbConnection db =
             new SqlConnection(ConfigurationManager.ConnectionStrings["ShopThoConDb"].ConnectionString))

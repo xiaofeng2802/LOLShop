@@ -1,28 +1,5 @@
 ﻿(function ($) {
     function initWheel(data) {
-        function resizeWheel() {
-            var initw = ($('body').width() / 2) + 200;
-           if (initw < 300) {
-               $('#canvas').width(300);
-               $('#canvas').height(300);
-
-           } else {
-               $('#canvas').width(initw);
-               $('#canvas').height(initw);
-
-           }
-        }
-
-        //function resize() {
-        //    $("#canvas").outerHeight($(window).height() - $("#canvas").offset().top - Math.abs($("#canvas").outerHeight(true) - $("#canvas").outerHeight()));
-        //}
-
-        //$(document).ready(function () {
-        //    resize();
-        //    $(window).on("resize", function () {
-        //        resize();
-        //    });
-        //});
 
         var wheelSpinning = false;
         // Create image in memory.
@@ -140,12 +117,19 @@
                     type: 'GET',
                     success: function (data) {
                         $("#flat-slider").slider("disable");
-                        startSpin(data, (20 - ui.value));
+                        if (data.success && data.success === true) {
+                            startSpin(data, (20 - ui.value));
+                        }
+
+                        if (data.message) {
+                            alert(data.message);
+                        }
+                        
                         $("#flat-slider").slider("value", 19);
 
                     },
                     error: function (error) {
-                        alert("Đã xảy ra lỗi với vòng quay hoặc bạn không đủ số Point(15 points/ lần), bạn hãy liên hệ Admin page để tìm hiểu thêm.");
+                        alert("Đã xảy ra lỗi với vòng quay hoặc bạn không đủ số Point(5 points/ lần), bạn hãy liên hệ Admin page để tìm hiểu thêm.");
                     }
                 });
             }
