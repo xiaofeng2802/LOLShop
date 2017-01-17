@@ -13,29 +13,15 @@ namespace ThoConShop.DataSeedWork.UserExternalService
     public class AccountExternalService
     {
 
-        static IDbConnection db =
-           new SqlConnection(ConfigurationManager.ConnectionStrings["ShopThoConDb"].ConnectionString);
-
         public static void UpdateAllAccountEventPrice(int allEventPrice)
         {
             string query = string.Format("Update dbo.Account SET EventPrice = {0} ", allEventPrice);
 
-            try
+            using (IDbConnection db =
+           new SqlConnection(ConfigurationManager.ConnectionStrings["ShopThoConDb"].ConnectionString))
             {
-                CheckConnectionState();
                 db.Execute(query);
-            }
-            catch (Exception)
-            {
-            }
-        }
-
-        private static void CheckConnectionState()
-        {
-            if (db.State == ConnectionState.Open)
-            {
-                db.Close();
-            }
+            } 
         }
     }
 }
